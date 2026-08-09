@@ -154,6 +154,12 @@
             border-radius: 7px; font-size: 11px; padding: 2px 7px; cursor: pointer;
             align-self: center; flex-shrink: 0; }
   .addcal:hover { color: var(--accent); border-color: var(--accent); }
+  .vote { background: none; border: 1px solid var(--border); border-radius: 7px;
+          font-size: 12px; padding: 1px 6px; cursor: pointer; align-self: center;
+          flex-shrink: 0; opacity: .55; filter: grayscale(60%); }
+  .vote:hover { opacity: 1; filter: none; border-color: var(--accent); }
+  .vote.chosen { opacity: 1; filter: none; border-color: var(--accent);
+                 background: rgba(76,194,255,.12); }
   .empty { color: var(--muted); font-size: 13px; font-style: italic; }
   /* Kalender + gjøremål: hovedpanelene */
   .cal-row { display: flex; gap: 12px; padding: 9px 6px; border-bottom: 1px solid var(--border);
@@ -336,6 +342,23 @@ const RATING = {
 const rating = r => RATING[r] || RATING.poor;
 
 const noMd = s => String(s ?? '').replace(/\*\*?/g, '');
+const myVotes = JSON.parse(localStorage.getItem('eventVotes') || '{}');
+async function castVote(url, title, vote, btn) {
+  myVotes[url] = vote;
+  localStorage.setItem('eventVotes', JSON.stringify(myVotes));
+  // Oppdater visuell tilstand umiddelbart
+  const parent = btn.parentElement;
+  parent.querySelectorAll('.vote').forEach(b => b.classList.remove('chosen'));
+  btn.classList.add('chosen');
+  try {
+    await fetch('/api/vote', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ url, title, vote }),
+    });
+  } catch (err) { console.warn('vote feilet:', err); }
+}
+
 function gcalUrl(e) {
   const pad = n => String(n).padStart(2, '0');
   const d = new Date(e.start);
@@ -579,6 +602,10 @@ function renderEvents(events) {
       <span class="when">${esc(fmtWhen(e))}</span>
       <span style="flex:1"><span class="dot" style="background:${relColor(e.relevance || 0)};width:7px;height:7px"></span>${esc(e.title)}<span style="color:var(--muted)"> · ${esc(e.venue)}</span>${
         showWhy && e.why_no ? `<div style="color:var(--muted);font-size:12px;margin-top:1px">🤖 ${esc(e.why_no)}</div>` : ''}</span>
+      <button class="vote ${myVotes[e.url] === 'up' ? 'chosen' : ''}" title="Mer som dette"
+        onclick="event.preventDefault();event.stopPropagation();castVote('${esc(e.url)}', '${esc(e.title)}', 'up', this)">👍</button>
+      <button class="vote ${myVotes[e.url] === 'down' ? 'chosen' : ''}" title="Mindre som dette"
+        onclick="event.preventDefault();event.stopPropagation();castVote('${esc(e.url)}', '${esc(e.title)}', 'down', this)">👎</button>
       <button class="addcal" title="Legg til i felleskalenderen"
         onclick="event.preventDefault();event.stopPropagation();window.open('${esc(gcalUrl(e))}','_blank')">📅+</button>
     </a>`;
@@ -589,7 +616,7 @@ function renderEvents(events) {
     (rest.length ? `<div style="font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:10px 0 4px">Ellers i byen</div>` + rest.map(e => row(e, false)).join('') : '');
   document.querySelector('#events .ev-list').innerHTML =
     (html || '<div class="empty">Ingen events funnet</div>') +
-    '<div class="src">Quicket + Ticketmaster · AI-kuratert mot profilen deres</div>';
+    '<div class="src">Quicket + Eventbrite + Ticketmaster · AI-kuratert · 👍👎 lærer den hva dere liker</div>';
 }
 
 function calWhen(e) {

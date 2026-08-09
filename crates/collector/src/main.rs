@@ -205,6 +205,35 @@ async fn attach_surf_analysis(
     spots
 }
 
+/// Stemmer fra tavlen (👍/👎) — lagret i KV av vote-funksjonen.
+async fn fetch_votes(client: &reqwest::Client) -> Vec<(String, String)> {
+    let (Some(token), Some(account), Some(ns)) = (
+        sources::env_nonempty("CLOUDFLARE_API_TOKEN"),
+        sources::env_nonempty("CLOUDFLARE_ACCOUNT_ID"),
+        sources::env_nonempty("CLOUDFLARE_KV_NAMESPACE_ID"),
+    ) else {
+        return vec![];
+    };
+    let url = format!(
+        "https://api.cloudflare.com/client/v4/accounts/{account}/storage/kv/namespaces/{ns}/values/votes.json"
+    );
+    let Ok(resp) = client.get(&url).bearer_auth(token).send().await else {
+        return vec![];
+    };
+    let Ok(votes) = resp.json::<Vec<serde_json::Value>>().await else {
+        return vec![];
+    };
+    votes
+        .into_iter()
+        .filter_map(|v| {
+            Some((
+                v["title"].as_str()?.to_string(),
+                v["vote"].as_str()?.to_string(),
+            ))
+        })
+        .collect()
+}
+
 /// AI-kuratering av events mot interesseprofilen, hash-cachet på url-settet.
 async fn curate_events(
     client: &reqwest::Client,
@@ -212,9 +241,13 @@ async fn curate_events(
     mut events: Vec<schema::EventItem>,
     previous: &DashboardData,
 ) -> Vec<schema::EventItem> {
+    let votes = fetch_votes(client).await;
     let mut urls: Vec<&str> = events.iter().map(|e| e.url.as_str()).collect();
     urls.sort();
-    let hash = blake3::hash(format!("curation-v4;{}", urls.join(";")).as_bytes()).to_hex().to_string();
+    let vote_sig: String = votes.iter().map(|(t, v)| format!("{t}={v};")).collect();
+    let hash = blake3::hash(format!("curation-v5;{};votes:{}", urls.join(";"), vote_sig).as_bytes())
+        .to_hex()
+        .to_string();
 
     if cache.get_meta("events_hash").as_deref() == Some(hash.as_str()) {
         for e in &mut events {
@@ -228,7 +261,7 @@ async fn curate_events(
     let Some(api_key) = sources::env_nonempty("ANTHROPIC_API_KEY") else {
         return events;
     };
-    match llm::curate_events(client, &api_key, &events).await {
+    match llm::curate_events(client, &api_key, &events, &votes).await {
         Ok(batch) => {
             for e in &mut events {
                 if let Some(c) = batch.items.iter().find(|c| c.url == e.url) {

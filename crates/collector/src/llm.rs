@@ -216,6 +216,7 @@ pub async fn curate_events(
     client: &reqwest::Client,
     api_key: &str,
     events: &[schema::EventItem],
+    votes: &[(String, String)],
 ) -> Result<schema::EventCurationBatch> {
     let settings = schemars::gen::SchemaSettings::draft07().with(|s| {
         s.inline_subschemas = true;
@@ -228,12 +229,27 @@ pub async fn curate_events(
 
     let mut prompt = format!(
         "Interesseprofil:\n{EVENT_PROFILE}\n\nVurder relevansen (1-5) for hvert \
-         event under. Vær streng: 4-5 er unntaket og skal samlet være maks 6-7 \
-         events — de som faktisk ville fått dem til å si «dit må vi». Er flere \
-         events nesten like (samme festival/serie), gi kun det beste av dem 4+, \
-         resten 3. why_no kun for relevans 4-5: én kort setning på norsk om \
-         hvorfor dette treffer. Ett output-item per event, url uendret.\n\n"
+         event under. Sikt på 10-14 events med 4-5 når utvalget gir grunnlag for \
+         det — 5 er «dit MÅ vi», 4 er «klart aktuelt». Er flere events nesten \
+         like (samme festival/serie), gi kun det beste av dem 4+, resten 3. \
+         why_no kun for relevans 4-5: én kort setning på norsk om hvorfor dette \
+         treffer. Ett output-item per event, url uendret.\n\n"
     );
+    if !votes.is_empty() {
+        prompt.push_str(
+            "VIKTIGST — lær av deres faktiske stemmer på tidligere events \
+             (👍 = mer av dette, 👎 = mindre av dette). Vekt likende events \
+             deretter:\n",
+        );
+        for (title, vote) in votes.iter().rev().take(60) {
+            prompt.push_str(&format!(
+                "{} {}\n",
+                if vote == "up" { "👍" } else { "👎" },
+                title
+            ));
+        }
+        prompt.push('\n');
+    }
     for e in events {
         prompt.push_str(&format!("- {} | {} | {}\n  url: {}\n", e.title, e.start, e.venue, e.url));
     }
