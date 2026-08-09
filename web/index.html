@@ -24,12 +24,13 @@
     --r-good: #00d68f;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { height: 100%; }
+  html { height: 100%; }
   body {
     background: var(--bg);
     color: var(--text);
     font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-    overflow: hidden;
+    overflow-y: auto;
+    min-height: 100%;
     padding: 16px;
     display: flex;
     flex-direction: column;
@@ -42,11 +43,10 @@
   #updated.stale { color: var(--warn); }
 
   main {
-    flex: 1;
     display: grid;
-    grid-template-columns: 28fr 44fr 28fr;
+    grid-template-columns: 30fr 40fr 30fr;
     gap: 12px;
-    min-height: 0;
+    align-items: start;
   }
   .col { display: flex; flex-direction: column; gap: 12px; min-height: 0; }
   section {
@@ -98,13 +98,13 @@
     color: #08110c; text-transform: uppercase; letter-spacing: .5px; white-space: nowrap;
   }
 
-  /* Nyheter */
-  #news { flex: 1; display: flex; flex-direction: column; min-height: 0; }
-  .news-list { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; }
-  .news-item { padding: 7px 8px 7px 12px; border-left: 3px solid var(--border); border-radius: 4px; }
+  /* Nyheter — kompakt, under hovedgriden */
+  .news-list { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 14px; }
+  .news-item { padding: 5px 8px 5px 11px; border-left: 3px solid var(--border); border-radius: 4px; }
   .news-item.hot { border-left-color: var(--alert); }
-  .news-item .head { font-size: 17px; font-weight: 600; line-height: 1.25; }
-  .news-item .sum { color: var(--muted); font-size: 13.5px; line-height: 1.35; margin-top: 2px; }
+  .news-item .head { font-size: 14.5px; font-weight: 600; line-height: 1.25; }
+  .news-item .sum { color: var(--muted); font-size: 12px; line-height: 1.3; margin-top: 1px;
+                    display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
   .news-item .meta { font-size: 11.5px; color: var(--muted); margin-top: 3px; display: flex; gap: 8px; align-items: center; }
   .badge {
     font-size: 10.5px; padding: 1px 8px; border-radius: 99px;
@@ -125,6 +125,21 @@
   .list-item .when { color: var(--accent); white-space: nowrap; font-variant-numeric: tabular-nums;
                      font-size: 12.5px; min-width: 58px; }
   .empty { color: var(--muted); font-size: 13px; font-style: italic; }
+  /* Kalender + gjøremål: hovedpanelene */
+  .cal-row { display: flex; gap: 12px; padding: 9px 6px; border-bottom: 1px solid var(--border);
+             align-items: baseline; border-radius: 6px; }
+  .cal-row:last-of-type { border-bottom: none; }
+  .cal-row .when { color: var(--accent); font-size: 14px; min-width: 84px;
+                   font-variant-numeric: tabular-nums; font-weight: 600; }
+  .cal-row .when.today { color: var(--r-good); }
+  .cal-row .t { font-size: 17px; font-weight: 500; }
+  .todo-row { display: flex; gap: 10px; padding: 8px 6px; border-bottom: 1px solid var(--border);
+              align-items: baseline; border-radius: 6px; }
+  .todo-row:last-of-type { border-bottom: none; }
+  .todo-row .st { font-size: 11px; padding: 2px 9px; border-radius: 99px; white-space: nowrap;
+                  background: rgba(143,161,179,.15); color: var(--muted); text-transform: uppercase; }
+  .todo-row .st.active { background: rgba(76,194,255,.15); color: var(--accent); }
+  .todo-row .t { font-size: 16px; font-weight: 500; }
   .src { color: var(--muted); font-size: 10px; margin-top: 6px; opacity: .75; text-align: right; }
   .daysrows { margin-top: 8px; }
   .dayrow { display: grid; grid-template-columns: 44px 1fr auto auto auto; gap: 8px;
@@ -134,8 +149,7 @@
   .dayrow .icons { display: flex; gap: 7px; font-size: 16px; }
   .dayrow .rain { color: var(--accent); font-size: 12px; min-width: 52px; text-align: right; }
   .dayrow .wind { color: var(--muted); font-size: 12px; min-width: 48px; text-align: right; }
-  #events { flex: 1; display: flex; flex-direction: column; min-height: 0; }
-  #events .ev-list { flex: 1; overflow-y: auto; }
+  #events .ev-list { max-height: 560px; overflow-y: auto; }
   #loadshedding .stage { display: flex; align-items: center; gap: 12px; }
   #loadshedding .num { font-size: 30px; font-weight: 200; }
   #loadshedding .num.ok { color: var(--ok); }
@@ -204,9 +218,13 @@
       </section>
     </div>
     <div class="col">
-      <section id="news">
-        <h2>Nyheter</h2>
-        <div class="news-list"><div class="empty">Ingen data ennå</div></div>
+      <section id="calendar" class="clickable" title="Trykk for alle avtaler">
+        <h2>Kalender</h2>
+        <div class="empty">Ingen hendelser — kobles til Google Calendar</div>
+      </section>
+      <section id="todos" class="clickable" title="Trykk for alle gjøremål">
+        <h2>Gjøremål</h2>
+        <div class="empty">Kobles til Linear</div>
       </section>
     </div>
     <div class="col">
@@ -214,20 +232,16 @@
         <h2>Load shedding</h2>
         <div class="empty">Ingen data</div>
       </section>
-      <section id="calendar">
-        <h2>Kalender</h2>
-        <div class="empty">Ingen hendelser — kobles til Google Calendar</div>
-      </section>
-      <section id="todos">
-        <h2>Gjøremål</h2>
-        <div class="empty">Kobles til Linear</div>
-      </section>
       <section id="events">
         <h2>Det skjer</h2>
         <div class="ev-list"><div class="empty">Ingen events ennå</div></div>
       </section>
     </div>
   </main>
+  <section id="news">
+    <h2>Nyheter</h2>
+    <div class="news-list"><div class="empty">Ingen data ennå</div></div>
+  </section>
 
   <div id="overlay">
     <div id="modal">
@@ -514,31 +528,82 @@ function renderEvents(events) {
     '<div class="src">Quicket + Ticketmaster · AI-kuratert mot profilen deres</div>';
 }
 
+function calWhen(e) {
+  const d = e.all_day ? new Date(e.start + 'T12:00:00') : new Date(e.start);
+  const today = new Date(); today.setHours(0,0,0,0);
+  const evDay = new Date(d); evDay.setHours(0,0,0,0);
+  const diff = Math.round((evDay - today) / 86400000);
+  const time = e.all_day ? '' : ' ' + new Intl.DateTimeFormat('no', { hour: '2-digit', minute: '2-digit' }).format(d);
+  let day;
+  if (diff === 0) day = 'I dag';
+  else if (diff === 1) day = 'I morgen';
+  else day = new Intl.DateTimeFormat('no', { weekday: 'short', day: 'numeric', month: 'short' }).format(d);
+  return { label: day + time, today: diff === 0 };
+}
+
 function renderCalendar(cal) {
-  const rows = cal.map(e => {
-    const when = e.all_day
-      ? new Intl.DateTimeFormat('no', { day: 'numeric', month: 'short' }).format(new Date(e.start + 'T12:00:00'))
-      : new Intl.DateTimeFormat('no', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date(e.start));
-    return `<div class="list-item"><span class="when">${esc(when)}</span><span>${esc(e.title)}</span></div>`;
+  const rows = cal.slice(0, 7).map(e => {
+    const w = calWhen(e);
+    return `<div class="cal-row">
+      <span class="when ${w.today ? 'today' : ''}">${esc(w.label)}</span>
+      <span class="t">${esc(e.title)}</span>
+    </div>`;
   }).join('');
-  document.getElementById('calendar').innerHTML = '<h2>Kalender</h2>' +
-    (rows || '<div class="empty">Ingen hendelser — kobles til Google Calendar</div>');
+  document.getElementById('calendar').innerHTML = '<h2>Kalender · Felles</h2>' +
+    (rows || '<div class="empty">Ingen hendelser de neste 30 dagene</div>') +
+    (cal.length > 7 ? `<div class="src">+ ${cal.length - 7} til — trykk for alle</div>` : '');
+}
+
+function calendarModal() {
+  const cal = D?.calendar || [];
+  if (!cal.length) return;
+  let html = '', lastDay = '';
+  for (const e of cal) {
+    const d = e.all_day ? new Date(e.start + 'T12:00:00') : new Date(e.start);
+    const dayKey = e.start.slice(0, 10);
+    if (dayKey !== lastDay) {
+      html += `<div style="color:var(--accent);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:1px;margin:14px 0 4px">${esc(new Intl.DateTimeFormat('no', { weekday: 'long', day: 'numeric', month: 'long' }).format(d))}</div>`;
+      lastDay = dayKey;
+    }
+    const time = e.all_day ? 'Hele dagen' : new Intl.DateTimeFormat('no', { hour: '2-digit', minute: '2-digit' }).format(d);
+    html += `<div class="cal-row"><span class="when">${esc(time)}</span><span class="t">${esc(e.title)}</span></div>`;
+  }
+  openModal('Kalender · neste 30 dager', html +
+    '<div class="src">Google Calendar «Felles - Cape Town» · oppdateres hvert 30. min</div>');
+}
+document.getElementById('calendar').addEventListener('click', calendarModal);
+
+function todoDue(t) {
+  if (!t.due) return '';
+  const overdue = new Date(t.due) < new Date();
+  const label = new Intl.DateTimeFormat('no', { day: 'numeric', month: 'short' }).format(new Date(t.due + 'T12:00:00'));
+  return ` <span style="color:${overdue ? 'var(--alert)' : 'var(--warn)'};font-size:12.5px;font-weight:600">${overdue ? '⚠ ' : ''}${label}</span>`;
 }
 
 function renderTodos(todos) {
-  const rows = todos.slice(0, 8).map(t => {
-    const due = t.due
-      ? ` <span style="color:${new Date(t.due) < new Date() ? 'var(--alert)' : 'var(--warn)'};font-size:12px">${new Intl.DateTimeFormat('no', { day: 'numeric', month: 'short' }).format(new Date(t.due + 'T12:00:00'))}</span>`
-      : '';
-    return `<div class="list-item">
-      <span class="when">${esc(t.status)}</span>
-      <span>${esc(t.title)}${t.project ? `<span style="color:var(--muted)"> · ${esc(t.project)}</span>` : ''}${due}</span>
-    </div>`;
-  }).join('');
-  document.getElementById('todos').innerHTML = '<h2>Gjøremål</h2>' +
-    (rows || '<div class="empty">Kobles til Linear</div>') +
-    (rows ? '<div class="src">Linear</div>' : '');
+  const rows = todos.slice(0, 8).map(t => `
+    <div class="todo-row">
+      <span class="st ${t.status === 'In Progress' ? 'active' : ''}">${esc(t.status)}</span>
+      <span class="t">${esc(t.title)}${todoDue(t)}</span>
+    </div>`).join('');
+  document.getElementById('todos').innerHTML = '<h2>Gjøremål · CapeTasks</h2>' +
+    (rows || '<div class="empty">Ingen åpne gjøremål 🎉</div>') +
+    (todos.length > 8 ? `<div class="src">+ ${todos.length - 8} til — trykk for alle</div>` : (rows ? '<div class="src">Linear</div>' : ''));
 }
+
+function todosModal() {
+  const todos = D?.todos || [];
+  if (!todos.length) return;
+  const rows = todos.map(t => `
+    <div class="todo-row">
+      <span class="st ${t.status === 'In Progress' ? 'active' : ''}">${esc(t.status)}</span>
+      <span class="t">${esc(t.title)}${todoDue(t)}
+        ${t.project ? `<div style="color:var(--muted);font-size:12.5px">${esc(t.project)}</div>` : ''}</span>
+    </div>`).join('');
+  openModal('Gjøremål', rows +
+    '<div class="src">Linear · CapeTasks · legg til via Linear-appen eller be Claude</div>');
+}
+document.getElementById('todos').addEventListener('click', todosModal);
 
 /* ---------- Hovedrender ---------- */
 function render(data) {

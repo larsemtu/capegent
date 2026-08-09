@@ -11,7 +11,7 @@ use std::io::BufReader;
 use tracing::warn;
 
 const HORIZON_DAYS: i64 = 30;
-const MAX_EVENTS: usize = 6;
+const MAX_EVENTS: usize = 20;
 
 /// Cape Town har ikke sommertid, fast UTC+2 holder.
 fn sast() -> FixedOffset {
