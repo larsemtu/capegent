@@ -155,7 +155,11 @@
 
 <script>
 const TZ = 'Africa/Johannesburg';
-const DATA_URL = '../data/latest.json';
+// Cloudflare: web/ er rot og data serveres av Pages Function på /data/latest.json.
+// GitHub Pages (overgangsfase): siden ligger på /capegent/web/ og data i repoet.
+const DATA_URL = location.hostname.endsWith('github.io')
+  ? '../data/latest.json'
+  : '/data/latest.json';
 
 const WMO = {
   0:  ['☀️','Klarvær'],   1: ['🌤️','Lettskyet'], 2: ['⛅','Delvis skyet'], 3: ['☁️','Overskyet'],

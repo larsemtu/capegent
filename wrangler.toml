@@ -1,0 +1,9 @@
+# Cloudflare Pages-prosjekt: statisk side fra web/ + Pages Function som
+# serverer data fra KV. KV-namespace-id fylles inn etter `wrangler kv namespace create`.
+name = "capegent"
+pages_build_output_dir = "web"
+compatibility_date = "2026-08-01"
+
+[[kv_namespaces]]
+binding = "DATA"
+id = "FYLL_INN_ETTER_OPPSETT"

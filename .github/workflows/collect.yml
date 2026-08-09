@@ -30,6 +30,21 @@ jobs:
           key: dedup-${{ github.run_id }}
           restore-keys: dedup-
 
+      # Forrige kjørings data hentes fra KV som fallback-kilde — data
+      # committes ikke til git (persondata skal aldri innom repoet)
+      - name: Hent forrige data fra KV
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_KV_NAMESPACE_ID: ${{ secrets.CLOUDFLARE_KV_NAMESPACE_ID }}
+        run: |
+          if [ -n "$CLOUDFLARE_API_TOKEN" ]; then
+            mkdir -p data
+            curl -sf -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+              "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/storage/kv/namespaces/$CLOUDFLARE_KV_NAMESPACE_ID/values/latest.json" \
+              -o data/latest.json || echo "ingen tidligere data i KV"
+          fi
+
       - name: Kjør collector
         run: cargo run --release -p collector
         env:
@@ -37,6 +52,21 @@ jobs:
           SEPUSH_TOKEN: ${{ secrets.SEPUSH_TOKEN }}
           CALENDAR_ICS_URL: ${{ secrets.CALENDAR_ICS_URL }}
 
+      - name: Last opp til KV
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_KV_NAMESPACE_ID: ${{ secrets.CLOUDFLARE_KV_NAMESPACE_ID }}
+        run: |
+          if [ -n "$CLOUDFLARE_API_TOKEN" ]; then
+            curl -sf -X PUT \
+              -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+              --data-binary @data/latest.json \
+              "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/storage/kv/namespaces/$CLOUDFLARE_KV_NAMESPACE_ID/values/latest.json"
+          fi
+
+      # Overgangsfase til Cloudflare Access er verifisert — fjernes når
+      # GitHub Pages slås av, og FØR persondata (kalender) aktiveres
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "data: oppdater latest.json"

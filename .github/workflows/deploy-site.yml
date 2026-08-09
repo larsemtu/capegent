@@ -1,0 +1,29 @@
+name: deploy-site
+
+# Deployer web/ + functions/ til Cloudflare Pages. Kjører kun når selve
+# siden endres — dataoppdateringer går via KV og trenger ingen deploy.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "web/**"
+      - "functions/**"
+      - "wrangler.toml"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy til Cloudflare Pages
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -n "$CLOUDFLARE_API_TOKEN" ]; then
+            npx --yes wrangler pages deploy
+          else
+            echo "CLOUDFLARE_API_TOKEN ikke satt — hopper over"
+          fi
