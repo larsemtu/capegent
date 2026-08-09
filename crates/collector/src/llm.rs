@@ -27,17 +27,23 @@ pub async fn summarize(
 
     let mut prompt = String::from(
         "Oppsummer og klassifiser hver av disse sakene. Behold source_url \
-         nøyaktig som oppgitt. Én output-item per input-sak.\n",
+         nøyaktig som oppgitt. Én output-item per input-sak. summary_no er \
+         maks 2 setninger for oversikten. detail_no er et fyldig sammendrag \
+         på 4-8 setninger basert på hele artikkelteksten der den finnes — \
+         få med konkrete fakta: hvem, hva, hvor, tall, sitater.\n",
     );
     for (i, item) in batch.iter().enumerate() {
         prompt.push_str(&format!(
-            "\n## Sak {} (kilde: {})\nTittel: {}\nIngress: {}\nsource_url: {}\n",
+            "\n## Sak {} (kilde: {})\nTittel: {}\nIngress: {}\n",
             i + 1,
             item.source,
             item.title,
             item.summary,
-            item.url
         ));
+        if let Some(text) = &item.full_text {
+            prompt.push_str(&format!("Artikkeltekst: {text}\n"));
+        }
+        prompt.push_str(&format!("source_url: {}\n", item.url));
     }
 
     let body = json!({
@@ -55,6 +61,9 @@ pub async fn summarize(
 
     let resp = client
         .post("https://api.anthropic.com/v1/messages")
+        // Batcher med full artikkeltekst tar godt over den globale
+        // 30s-timeouten som er ment for feed-/API-henting
+        .timeout(std::time::Duration::from_secs(180))
         .header("x-api-key", api_key)
         .header("anthropic-version", "2023-06-01")
         .json(&body)
@@ -99,6 +108,7 @@ pub fn fallback(raw: &RawItem) -> NewsEntry {
         item: NewsItem {
             headline_no: raw.title.clone(),
             summary_no: summary,
+            detail_no: raw.full_text.clone().unwrap_or_default(),
             category: Category::Other,
             urgency: 2,
             source_url: raw.url.clone(),

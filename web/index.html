@@ -3,11 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
 <title>Cape Town</title>
 <style>
   :root {
     --bg: #0b0f14;
     --panel: #131a22;
+    --panel2: #182230;
     --border: #1f2a36;
     --text: #e8eef4;
     --muted: #8fa1b3;
@@ -15,6 +17,11 @@
     --warn: #ffb454;
     --alert: #ff5c5c;
     --ok: #3fdf8f;
+    --r-poor: #ff5c5c;
+    --r-poorfair: #ffb454;
+    --r-fair: #b8e05a;
+    --r-fairgood: #3fdf8f;
+    --r-good: #00d68f;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { height: 100%; }
@@ -23,95 +30,151 @@
     color: var(--text);
     font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
     overflow: hidden;
-    padding: 18px;
+    padding: 16px;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
   }
-  header {
-    display: flex;
-    align-items: baseline;
-    gap: 20px;
-  }
-  header h1 { font-size: 30px; font-weight: 700; letter-spacing: 2px; }
-  #clock { font-size: 30px; font-weight: 300; font-variant-numeric: tabular-nums; }
-  #updated { margin-left: auto; color: var(--muted); font-size: 15px; }
+  header { display: flex; align-items: baseline; gap: 20px; }
+  header h1 { font-size: 28px; font-weight: 700; letter-spacing: 2px; }
+  #clock { font-size: 28px; font-weight: 300; font-variant-numeric: tabular-nums; }
+  #updated { margin-left: auto; color: var(--muted); font-size: 14px; }
   #updated.stale { color: var(--warn); }
 
   main {
     flex: 1;
     display: grid;
-    grid-template-columns: 27fr 46fr 27fr;
-    gap: 14px;
+    grid-template-columns: 28fr 44fr 28fr;
+    gap: 12px;
     min-height: 0;
   }
-  .col { display: flex; flex-direction: column; gap: 14px; min-height: 0; }
+  .col { display: flex; flex-direction: column; gap: 12px; min-height: 0; }
   section {
     background: var(--panel);
     border: 1px solid var(--border);
     border-radius: 10px;
-    padding: 14px 16px;
+    padding: 12px 14px;
     overflow: hidden;
   }
   section h2 {
-    font-size: 13px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--muted);
-    margin-bottom: 10px;
+    font-size: 12px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 1.5px; color: var(--muted); margin-bottom: 8px;
   }
+  .clickable { cursor: pointer; }
+  .clickable:hover { background: var(--panel2); }
 
   /* Vær */
-  .now { display: flex; align-items: center; gap: 16px; }
-  .now .icon { font-size: 52px; line-height: 1; }
-  .now .temp { font-size: 46px; font-weight: 200; }
-  .now .desc { color: var(--muted); font-size: 15px; }
-  .wind-row { display: flex; gap: 18px; margin-top: 10px; font-size: 16px; }
-  .wind-row .lbl { color: var(--muted); font-size: 12px; display: block; }
-  .daily { display: flex; margin-top: 12px; gap: 6px; }
+  .now { display: flex; align-items: center; gap: 14px; }
+  .now .icon { font-size: 44px; line-height: 1; }
+  .now .temp { font-size: 40px; font-weight: 200; }
+  .now .desc { color: var(--muted); font-size: 14px; }
+  .wind-row { display: flex; gap: 16px; margin-top: 8px; font-size: 15px; }
+  .wind-row .lbl { color: var(--muted); font-size: 11px; display: block; }
+  .hours { display: flex; margin-top: 10px; gap: 4px; }
+  .hours .h {
+    flex: 1; text-align: center; background: rgba(255,255,255,.03);
+    border-radius: 7px; padding: 6px 1px; font-size: 12.5px;
+  }
+  .hours .h .t { color: var(--muted); font-size: 11px; }
+  .hours .h .i { font-size: 18px; margin: 1px 0; }
+  .daily { display: flex; margin-top: 8px; gap: 4px; }
   .daily .day {
     flex: 1; text-align: center; background: rgba(255,255,255,.03);
-    border-radius: 8px; padding: 8px 2px; font-size: 14px;
+    border-radius: 7px; padding: 6px 1px; font-size: 12.5px;
   }
-  .daily .day .d { color: var(--muted); font-size: 12px; text-transform: uppercase; }
-  .daily .day .i { font-size: 22px; margin: 2px 0; }
+  .daily .day .d { color: var(--muted); font-size: 10.5px; text-transform: uppercase; }
+  .daily .day .i { font-size: 17px; margin: 1px 0; }
 
   /* Surf */
-  .spot { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; padding: 9px 0; border-bottom: 1px solid var(--border); }
-  .spot:last-child { border-bottom: none; padding-bottom: 0; }
-  .spot .name { font-size: 17px; font-weight: 600; }
-  .spot .meta { color: var(--muted); font-size: 13.5px; grid-column: 1 / -1; }
-  .spot .h { font-size: 21px; font-weight: 300; color: var(--accent); }
+  .spot { display: grid; grid-template-columns: 1fr auto auto; align-items: center;
+          gap: 2px 10px; padding: 8px 6px; border-bottom: 1px solid var(--border);
+          border-radius: 6px; }
+  .spot:last-child { border-bottom: none; }
+  .spot .name { font-size: 16px; font-weight: 600; }
+  .spot .meta { color: var(--muted); font-size: 12.5px; grid-column: 1 / -1; }
+  .spot .h { font-size: 19px; font-weight: 300; color: var(--accent); }
+  .pill {
+    font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 99px;
+    color: #08110c; text-transform: uppercase; letter-spacing: .5px; white-space: nowrap;
+  }
 
   /* Nyheter */
-  #news { flex: 1; display: flex; flex-direction: column; }
-  .news-list { flex: 1; display: flex; flex-direction: column; justify-content: space-between; gap: 8px; overflow: hidden; }
-  .news-item { padding: 8px 0 8px 12px; border-left: 3px solid var(--border); }
+  #news { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+  .news-list { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; }
+  .news-item { padding: 7px 8px 7px 12px; border-left: 3px solid var(--border); border-radius: 4px; }
   .news-item.hot { border-left-color: var(--alert); }
-  .news-item .head { font-size: 19px; font-weight: 600; line-height: 1.25; }
-  .news-item .sum { color: var(--muted); font-size: 14.5px; line-height: 1.35; margin-top: 3px; }
-  .news-item .meta { font-size: 12px; color: var(--muted); margin-top: 4px; display: flex; gap: 8px; align-items: center; }
+  .news-item .head { font-size: 17px; font-weight: 600; line-height: 1.25; }
+  .news-item .sum { color: var(--muted); font-size: 13.5px; line-height: 1.35; margin-top: 2px; }
+  .news-item .meta { font-size: 11.5px; color: var(--muted); margin-top: 3px; display: flex; gap: 8px; align-items: center; }
   .badge {
-    font-size: 11px; padding: 1px 8px; border-radius: 99px;
-    background: rgba(76,194,255,.12); color: var(--accent); text-transform: uppercase; letter-spacing: .5px;
+    font-size: 10.5px; padding: 1px 8px; border-radius: 99px;
+    background: rgba(76,194,255,.12); color: var(--accent);
+    text-transform: uppercase; letter-spacing: .5px;
   }
-  .badge.crime { background: rgba(255,92,92,.12); color: var(--alert); }
+  .badge.crime { background: rgba(255,92,92,.14); color: var(--alert); }
   .badge.traffic { background: rgba(255,180,84,.14); color: var(--warn); }
   .badge.weather { background: rgba(63,223,143,.12); color: var(--ok); }
+  .badge.politics { background: rgba(196,160,255,.14); color: #c4a0ff; }
+  .badge.infrastructure { background: rgba(255,180,84,.14); color: var(--warn); }
+  .badge.event { background: rgba(255,140,200,.14); color: #ff8cc8; }
 
-  /* Load shedding */
-  #loadshedding .stage { display: flex; align-items: center; gap: 14px; }
-  #loadshedding .num { font-size: 40px; font-weight: 200; }
+  /* Høyrekolonne */
+  .list-item { display: flex; gap: 10px; padding: 6px 4px; border-bottom: 1px solid var(--border);
+               font-size: 14px; align-items: baseline; border-radius: 4px; }
+  .list-item:last-child { border-bottom: none; }
+  .list-item .when { color: var(--accent); white-space: nowrap; font-variant-numeric: tabular-nums;
+                     font-size: 12.5px; min-width: 58px; }
+  .empty { color: var(--muted); font-size: 13px; font-style: italic; }
+  #events { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+  #events .ev-list { flex: 1; overflow-y: auto; }
+  #loadshedding .stage { display: flex; align-items: center; gap: 12px; }
+  #loadshedding .num { font-size: 30px; font-weight: 200; }
   #loadshedding .num.ok { color: var(--ok); }
   #loadshedding .num.bad { color: var(--alert); }
-  #loadshedding .note { color: var(--muted); font-size: 13px; }
+  #loadshedding .note { color: var(--muted); font-size: 12px; }
 
-  /* Kalender + events */
-  .cal-item { display: flex; gap: 12px; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 15px; }
-  .cal-item:last-child { border-bottom: none; }
-  .cal-item .when { color: var(--accent); white-space: nowrap; font-variant-numeric: tabular-nums; }
-  .empty { color: var(--muted); font-size: 14px; font-style: italic; }
+  /* Modal */
+  #overlay {
+    position: fixed; inset: 0; background: rgba(4,8,12,.75);
+    display: none; align-items: center; justify-content: center; z-index: 50;
+    backdrop-filter: blur(3px);
+  }
+  #overlay.open { display: flex; }
+  #modal {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
+    width: min(880px, 92vw); max-height: 88vh; display: flex; flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0,0,0,.6);
+  }
+  #modal .m-head { display: flex; align-items: flex-start; gap: 12px; padding: 18px 22px 10px; }
+  #modal .m-head h3 { font-size: 22px; line-height: 1.25; flex: 1; }
+  #modal .m-close {
+    background: var(--panel2); border: 1px solid var(--border); color: var(--text);
+    font-size: 20px; width: 38px; height: 38px; border-radius: 10px; cursor: pointer;
+  }
+  #modal .m-body { padding: 4px 22px 20px; overflow-y: auto; font-size: 15px; line-height: 1.5; }
+  #modal .m-body p { margin-bottom: 10px; }
+  .m-meta { display: flex; gap: 10px; align-items: center; color: var(--muted);
+            font-size: 12.5px; margin-bottom: 12px; flex-wrap: wrap; }
+  .m-link {
+    display: inline-block; margin-top: 8px; padding: 9px 16px; border-radius: 9px;
+    background: rgba(76,194,255,.14); color: var(--accent); text-decoration: none;
+    font-size: 14px; font-weight: 600;
+  }
+  table.fc { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  table.fc th { text-align: left; color: var(--muted); font-weight: 600; font-size: 11px;
+                text-transform: uppercase; letter-spacing: .5px; padding: 4px 8px; }
+  table.fc td { padding: 4px 8px; border-top: 1px solid var(--border);
+                font-variant-numeric: tabular-nums; }
+  table.fc .dayhead td { color: var(--accent); font-weight: 700; padding-top: 12px;
+                         border-top: none; font-size: 12px; text-transform: uppercase;
+                         letter-spacing: 1px; }
+  .dot { display: inline-block; width: 10px; height: 10px; border-radius: 99px; margin-right: 7px; }
+  .week-grid { display: flex; gap: 6px; margin-bottom: 14px; }
+  .week-grid .day { flex: 1; text-align: center; background: var(--panel2);
+                    border-radius: 8px; padding: 8px 2px; font-size: 13px; }
+  .week-grid .day .d { color: var(--muted); font-size: 11px; text-transform: uppercase; }
+  .week-grid .day .i { font-size: 22px; margin: 2px 0; }
+  .week-grid .day .w { color: var(--muted); font-size: 11px; }
 </style>
 </head>
 <body>
@@ -122,7 +185,7 @@
   </header>
   <main>
     <div class="col">
-      <section id="weather">
+      <section id="weather" class="clickable" title="Trykk for 48-timersvarsel">
         <h2>Vær · Green Point</h2>
         <div class="empty">Ingen data ennå</div>
       </section>
@@ -144,14 +207,28 @@
       </section>
       <section id="calendar">
         <h2>Kalender</h2>
-        <div class="empty">Ingen hendelser</div>
+        <div class="empty">Ingen hendelser — kobles til Google Calendar</div>
+      </section>
+      <section id="todos">
+        <h2>Gjøremål</h2>
+        <div class="empty">Kobles til Linear</div>
       </section>
       <section id="events">
         <h2>Det skjer</h2>
-        <div class="empty">Kommer i v2</div>
+        <div class="ev-list"><div class="empty">Ingen events ennå</div></div>
       </section>
     </div>
   </main>
+
+  <div id="overlay">
+    <div id="modal">
+      <div class="m-head">
+        <h3 id="m-title"></h3>
+        <button class="m-close" id="m-close">×</button>
+      </div>
+      <div class="m-body" id="m-body"></div>
+    </div>
+  </div>
 
 <script>
 const TZ = 'Africa/Johannesburg';
@@ -183,8 +260,23 @@ const CAT = {
   event: 'Event', infrastructure: 'Infrastruktur', other: 'Nyheter',
 };
 
+const RATING = {
+  poor:      { label: 'Poor',      color: 'var(--r-poor)' },
+  poor_fair: { label: 'Poor–Fair', color: 'var(--r-poorfair)' },
+  fair:      { label: 'Fair',      color: 'var(--r-fair)' },
+  fair_good: { label: 'Fair–Good', color: 'var(--r-fairgood)' },
+  good:      { label: 'Good',      color: 'var(--r-good)' },
+};
+const rating = r => RATING[r] || RATING.poor;
+
 const esc = s => String(s ?? '').replace(/[&<>"]/g,
   c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+const hhmm = iso => iso.slice(11, 16);
+const dayName = iso => new Intl.DateTimeFormat('no', { weekday: 'long', day: 'numeric', month: 'short' })
+  .format(new Date(iso.slice(0, 10) + 'T12:00:00'));
+const shortDay = iso => new Intl.DateTimeFormat('no', { weekday: 'short' })
+  .format(new Date(iso.slice(0, 10) + 'T12:00:00'));
 
 function tickClock() {
   document.getElementById('clock').textContent =
@@ -199,72 +291,227 @@ function relTime(iso) {
   return Math.round(mins / 1440) + ' d siden';
 }
 
+/* ---------- Modal ---------- */
+const overlay = document.getElementById('overlay');
+function openModal(title, bodyHtml) {
+  document.getElementById('m-title').innerHTML = title;
+  document.getElementById('m-body').innerHTML = bodyHtml;
+  overlay.classList.add('open');
+}
+function closeModal() { overlay.classList.remove('open'); }
+overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+document.getElementById('m-close').addEventListener('click', closeModal);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+let D = null; // siste data, for modal-innhold
+
+/* ---------- Vær ---------- */
+function renderWeather(w) {
+  const [icon, desc] = wmo(w.weather_code);
+  const nextHours = (w.hourly || []).slice(0, 6).map(h => `
+    <div class="h">
+      <div class="t">${esc(hhmm(h.time))}</div>
+      <div class="i">${wmo(h.weather_code)[0]}</div>
+      <div>${Math.round(h.temp_c)}°</div>
+    </div>`).join('');
+  const days = (w.daily || []).slice(1, 7).map(d => `
+    <div class="day">
+      <div class="d">${esc(shortDay(d.date))}</div>
+      <div class="i">${wmo(d.weather_code)[0]}</div>
+      <div>${Math.round(d.temp_max_c)}° <span style="color:var(--muted)">${Math.round(d.temp_min_c)}°</span></div>
+    </div>`).join('');
+  document.getElementById('weather').innerHTML = `
+    <h2>Vær · Green Point</h2>
+    <div class="now">
+      <div class="icon">${icon}</div>
+      <div>
+        <div class="temp">${Math.round(w.temp_c)}°</div>
+        <div class="desc">${esc(desc)} · føles som ${Math.round(w.apparent_temp_c)}°</div>
+      </div>
+      <div style="margin-left:auto;text-align:right">
+        <div class="wind-row" style="margin:0"><div><span class="lbl">Vind</span>${Math.round(w.wind_speed_kmh)} km/t ${compass(w.wind_direction_deg)}</div></div>
+        <div class="wind-row" style="margin:4px 0 0"><div><span class="lbl">Kast</span>${Math.round(w.wind_gusts_kmh)} km/t</div></div>
+      </div>
+    </div>
+    <div class="hours">${nextHours}</div>
+    <div class="daily">${days}</div>`;
+}
+
+function weatherModal() {
+  const w = D?.weather;
+  if (!w) return;
+  const week = (w.daily || []).map(d => `
+    <div class="day">
+      <div class="d">${esc(shortDay(d.date))}</div>
+      <div class="i">${wmo(d.weather_code)[0]}</div>
+      <div>${Math.round(d.temp_max_c)}° <span style="color:var(--muted)">${Math.round(d.temp_min_c)}°</span></div>
+      <div class="w">${d.precipitation_probability_pct != null ? Math.round(d.precipitation_probability_pct) + '%' : ''} · ${Math.round(d.wind_speed_max_kmh)} km/t</div>
+    </div>`).join('');
+
+  let rows = '', lastDay = '';
+  for (const h of (w.hourly || [])) {
+    const day = h.time.slice(0, 10);
+    if (day !== lastDay) {
+      rows += `<tr class="dayhead"><td colspan="5">${esc(dayName(h.time))}</td></tr>`;
+      lastDay = day;
+    }
+    const precip = (h.precipitation_probability_pct != null ? Math.round(h.precipitation_probability_pct) + '%' : '–')
+      + (h.precipitation_mm > 0 ? ` · ${h.precipitation_mm.toFixed(1)} mm` : '');
+    rows += `<tr>
+      <td>${esc(hhmm(h.time))}</td>
+      <td>${wmo(h.weather_code)[0]} <span style="color:var(--muted);font-size:12px">${esc(wmo(h.weather_code)[1])}</span></td>
+      <td>${Math.round(h.temp_c)}°</td>
+      <td>${precip}</td>
+      <td>${Math.round(h.wind_speed_kmh)} (${Math.round(h.wind_gusts_kmh)}) km/t ${compass(h.wind_direction_deg)}</td>
+    </tr>`;
+  }
+  openModal('Vær · Green Point', `
+    <div class="week-grid">${week}</div>
+    <table class="fc">
+      <tr><th>Kl</th><th></th><th>Temp</th><th>Nedbør</th><th>Vind (kast)</th></tr>
+      ${rows}
+    </table>`);
+}
+document.getElementById('weather').addEventListener('click', weatherModal);
+
+/* ---------- Surf ---------- */
+function renderSurf(spots) {
+  document.getElementById('surf').innerHTML = '<h2>Surf</h2>' + spots.map((s, i) => {
+    const r = rating(s.rating);
+    return `
+    <div class="spot clickable" data-spot="${i}" title="Trykk for varsel">
+      <div class="name">${esc(s.name)}</div>
+      <span class="pill" style="background:${r.color}">${r.label}</span>
+      <div class="h">${s.swell_height_m.toFixed(1)} m</div>
+      <div class="meta">
+        ${s.swell_period_s.toFixed(0)} s · svell fra ${compass(s.swell_direction_deg)} ·
+        vind ${Math.round(s.wind_speed_kmh)} km/t ${compass(s.wind_direction_deg)}
+      </div>
+    </div>`;
+  }).join('');
+  document.querySelectorAll('#surf .spot').forEach(el =>
+    el.addEventListener('click', () => surfModal(+el.dataset.spot)));
+}
+
+function surfModal(i) {
+  const s = D?.surf?.[i];
+  if (!s) return;
+  const r = rating(s.rating);
+  let rows = '', lastDay = '';
+  for (const h of (s.hourly || [])) {
+    const day = h.time.slice(0, 10);
+    if (day !== lastDay) {
+      rows += `<tr class="dayhead"><td colspan="5">${esc(dayName(h.time))}</td></tr>`;
+      lastDay = day;
+    }
+    const hr = rating(h.rating);
+    rows += `<tr>
+      <td>${esc(hhmm(h.time))}</td>
+      <td><span class="dot" style="background:${hr.color}"></span>${hr.label}</td>
+      <td>${h.swell_height_m.toFixed(1)} m @ ${h.swell_period_s.toFixed(0)} s</td>
+      <td>${compass(h.swell_direction_deg)}</td>
+      <td>${Math.round(h.wind_speed_kmh)} km/t ${compass(h.wind_direction_deg)}</td>
+    </tr>`;
+  }
+  openModal(`${esc(s.name)} <span class="pill" style="background:${r.color};vertical-align:middle">${r.label}</span>`, `
+    <div class="m-meta">
+      <span>Svell ${s.swell_height_m.toFixed(1)} m @ ${s.swell_period_s.toFixed(0)} s fra ${compass(s.swell_direction_deg)}</span>
+      <span>·</span><span>Bølge ${s.wave_height_m.toFixed(1)} m</span>
+      <span>·</span><span>Vind ${Math.round(s.wind_speed_kmh)} km/t fra ${compass(s.wind_direction_deg)}</span>
+    </div>
+    <table class="fc">
+      <tr><th>Kl</th><th>Forhold</th><th>Svell</th><th>Retning</th><th>Vind</th></tr>
+      ${rows}
+    </table>`);
+}
+
+/* ---------- Nyheter ---------- */
+function renderNews(news) {
+  const items = news.slice(0, 12).map((n, i) => `
+    <div class="news-item clickable ${n.urgency >= 4 ? 'hot' : ''}" data-news="${i}" title="Trykk for hele saken">
+      <div class="head">${esc(n.headline_no)}</div>
+      <div class="sum">${esc(n.summary_no)}</div>
+      <div class="meta">
+        <span class="badge ${esc(n.category)}">${CAT[n.category] || esc(n.category)}</span>
+        <span>${esc(n.source)}</span>
+        <span>${relTime(n.published_at)}</span>
+      </div>
+    </div>`).join('');
+  document.querySelector('#news .news-list').innerHTML = items;
+  document.querySelectorAll('#news .news-item').forEach(el =>
+    el.addEventListener('click', () => newsModal(+el.dataset.news)));
+}
+
+function newsModal(i) {
+  const n = D?.news?.[i];
+  if (!n) return;
+  const detail = (n.detail_no || n.summary_no || '')
+    .split(/\n+/).filter(Boolean)
+    .map(p => `<p>${esc(p)}</p>`).join('');
+  openModal(esc(n.headline_no), `
+    <div class="m-meta">
+      <span class="badge ${esc(n.category)}">${CAT[n.category] || esc(n.category)}</span>
+      <span>${esc(n.source)}</span>
+      <span>${relTime(n.published_at)}</span>
+      <span>hastegrad ${n.urgency}/5</span>
+    </div>
+    ${detail}
+    <a class="m-link" href="${esc(n.source_url)}" target="_blank" rel="noopener">
+      Les hele saken hos ${esc(n.source)} ↗
+    </a>`);
+}
+
+/* ---------- Events / kalender / todos ---------- */
+function renderEvents(events) {
+  const rows = events.map(e => {
+    const when = new Intl.DateTimeFormat('no', { day: 'numeric', month: 'short', timeZone: TZ })
+      .format(new Date(e.start));
+    return `<a class="list-item clickable" href="${esc(e.url)}" target="_blank" rel="noopener"
+              style="text-decoration:none;color:inherit">
+      <span class="when">${esc(when)}</span>
+      <span>${esc(e.title)}<span style="color:var(--muted)"> · ${esc(e.venue)}</span></span>
+    </a>`;
+  }).join('');
+  document.querySelector('#events .ev-list').innerHTML =
+    rows || '<div class="empty">Ingen events funnet</div>';
+}
+
+function renderCalendar(cal) {
+  const rows = cal.map(e => {
+    const when = e.all_day
+      ? new Intl.DateTimeFormat('no', { day: 'numeric', month: 'short' }).format(new Date(e.start + 'T12:00:00'))
+      : new Intl.DateTimeFormat('no', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date(e.start));
+    return `<div class="list-item"><span class="when">${esc(when)}</span><span>${esc(e.title)}</span></div>`;
+  }).join('');
+  document.getElementById('calendar').innerHTML = '<h2>Kalender</h2>' +
+    (rows || '<div class="empty">Ingen hendelser — kobles til Google Calendar</div>');
+}
+
+function renderTodos(todos) {
+  const rows = todos.map(t => `
+    <div class="list-item">
+      <span class="when">${esc(t.status)}</span>
+      <span>${esc(t.title)}${t.project ? `<span style="color:var(--muted)"> · ${esc(t.project)}</span>` : ''}</span>
+    </div>`).join('');
+  document.getElementById('todos').innerHTML = '<h2>Gjøremål</h2>' +
+    (rows || '<div class="empty">Kobles til Linear</div>');
+}
+
+/* ---------- Hovedrender ---------- */
 function render(data) {
+  D = data;
   const upd = document.getElementById('updated');
   upd.textContent = 'Oppdatert ' + relTime(data.generated_at);
   upd.classList.toggle('stale',
     Date.now() - new Date(data.generated_at).getTime() > 90 * 60000);
 
-  // Vær
-  if (data.weather) {
-    const w = data.weather;
-    const [icon, desc] = wmo(w.weather_code);
-    const days = (w.daily || []).slice(1, 5).map(d => {
-      const name = new Intl.DateTimeFormat('no', { weekday: 'short', timeZone: TZ })
-        .format(new Date(d.date + 'T12:00:00'));
-      return `<div class="day">
-        <div class="d">${esc(name)}</div>
-        <div class="i">${wmo(d.weather_code)[0]}</div>
-        <div>${Math.round(d.temp_max_c)}° <span style="color:var(--muted)">${Math.round(d.temp_min_c)}°</span></div>
-      </div>`;
-    }).join('');
-    document.getElementById('weather').innerHTML = `
-      <h2>Vær · Green Point</h2>
-      <div class="now">
-        <div class="icon">${icon}</div>
-        <div>
-          <div class="temp">${Math.round(w.temp_c)}°</div>
-          <div class="desc">${esc(desc)} · føles som ${Math.round(w.apparent_temp_c)}°</div>
-        </div>
-      </div>
-      <div class="wind-row">
-        <div><span class="lbl">Vind</span>${Math.round(w.wind_speed_kmh)} km/t ${compass(w.wind_direction_deg)}</div>
-        <div><span class="lbl">Kast</span>${Math.round(w.wind_gusts_kmh)} km/t</div>
-        <div><span class="lbl">Nedbør</span>${w.precipitation_mm} mm</div>
-      </div>
-      <div class="daily">${days}</div>`;
-  }
+  if (data.weather) renderWeather(data.weather);
+  if (data.surf?.length) renderSurf(data.surf);
+  if (data.news?.length) renderNews(data.news);
+  renderEvents(data.events || []);
+  renderCalendar(data.calendar || []);
+  renderTodos(data.todos || []);
 
-  // Surf
-  if (data.surf && data.surf.length) {
-    const spots = data.surf.map(s => `
-      <div class="spot">
-        <div class="name">${esc(s.name)}</div>
-        <div class="h">${s.swell_height_m.toFixed(1)} m</div>
-        <div class="meta">
-          ${s.swell_period_s.toFixed(0)} s · svell fra ${compass(s.swell_direction_deg)} ·
-          vind ${Math.round(s.wind_speed_kmh)} km/t ${compass(s.wind_direction_deg)}
-        </div>
-      </div>`).join('');
-    document.getElementById('surf').innerHTML = `<h2>Surf</h2>${spots}`;
-  }
-
-  // Nyheter
-  if (data.news && data.news.length) {
-    const items = data.news.slice(0, 6).map(n => `
-      <div class="news-item ${n.urgency >= 4 ? 'hot' : ''}">
-        <div class="head">${esc(n.headline_no)}</div>
-        <div class="sum">${esc(n.summary_no)}</div>
-        <div class="meta">
-          <span class="badge ${esc(n.category)}">${CAT[n.category] || esc(n.category)}</span>
-          <span>${esc(n.source)}</span>
-          <span>${relTime(n.published_at)}</span>
-        </div>
-      </div>`).join('');
-    document.querySelector('#news .news-list').innerHTML = items;
-  }
-
-  // Load shedding
   const ls = document.getElementById('loadshedding');
   if (data.load_shedding) {
     const s = data.load_shedding;
@@ -273,25 +520,6 @@ function render(data) {
         <div class="num ${s.stage === 0 ? 'ok' : 'bad'}">${s.stage === 0 ? '✓' : 'Stage ' + s.stage}</div>
         <div class="note">${s.stage === 0 ? 'Ingen load shedding' : ''} ${esc(s.note)}</div>
       </div>`;
-  }
-
-  // Kalender
-  if (data.calendar && data.calendar.length) {
-    const rows = data.calendar.map(e => {
-      const when = e.all_day
-        ? new Intl.DateTimeFormat('no', { day: 'numeric', month: 'short' }).format(new Date(e.start + 'T12:00:00'))
-        : new Intl.DateTimeFormat('no', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date(e.start));
-      return `<div class="cal-item"><span class="when">${esc(when)}</span><span>${esc(e.title)}</span></div>`;
-    }).join('');
-    document.getElementById('calendar').innerHTML = `<h2>Kalender</h2>${rows}`;
-  }
-
-  // Events
-  if (data.events && data.events.length) {
-    const rows = data.events.map(e =>
-      `<div class="cal-item"><span class="when">${esc(e.date)}</span><span>${esc(e.title)} · ${esc(e.venue)}</span></div>`
-    ).join('');
-    document.getElementById('events').innerHTML = `<h2>Det skjer</h2>${rows}`;
   }
 }
 
@@ -303,7 +531,6 @@ async function refresh() {
     lastGood = await resp.json();
     render(lastGood);
   } catch (err) {
-    // Behold siste kjente data på skjermen; marker bare alderen
     console.warn('fetch feilet:', err);
     if (lastGood) render(lastGood);
   }

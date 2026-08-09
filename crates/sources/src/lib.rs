@@ -2,7 +2,9 @@
 //! gjennom LLM-steget. Strukturerte API-er (Open-Meteo, EskomSePush, iCal)
 //! har egne typede moduler og går aldri innom Claude.
 
+pub mod article;
 pub mod calendar;
+pub mod events;
 pub mod loadshedding;
 pub mod marine;
 pub mod rss;
@@ -17,6 +19,9 @@ pub struct RawItem {
     pub source: String,
     pub title: String,
     pub summary: String,
+    /// Full artikkeltekst der feeden leverer den (content:encoded o.l.).
+    /// Mangler den, forsøker collectoren å hente artikkelsiden selv.
+    pub full_text: Option<String>,
     pub url: String,
     pub published: Option<DateTime<Utc>>,
 }

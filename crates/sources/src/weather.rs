@@ -1,5 +1,5 @@
 use anyhow::{Context, Result};
-use schema::{DailyForecast, Weather};
+use schema::{DailyForecast, HourlyForecast, Weather};
 use serde::Deserialize;
 
 pub const GREEN_POINT: (f64, f64) = (-33.906, 18.410);
@@ -7,6 +7,7 @@ pub const GREEN_POINT: (f64, f64) = (-33.906, 18.410);
 #[derive(Deserialize)]
 struct ForecastResp {
     current: Current,
+    hourly: Hourly,
     daily: Daily,
 }
 
@@ -19,6 +20,18 @@ struct Current {
     wind_speed_10m: f64,
     wind_direction_10m: f64,
     wind_gusts_10m: f64,
+}
+
+#[derive(Deserialize)]
+struct Hourly {
+    time: Vec<String>,
+    temperature_2m: Vec<f64>,
+    weather_code: Vec<u8>,
+    precipitation_probability: Vec<Option<f64>>,
+    precipitation: Vec<f64>,
+    wind_speed_10m: Vec<f64>,
+    wind_direction_10m: Vec<f64>,
+    wind_gusts_10m: Vec<f64>,
 }
 
 #[derive(Deserialize)]
@@ -37,9 +50,11 @@ pub async fn fetch(client: &reqwest::Client) -> Result<Weather> {
         "https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}\
          &current=temperature_2m,apparent_temperature,precipitation,weather_code,\
          wind_speed_10m,wind_direction_10m,wind_gusts_10m\
+         &hourly=temperature_2m,weather_code,precipitation_probability,precipitation,\
+         wind_speed_10m,wind_direction_10m,wind_gusts_10m\
          &daily=temperature_2m_max,temperature_2m_min,weather_code,\
          precipitation_probability_max,wind_speed_10m_max\
-         &timezone=Africa%2FJohannesburg&forecast_days=5"
+         &timezone=Africa%2FJohannesburg&forecast_days=7&forecast_hours=48"
     );
     let resp: ForecastResp = client
         .get(&url)
@@ -50,6 +65,23 @@ pub async fn fetch(client: &reqwest::Client) -> Result<Weather> {
         .json()
         .await
         .context("parse open-meteo forecast")?;
+
+    let hourly = resp
+        .hourly
+        .time
+        .iter()
+        .enumerate()
+        .map(|(i, time)| HourlyForecast {
+            time: time.clone(),
+            temp_c: resp.hourly.temperature_2m[i],
+            weather_code: resp.hourly.weather_code[i],
+            precipitation_probability_pct: resp.hourly.precipitation_probability[i],
+            precipitation_mm: resp.hourly.precipitation[i],
+            wind_speed_kmh: resp.hourly.wind_speed_10m[i],
+            wind_direction_deg: resp.hourly.wind_direction_10m[i],
+            wind_gusts_kmh: resp.hourly.wind_gusts_10m[i],
+        })
+        .collect();
 
     let daily = resp
         .daily
@@ -74,6 +106,7 @@ pub async fn fetch(client: &reqwest::Client) -> Result<Weather> {
         wind_speed_kmh: resp.current.wind_speed_10m,
         wind_direction_deg: resp.current.wind_direction_10m,
         wind_gusts_kmh: resp.current.wind_gusts_10m,
+        hourly,
         daily,
     })
 }

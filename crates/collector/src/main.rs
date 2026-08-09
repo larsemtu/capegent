@@ -8,7 +8,7 @@ mod llm;
 use anyhow::Result;
 use futures::future::join_all;
 use schema::{DashboardData, NewsEntry, SurfSpot};
-use sources::{calendar, loadshedding, marine, rss::RssSource, weather, RawItem, Source};
+use sources::{article, calendar, events, loadshedding, marine, rss::RssSource, weather, RawItem, Source};
 use std::collections::HashSet;
 use std::path::Path;
 use std::time::Duration;
@@ -22,7 +22,8 @@ const FEEDS: &[(&str, &str)] = &[
 ];
 
 const MAX_NEWS: usize = 20;
-const LLM_BATCH: usize = 12;
+// Mindre batcher enn før — full artikkeltekst gjør hvert kall større
+const LLM_BATCH: usize = 6;
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -47,11 +48,12 @@ async fn main() -> Result<()> {
 
     let cache = dedup::Cache::open(Path::new(".cache/dedup.redb"))?;
 
-    let (weather_res, surf, loadshedding_res, calendar_res, raw_news) = tokio::join!(
+    let (weather_res, surf, loadshedding_res, calendar_res, events_res, raw_news) = tokio::join!(
         weather::fetch(&client),
         fetch_surf(&client),
         loadshedding::fetch(&client),
         calendar::fetch(&client),
+        events::fetch(&client),
         fetch_news(&client),
     );
 
@@ -82,8 +84,16 @@ async fn main() -> Result<()> {
                 previous.calendar
             }
         },
-        // Events-kilder (Quicket/Webtickets) kommer senere
-        events: previous.events,
+        events: match events_res {
+            Ok(events) if !events.is_empty() => events,
+            Ok(_) => previous.events,
+            Err(e) => {
+                warn!("events feilet, bruker forrige: {e:#}");
+                previous.events
+            }
+        },
+        // Fylles når Linear-integrasjonen kobles på
+        todos: previous.todos,
     };
 
     std::fs::create_dir_all("data")?;
@@ -152,6 +162,23 @@ async fn process_news(
     }
     info!(cached = entries.len(), new = fresh.len(), "dedup mot cache");
 
+    // Hent full artikkeltekst for nye saker uten (IOL/GroundUp har bare
+    // ingress i feeden). Best effort — ingressen er fallback.
+    let article_texts = join_all(fresh.iter().map(|item| async {
+        match &item.full_text {
+            Some(_) => None,
+            None => article::fetch_text(client, &item.url).await.ok(),
+        }
+    }))
+    .await;
+    for (item, text) in fresh.iter_mut().zip(article_texts) {
+        if let Some(text) = text {
+            if text.len() > 300 {
+                item.full_text = Some(text);
+            }
+        }
+    }
+
     let api_key = sources::env_nonempty("ANTHROPIC_API_KEY");
     for chunk in fresh.chunks(LLM_BATCH) {
         match &api_key {
@@ -172,7 +199,18 @@ async fn process_news(
         }
     }
 
+    // Behold de nyeste, vis deretter etter prioritet:
+    // krim først, så politikk/infrastruktur, så resten — innen samme
+    // kategori-rang teller hastegrad og ferskhet
     entries.sort_by(|a, b| b.published_at.cmp(&a.published_at));
     entries.truncate(MAX_NEWS);
+    entries.sort_by(|a, b| {
+        a.item
+            .category
+            .rank()
+            .cmp(&b.item.category.rank())
+            .then(b.item.urgency.cmp(&a.item.urgency))
+            .then(b.published_at.cmp(&a.published_at))
+    });
     entries
 }

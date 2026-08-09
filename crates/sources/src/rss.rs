@@ -46,10 +46,17 @@ impl Source for RssSource {
                 let mut summary =
                     strip_html(&entry.summary.map(|t| t.content).unwrap_or_default());
                 truncate_chars(&mut summary, 500);
+                // Noen feeder (Daily Maverick) leverer hele artikkelen i content
+                let full_text = entry.content.and_then(|c| c.body).map(|body| {
+                    let mut text = strip_html(&body);
+                    truncate_chars(&mut text, 6000);
+                    text
+                }).filter(|t| t.len() > 300);
                 Some(RawItem {
                     source: self.id.to_string(),
                     title,
                     summary,
+                    full_text,
                     url,
                     published: entry.published.or(entry.updated),
                 })

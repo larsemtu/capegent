@@ -6,7 +6,8 @@ use redb::{Database, TableDefinition};
 use schema::NewsEntry;
 use std::path::Path;
 
-const SUMMARIES: TableDefinition<&str, &str> = TableDefinition::new("summaries");
+// v2: NewsItem fikk detail_no — nytt tabellnavn så alt re-oppsummeres én gang
+const SUMMARIES: TableDefinition<&str, &str> = TableDefinition::new("summaries_v2");
 
 pub struct Cache {
     db: Database,
@@ -66,6 +67,7 @@ mod tests {
             item: NewsItem {
                 headline_no: "Testoverskrift".into(),
                 summary_no: "Et sammendrag.".into(),
+                detail_no: "Et lengre sammendrag.".into(),
                 category: Category::Other,
                 urgency: 3,
                 source_url: "https://example.com/artikkel".into(),
