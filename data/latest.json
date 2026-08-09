@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-08-09T14:25:21.888679584+00:00",
+  "generated_at": "2026-08-09T14:31:24.858343194+00:00",
   "weather": {
-    "temp_c": 13.3,
-    "apparent_temp_c": 8.4,
+    "temp_c": 13.1,
+    "apparent_temp_c": 8.3,
     "precipitation_mm": 0.0,
     "weather_code": 0,
-    "wind_speed_kmh": 24.0,
-    "wind_direction_deg": 157.0,
+    "wind_speed_kmh": 23.5,
+    "wind_direction_deg": 158.0,
     "wind_gusts_kmh": 53.6,
     "daily": [
       {
@@ -55,10 +55,10 @@
     {
       "name": "Muizenberg",
       "wave_height_m": 2.66,
-      "swell_height_m": 2.24,
-      "swell_period_s": 9.05,
+      "swell_height_m": 2.22,
+      "swell_period_s": 9.0,
       "swell_direction_deg": 220.0,
-      "wind_speed_kmh": 25.9,
+      "wind_speed_kmh": 25.3,
       "wind_direction_deg": 158.0
     },
     {
@@ -67,17 +67,17 @@
       "swell_height_m": 2.68,
       "swell_period_s": 8.9,
       "swell_direction_deg": 226.0,
-      "wind_speed_kmh": 25.7,
+      "wind_speed_kmh": 25.3,
       "wind_direction_deg": 157.0
     },
     {
       "name": "Llandudno",
-      "wave_height_m": 3.42,
-      "swell_height_m": 3.08,
+      "wave_height_m": 3.4,
+      "swell_height_m": 3.06,
       "swell_period_s": 8.9,
       "swell_direction_deg": 222.0,
-      "wind_speed_kmh": 24.8,
-      "wind_direction_deg": 159.0
+      "wind_speed_kmh": 24.0,
+      "wind_direction_deg": 158.0
     }
   ],
   "news": [
@@ -244,6 +244,15 @@
       "published_at": "2026-08-07T15:58:04Z"
     },
     {
+      "headline_no": "Nasjonal vannaksjonplan diagnostiserer problemene, men mangler løsningen",
+      "summary_no": "Sør-Afrikas nye vannaksjonplan behandler vanntilgangen som et teknisk og driftsproblem, ikke som en systemkrise drevet av institusjonell svikt, korrupsjon og klimaendringer. Planen ignorerer de dypere årsakene bak landets vannkrise.",
+      "category": "infrastructure",
+      "urgency": 4,
+      "source_url": "https://www.dailymaverick.co.za/opinionista/2026-08-07-national-water-action-plan-gets-the-diagnosis-right-but-misses-the-real-fix/",
+      "source": "dailymaverick",
+      "published_at": "2026-08-07T14:21:32Z"
+    },
+    {
       "headline_no": "MEDISINSK ETIKK: Formulafirmaer påvirker helsepersonell",
       "summary_no": "Eksperter oppfordrer helsepersonell til å fremme amming og beskytte foreldre mot meieriindustriens påvirkninger. Verdens ammingsuke markeres med debatt om kommersiell påvirkning.",
       "category": "other",
@@ -251,15 +260,6 @@
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-07-formula-firms-targeting-healthcare-workers-to-shape-feeding-advice/",
       "source": "dailymaverick",
       "published_at": "2026-08-07T14:19:41Z"
-    },
-    {
-      "headline_no": "RUGBY TEST: Springboks fokus på Argentina før All Blacks-møte",
-      "summary_no": "Springboks møter Argentina i Buenos Aires med mål om 12. strake seier. Rassie Erasmus må avklare skader og form før møtet med All Blacks.",
-      "category": "event",
-      "urgency": 2,
-      "source_url": "https://www.dailymaverick.co.za/article/2026-08-07-boks-have-a-long-to-do-list-against-argentina-before-turning-attention-to-all-blacks/",
-      "source": "dailymaverick",
-      "published_at": "2026-08-07T13:50:09Z"
     }
   ],
   "load_shedding": null,
