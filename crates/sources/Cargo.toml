@@ -15,4 +15,5 @@ anyhow = { workspace = true }
 chrono = { workspace = true }
 async-trait = { workspace = true }
 ical = { workspace = true }
+rrule = { workspace = true }
 scraper = { workspace = true }

@@ -19,6 +19,7 @@ chrono = { version = "0.4", features = ["serde"] }
 async-trait = "0.1"
 futures = "0.3"
 ical = "0.11"
+rrule = "0.13"
 dotenvy = "0.15"
 
 [profile.release]
