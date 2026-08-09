@@ -53,6 +53,7 @@ jobs:
           CALENDAR_ICS_URL: ${{ secrets.CALENDAR_ICS_URL }}
           LINEAR_API_KEY: ${{ secrets.LINEAR_API_KEY }}
           LINEAR_PROJECT: CapeTasks
+          TICKETMASTER_API_KEY: ${{ secrets.TICKETMASTER_API_KEY }}
 
       - name: Last opp til KV
         env:

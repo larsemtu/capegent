@@ -12,6 +12,8 @@ const PAGES: &[&str] = &[
     "https://www.quicket.co.za/events/",
     "https://www.quicket.co.za/events/?page=2",
     "https://www.quicket.co.za/events/?page=3",
+    "https://www.quicket.co.za/events/?page=4",
+    "https://www.quicket.co.za/events/?page=5",
 ];
 
 /// Stor-Cape Town pluss vinlandet — dashbordet er for inspirasjon, så
@@ -47,7 +49,7 @@ pub async fn fetch(client: &reqwest::Client) -> Result<Vec<EventItem>> {
     });
     events.sort_by(|a, b| a.start.cmp(&b.start));
     events.dedup_by(|a, b| a.url == b.url);
-    events.truncate(15);
+    events.truncate(40);
     Ok(events)
 }
 
@@ -97,6 +99,8 @@ async fn fetch_page(client: &reqwest::Client, url: &str) -> Result<Vec<EventItem
                 start,
                 venue: if venue.is_empty() { locality.to_string() } else { venue.to_string() },
                 url,
+                relevance: None,
+                why_no: None,
             });
         }
     }

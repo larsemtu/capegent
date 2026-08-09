@@ -8,7 +8,7 @@ mod llm;
 use anyhow::Result;
 use futures::future::join_all;
 use schema::{DashboardData, NewsEntry, SurfSpot};
-use sources::{article, calendar, events, linear, loadshedding, marine, rss::RssSource, weather, RawItem, Source};
+use sources::{article, calendar, events, linear, loadshedding, marine, rss::RssSource, ticketmaster, weather, RawItem, Source};
 use std::collections::HashSet;
 use std::path::Path;
 use std::time::Duration;
@@ -49,18 +49,40 @@ async fn main() -> Result<()> {
 
     let cache = dedup::Cache::open(Path::new(".cache/dedup.redb"))?;
 
-    let (weather_res, surf, loadshedding_res, calendar_res, events_res, todos_res, raw_news) = tokio::join!(
+    let (weather_res, surf, loadshedding_res, calendar_res, events_res, tm_res, todos_res, raw_news) = tokio::join!(
         weather::fetch(&client),
         fetch_surf(&client),
         loadshedding::fetch(&client),
         calendar::fetch(&client),
         events::fetch(&client),
+        ticketmaster::fetch(&client),
         linear::fetch(&client),
         fetch_news(&client),
     );
 
     let news = process_news(&client, &cache, raw_news).await;
     let surf = attach_surf_analysis(&client, &cache, surf, &previous).await;
+
+    let curated_events = {
+        let mut all = match events_res {
+            Ok(events) => events,
+            Err(e) => {
+                warn!("events feilet: {e:#}");
+                vec![]
+            }
+        };
+        match tm_res {
+            Ok(mut tm) => all.append(&mut tm),
+            Err(e) => warn!("ticketmaster feilet: {e:#}"),
+        }
+        if all.is_empty() {
+            previous.events.clone()
+        } else {
+            all.sort_by(|a, b| a.start.cmp(&b.start));
+            all.dedup_by(|a, b| a.url == b.url);
+            curate_events(&client, &cache, all, &previous).await
+        }
+    };
 
     let data = DashboardData {
         generated_at: chrono::Utc::now().to_rfc3339(),
@@ -87,14 +109,7 @@ async fn main() -> Result<()> {
                 previous.calendar
             }
         },
-        events: match events_res {
-            Ok(events) if !events.is_empty() => events,
-            Ok(_) => previous.events,
-            Err(e) => {
-                warn!("events feilet, bruker forrige: {e:#}");
-                previous.events
-            }
-        },
+        events: curated_events,
         todos: match todos_res {
             Ok(todos) => todos,
             Err(e) => {
@@ -183,6 +198,45 @@ async fn attach_surf_analysis(
         Err(e) => warn!("surf-analyse feilet: {e:#}"),
     }
     spots
+}
+
+/// AI-kuratering av events mot interesseprofilen, hash-cachet på url-settet.
+async fn curate_events(
+    client: &reqwest::Client,
+    cache: &dedup::Cache,
+    mut events: Vec<schema::EventItem>,
+    previous: &DashboardData,
+) -> Vec<schema::EventItem> {
+    let mut urls: Vec<&str> = events.iter().map(|e| e.url.as_str()).collect();
+    urls.sort();
+    let hash = blake3::hash(format!("curation-v2;{}", urls.join(";")).as_bytes()).to_hex().to_string();
+
+    if cache.get_meta("events_hash").as_deref() == Some(hash.as_str()) {
+        for e in &mut events {
+            if let Some(prev) = previous.events.iter().find(|p| p.url == e.url) {
+                e.relevance = prev.relevance;
+                e.why_no = prev.why_no.clone();
+            }
+        }
+        return events;
+    }
+    let Some(api_key) = sources::env_nonempty("ANTHROPIC_API_KEY") else {
+        return events;
+    };
+    match llm::curate_events(client, &api_key, &events).await {
+        Ok(batch) => {
+            for e in &mut events {
+                if let Some(c) = batch.items.iter().find(|c| c.url == e.url) {
+                    e.relevance = Some(c.relevance.clamp(1, 5));
+                    e.why_no = (!c.why_no.trim().is_empty()).then(|| c.why_no.clone());
+                }
+            }
+            let _ = cache.put_meta("events_hash", &hash);
+            info!("ny event-kuratering generert");
+        }
+        Err(e) => warn!("event-kuratering feilet: {e:#}"),
+    }
+    events
 }
 
 async fn fetch_news(client: &reqwest::Client) -> Vec<RawItem> {

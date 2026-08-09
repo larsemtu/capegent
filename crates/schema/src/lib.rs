@@ -208,6 +208,28 @@ pub struct EventItem {
     pub start: String,
     pub venue: String,
     pub url: String,
+    /// AI-vurdert relevans for beboerne, 1-5 (5 = må ikke gå glipp av)
+    #[serde(default)]
+    pub relevance: Option<u8>,
+    /// Kort norsk begrunnelse når relevans >= 4
+    #[serde(default)]
+    pub why_no: Option<String>,
+}
+
+/// Claude sin event-kuratering — tvunget tool-output, matches på url.
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+pub struct EventCurationBatch {
+    pub items: Vec<EventCuration>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+pub struct EventCuration {
+    /// Nøyaktig url fra input
+    pub url: String,
+    /// 1-5: 5 = kritisk/må-med, 4 = veldig aktuelt, 3 = kanskje, 1-2 = ikke aktuelt
+    pub relevance: u8,
+    /// Kort begrunnelse på norsk, kun for 4-5 (ellers tom streng)
+    pub why_no: String,
 }
 
 /// Gjøremål — fylles fra Linear når integrasjonen kobles på.

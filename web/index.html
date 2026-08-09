@@ -494,18 +494,24 @@ function newsModal(i) {
 
 /* ---------- Events / kalender / todos ---------- */
 function renderEvents(events) {
-  const rows = events.map(e => {
-    const when = new Intl.DateTimeFormat('no', { day: 'numeric', month: 'short', timeZone: TZ })
-      .format(new Date(e.start));
-    return `<a class="list-item clickable" href="${esc(e.url)}" target="_blank" rel="noopener"
-              style="text-decoration:none;color:inherit">
-      <span class="when">${esc(when)}</span>
-      <span>${esc(e.title)}<span style="color:var(--muted)"> · ${esc(e.venue)}</span></span>
+  const fmtWhen = e => new Intl.DateTimeFormat('no', { day: 'numeric', month: 'short', timeZone: TZ })
+    .format(new Date(e.start));
+  const relColor = r => r >= 5 ? 'var(--r-good)' : r >= 4 ? 'var(--r-fair)' : 'var(--border)';
+  const row = (e, showWhy) => `
+    <a class="list-item clickable" href="${esc(e.url)}" target="_blank" rel="noopener"
+       style="text-decoration:none;color:inherit${e.relevance >= 5 ? ';border-left:3px solid var(--r-good);padding-left:7px' : ''}">
+      <span class="when">${esc(fmtWhen(e))}</span>
+      <span><span class="dot" style="background:${relColor(e.relevance || 0)};width:7px;height:7px"></span>${esc(e.title)}<span style="color:var(--muted)"> · ${esc(e.venue)}</span>${
+        showWhy && e.why_no ? `<div style="color:var(--muted);font-size:12px;margin-top:1px">🤖 ${esc(e.why_no)}</div>` : ''}</span>
     </a>`;
-  }).join('');
+  const picks = events.filter(e => (e.relevance || 0) >= 4);
+  const rest = events.filter(e => (e.relevance || 0) < 4 && (e.relevance || 0) !== 1 && (e.relevance || 0) !== 2);
+  const html =
+    (picks.length ? `<div style="font-size:10.5px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin:2px 0 4px">Anbefalt for dere</div>` + picks.map(e => row(e, true)).join('') : '') +
+    (rest.length ? `<div style="font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:10px 0 4px">Ellers i byen</div>` + rest.map(e => row(e, false)).join('') : '');
   document.querySelector('#events .ev-list').innerHTML =
-    (rows || '<div class="empty">Ingen events funnet</div>') +
-    '<div class="src">Quicket</div>';
+    (html || '<div class="empty">Ingen events funnet</div>') +
+    '<div class="src">Quicket + Ticketmaster · AI-kuratert mot profilen deres</div>';
 }
 
 function renderCalendar(cal) {

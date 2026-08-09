@@ -9,6 +9,7 @@ pub mod linear;
 pub mod loadshedding;
 pub mod marine;
 pub mod rss;
+pub mod ticketmaster;
 pub mod weather;
 
 use anyhow::Result;
