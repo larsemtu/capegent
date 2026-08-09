@@ -1,21 +1,12 @@
 {
-  "generated_at": "2026-08-09T18:31:29.888529+00:00",
+  "generated_at": "2026-08-09T19:11:31.640396272+00:00",
   "weather": {
-    "temp_c": 10.4,
+    "temp_c": 10.1,
     "symbol": "clearsky",
     "precipitation_mm": 0.0,
-    "wind_ms": 6.9,
-    "wind_direction_deg": 155.0,
+    "wind_ms": 6.6,
+    "wind_direction_deg": 158.6,
     "hourly": [
-      {
-        "time": "2026-08-09T20:00",
-        "temp_c": 10.4,
-        "symbol": "clearsky",
-        "precipitation_mm": 0.0,
-        "wind_ms": 6.9,
-        "wind_direction_deg": 155.0,
-        "gust_ms": 9.8
-      },
       {
         "time": "2026-08-09T21:00",
         "temp_c": 10.1,
@@ -23,7 +14,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 6.6,
         "wind_direction_deg": 158.6,
-        "gust_ms": 9.2
+        "gust_ms": 9.6
       },
       {
         "time": "2026-08-09T22:00",
@@ -32,7 +23,7 @@
         "precipitation_mm": 0.2,
         "wind_ms": 5.5,
         "wind_direction_deg": 156.9,
-        "gust_ms": 8.4
+        "gust_ms": 9.6
       },
       {
         "time": "2026-08-09T23:00",
@@ -41,7 +32,7 @@
         "precipitation_mm": 0.1,
         "wind_ms": 6.1,
         "wind_direction_deg": 160.5,
-        "gust_ms": 7.7
+        "gust_ms": 8.7
       },
       {
         "time": "2026-08-10T00:00",
@@ -59,7 +50,7 @@
         "precipitation_mm": 0.1,
         "wind_ms": 4.1,
         "wind_direction_deg": 171.3,
-        "gust_ms": 5.3
+        "gust_ms": 4.9
       },
       {
         "time": "2026-08-10T02:00",
@@ -68,7 +59,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 4.0,
         "wind_direction_deg": 163.6,
-        "gust_ms": 4.8
+        "gust_ms": 5.5
       },
       {
         "time": "2026-08-10T03:00",
@@ -77,7 +68,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 3.5,
         "wind_direction_deg": 152.1,
-        "gust_ms": 5.2
+        "gust_ms": 4.9
       },
       {
         "time": "2026-08-10T04:00",
@@ -86,7 +77,7 @@
         "precipitation_mm": 0.1,
         "wind_ms": 3.7,
         "wind_direction_deg": 171.5,
-        "gust_ms": 3.4
+        "gust_ms": 4.4
       },
       {
         "time": "2026-08-10T05:00",
@@ -95,7 +86,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 4.2,
         "wind_direction_deg": 179.5,
-        "gust_ms": 3.6
+        "gust_ms": 4.7
       },
       {
         "time": "2026-08-10T06:00",
@@ -104,7 +95,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 4.3,
         "wind_direction_deg": 182.1,
-        "gust_ms": 4.2
+        "gust_ms": 5.0
       },
       {
         "time": "2026-08-10T07:00",
@@ -113,7 +104,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 4.4,
         "wind_direction_deg": 178.1,
-        "gust_ms": 4.5
+        "gust_ms": 4.9
       },
       {
         "time": "2026-08-10T08:00",
@@ -122,7 +113,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 5.1,
         "wind_direction_deg": 173.9,
-        "gust_ms": 5.9
+        "gust_ms": 6.8
       },
       {
         "time": "2026-08-10T09:00",
@@ -131,7 +122,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 5.7,
         "wind_direction_deg": 161.8,
-        "gust_ms": 7.5
+        "gust_ms": 7.7
       },
       {
         "time": "2026-08-10T10:00",
@@ -140,7 +131,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 5.3,
         "wind_direction_deg": 150.2,
-        "gust_ms": 9.8
+        "gust_ms": 11.0
       },
       {
         "time": "2026-08-10T11:00",
@@ -149,7 +140,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 6.0,
         "wind_direction_deg": 155.3,
-        "gust_ms": 10.1
+        "gust_ms": 9.9
       },
       {
         "time": "2026-08-10T12:00",
@@ -158,7 +149,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 6.5,
         "wind_direction_deg": 152.6,
-        "gust_ms": 11.2
+        "gust_ms": 11.9
       },
       {
         "time": "2026-08-10T13:00",
@@ -167,7 +158,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 7.4,
         "wind_direction_deg": 147.8,
-        "gust_ms": 13.5
+        "gust_ms": 13.3
       },
       {
         "time": "2026-08-10T14:00",
@@ -176,7 +167,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 8.0,
         "wind_direction_deg": 149.6,
-        "gust_ms": 14.3
+        "gust_ms": 14.2
       },
       {
         "time": "2026-08-10T15:00",
@@ -194,7 +185,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 7.6,
         "wind_direction_deg": 153.4,
-        "gust_ms": 13.7
+        "gust_ms": 14.0
       },
       {
         "time": "2026-08-10T17:00",
@@ -203,7 +194,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 7.6,
         "wind_direction_deg": 155.0,
-        "gust_ms": 13.2
+        "gust_ms": 14.0
       },
       {
         "time": "2026-08-10T18:00",
@@ -212,7 +203,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 6.8,
         "wind_direction_deg": 145.6,
-        "gust_ms": 11.5
+        "gust_ms": 12.0
       },
       {
         "time": "2026-08-10T19:00",
@@ -221,7 +212,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 7.2,
         "wind_direction_deg": 144.5,
-        "gust_ms": 10.3
+        "gust_ms": 9.8
       },
       {
         "time": "2026-08-10T20:00",
@@ -230,7 +221,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 7.1,
         "wind_direction_deg": 150.8,
-        "gust_ms": 9.9
+        "gust_ms": 9.8
       },
       {
         "time": "2026-08-10T21:00",
@@ -239,7 +230,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 6.8,
         "wind_direction_deg": 154.1,
-        "gust_ms": 8.7
+        "gust_ms": 9.3
       },
       {
         "time": "2026-08-10T22:00",
@@ -257,7 +248,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 6.0,
         "wind_direction_deg": 150.9,
-        "gust_ms": 8.4
+        "gust_ms": 8.0
       },
       {
         "time": "2026-08-11T00:00",
@@ -266,7 +257,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 5.6,
         "wind_direction_deg": 149.9,
-        "gust_ms": 8.2
+        "gust_ms": 7.4
       },
       {
         "time": "2026-08-11T01:00",
@@ -275,7 +266,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 5.4,
         "wind_direction_deg": 157.0,
-        "gust_ms": 7.4
+        "gust_ms": 6.4
       },
       {
         "time": "2026-08-11T02:00",
@@ -284,7 +275,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 5.5,
         "wind_direction_deg": 158.0,
-        "gust_ms": 7.6
+        "gust_ms": 7.1
       },
       {
         "time": "2026-08-11T03:00",
@@ -293,7 +284,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 5.5,
         "wind_direction_deg": 153.9,
-        "gust_ms": 7.6
+        "gust_ms": 7.1
       },
       {
         "time": "2026-08-11T04:00",
@@ -302,7 +293,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 5.2,
         "wind_direction_deg": 155.8,
-        "gust_ms": 7.4
+        "gust_ms": 6.7
       },
       {
         "time": "2026-08-11T05:00",
@@ -311,7 +302,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 4.9,
         "wind_direction_deg": 159.4,
-        "gust_ms": 6.8
+        "gust_ms": 6.5
       },
       {
         "time": "2026-08-11T06:00",
@@ -320,7 +311,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 4.7,
         "wind_direction_deg": 163.5,
-        "gust_ms": 6.4
+        "gust_ms": 6.8
       },
       {
         "time": "2026-08-11T07:00",
@@ -329,7 +320,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 4.9,
         "wind_direction_deg": 170.3,
-        "gust_ms": 6.4
+        "gust_ms": 7.1
       },
       {
         "time": "2026-08-11T08:00",
@@ -338,7 +329,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 5.2,
         "wind_direction_deg": 162.0,
-        "gust_ms": 6.1
+        "gust_ms": 7.5
       },
       {
         "time": "2026-08-11T09:00",
@@ -347,7 +338,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 4.9,
         "wind_direction_deg": 170.9,
-        "gust_ms": 6.4
+        "gust_ms": 8.0
       },
       {
         "time": "2026-08-11T10:00",
@@ -356,7 +347,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 4.5,
         "wind_direction_deg": 167.1,
-        "gust_ms": 7.3
+        "gust_ms": 7.9
       },
       {
         "time": "2026-08-11T11:00",
@@ -365,7 +356,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 4.1,
         "wind_direction_deg": 164.6,
-        "gust_ms": 7.4
+        "gust_ms": 7.6
       },
       {
         "time": "2026-08-11T12:00",
@@ -374,7 +365,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 4.1,
         "wind_direction_deg": 173.5,
-        "gust_ms": 6.2
+        "gust_ms": 6.9
       },
       {
         "time": "2026-08-11T13:00",
@@ -383,7 +374,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 4.8,
         "wind_direction_deg": 184.2,
-        "gust_ms": 5.6
+        "gust_ms": 6.9
       },
       {
         "time": "2026-08-11T14:00",
@@ -392,7 +383,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 5.5,
         "wind_direction_deg": 114.8,
-        "gust_ms": 6.5
+        "gust_ms": 9.7
       },
       {
         "time": "2026-08-11T15:00",
@@ -401,7 +392,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 5.0,
         "wind_direction_deg": 106.8,
-        "gust_ms": 7.8
+        "gust_ms": 11.2
       },
       {
         "time": "2026-08-11T16:00",
@@ -410,7 +401,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 6.0,
         "wind_direction_deg": 116.8,
-        "gust_ms": 10.2
+        "gust_ms": 11.2
       },
       {
         "time": "2026-08-11T17:00",
@@ -419,7 +410,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 6.2,
         "wind_direction_deg": 145.9,
-        "gust_ms": 9.7
+        "gust_ms": 10.4
       },
       {
         "time": "2026-08-11T18:00",
@@ -428,7 +419,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 5.5,
         "wind_direction_deg": 152.6,
-        "gust_ms": 6.4
+        "gust_ms": 8.7
       },
       {
         "time": "2026-08-11T19:00",
@@ -437,7 +428,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 4.7,
         "wind_direction_deg": 155.4,
-        "gust_ms": 5.2
+        "gust_ms": 8.9
       },
       {
         "time": "2026-08-11T20:00",
@@ -446,7 +437,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 5.1,
         "wind_direction_deg": 163.1,
-        "gust_ms": 6.3
+        "gust_ms": 8.4
       },
       {
         "time": "2026-08-11T21:00",
@@ -455,7 +446,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 6.1,
         "wind_direction_deg": 165.5,
-        "gust_ms": 7.6
+        "gust_ms": 9.3
       },
       {
         "time": "2026-08-11T22:00",
@@ -464,7 +455,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 6.4,
         "wind_direction_deg": 160.6,
-        "gust_ms": 9.0
+        "gust_ms": 8.8
       },
       {
         "time": "2026-08-11T23:00",
@@ -473,7 +464,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 7.0,
         "wind_direction_deg": 154.7,
-        "gust_ms": 9.9
+        "gust_ms": 10.2
       },
       {
         "time": "2026-08-12T00:00",
@@ -482,7 +473,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 7.1,
         "wind_direction_deg": 146.8,
-        "gust_ms": 11.5
+        "gust_ms": 10.1
       },
       {
         "time": "2026-08-12T01:00",
@@ -491,7 +482,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 5.8,
         "wind_direction_deg": 153.1,
-        "gust_ms": 11.5
+        "gust_ms": 8.4
       },
       {
         "time": "2026-08-12T02:00",
@@ -500,7 +491,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 4.6,
         "wind_direction_deg": 146.9,
-        "gust_ms": 8.9
+        "gust_ms": 8.5
       },
       {
         "time": "2026-08-12T03:00",
@@ -509,7 +500,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 4.2,
         "wind_direction_deg": 139.7,
-        "gust_ms": 7.3
+        "gust_ms": 7.0
       },
       {
         "time": "2026-08-12T04:00",
@@ -518,7 +509,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 4.2,
         "wind_direction_deg": 136.0,
-        "gust_ms": 6.9
+        "gust_ms": 7.4
       },
       {
         "time": "2026-08-12T05:00",
@@ -527,7 +518,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 4.3,
         "wind_direction_deg": 136.8,
-        "gust_ms": 6.1
+        "gust_ms": 7.4
       },
       {
         "time": "2026-08-12T06:00",
@@ -536,7 +527,7 @@
         "precipitation_mm": 0.0,
         "wind_ms": 4.0,
         "wind_direction_deg": 132.5,
-        "gust_ms": 6.2
+        "gust_ms": 6.9
       },
       {
         "time": "2026-08-12T07:00",
@@ -545,24 +536,24 @@
         "precipitation_mm": 0.0,
         "wind_ms": 4.2,
         "wind_direction_deg": 137.9,
-        "gust_ms": 6.1
+        "gust_ms": 7.5
       }
     ],
     "days": [
       {
         "date": "2026-08-09",
         "temp_min_c": 9.5,
-        "temp_max_c": 10.4,
+        "temp_max_c": 10.1,
         "precipitation_mm_total": 0.5,
-        "wind_max_ms": 6.9,
+        "wind_max_ms": 6.6,
         "periods": [
           {
-            "from_hour": 20,
-            "symbol": "fair",
-            "temp_c": 10.4,
+            "from_hour": 21,
+            "symbol": "lightrainshowers",
+            "temp_c": 10.1,
             "precipitation_mm": 0.5,
-            "wind_ms": 6.9,
-            "wind_direction_deg": 155.0
+            "wind_ms": 6.6,
+            "wind_direction_deg": 158.6
           }
         ]
       },
@@ -940,28 +931,16 @@
   "surf": [
     {
       "name": "Muizenberg",
-      "wave_height_m": 2.46,
+      "wave_height_m": 2.44,
       "swell_height_m": 2.08,
-      "swell_period_s": 8.1,
+      "swell_period_s": 8.05,
       "swell_direction_deg": 217.0,
-      "wind_ms": 5.19,
+      "wind_ms": 5.05,
       "wind_direction_deg": 154.0,
       "rating": "poor_fair",
       "water_temp_c": 14.6,
-      "analysis_no": "Nybegynnerspot — offshore NV. Vinden blåser fra SØ-S (121°-152°), altså pålandsvind hele perioden, noe som gjør paddling svært vanskelig og farlig. Lørdag 10. aug kl 08:00 (4 m/s fra 127°) er minst dårlig, men fortsatt påland. Søndag 11. aug: svellet minker til 1.0–1.5m og vinden blir sterkere (6–8 m/s fra 116°–137°). **Dropp Muizenberg de neste 48 timene — pålandsvind gjør det nesten umulig å padle ut.** 3mm våtdrakt (15°C).",
+      "analysis_no": "Lørdag 10.08 06:00-09:00 er beste vindu — 2.0m @ 8s med svak vind fra østlig retning (121-155°), offshore-kompatibel. Vind dreier mot SV (133-135°) fra 12:00, som er påland og dårlig for nybegynner. Søndag 11.08 hele dagen: svell krymper til 1.2-1.7m, vind fra SV-S (114-139°) som er hardt påland mot NV-offshore. Padleforhold vanskelig både lørdags ettermiddag og hele søndag.",
       "hourly": [
-        {
-          "time": "2026-08-09T20:00",
-          "swell_height_m": 2.1,
-          "swell_period_s": 8.15,
-          "swell_direction_deg": 217.0,
-          "wind_ms": 5.3,
-          "wind_direction_deg": 152.0,
-          "tide_m": -0.81,
-          "current_kmh": 0.5,
-          "current_direction_deg": 315.0,
-          "rating": "poor_fair"
-        },
         {
           "time": "2026-08-09T21:00",
           "swell_height_m": 2.08,
@@ -1525,33 +1504,33 @@
           "current_kmh": 0.4,
           "current_direction_deg": 297.0,
           "rating": "poor_fair"
+        },
+        {
+          "time": "2026-08-11T20:00",
+          "swell_height_m": 0.92,
+          "swell_period_s": 7.5,
+          "swell_direction_deg": 167.0,
+          "wind_ms": 7.22,
+          "wind_direction_deg": 127.0,
+          "tide_m": -1.26,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
+          "rating": "poor_fair"
         }
       ]
     },
     {
       "name": "Big Bay",
-      "wave_height_m": 2.64,
-      "swell_height_m": 2.52,
-      "swell_period_s": 8.75,
+      "wave_height_m": 2.6,
+      "swell_height_m": 2.5,
+      "swell_period_s": 8.7,
       "swell_direction_deg": 224.0,
-      "wind_ms": 5.17,
-      "wind_direction_deg": 155.0,
+      "wind_ms": 4.92,
+      "wind_direction_deg": 156.0,
       "rating": "fair_good",
-      "water_temp_c": 14.0,
-      "analysis_no": "Offshore ØSØ (ca 100°). Lørdag 10. aug 08:00–14:00 er best: 2.1–2.3m, 4–7 m/s fra 146°–155° (tungt påland, men mindre enn Muizenberg). Søndag 11. aug 14:00 (1.3m @ 9s, 3 m/s fra 100°) kan være paddlbar — minste påland-vindu. Generelt krevende på grunn av strøm (0.4–1.0 km/t) og pålandsvind. 3mm våtdrakt (14°C).",
+      "water_temp_c": 13.9,
+      "analysis_no": "Lørdag 10.08 00:00-09:00 er best — 2.2-2.4m @ 8-9s med svak vind fra SØ-S (152-173°), nær perfekt for ØSØ-offshore. Fra 12:00 vind øker til 5-7 m/s fra SSØ (149°), grensefølelse men ennå padlerbar. Søndag 11.08: svell synker til 1.1-1.8m, vind svak 2-4 m/s, men strøm blir roterende og uforutsigbar. Best daglig timing: lørdags morgen til formiddag.",
       "hourly": [
-        {
-          "time": "2026-08-09T20:00",
-          "swell_height_m": 2.54,
-          "swell_period_s": 8.75,
-          "swell_direction_deg": 224.0,
-          "wind_ms": 5.3,
-          "wind_direction_deg": 155.0,
-          "tide_m": -0.86,
-          "current_kmh": 1.0,
-          "current_direction_deg": 315.0,
-          "rating": "fair_good"
-        },
         {
           "time": "2026-08-09T21:00",
           "swell_height_m": 2.5,
@@ -2115,33 +2094,33 @@
           "current_kmh": 0.6,
           "current_direction_deg": 288.0,
           "rating": "good"
+        },
+        {
+          "time": "2026-08-11T20:00",
+          "swell_height_m": 1.06,
+          "swell_period_s": 8.2,
+          "swell_direction_deg": 198.0,
+          "wind_ms": 3.9,
+          "wind_direction_deg": 144.0,
+          "tide_m": -1.22,
+          "current_kmh": 0.6,
+          "current_direction_deg": 304.0,
+          "rating": "good"
         }
       ]
     },
     {
       "name": "Llandudno",
-      "wave_height_m": 3.14,
+      "wave_height_m": 3.12,
       "swell_height_m": 2.9,
       "swell_period_s": 8.55,
-      "swell_direction_deg": 218.0,
-      "wind_ms": 4.38,
-      "wind_direction_deg": 154.0,
+      "swell_direction_deg": 217.0,
+      "wind_ms": 4.2,
+      "wind_direction_deg": 155.0,
       "rating": "fair_good",
       "water_temp_c": 14.2,
-      "analysis_no": "Krevende spot for øvede, offshore Ø (ca 90°). Lørdag 10. aug 02:00–08:00: 2.6–2.8m @ 8–9s, svak vind fra SØ (135°–141°), godt paddlevindu før Cape Doctor setter inn. Søndag 11. aug 05:00–08:00: 2.0–2.2m, fortsatt svak vind (4–5 m/s fra 128°–129°). **Best valg for øvede:** lørdag 10. aug 06:00–09:00. 3mm våtdrakt (14°C).",
+      "analysis_no": "Større svell (2.2-2.9m) gjør dette krevende for lett øvede. Lørdag 10.08 00:00-09:00 har svak vind (3-4 m/s fra S-SSØ), men strøm konsistent 0.8 km/t. Fra 12:00-21:00 vind blir 6-7 m/s fra S-SSV — påland mot Ø-offshore. Søndag 11.08: svell faller til 1.2-2.3m, vind svak, men fortsatt krevende spot. Anbefaling: dropp Llandudno eller bare ta lørdag 06:00-09:00 hvis veldig erfarne.",
       "hourly": [
-        {
-          "time": "2026-08-09T20:00",
-          "swell_height_m": 2.92,
-          "swell_period_s": 8.6,
-          "swell_direction_deg": 218.0,
-          "wind_ms": 4.56,
-          "wind_direction_deg": 154.0,
-          "tide_m": -0.86,
-          "current_kmh": 0.9,
-          "current_direction_deg": 307.0,
-          "rating": "fair_good"
-        },
         {
           "time": "2026-08-09T21:00",
           "swell_height_m": 2.9,
@@ -2705,6 +2684,18 @@
           "current_kmh": 0.8,
           "current_direction_deg": 225.0,
           "rating": "good"
+        },
+        {
+          "time": "2026-08-11T20:00",
+          "swell_height_m": 1.08,
+          "swell_period_s": 8.15,
+          "swell_direction_deg": 171.0,
+          "wind_ms": 4.28,
+          "wind_direction_deg": 135.0,
+          "tide_m": -1.24,
+          "current_kmh": 0.6,
+          "current_direction_deg": 236.0,
+          "rating": "good"
         }
       ]
     }
@@ -2712,8 +2703,8 @@
   "news": [
     {
       "headline_no": "Tragisk helg: 11 personer drept i skyteepisoder i Cape Town",
-      "summary_no": "Politiet i Vestlig Kap har intensivert sine operasjoner etter at 11 personer ble skutt i løpet av helgen i områdene Langa, Gugulethu og Khayelitsha. Episodene omtales som en tragedie som krever etterforsking av Serious Violent Crimes Unit.",
-      "detail_no": "Elleve personer ble drept i tre separate skyteepisoder i Cape Town helgen 8.-9. august. I første incident ble tre menn i alderen 25, 31 og 35 år skutt og drept i TR Section i Lingelethu West i Khayelitsha omkring kl. 22.50 på lørdag 8. august. I Langa ble fire menn og en kvinne drept på Winnie Mandela Street i fase 3 omkring kl. 22.45 samme kveld. På søndagen ble to menn og en kvinne drept i Barcelona uformell bosetting i Gugulethu omkring kl. 04.10, og to andre personer ble såret. Vestlig Kap-politiet har styrket sine patruljering i de berørte områdene og andre mulige risikosteder. Vestlig Kap politikommissær Lieutenant-General Sizakhele Dyantyi besøker de berørte områdene. Politiet oppfordrer publikum til å kontakte Crime Stop på 08600 10111 med informasjon.",
+      "summary_no": "11 personer ble drept i tre separate skyteepisoder i Langa, Gugulethu og Khayelitsha i Cape Town helgen 8.-9. august. Politiet har forsterket patruljeringen i områdene og etterforsker sakene.",
+      "detail_no": "Tre menn i alderen 25, 31 og 35 år ble drept i Lingelethu West i Khayelitsha lørdag 8. august kl. 22:50. I Langa ble fire menn og en kvinne drept på Winnie Mandela Street i KwaLanga samme kveld kl. 22:45. Søndag ble to menn og en kvinne drept i Barcelona-båreskapet i Gugulethu kl. 04:10, og to andre personer ble såret. Provinspolitistalesmann Brigadier Novela Potelwa sa etterforskningen utføres av Serious Violent Crimes Unit. Vestcaputrygghetspolitichef Sizakhele Dyantyi skal besøke de berørte områdene. Politiet oppfordrer publikum til å kontakte Crime Stop på 08600 10111 med informasjon.",
       "category": "crime",
       "urgency": 5,
       "source_url": "https://www.iol.co.za/news/crime-and-courts/tragic-weekend-11-killed-in-cape-town-shooting-incidents-7f76d81b-5ea9-4b92-bbd5-ab2d6ee911cb",
@@ -2721,19 +2712,29 @@
       "published_at": "2026-08-09T08:52:23Z"
     },
     {
-      "headline_no": "Nasjonalt handlingsplan for vann behandler symptomene, ikke årsakene",
-      "summary_no": "Sørafrika har presentert en nasjonal handlingsplan for vannkrisen, men eksperter mener den fokuserer for mye på tekniske løsninger og overseer de strukturelle problemene med svake institusjoner og korrupsjon. Nesten halvparten av drikkevannssystemene oppfyller ikke kvalitetsstandarder, og 80 % av avløpsrenseanleggene fungerer dårlig.",
-      "detail_no": "President Cyril Ramaphosa lanserte 23. juli 2026 en nasjonal handlingsplan for vannkrisen som skal ledes av Watercom-komiteen. Planen adresserer fem hovedområder: respons på vannkutt, kommunal institusjonell reform, infrastrukturinvestering, juridiske mekanismer og korrupsjonsbekjempelse. Ifølge anslåg mangler minst 2.688 lokalsamfunn tilgang til drikkevann, mens nesten halvparten av alt behandlet vann går tapt gjennom lekkasjer og tyveri. Dr. Ferrial Adam, styreleder for WaterCAN, kritiserer at planen fortsatt behandler vann som et ingeniør- og forvaltningsmessig problem, ikke som en systemisk krise forårsaket av svikt i institusjoner, økonomisk ustabilitet, korrupsjon og forverring av økosystemer. Hun argumenterer for at løsningen krever en nytt styringsmodell basert på samarbeid mellom stat, privat sektor og sivilsamfunn.",
+      "headline_no": "Nasjonalt vanningsaksjonplan diagnostiserer krisen riktig, men mangler løsning",
+      "summary_no": "Sør-Afrikas nasjonale vanningsaksjonplan anerkjenner vandringskrisen som en nasjonal krise, men adresserer problemet som teknisk og administrativt snarere enn som et systemisk problem drevet av svikt i institusjonene, korrupsjon og sosial ulikhet. Eksperter mener planen trenger en annen styringsmodell basert på samarbeid mellom stat, privat sektor og sivilsamfunn.",
+      "detail_no": "Presidenten lanserte Nasjonalt vanningsaksjonplan 23. juli 2026, som skal ledes av Watercom-komitéen. Krisens omfang er kritisk: nesten halvparten av drikkevannssystemene oppfyller ikke kvalitetsstandarder, over 80 prosent av avløpsanlegg presterer dårlig, og nesten halvparten av renset vann når aldri forbrukerne på grunn av lekkasjer og tyveri. Minst 2688 ustyrt lokalsamfunn mangler helt vanninfrastruktur. Planen fokuserer på fem områder – respons på vannunterbrekelser, kommunal reforming, infrastrukturinvestering, juridisk regulering og korrupsjonsbekjempelse. Men eksperter som Dr. Ferrial Adam kritiserer at planen behandler vann som en ingeniør- og serviceytelsesspørsmål istedenfor som en systemkrise drevet av feilslåtte institusjoner, finansiell ustabilitet, korrupsjon, forverret infrastruktur, forurensning, degraderte elver og dype sosiale ulikheter.",
       "category": "infrastructure",
-      "urgency": 4,
+      "urgency": 5,
       "source_url": "https://www.dailymaverick.co.za/opinionista/2026-08-07-national-water-action-plan-gets-the-diagnosis-right-but-misses-the-real-fix/",
       "source": "dailymaverick",
       "published_at": "2026-08-07T14:21:32Z"
     },
     {
-      "headline_no": "Tallenes spill kan ikke kurere Sør-Afrika for kjønnbasert vold",
-      "summary_no": "Sør-Afrikas innsats mot kjønnbasert vold og femisid viser mange statistikker om sentre og tjenester, men eksperter advarer om at tallene ikke nødvendigvis reflekterer kvaliteten eller effektiviteten av intervensjoner. Uten ekstra budsjett og bedre koordinering mellom departementer risikerer landet å komme langt fra målsettingene.",
-      "detail_no": "Etter at president Cyril Ramaphosa erklærte kjønnbasert vold og femisid som en nasjonal katastrofe i november 2025, presenterte Departementet for sosial utvikling sitt første kvartalvisrapport (april-juni 2026) for parlamentet. Sosial- og utviklingsminister Dina Pule rapporterte at Khuseleka One-Stop-sentre etablert i KwaZulu-Natal og nylig åpnet shelter for LGBTQIA+-personer i Vestlig Kap, samt at kommandosenteret for kjønnbasert vold håndterte 31 000 klientinteraksjoner i første kvartal. Imidlertid påpeker eksperter som Lisa Vetten og andre at deklarasjonen ikke førte til ekstra budsjetter – departementene måtte i stedet omfordele eksisterende midler. Mange bekymrer seg for at fokus på tall maskerer mangelen på kvalitet og at det mangler tilstrekkelig ressurser, som blant annet at kommandosenteret kun har 48 sosialarbeidere. En ny fem-milliarders-rand nødfond er knyttet til det nylig opprettede Nasjonale rådet for kjønnbasert vold og femisid for å bygge nye shelter og dommer, men fagfolk advarer om at suksess ikke kan måles kun i møter og rapporter, men i om kvinner og kjønnsmangfoldige mennesker faktisk føler seg tryggere.",
+      "headline_no": "LOKALVALG 2026: DA vil reservere vann- og strøminntekter kun for disse tjenestene",
+      "summary_no": "Demokratenes Allianse (DA) kunngjorde lørdag sin manifest for lokalvalg 4. november, med løfte om å doble antallet kommuner den styrer fra 31 til 60. Sentralt står planen om å ringfeste alle inntekter fra vann- og strømkollekt eksklusivt til infrastrukturvederlag.",
+      "detail_no": "DA-leder Geordin Hill-Lewis sa foran tusenvis av tilhengere på Mary Fitzgerald Square 8. august at «enhver rand samlet for vann vil beskyttes for vann. Enhver rand samlet for strøm vil beskyttes for strøm. Dine penger skal ikke lenger behandles som en politisk slushfond.» Mangelfull infrastrukturvederlag i deler av Johannesburg, en sentral valgkamp, skyldes at etterfølgende administrasjoner har mislyktes i å investere i vedlikehold og ny infrastruktur. Flere kommuner landsdekkende møter samme utfordring. En meningsmåling fra Social Research Foundation (SRF) viste at ANC leder nasjonalt med 34 prosent, etterfulgt av DA med 27 prosent. I Johannesburg ligger DA foran med 42 prosent mot ANCs 17 prosent. Hill-Lewis fremhevet at over 60 prosent av DA-kommuner oppnår rene revisjoner, sammenlignet med omkring 5 prosent av ANC-styrte kommuner. Joburg-ordførerkandidaten Helen Zille varslet også en femårsplan sentrert på bedre tjenesteleveranse og sterkere finansstyring, og advarte mot såkalte «vanngangstere» – kriminelle grupper som Zille hevder saboterer reparasjoner for å tjene på det ødelagte systemet.",
+      "category": "politics",
+      "urgency": 4,
+      "source_url": "https://www.dailymaverick.co.za/article/2026-08-08-new-rule-da-will-ringfence-water-electricity-revenue-for-services/",
+      "source": "dailymaverick",
+      "published_at": "2026-08-08T17:32:02Z"
+    },
+    {
+      "headline_no": "Tall og statistikk kan ikke løse Sør-Afrikas kjønnsvold-krise",
+      "summary_no": "Departementet for sosial utvikling har presentert sin første rapport om tiltak mot kjønnsvold etter at presidenten erklærte det som en nasjonal katastrofe, men eksperter sier at telling av møter og rapporter ikke måler faktiske resultater.",
+      "detail_no": "President Cyril Ramaphosa erklærte kjønnsvold og feminisid som en nasjonal katastrofe 20. november 2025. Sosialminister Dina Pule rapporterte til Parlamentet at Khuseleka-sentre og Thuthuzela Care Centers åpner i flere provinser, og at det er etablert nye ly for LGBTQIA+-personer i Vestcapten. Genderdatakommandosenteret administrerte 31.000 klientinteraksjoner i første kvartal 2026, men MP Sheila Peters kritiserte at senteret er underfinansiert med bare 48 sosialarbeidere. Kjønnsspesialist Lisa Vetten sier at å fokusere på tall og statistikk ikke forteller om kvaliteten på arbeidet eller om de rette handlingene iverksettes. En Råd for kjønnsvold og feminisid ble oppnevnt 31. juli, med et 5 milliarders rand-nødfond bundet til det, men eksperter advarer om at suksess må måles etter om kvinner og kjønnsdiversitet faktisk føler seg tryggere, ikke bare på antall møter som holdes.",
       "category": "politics",
       "urgency": 3,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-09-numbers-game-cannot-cure-south-africa-of-its-violence-gender-based-violence/",
@@ -2741,9 +2742,9 @@
       "published_at": "2026-08-09T05:34:28Z"
     },
     {
-      "headline_no": "KVINNEDAGEN 1956-2026: Sørafrikanske kvinner gjør fremskritt i boligeierskap og utdanning, men vold og lønngap består",
-      "summary_no": "70 år etter kvinnemarsjene mot apartheid-lovene har sørafrikanske kvinner fått juridiske rettigheter som å eie hus og åpne bankkonti, men økonomisk frihet, sikkerhet og likestilling i arbeidslivet er fortsatt uoppnådd. En lønnsgap på 20-32 % og høyere arbeidsledighet blant kvinner viser at formelle lover ikke har oversatt til faktisk likebehandling.",
-      "detail_no": "I 70 år siden kvinnemarsjene mot apartheids passlover har det sørafrikanske samfunnet gjort betydelige juridiske fremskritt – kvinner kan nå eie eiendom, åpne bankkonti uten mannlig tillatelse og få sikker abort. Ifølge Sibongile Tshabalala fra Treatment Action Campaign (TAC) er problemet at juridiske rettigheter ikke automatisk oversetter til økonomisk frihet i firkantene og landsbygdene. Statistikk fra Q1 2026 viser at arbeidsledigheten for kvinner er 36,4 % mot 29,6 % for menn, og lønngapet er på 20,2 % per time og 32,5 % per måned. Deborah Mutemwa-Tumbo, medgrunnlegger av en advokatfirma for sorte kvinner, understreker at institutionell makt og eierskap er den neste grensen for kvinners empowerment. Nasjonalbudsjettet 2026 allokerer 342,1 milliarder rand til kjønnsorienterte tiltak, men utfordringen er å sikre at politikken produserer faktiske samfunnsøkonomiske resultater.",
+      "headline_no": "KVINNEDAGEN 1956-2026: Sørafrikanske kvinner har gjort framgang innen boligeierskap og utdanning, men kjønnsvold og lønnsgap gjenstår",
+      "summary_no": "70 år etter apartheid-marsjen i 1956 har sørafrikanske kvinner formelt juridiske rettigheter, men møter fortsatt økonomisk ulikhet, vold og lønnsgap på 20-32 prosent. Selv om flere kvinner eier hjem og holder lederposisjoner, er kvinners lønns- og karrieremuligheter begrenset av uformelle barrierer og uproporsjonal omsorgsbelastning.",
+      "detail_no": "Til tross for 30 år med demokrati har sørafrikanske kvinner formelt rett til å oppholde seg hvor som helst, men økonomisk frihet uteblir. Arbeidsløsheten for kvinner ligger på 36,4 prosent mot 29,6 prosent for menn (Q1 2026). FN estimerte lønnsgapet til 20,2 prosent per time og 32,5 prosent per måned i 2024, drevet av kvinners større ansvar for ubetalbart omsorgsarbeid og diskriminerende arbeidsplasspraksiser. Sibongile Tshabalala fra Treatment Action Campaign fremhever at juridiske rettigheter ikke automatisk oversettes til økonomisk fridom. Regjeringen bevilger nå omkring 342,1 milliarder rand til kjønnsorienterte budsjettintervensjoner i finansåret 2026/27, fokusert på kvinners økonomiske myndiggjøring og utdanning. Juridiske og politiske reformer er på plass, men den største utfordringen er nå å sikre at de produserer konkrete sosioøkonomiske resultater.",
       "category": "politics",
       "urgency": 3,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-09-a-woman-s-work-is-never-done-and-she-knows-it/",
@@ -2751,29 +2752,9 @@
       "published_at": "2026-08-09T00:00:00Z"
     },
     {
-      "headline_no": "KVINNEDAGEN 1956-2026: 2026 markerer skiftet fra glasstak til cybertak i media",
-      "summary_no": "En ny forskning om kvinnelige journalister i Sørafrika viser et kritisk tilbakeslag med færre kvinner i lederposisjoner og økt cyberkriminalitet mot dem, spesielt svarte kvinnelige journalister. 75 % av kvinnelige journalister rapporterer om nettbasert trakassering og misogyn oppførsel.",
-      "detail_no": "Studien \"Glass Ceilings 2026: Women in South African Media\", lansert av South African National Editors' Forum (Sanef) 6. august, avslører at bakslaget mot kjønnslighet er betydelig. Mens kvinnelige journalister for 25 år siden brøt glasstak og ble redaktører, ser 2026 færre kvinner i lederstillinger og flere som forlater journalistikken, spesielt svarte kvinner som rapporterer at de følelse seg ydmyket, sidelinjet og oversett. Hele 75 % av 111 kvinnene som ble spurt, rapporterte cybermobbing og cybermisogyn – en økning fra 30 % i 2018. Svarte menn blir stadig resirkulert til redaktørposjoner på nasjonale publikasjoner, mens kvinner ofte søker beskyttelse uten å få den. Lønnsgapet består – over 60 % mener det eksisterer ulikhet. Medieselskapene kritiseres for å la plattformene drive hatefulle ytringer uten å gripe inn, mens de samme selskapene står overfor kaos med omstrukturering, jobbnedskjæringer og usikre eierskap.",
-      "category": "politics",
-      "urgency": 3,
-      "source_url": "https://www.dailymaverick.co.za/article/2026-08-08-2026-marks-the-shift-from-glass-ceiling-to-cyberceiling-in-media/",
-      "source": "dailymaverick",
-      "published_at": "2026-08-08T20:42:04Z"
-    },
-    {
-      "headline_no": "LOKALVALG 2026: DA vil sikre at all vann- og strøminntekt går til infrastruktur",
-      "summary_no": "Demokratiske Alliansen (DA) presenterte sitt valgprogram for lokalvalget 4. november og lover å «ringfence» – sikre separat – all inntekt fra vann- og strømtakster til vedlikehold og reparasjoner. Partiet ønsker å doble antallet kommuner det styrer fra 31 til 60.",
-      "detail_no": "DA-leder Geordin Hill-Lewis lovet lørdag 8. august i Mary Fitzgerald Square i Johannesburg at hver rand hentet for vann skal beskyttes for vann, og hver rand for elektrisitet skal beskyttes for elektrisitet – ikke bli brukt til fete lønn, politiske prosjekter eller korrupte kontrakter. Johannesburg og mange andre kommuner har sliter med kollapsende vann- og strømnett fordi revenyer er blitt avledet til andre formål. DA-styrte kommuner har bedre økonomi – over 60 % oppnår ren revisjon sammenlignet med rundt 5 % av ANC-styrte kommuner. Ifølge en SRF-undersøkelse leder ANC nasjonalt med 34 %, fulgt av DA med 27 %, mens DA leder i Johannesburg med 42 % mot ANC's 17 %. Helen Zille, som er nominert som borgermester i Johannesburg, lovet også å stanse sløsing, pålegge konsekvenser for dårlig prestasjon og gjøre slutt på «vannmafia» som saboterer reparasjoner. Hun lover å gjenopprette daglige tjenester og bygge opp datadriven styring der innbyggere kan rapportere problemer og følge saksgangen.",
-      "category": "politics",
-      "urgency": 3,
-      "source_url": "https://www.dailymaverick.co.za/article/2026-08-08-new-rule-da-will-ringfence-water-electricity-revenue-for-services/",
-      "source": "dailymaverick",
-      "published_at": "2026-08-08T17:32:02Z"
-    },
-    {
-      "headline_no": "UCT-rektor saksøker universitetsråd over hemmeligholdelse av 34 klager",
-      "summary_no": "Universitetet i Cape Towns rektor Mosa Moshabela har saksøkt UCTs råd på grunn av etterforskning av 34 klager fra ansatte og studenter angående hans oppførsel, som resulterte i no disciplinary action men påpekte \"visse bekymringer\". Det er universitetets tredje ledelseskrise på fem år.",
-      "detail_no": "Mindre enn fire år etter forrige ledelseskrisis ved UCT står universitetet igjen overfor turbulens når rektor Mosa Moshabela har tatt universitetets eget råd til Vestens Kap High Court angående en etterforskning av 34 klager fra staff og studenter. Ombudsman Nashira Abrahams registrerte 39 besøk angående rektoren innen desember 2025, hvorav 31 var åpne saker. Nesten 70% av klagene kom fra kvinner, hovusakelig afrikanere, og majoriteten var fra administrativ og support-stab. Seks saker var kategorisert som seksuell trakassering (3), diskriminering basert på kultur (2), og diskriminering basert på kjønn (1). En uavhengig etterforskning av to senioradvokatene Alex Freund SC og Tanya Golden SC ble fullført i mai 2026, og UCT-rådet besluttet 30. mai at ingen disiplinær prosess skulle iverksettes. Rådet fant imidlertid at «visse bekymringer» om Moshabalas atferd skulle diskuteres, og direkterte at han skulle gjennomgå executive coaching og årlig evaluering – tiltak som kun ble «sterkt oppfordret» for andre ledere.",
+      "headline_no": "Ny lederkrise ved Universitetet i Cape Town: Viserektor i retten over 34 klager",
+      "summary_no": "Universitetet i Cape Towns viserektor Mosa Moshabela har saksøkt universitetets råd etter en etterforskning av 34 klager fra ansatte og studenter. Rådets undersøkelse fant at ingen disiplinærsaker skulle oppstilles, men noterte \"visse bekymringer\" om hans oppførsel.",
+      "detail_no": "Universitetet i Cape Town gjennomgår en ny lederkrise mindre enn fire år etter en tidligere styrings-skandale under viserektor Mamokgethi Phakeng. Viserektor professor Mosa Moshabela har nå søkt Cape Town høyesterett mot universitetets råd etter en etterforskning av 34 klager fra UCT-ansatte og studenter om hans oppførsel. Ombudsmannen mottok først 21 klager fra ansatte i juni 2025, senere utvidet til 39 besøk innen desember 2025. Senior advokater Alex Freund SC og Tanya Golden SC gjennomførte en konfidensielt undersøkelse, men færre klager enn opprinnelig planlagt ble presentert for Moshabela til svar. Rådets påfølgende avgjørelse på 30. mai 2026 var at ingen disiplinærsaker skulle innledes, men rådets rapport pekte på \"visse bekymringer\" som burde diskuteres med ham. Moshabela fikk pålegg om executive coaching og årlig gjennomgang – mens andre toppledere bare ble sterkt oppfordret. Nesten 70% av klagerne var kvinner, og seks åpne saker gjaldt seksuell trakassering og diskriminering.",
       "category": "politics",
       "urgency": 3,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-07-another-uct-leadership-crisis-34-complaints-secret-findings-and-a-vc-in-court/",
@@ -2781,19 +2762,9 @@
       "published_at": "2026-08-07T16:08:58Z"
     },
     {
-      "headline_no": "Parliament på vei til fullstendig gjenoppbygging – 2027-målsetting for statsadresse",
-      "summary_no": "Fem år etter den katastrofale brannen i januar 2022 er Parliaments gjenoppbyggingsprosjekt på sporet for fullføring juni 2027, med 2027-statsadressen planlagt i det nye møtesalen. Totalkostnaden har økt til 4,6 milliarder rand, og 52% av budsjett er forbrukt uten kostnadsoverskridelser.",
-      "detail_no": "Parliament forventes å være klar til å huse statsadresse og budsjettale i 2027, fem år etter brannen 2. januar 2022 som ødela det ikoniske bygget. Gjenoppbyggingsprosjektet har en totalkostnad på 4,6 milliarder rand for all strukturell arbeid, konstruksjon, innredning og landskapsarbeid. Per august 2026 er 52% av budsjettet forbrukt uten kostnadsoverskridelser. I januar 2027 skal den 1.172-setersmøtesalen inkludert publikumsgallerier og alle ICT-infrastruktur være klar. Det nye møtesalen vil ha en afrikansk trommefasade og glass-elementer. Den opprinnelige Old Assembly fra 1910 skal renoveres, med asbestdak fra 1950-tallet fjernet – ikke en full rekonstruksjon men blanding av gammelt og nytt. Strukturelt arbeid har inkludert asbestsanering, vanntettsetting, ventilasjonsforbedringer og sikring mot en bekk som løper under Parliament. Uventet arbeid for strukturell og seismisk integritet forsinket prosjektet med cirka fem måneder.",
-      "category": "infrastructure",
-      "urgency": 3,
-      "source_url": "https://www.dailymaverick.co.za/article/2026-08-07-from-ashes-to-assembly-as-parliament-targets-2027-return/",
-      "source": "dailymaverick",
-      "published_at": "2026-08-07T15:58:04Z"
-    },
-    {
-      "headline_no": "Ekspropriasjons- og politiktvister truer GNU med unødvendige konflikter",
-      "summary_no": "Regjeringen for nasjonal enhet står overfor intern strid om ekspropriasjonsloven og politimaktene, blant annet når Cape Town-ordfører Geordin Hill-Lewis erklærer uenighet med statsapparatet over Metropolitan Police sine etterforskningsmyndigheter. Eksperter advarer om at disse konfliktene krever modningere løsninger for å unngå domstolskonfrontasjoner.",
-      "detail_no": "GNU-regjeringen møter indre splittelse på flere område. Deputy-finansminister Ashor Sarupen leder en DA-delegasjon til Vestlig Kap høyesterett for å påklage regjeringens egen ekspropriasjonlov, ledsaget av motstandere som AfriForum og Vaderland Stifting. Denne ironi understreker at selv om GNU fungerer sammen, finnes det urokkelige spørsmål som krever klarere tenking. Ekspropriasjonsloven var dårlig håndtert av ANC, som skyndte seg gjennom prosessen for å vise resultater i 2024-manifesten, og dette har gitt grunnlag for gjennomførbare juridiske utfordringer. En annen potensielt eskalerende konflikt gjelder Metropolitan Police sine myndigheter: Cape Town-ordfører Hill-Lewis har erklært uenighet med aktuell politikommissær over regjeringens vegrring til å gi metro-politi etterforskningsmyndigheter. Han argumenterer at Cape Town Metro Police årlig beslaglegger rundt 400 illegale skytevåpen, men uten etterforskningsmyndigheter må sakene overføres til SAPS, hvor mange mistenkte slippes fri på grunn av svake dossier. Hill-Lewis mener løsningen er enkel – bare legge det til SAPS-endringsforslaget som nå ligger for Parlamentet – men saken skal til mekling, og muligens domstol.",
+      "headline_no": "GNU-splittelse: Uenighet om ekspropriasjon og bypoliti truer enhetskabinettets troverdighet",
+      "summary_no": "DA-leder Ashor Sarupen går til retten mot sitt eget regjeringsdepartement for å utfordre Ekspropriasjonslovgivningen, mens Cape Town-ordfører krever at bymilitsen får etterforskningsmyndighet.",
+      "detail_no": "Ashor Sarupen, visefinansiminister, ledet en DA-delegasjon til Vestcap-høyesterett for å utfordre sin egen regjerings ekspropriasjonsloven i egenskap av DA-formannsfunksjonær. Første motpart var hans DA-kollega Dean Macpherson, arbeidsministerium. DA slutter seg til AfriForum og Vaderland Stigting i saken. Samtidig erklærte Cape Town-ordfører Geordin Hill-Lewis en mellomstatslig tvist med den fungerende politisjefen over veigeringen av sentralregeringen om å gi bymilitsen undersøkelsesmyndighet. Hill-Lewis argumenterer at bytilsamfunnets Metro Police beslaglegger ca. 400 illegale våpen årlig, men uten etterforskningsmyndighet må sakene overleveres SAPS, hvor mistenkte ofte frigjøres på grunn av svak bevisbehandling. Saken går nå til mekling. Kommentator påpeker at selv om GNU fungerer enig, trenger intrikate spørsmål klarere hoder for å unngå unødvendige konfrontasjoner.",
       "category": "politics",
       "urgency": 2,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-09-wrangles-over-expropriation-and-metro-cops-risk-sinking-to-needless-gnu-depths/",
@@ -2801,9 +2772,19 @@
       "published_at": "2026-08-09T05:00:00Z"
     },
     {
-      "headline_no": "MINNEVERDIG ØYEBLIKK: Janine van Wyk hjalp Banyana til seier over Nigeria",
-      "summary_no": "Sørafrikas tidligere fotballkapten Janine van Wyk minnes sitt mest betydningsfulle mål – et skudd fra 25 meter i semifinalen av det afrikanskampionskapet 2012 i Ekvatorial-Guinea som ga Banyana seier over Nigeria. Målet, som traff krysspanelet og gikk inn, brøt et år med tap mot det nigerianskiske laget.",
-      "detail_no": "I sin biografiskrift husker Janine van Wyk den sørafrikanske kvinnefotballen sine største triumf: semifinalen i det afrikanske mesterskapet 2012 i Ekvatorial-Guinea mot Nigeria. Etter tidligere tap mot Nigeria satte Banyana seg fore å vinne, styrket av at Nigeria ikke hadde kvalifisert seg til OL og var en ustabil side. Van Wyk beskriver hvordan hun fikk ballen fra lagvenninnen Nothando Vilakazi rundt 25 meter fra mål, og tok en uventet skuddfot med sin svakere venstre fot. Ballen fløy høyt, truet med å gå over stengelen, men dykket mot målet – keeper Precious Dedes hånd nådde ballen, men kunne ikke stoppe den før den traff undersiden av krysspanelet og gikk inn i hjørnet. Van Wyk gledet seg med en magekruling på den fuktige gressteppet, fulgt av jubelende lagvenninner. Laget forsvarte målet hardt resten av kampen og Banyana nådde finalen.",
+      "headline_no": "Parlamentet skal være klart til 2027 – fem år etter brannen",
+      "summary_no": "Parlamentet meddeler at det gjenoppbyggede representanthuset vil være klar til å huse statsministerens tale og budsjettale i 2027, fem år etter brannen i januar 2022. Prosjektet ligger på schemalinie med 52% av R4,6-milliard-budsjettet brukt.",
+      "detail_no": "Fem år etter brannen 2. januar 2022 som rammet Parlamentet, sier myndighetene at gjenoppbyggingen av nasjonalforsamlingen skal være ferdig innen juni 2027 for å huse statsministerens tale og budsjettale i 2027. Byggelederen Chuene Ramphele forklarte at uventet arbeid for strukturell og seismisk integritet forsinket prosjektet med ca. fem måneder. Det nye kammeret på 1.172 plasser, inklusive publikumsgallerier, forventes ferdig til møblering innen januar 2027. Kostnadene har steget fra originalt R1 miliard til nå R4,6 miliard for all strukturell arbeid, konstruksjon, møbler og landskapsarbeid. Brannen i 2022 oppsto fordi parlamentarisk sikkerhetspersonell var satt på tvungen ferie, og Zandile Mafe oppholdt seg i bygningen i flere timer før alarmen ble slått. Siden 2022 har Parlamentet brukt City Hall og et forsettingmarkedsteltet for møter. Den afrikanske tromme-designfasaden som vender mot presidentskontoret Tuynhuys skal være ferdig februar 2027.",
+      "category": "infrastructure",
+      "urgency": 2,
+      "source_url": "https://www.dailymaverick.co.za/article/2026-08-07-from-ashes-to-assembly-as-parliament-targets-2027-return/",
+      "source": "dailymaverick",
+      "published_at": "2026-08-07T15:58:04Z"
+    },
+    {
+      "headline_no": "MINNEVERDIG MOMENT: Da Janine van Wyk hjalp Banyana til å slå Nigeria",
+      "summary_no": "Sørafrikas tidligere fotballkaptein Janine van Wyk husker sitt mest minnerike mål – et vakker skudd fra 25 meter i semifinalen i 2012 som sendte Banyana til finalen mot Nigeria. Seieren markerte et vendepunkt for det sørafrikanske kvinnelaget, som hadde slitt mot det nigerianske laget tidligere.",
+      "detail_no": "I semifinalen under African Cup of Nations 2012 i Equatorial Guinea skåret Janine van Wyk sitt kanskje fineste mål. Etter et hjørnespark tok hun sjansen med sitt svakere venstre bein fra omkring 25 meter og sendte ballen i nettet langs underkanten av tverrstangen. Van Wyk beskriver hvordan hennes lag endelig følte seg i kontroll mot det tradisjonelt dominerende Nigeria, uten de vanlige nervene som fulgte møter mot naboene. Laget hadde flere lag som tidligere hadde tapt mot Nigeria, men denne gangen var mentaliteten annerledes – de trodde på at de kunne vinne. Målet hennes ble avgjørende i en 1-0-seier som sendte Banyana videre til finalen. For resten av kampen forsvarte laget målet sitt med livet, og når dommeren blåste av etter 90 minutter, hadde de gjort historie.",
       "category": "event",
       "urgency": 2,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-08-the-day-janine-van-wyk-helped-banyana-conquer-mighty-nigeria/",
@@ -2811,9 +2792,9 @@
       "published_at": "2026-08-08T21:05:54Z"
     },
     {
-      "headline_no": "FOR PROTOKOLLEN: All Blacks mot Springboks er rugbyens største rivalitet",
-      "summary_no": "Etter 30 år gjennomfører New Zealand All Blacks en full turné i Sørafrika med åtte kamper, hvorav fire er testmatcher som tester rivaliteten som anses for rugbyens største. Springboks har vunnet de siste to VM og er favoritter, men All Blacks er farlige motstandere.",
-      "detail_no": "All Blacks møter Springboks i en ny era med \"Rugby's Greatest Rivalry\"-serien, den første fullstendige turneen på 30 år mellom rivaler som har møttes 110 ganger siden 1921. Statistikken forsvarer påstanden: sammen har de to nasjonene vunnet syv av de 10 VM siden 1987 (Sørafrika fire, New Zealand tre), og siden verdensrangeringer ble innført i 2003, har All Blacks sittet på toppen i 747 uker mot Springboks' 332 uker – neste nærmeste er Irland med 74 uker. Turneen består av åtte kamper med første test på Ellis Park 22. august. Springboks starter som favoritter etter å ha vunnet de siste to VM og Rugby Championship, og har en 11-kamp vinnerserie, men All Blacks under ny trener Dave Rennie vet at Springboks er å beseire. Treneren har en imponerende rekord mot Sørafrika-lag fra sin tid som trener.",
+      "headline_no": "FOR PROTOKOLLEN: Det er umulig å nekte at All Blacks mot Springboks er rivaliseringen størst",
+      "summary_no": "All Blacks er på sin første fullstendige turnè i Sør-Afrika på 30 år, med en serie på åtte kamper som starter 22. august. Rivaliseringen mellom lagene er dokumentert som historiens største i rugby – sammen har de vunnet 7 av 10 verdensmesterskaper siden 1987.",
+      "detail_no": "Springboks og All Blacks møtes for første gang på full turnè siden 1996, med åtte kamper som inkluderer fire klubbkamper og fire testmatcher på påfølgende helger. De to lagene har møttes 110 ganger siden 1921. Kombinert har Springboks og All Blacks vunnet 7 av 10 verdensmesterskaper – Sør-Afrika med fire titler og New Zealand med tre. All Blacks har hatt 747 uker på verdens rangering nummer en siden 2003, Springboks 332 uker. All Blacks leder i møter med 63 seire mot Springboks' 43, med fire uavgjort. Under Rassie Erasmus' ledelse siden 2018 har Springboks imidlertid vunnet 8 av 15 møter. Springboks starter som favoritter med 11 påfølgende testseire, men All Blacks under nye trener Dave Rennie har lite å tape og kan utgjøre en stor fare. Den tredje kampen på FNB Stadium med 94.000 tilskuere forventes å generere omkring samme inntekter som den fjerde kampen i Baltimore USA, som kan bringe inn omkring 100 millioner rand for Sør-Afrika alene.",
       "category": "event",
       "urgency": 2,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-08-no-denying-all-blacks-vs-the-boks-is-the-greatest-rivalry/",
@@ -2821,19 +2802,9 @@
       "published_at": "2026-08-08T21:02:04Z"
     },
     {
-      "headline_no": "Malaysisk stjernekokk Shankar Santhiram gjennomfører kulinarisk revolusjon i Sør-Afrika",
-      "summary_no": "55-årige malaysiske kokk Shankar R. Santhiram filmer en 10-episodisk kulinarisk TV-serie i Sør-Afrika og har fått stor tilslutning blant den indiske diasporaen. Han er chef og eier av den kritikerroste restauranten Fire by Shankar i Penang, Malaysia, og har også utdannelse som jurist og jobber som ledelsescoach.",
-      "detail_no": "Malaysian-tamilsk kokk Shankar R. Santhiram (55) er i Cape Town for å filme serien \"Shankar's Saapadu Story South Africa\" med 10 episoder. Han er chef patron av den prisvinnende restauranten Fire by Shankar i Penang som spesialiserer seg i moderne, innovativ tamilsk mat. Santhiram har også en juridisk grad, jobber som filantroper og ledelsescoach, og har vært ukentlig spalteist i 10 år. Han fant sitt største publikum utenfor Malaysia i Sør-Afrika, noe som motiverte hans besøk til landet hvor han har en venn på 37 år i Muizenberg, Cape Town. Kokken forklarer at hans tilnærming til indisk mat avviser en-pensel-tilnærming da India er et subkontinent med varierende klima og produkter som endrer seg hver 50-100 km. Han uttrykker at forbindelsen til hjemmekost er en visceral avhengighet – etter best restauranter i Milano eller Roma lengter han etter ris og dhal.",
-      "category": "event",
-      "urgency": 2,
-      "source_url": "https://www.iol.co.za/lifestyle/food-drink/meet-malaysian-chef-shankar-santhiram-who-is-sparking-sas-unlikely-goat-revolution-a148d81f-9180-40d2-871d-2ecbd8e93f65",
-      "source": "iol",
-      "published_at": "2026-08-08T08:13:10Z"
-    },
-    {
-      "headline_no": "All Blacks seirer 38-21 over Stormers i Cape Town på turstart",
-      "summary_no": "New Zealand All Blacks won 38-21 over Cape Town Stormers on Friday at DHL Stadium in their South African tour opener, with the home side making a spirited performance but succumbing to injury-induced collapse in the final minutes. All Blacks displayed brilliant attack but were plagued by indiscipline with 16 penalties and three yellow cards.",
-      "detail_no": "All Blacks starter sin Sør-Afrika-turnê med seier 38-21 over Stormers foran 47.130 tilskuere på DHL Stadium på en perfekt Cape Town-kveld. New Zealand scoret seks forsøk mot tre for hjemmelaget, og dominerte når de angrepet med fart og smarthet. All Blacks var imidlertid alvorlig udisiplinert og ga 16 straffer med tre gule kort. Stormers holdt seg inne til 12 minutter gjenstod da stillingen var 14-14, men kollapsed i sluttfasen etter at flere nøkkelspillere ble skadd. Scrumhalf Imad Khan falt ut i tredje minutt, løper Seabelo Senatla måtte spille på halvrygg og flanker Hacjivah Dayimani på wing. Veteran flankspiller Deon Fourie (39) imponerte for Stormers med tre takk på fem sekunder og utnyttet en fin målpassering fra Dewaldt Duvenage til å sette Senatla over til utligning etter 56 minutter.",
+      "headline_no": "All Blacks starter turné med seier over Stormers på DHL Stadium",
+      "summary_no": "All Blacks vant 38-21 mot Stormers på DHL Stadium i Cape Town foran 47.130 tilskuere. Nyzeelanderne scoret seks forsøk, men var utsatt for kaotisk spill med 16 straffer og tre gule kort.",
+      "detail_no": "All Blacks startet sin Sør-Afrika-turné med seier på 38-21 (pause 14-7) mot Stormers på DHL Stadium i Cape Town fredag kveld foran 47.130 tilskuere. Nyzeelandske trener Dave Rennie vil være lettet, men kampresultatet skjulte et dårlig disiplinert All Blacks-lag som begikk 16 straffer og fikk tre gule kort. All Blacks scoret seks forsøk mot tre, men Stormers var sterkere organisert og kjempet hardnakket til skader tok over mot slutten. Stormers mistet scrumhalv Imad Khan i tredje minutt, og senere captain Ruhan Nel. I sluttfasen opererte winger Seabelo Senatla på scrumhalf-posisjonen. All Blacks' andre-raden var svakere enn Stormers' forwarti, noe som bekymrer foran kamp mot Springboks. Veteran flank Deon Fourie (39) var Stormers' fremste mann og gjorde tre takinger på fem sekunder i en sekvens.",
       "category": "event",
       "urgency": 2,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-07-ill-disciplined-all-blacks-survive-stormers-scare-in-tour-opener/",
@@ -2841,9 +2812,9 @@
       "published_at": "2026-08-07T22:33:04Z"
     },
     {
-      "headline_no": "Bok-bombe redder dagen: Springboks slår Argentina 17-10 i Buenos Aires",
-      "summary_no": "Springboks slo Argentina 17-10 i Buenos Aires takket være sterke innbytter som ga pakken kraftpågang i andre halvdel. Seieren gir de sørafrikanske rugbyspillerne momentum inn i kommende testkamper mot New Zealand.",
-      "detail_no": "Springboks-rugbylandslaget vant 17-10 over Argentina i Buenos Aires etter en hard og krevende kamp som krevde grit og karakter. I første halvdel var Argentina over, men i andre halvdel fikk Springboks sin kraft når innbytterspillere som lock Cobus Wiese, hooker Jan-Hendrik Wessels og prop Zach Porthen kom inn – besetningen som kalles «Bomb Squad». Med fornyelsens kraft fikk Springboks kontroll over gainline-kampen. Flyhalf Handré Pollard ledet laget inn i riktige områder av banen, og nummer 8 Cameron Hanekom scoret seiersforsøket fra en fem-meters scrum midmåls i annen halvdel. Kampen var fylt av sterk forsvar, straffer og til og med et forsøk på drop goal fra Feinberg-Mngomezulu som traff Pumas-tverrbaren. Captain Siya Kolisi skadde seg på hamstring i første halvdel. Argentina fikk mulighet til å presse for uavgjort med siste angrepssekvensen, men wing Matías Moroni mislyktes i å holde den siste pasningen med prøvelinja tantaliserande innen rekkevidde. Seieren er Springboks' 12. strake testseier og gir dem momentum inn i kommende fire-testkamp-serie mot All Blacks, en ideell testkamp to uker før møtet med New Zealand.",
+      "headline_no": "Springbokker seirer over Argentina 17-10 i Buenos Aires takket være «Bomb Squad»",
+      "summary_no": "Springbokker slo Argentina 17-10 i en hard Test-kamp i Buenos Aires, med sterk andreomgang etter at forsterkningstropper endret kampen.",
+      "detail_no": "Springbokene vant 17-10 mot Argentina (halvtidsstilling 10-10) i Buenos Aires i en gamaldags Test-kamp som krevde enorm måpestadighet. Argentina dominerte første omgang og burde vært foran, men Sør-Afrika kom sterkt tilbake i andre omgang da «Bomb Squad»-forsterningene – lock Cobus Wiese, hooker Jan-Hendrik Wessels og prop Zach Porthen – ga pakken nytt initiativ. Flyhalf Handré Pollard styrte laget effektivt, og Cameron Hanekom scoret den avgjørende forsøket fra fem-meters skrummet. Eben Etzebeth spilte hele kampen og var dominerende, mens Argentina-back Benjamín Grondona var imponerende. Det var en kamp preget av massiv forsvarsvilje, sterk vind som påvirket kastespillet, og Argentina hadde sjanser til slutt. Seieren var Sør-Afrikas 12. strake testseier og gir dem momentum før All Blacks-serien som starter om to uker.",
       "category": "event",
       "urgency": 1,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-09-bomb-squad-saves-the-day-for-boks-against-argentina-in-buenos-aires/",
@@ -2851,9 +2822,9 @@
       "published_at": "2026-08-09T00:43:34Z"
     },
     {
-      "headline_no": "Lekeplass i Johannesburgs gamle fengsel inspirerer barn",
-      "summary_no": "Play Africa åpnet et interaktivt museum for barn inne i Johannesburgs berømte Old Fort ved Constitution Hill, hvor Nelson Mandela en gang var fengslet. Institusjonen når rundt 10.000 barn årlig gjennom museumsbesøk og mobile programmer.",
-      "detail_no": "Play Africa er et interaktivt barnelaboratorium opprettet i 2017 inne i den historiske Old Fort ved Constitution Hill i Johannesburg Braamfontein-området. Institusjonen er ledet av Futhi Mbongwe og transformerer et sted kjent for frykt og undertrykkelse til et rom for lekende læring. Museet inneholder fargerike lekesoner, deriblant en Children's Courtroom hvor barn rolleplay i en domstol og lærer om medborgerskap og menneskerettigheter. Play Africa når cirka 10.000 barn årlig gjennom museumsbesøk, programmer, feltture og en mobil museum som bringer utdanningsprogrammer til townhips og landlige områder i Sør-Afrika. Nelson Mandelas gamle sykehusscelle ligger bare 19 meter fra lekemuseet – Mandela ble holdt der i 1962 som varetektsfange fordi myndighetene betraktet ham som for politisk innflytelsesrik til å dele celle med andre sorte fanger.",
+      "headline_no": "Lekemuseum i det berømte fengselet - Play Africa åpner for barn i Johannesburgs gamle fort",
+      "summary_no": "Play Africa har åpnet et interaktivt barn-museum inne i det historiske fengselet Old Fort ved Constitution Hill i Johannesburg. Museet bruker leken til læring og har alt fra roller-play-rettssal til mobile utdanningstilbud som når 10.000 barn årlig.",
+      "detail_no": "Play Africa er et interaktivt barnmuseum som ligger inne i Old Fort ved Constitution Hill i Johannesburgs Braamfontein-bydel – på stedet av et brutalt 1800-talls fengsel som senere ble hjemsted for landets grunnlovsdomstol. Museet drives av Futhi Mbongwe, som fra 2017 har vært involvert. Institusjonen er utformet for å omdanne et sted assosiert med frykt og undertrykkelse til ett som handler om lekefull læring. Museet når omtrent 10.000 barn årlig gjennom turer, programmer og en mobil museum som frakter utstillinger til townships og landlige områder i Sør-Afrika. Nelson Mandelas gamle sykecelle ligger bare 19 meter unna museet – han ble holdt der i 1962 som varetektsfange. Museet tilbyr blant annet en \"Children's Courtroom\" hvor barn lærer om menneskerettigheter og rettssystemer gjennom rollespill.",
       "category": "event",
       "urgency": 1,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-08-children-can-play-in-joburg-s-infamous-jail/",
@@ -2861,9 +2832,29 @@
       "published_at": "2026-08-08T11:00:00Z"
     },
     {
-      "headline_no": "Melkepulverfirmaer påvirker helsepersonell til å forme ammeråd",
-      "summary_no": "Eksperter advarer mot at kommersielle melkepulverfirmaer aktivt påvirker helsepersonell for å forme mat- og ammeråd til foreldre. Kun 22 % av babyer under seks måneder i Sørafrika blir fullammet, mens det globale tallet er 48 %.",
-      "detail_no": "Under et webinar for Verdens ammefestuke 1.–7. august 2026 advarte en panel av eksperter mot kommersielle melkepulverfirmaers påvirkningsstrategier. En rapport fra WHO og Unicef viser at ett av fem sørafrikanske helsepersonell hadde anbefalt melkepulver til pasienter, og én av fire hadde gitt merkeanbefaling. Nesten halvparten av helsepersonell i Sørafrika hadde hatt direkte kontakt med selskaprepresentanter. Professor Tanya Doherty fra SAMRC påpekte at markedsføringsbeskjeder blir normalisert gjennom gjentatt eksponering, og at melkepulver feilaktig beskrives som «nært brystmelk» eller som løsning på normal spedbarnsforstyrrelser som gråt og kolikk. Firmene bruker vitenskapelig språk og pseudo-vitenskapelige påstander for å skape inntrykk av innovasjon og troverdighet uten evidens.",
+      "headline_no": "Malaysisk stjernekokk Shankar Santhiram skaper geitt-revolusjon i Sør-Afrika",
+      "summary_no": "Den 55 år gamle malaysiske kokken Shankar Santhiram filmer en 10-episoder kulinarisk TV-serie i Sør-Afrika og sier han opplevde sitt største følgerskab utenfor Malaysia nettopp her. Han kombinerer tamilsk mat med universell kost som forbinder kulturer.",
+      "detail_no": "Shankar R. Santhiram er en 55 år gammel malaysisk tamilsk kokk som nå befinner seg i Cape Town for å filme en omfattende 10-episoders kulinarisk TV-serie kalt \"Shankar's Saapadu Story South Africa\". Han er også chef-patron for restauranten Fire by Shankar i Penang, Malaysia, som spesialiserer seg på moderne, innovativ tamilsk-inspirert mat. Santhiram er i tillegg jurist, filantrop og ledercoach, og har vært ukentlig spalteforfatter i 10 år. Han forklarer at han oppdaget at hans største følgerskab utenfor Malaysia var i Sør-Afrika, og at han føler en særlig tilknytning til det indiske diasporah her. Han mener tamilsk mat handler om å injisere trøst direkte inn i diasporaens årer – «som en fix». Hans reise fra juraklasse til kjøkken startet som en tektonikstyrt endring, og ble påvirket av sin fars motstand mot at en gutt skulle være på kjøkkenet.",
+      "category": "event",
+      "urgency": 1,
+      "source_url": "https://www.iol.co.za/lifestyle/food-drink/meet-malaysian-chef-shankar-santhiram-who-is-sparking-sas-unlikely-goat-revolution-a148d81f-9180-40d2-871d-2ecbd8e93f65",
+      "source": "iol",
+      "published_at": "2026-08-08T08:13:10Z"
+    },
+    {
+      "headline_no": "KVINNEDAGEN 1956-2026: 2026 markerer skiftet fra glasstak til cybertak i medier",
+      "summary_no": "En rapport fra Glass Ceilings 2026 avslører at 75 prosent av kvinnejournalister i Sør-Afrika opplevde nettbasert trakassering og cybermisogyn, en økning fra 30 prosent i 2018. Selv om kvinner har brutt ned tradisjonelle karrierebarrierer, møter de nå ny motstand på sosiale medier og en tilbakeslåing i lederposisjoner.",
+      "detail_no": "Undersøkelsen Glass Ceilings 2026, lansert av South African National Editors' Forum (Sanef) 6. august, viser en betydelig tilbakeslåing mot likestilling for kvinnejournalister. 75 prosent av 111 undersøkte kvinnejournalister rapporterte om cybermobbing og cybermisogyn – en økning på 45 prosentpoeng fra 2018-rapporten som fant at kun 30 prosent identifiserte disse problemene. Rapporten avslører også at svarte afrikanske kvinner forlater nyhetsrom i merkbar andel, rapporterer at de føler seg ydmyket og ignorert, og at deres forfremelser ofte møtes med skepsis. Mens kjønnslønngapet fortsatt er et problem – mer enn 60 prosent av respondentene trodde på at et lønnsgap eksisterer – er det nye cybertakten på sosiale medier nå den primære trusselen. Mediehusene Arena Holdings, Media24 og National Media Group har alle gjennomgått omstillinger eller eierskapsendringer, noe som skaper usikkerhet omkring redaksjonell mangfold.",
+      "category": "other",
+      "urgency": 3,
+      "source_url": "https://www.dailymaverick.co.za/article/2026-08-08-2026-marks-the-shift-from-glass-ceiling-to-cyberceiling-in-media/",
+      "source": "dailymaverick",
+      "published_at": "2026-08-08T20:42:04Z"
+    },
+    {
+      "headline_no": "Melkepulverselskaper påvirker helsepersonell for å forme råd om spebarnsernæring",
+      "summary_no": "Eksperter oppfordrer helsepersonell til å beskytte foreldre mot kommersielle melkepulverfirmaers innflytelse under Verdens ammefestuke. I Sør-Afrika ammedes kun 22 prosent av spedbarn eksklusivt, langt under WHOs globale snitt på 48 prosent.",
+      "detail_no": "Under en paneldiskusjon 5. august arrangert av Healthy Living Alliance for Verdens ammefestuke, advarte eksperter om at melkepulverfirmaer aktivt påvirker helsepersonell for å influere foreldres matveisvalg. En WHO- og Unicef-rapport viste at 20 prosent av kvinner i Sør-Afrika ble rådet til å bruke melkepulver av helsepersonell, og 25 prosent mottok merkeanbefaling fra fagfolk. Professor Tanya Doherty forklarte at melkepulverindustrien markedsfører sine produkter som løsninger på normale nyfødt-atferd som gråt og kolikk, og bruker vitenskapelige påstander og pseudo-vitenskapelige referanser uten bevis. Helsepersonell ble hyppig kontaktet av selskapene gjennom markedsførings-e-poster, sponsede kurs og CPD-poeng, hvilket normaliserte kommersielle påstander og skapte interessekonflikter mellom deres ansvar overfor familier og kommersielle interesser.",
       "category": "other",
       "urgency": 3,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-07-formula-firms-targeting-healthcare-workers-to-shape-feeding-advice/",
@@ -2871,9 +2862,19 @@
       "published_at": "2026-08-07T14:19:41Z"
     },
     {
-      "headline_no": "WEEKEND-OPPSUMMERING: Madlanga-effekten, Capetons boligkrise og hvorfor kjøpe bøker vi aldri leser",
-      "summary_no": "En ukesoppsummering som hyller avisjournalisten Estelle Ellis, som avslørte svikt i østkapprovinsens sykehus og kommuner, samtidig som den diskuterer Madlanga-kommisjonens betydning for sivil styring, Cape Tows indre bylboligkrise og de økonomiske problemer i Media24.",
-      "detail_no": "Daily Mavericks ukessammendrag presenterer flere viktige saker: Det hylles Daily Maverick-journalisten Estelle Ellis, som under årenes reporting avslørte svikt i østkapprovinsens sykehus, domstoler og kommuner – og som til og med ble fanget i en hisstopp med et lik istedenfor å ta en embetsmanns ord for det. Marianne Thamm skriver om Madlanga-kommisjonen som undersøker hvordan politiet ble kapret, og hvordan den kan tjene som kjørested for borgerlæring. Kevin Bloom analyserer Cape Tows forslag til kort-siktig utleie-lov som vil omklassifisere Airbnb-lignende utleier som kommersielle og øke avgifter – vil det frigjøre indre bylboligbygger for lokale leiere? Styli Charalambous rapporterer at Media24, Sørafrikas største digitale nyhetspublisør, har forsøkt alle oppskrifter i omstillingshåndboken – salg, lukking, massiv jobbreduksjon – men tapene øker fortsatt med 60 %. Og det rapporteres at Johannesburgs elektrisitetsnettverk er på bristepunktet med krasjende infrastruktur og utpressing som driver systemet ut av kontroll.",
+      "headline_no": "Redaksjonelt minnesord: Journalisten Estelle Ellis ville ikke gi seg",
+      "summary_no": "Daily Maverick-journalisten Estelle Ellis, som arbeidet i Nelson Mandela Bay-kontoret, er død. Hun var kjent for sin dedikasjon til å dekke historier som betydde noe og for hennes ubekvemme spørsmål.",
+      "detail_no": "Estelle Ellis var en journalist ved Daily Maverick som arbeidet for Baywatch-leserne i Nelson Mandela Bay. Hun var kjent for sin fiersomhet som tilhenger av mennesker som ofte ble ignorert, og hennes determinkasjon. Kollegene beskriver henne som noen som ikke nøydes med halvleininger – verken i journalistikken, vennskap, familie eller i saker hun brydde seg om. Hun kunne være kresen og sta, og drev ofte redaktøren på skapte med dokumentasjon og kilder. Ellis var også dedikert til sitt kattekjær Finn (World's Best Cat) og var stolt over sin niese Leah og nevø Jacques. Daily Maverick-redaksjonen lover å fortsette arbeidet hennes ved å stille spørsmål hun ville ha stilt og fortelle historiene hun kjempet for.",
+      "category": "other",
+      "urgency": 2,
+      "source_url": "https://www.dailymaverick.co.za/article/2026-08-09-the-lessons-we-learnt-from-estelle-the-journalist-who-could/",
+      "source": "dailymaverick",
+      "published_at": "2026-08-09T06:00:00Z"
+    },
+    {
+      "headline_no": "HELGEOPPSUMMERING: Madlanga-effekten, boligklemmen i Cape Town, og hvorfor kjøpe bøker vi aldri leser",
+      "summary_no": "Weekend Wrap sammenfatter hovedsakene i Sør-Afrika, inkludert tribut til journalisten Estelle Ellis som avslørte svikt i helsetjenesten, en gjennomgang av Madlanga-kommisjonen om politivesen, og en debatt om Cape Towners boligkrise og boligregistreringsreformer.",
+      "detail_no": "Daily Maverick-journalisten Estelle Ellis, kjent for å avsløre mangler i sykehus, domstoler og kommuner i Østkaplen, er død. Cape Towners nye kortutleieforordning klassifiserer mange Airbnb-liknende utleier som kommersiell, noe som øker takster og krever registrering – spørsmålet gjenstår om dette frigjør innby-bolig for lokale leietakere. En debatt om alderbasert opptak til første klasse avslører en dypere krise: de fleste barn starter første klasse uten nødvendig utviklingsgrunnlag. En gårdsbruker fra Addo har bare åtte uker til å omstille seg fra gårdsforvalter til MMA-fighter etter å ha acceptert et siste-minutts-kall til Moer 'n Boer sesong tre. Media24, Sør-Afrikas største digitale nyhetsforlegger, har forsøkt alle tiltakene læreboker foreskriver – avhendelser, lukkinger, store personellkutt og digital transformasjon – men økonomiske tap økte fortsatt med 60 prosent. Johannesburgs elektrisitetsnettverk sliter med eldre infrastruktur, systemisk operasjonell paralyse og åpenbar utpressingsskandaler som får elektrisitetsselskapet til å slite stadig mer.",
       "category": "other",
       "urgency": 2,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-08-madlanga-effect-cape-town-housing-squeeze-and-why-buy-books-we-never-read/",
@@ -2881,9 +2882,9 @@
       "published_at": "2026-08-08T12:47:15Z"
     },
     {
-      "headline_no": "Workshop Mom åpner dører for kvinner innenfor bilreparasjon i Nigeria",
-      "summary_no": "Tokunbo Adegoju er en av Nigerias få kvinnelige seniorbilmekanikere som både jobber ved verkstedet Auto Medics i Lagos og leder radieoprogrammer hvor hun hjelper bilistene med bilproblemer. Hun oppmuntrer også unge kvinner til å ta seg inn i tekniske yrker gjennom mentorskapet sitt.",
-      "detail_no": "Tokunbo Adegoju arbeider som bilfagtekniker ved Auto Medics i Lagos og er blitt en betrodd ekspert på diagnose av bildefekter både gjennom direkte arbeid og radiofremstillinger på Eko FM og Lagos Traffic Radio 96.1FM. Hun var ikke opprinnelig planlagt å reparere biler, men hennes far så hennes evne til å fikse ting hjemme da hun vokste opp, og hennes mann oppmuntret henne senere til å ta fagopplæring innen bilreparasjon. Gjennom sitt arbeid som seniorfagtekniker hjelper Adegoju nå til å trene den neste generasjonen mekanikere, inkludert unge kvinner som kaller henne «Workshop Mom». Hennes nærvær i verkstedet har hjulpet til å endre hvordan noen kvinner ser på bilreparasjon, og hun er en viktig del av Nigerias innsats for å øke kvinnelig deltakelse innen tekniske karrierer.",
+      "headline_no": "«Workshop Mom» er forløper for forandring for kvinner i Nigeria",
+      "summary_no": "Tokunbo Adegoju er en av Nigerias få kvinnelige senior-mekanikere som jobber som bilekspert i Lagos og gir radiokonsultasjon. Hun mentorerer unge mekanikere, spesielt kvinner, og bryter ned kulturelle barrierer i bilreparasjonsbransjen.",
+      "detail_no": "Tokunbo Adegoju arbeider som seniormekaniker ved Auto Medics i Lagos og er kjent for sin ekspertise innen diagnose av bildefekter gjennom radioshow på Eko FM og Lagos Traffic Radio. Hun var opprinnelig interessert i medisin, men en bilulykke fikk henne til å ombestemme seg. Ektemann hennes oppfordret henne til å bli mekaniker etter å ha hørt et radioprogram. Grunnlegger Kunle Shonaike av Auto Medics sier at kulturelle barrierer hindrer kvinner i faget, men at dette endres. Adegoju er nå seniormekaniker som mentorerer neste generasjon mekanikere, og trainees kaller henne «Workshop Mom». Hun jobber både i verkstedet og i radiostudio for å hjelpe bilister med feildiagnoser, og bidrar til å øke kvinnelig deltakelse i tekniske karrierer i Nigeria.",
       "category": "other",
       "urgency": 1,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-09-workshop-mom-at-the-wheel-of-big-change-for-women-in-nigeria/",
@@ -2891,19 +2892,9 @@
       "published_at": "2026-08-09T09:00:00Z"
     },
     {
-      "headline_no": "Journalisten Estelle Ellis minnes: En kamp for det som betydde noe",
-      "summary_no": "Daily Maverick minnes sin tidligere kollega og journalist Estelle Ellis, som døde og etterla seg en arv av dyptgripende journalistikk og dedikasjon til å fortelle historier som betydde noe. Hun var kjent for sitt stålsetting, sitt spørsmål og sin uvilkårlige vilje til å grave dypere.",
-      "detail_no": "Daily Maverick's redaksjon minnes kollegaen Estelle Ellis, en journalist og sterk talsperson for mennesker som ofte ble ignorert. Ellis var kjent for sitt stålsatte arbeid – hun ville argumentere intenst, ville stille flere spørsmål, og hadde vanen å ha rett. Hun arbeidet for Daily Maverick Nelson Mandela Bay-byråen og redaksjonen Baywatch. Ellis var drevet av troen på at ting ville kunne bli bedre, og hun viste denne dedikasjon i alt hun gjorde, fra sitt journalistiske arbeid til sine personlige forhold. Hun var dedikert til katten sin Finn og var stolt av sin familie med niesen Leah og nevøen Jacques. Daily Maverick lover å fortsette å stille de spørsmålene hun ville stilt, fortelle de historiene hun kjempet for å få fortalt, og stå ved siden av de menneskene som stolte på henne med deres håp, frykt og sannhet.",
-      "category": "other",
-      "urgency": 1,
-      "source_url": "https://www.dailymaverick.co.za/article/2026-08-09-the-lessons-we-learnt-from-estelle-the-journalist-who-could/",
-      "source": "dailymaverick",
-      "published_at": "2026-08-09T06:00:00Z"
-    },
-    {
-      "headline_no": "Daily Maverick First Thing-abonnenter deler ukentlig fotogalleri",
-      "summary_no": "Daily Maverick inviterer First Thing-abonnenter til å dele egne fotografier til en ukentlig galleri med maksimalt 20 bilder per uke. Fotografer anbefales å sende bilder i landscape-format med høy oppløsning, og beholdner rettighetene til sitt arbeid.",
-      "detail_no": "Daily Maverick sin First Thing-nyhetsbrev oppfordrer abonnenter til å sende inn egne fotografier for ukentlig publisering i et subscriber photo gallery. Redaksjonelle retningslinjer krever at bilder helst er i landscape-format og med høest mulig oppløsning, og maksimalt 20 bilder publiseres per uke. Fotografer – både amatører og profesjonelle – beholdner alle rettigheter til sitt arbeid, og kan oppgir portføljelenker eller trykkealternativer ved innsending. Redaksjonen oppfordrer alle typer fotografier, selv om redaktøren John Stupart personlig er hundeelskende. Ved å sende inn et foto gir fotografen Daily Maverick tillatelse til publisering på nettstedet i det formatet som presenteres.",
+      "headline_no": "Fototilbyding: Ukens beste innsendte bilder",
+      "summary_no": "Daily Maverick sin First Thing-nyhetsbrev innbyr leserne til å sende inn egne fotografi for publisering i ukentlig galleri. Billedene bør være i landskapformat og høy oppløsning.",
+      "detail_no": "Daily Maverick ønsker innspill fra lesere som abonnerer på First Thing-nyhetsbrevet. Redaksjonen setter sammen en ukentlig fotogalleri fra innsendt materiale og oppfordrer til både amatør- og profesjonellefotografer. Rettningslinjene er at bilder bør orienteres horisontalt (landskapformat) og ha høyest mulig oppløsning. Maksimalt 20 bilder publiseres per uke. Fotografer oppfordres til å oppgi porteføljelenkjer eller trykkalternativer når de sender inn bilder. Ved innlevering gir fotografen lov til at Daily Maverick publiserer bildet, men fotografen beholder alle rettighetene.",
       "category": "other",
       "urgency": 1,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-07-i-have-a-picture-for-you-01-august-07-august-2026/",
@@ -3006,5 +2997,5 @@
     }
   ],
   "todos": [],
-  "surf_summary_no": "**Beste vindu: Llandudno, lørdag 10. aug 06:00–09:00** — 2.6–2.7m swell, lett vind fra SØ (135°–140°), før Cape Doctor blir sterk. Big Bay også mulig hvis nybegynnere må, men mer påland. **Dropp Muizenberg helt** — pålandsvind hele perioden gjør paddling farlig. Søndag blir dårligere alle spots med synkende swell (1.0–2.2m) og sterkere vind."
+  "surf_summary_no": "Lørdag 10.08 formiddag (06:00-09:00) er gyllen for både Muizenberg og Llandudno. Big Bay er best lørdag 00:00-12:00 med stabil offshore vind og 2.0-2.4m svell. Søndag 11.08 er ikke anbefalt for nybegynnere — svell krymper, vind blir rørig, og strøm roterer ugunstig alle steder. Velg Big Bay lørdag morgen som hovedplan.\""
 }
