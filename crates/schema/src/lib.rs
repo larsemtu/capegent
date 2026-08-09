@@ -53,6 +53,22 @@ pub struct NewsBatch {
     pub items: Vec<NewsItem>,
 }
 
+/// Claude sin surf-tolkning — tvunget tool-output.
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+pub struct SurfAnalysisBatch {
+    /// Kort samlet vurdering: hvilken spot/dag/vindu er best fremover
+    pub summary_no: String,
+    pub spots: Vec<SpotAnalysis>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+pub struct SpotAnalysis {
+    /// Må matche spot-navnet nøyaktig
+    pub name: String,
+    /// 2-4 setninger: beste vinduer, vind/svell-begrunnelse, padleforhold
+    pub analysis_no: String,
+}
+
 /// Det som faktisk lagres i latest.json: LLM-output pluss metadata vi
 /// kobler på selv (matchet på source_url).
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -90,6 +106,9 @@ pub struct HourlyForecast {
     pub precipitation_mm: f64,
     pub wind_ms: f64,
     pub wind_direction_deg: f64,
+    /// Vindkast fra Open-Meteo (MET leverer ikke kast utenfor Norden)
+    #[serde(default)]
+    pub gust_ms: Option<f64>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -137,6 +156,12 @@ pub struct SurfSpot {
     pub wind_ms: f64,
     pub wind_direction_deg: f64,
     pub rating: SurfRating,
+    /// Havtemperatur ved spoten (våtdraktvalg)
+    #[serde(default)]
+    pub water_temp_c: Option<f64>,
+    /// Claude sin tolkning av forholdene de neste dagene, norsk
+    #[serde(default)]
+    pub analysis_no: Option<String>,
     /// Neste 48 timer for detaljvisning
     #[serde(default)]
     pub hourly: Vec<SurfHour>,
@@ -150,6 +175,14 @@ pub struct SurfHour {
     pub swell_direction_deg: f64,
     pub wind_ms: f64,
     pub wind_direction_deg: f64,
+    /// Tidevannshøyde relativt middelvann
+    #[serde(default)]
+    pub tide_m: Option<f64>,
+    /// Havstrøm i km/t (presser deg inn/ut — Muizenberg-faktoren)
+    #[serde(default)]
+    pub current_kmh: Option<f64>,
+    #[serde(default)]
+    pub current_direction_deg: Option<f64>,
     pub rating: SurfRating,
 }
 
@@ -206,4 +239,7 @@ pub struct DashboardData {
     pub events: Vec<EventItem>,
     #[serde(default)]
     pub todos: Vec<TodoItem>,
+    /// Claude sin samlede surfvurdering på tvers av spotene
+    #[serde(default)]
+    pub surf_summary_no: Option<String>,
 }

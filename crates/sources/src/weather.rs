@@ -4,6 +4,8 @@
 //! til SAST (fast UTC+2, ingen sommertid).
 
 use anyhow::{Context, Result};
+use std::collections::HashMap;
+use tracing::warn;
 use chrono::{DateTime, FixedOffset, Timelike, Utc};
 use schema::{DayForecast, HourlyForecast, PeriodForecast, Weather};
 use serde::Deserialize;
@@ -13,6 +15,36 @@ pub const GREEN_POINT: (f64, f64) = (-33.906, 18.410);
 
 fn sast() -> FixedOffset {
     FixedOffset::east_opt(2 * 3600).unwrap()
+}
+
+#[derive(Deserialize)]
+struct GustResp {
+    hourly: GustHourly,
+}
+
+#[derive(Deserialize)]
+struct GustHourly {
+    time: Vec<String>,
+    wind_gusts_10m: Vec<Option<f64>>,
+}
+
+/// Kast finnes ikke i MET-data utenfor Norden — suppler fra Open-Meteo.
+/// Best effort: feiler dette, mangler bare kast-kolonnen.
+async fn fetch_gusts(client: &reqwest::Client) -> Result<HashMap<String, f64>> {
+    let (lat, lon) = GREEN_POINT;
+    let url = format!(
+        "https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}\
+         &hourly=wind_gusts_10m&wind_speed_unit=ms\
+         &timezone=Africa%2FJohannesburg&forecast_hours=72"
+    );
+    let resp: GustResp = client.get(&url).send().await?.error_for_status()?.json().await?;
+    Ok(resp
+        .hourly
+        .time
+        .into_iter()
+        .zip(resp.hourly.wind_gusts_10m)
+        .filter_map(|(t, g)| Some((t, g?)))
+        .collect())
 }
 
 #[derive(Deserialize)]
@@ -78,15 +110,25 @@ pub async fn fetch(client: &reqwest::Client) -> Result<Weather> {
     let url = format!(
         "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat={lat}&lon={lon}"
     );
-    let resp: MetResp = client
-        .get(&url)
-        .send()
-        .await
-        .context("GET met.no locationforecast")?
-        .error_for_status()?
-        .json()
-        .await
-        .context("parse met.no locationforecast")?;
+    let (met_res, gusts_res) = tokio::join!(
+        async {
+            client
+                .get(&url)
+                .send()
+                .await
+                .context("GET met.no locationforecast")?
+                .error_for_status()?
+                .json::<MetResp>()
+                .await
+                .context("parse met.no locationforecast")
+        },
+        fetch_gusts(client)
+    );
+    let resp = met_res?;
+    let gusts = gusts_res.unwrap_or_else(|e| {
+        warn!("kast fra Open-Meteo feilet: {e:#}");
+        HashMap::new()
+    });
 
     let ts = &resp.properties.timeseries;
     let first = ts.first().context("tom timeserie fra met.no")?;
@@ -112,6 +154,9 @@ pub async fn fetch(client: &reqwest::Client) -> Result<Weather> {
                     .unwrap_or(0.0),
                 wind_ms: p.data.instant.details.wind_speed,
                 wind_direction_deg: p.data.instant.details.wind_from_direction,
+                gust_ms: gusts
+                    .get(&local.format("%Y-%m-%dT%H:%M").to_string())
+                    .copied(),
             })
         })
         .collect();

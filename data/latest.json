@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-09T18:21:14.396603+00:00",
+  "generated_at": "2026-08-09T18:31:29.888529+00:00",
   "weather": {
     "temp_c": 10.4,
     "symbol": "clearsky",
@@ -13,7 +13,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 6.9,
-        "wind_direction_deg": 155.0
+        "wind_direction_deg": 155.0,
+        "gust_ms": 9.8
       },
       {
         "time": "2026-08-09T21:00",
@@ -21,7 +22,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 6.6,
-        "wind_direction_deg": 158.6
+        "wind_direction_deg": 158.6,
+        "gust_ms": 9.2
       },
       {
         "time": "2026-08-09T22:00",
@@ -29,7 +31,8 @@
         "symbol": "lightrainshowers",
         "precipitation_mm": 0.2,
         "wind_ms": 5.5,
-        "wind_direction_deg": 156.9
+        "wind_direction_deg": 156.9,
+        "gust_ms": 8.4
       },
       {
         "time": "2026-08-09T23:00",
@@ -37,7 +40,8 @@
         "symbol": "lightrainshowers",
         "precipitation_mm": 0.1,
         "wind_ms": 6.1,
-        "wind_direction_deg": 160.5
+        "wind_direction_deg": 160.5,
+        "gust_ms": 7.7
       },
       {
         "time": "2026-08-10T00:00",
@@ -45,7 +49,8 @@
         "symbol": "fair",
         "precipitation_mm": 0.0,
         "wind_ms": 4.1,
-        "wind_direction_deg": 152.3
+        "wind_direction_deg": 152.3,
+        "gust_ms": 7.3
       },
       {
         "time": "2026-08-10T01:00",
@@ -53,7 +58,8 @@
         "symbol": "lightrainshowers",
         "precipitation_mm": 0.1,
         "wind_ms": 4.1,
-        "wind_direction_deg": 171.3
+        "wind_direction_deg": 171.3,
+        "gust_ms": 5.3
       },
       {
         "time": "2026-08-10T02:00",
@@ -61,7 +67,8 @@
         "symbol": "partlycloudy",
         "precipitation_mm": 0.0,
         "wind_ms": 4.0,
-        "wind_direction_deg": 163.6
+        "wind_direction_deg": 163.6,
+        "gust_ms": 4.8
       },
       {
         "time": "2026-08-10T03:00",
@@ -69,7 +76,8 @@
         "symbol": "fair",
         "precipitation_mm": 0.0,
         "wind_ms": 3.5,
-        "wind_direction_deg": 152.1
+        "wind_direction_deg": 152.1,
+        "gust_ms": 5.2
       },
       {
         "time": "2026-08-10T04:00",
@@ -77,7 +85,8 @@
         "symbol": "lightrainshowers",
         "precipitation_mm": 0.1,
         "wind_ms": 3.7,
-        "wind_direction_deg": 171.5
+        "wind_direction_deg": 171.5,
+        "gust_ms": 3.4
       },
       {
         "time": "2026-08-10T05:00",
@@ -85,7 +94,8 @@
         "symbol": "fair",
         "precipitation_mm": 0.0,
         "wind_ms": 4.2,
-        "wind_direction_deg": 179.5
+        "wind_direction_deg": 179.5,
+        "gust_ms": 3.6
       },
       {
         "time": "2026-08-10T06:00",
@@ -93,7 +103,8 @@
         "symbol": "partlycloudy",
         "precipitation_mm": 0.0,
         "wind_ms": 4.3,
-        "wind_direction_deg": 182.1
+        "wind_direction_deg": 182.1,
+        "gust_ms": 4.2
       },
       {
         "time": "2026-08-10T07:00",
@@ -101,7 +112,8 @@
         "symbol": "partlycloudy",
         "precipitation_mm": 0.0,
         "wind_ms": 4.4,
-        "wind_direction_deg": 178.1
+        "wind_direction_deg": 178.1,
+        "gust_ms": 4.5
       },
       {
         "time": "2026-08-10T08:00",
@@ -109,7 +121,8 @@
         "symbol": "partlycloudy",
         "precipitation_mm": 0.0,
         "wind_ms": 5.1,
-        "wind_direction_deg": 173.9
+        "wind_direction_deg": 173.9,
+        "gust_ms": 5.9
       },
       {
         "time": "2026-08-10T09:00",
@@ -117,7 +130,8 @@
         "symbol": "fair",
         "precipitation_mm": 0.0,
         "wind_ms": 5.7,
-        "wind_direction_deg": 161.8
+        "wind_direction_deg": 161.8,
+        "gust_ms": 7.5
       },
       {
         "time": "2026-08-10T10:00",
@@ -125,7 +139,8 @@
         "symbol": "fair",
         "precipitation_mm": 0.0,
         "wind_ms": 5.3,
-        "wind_direction_deg": 150.2
+        "wind_direction_deg": 150.2,
+        "gust_ms": 9.8
       },
       {
         "time": "2026-08-10T11:00",
@@ -133,7 +148,8 @@
         "symbol": "fair",
         "precipitation_mm": 0.0,
         "wind_ms": 6.0,
-        "wind_direction_deg": 155.3
+        "wind_direction_deg": 155.3,
+        "gust_ms": 10.1
       },
       {
         "time": "2026-08-10T12:00",
@@ -141,7 +157,8 @@
         "symbol": "fair",
         "precipitation_mm": 0.0,
         "wind_ms": 6.5,
-        "wind_direction_deg": 152.6
+        "wind_direction_deg": 152.6,
+        "gust_ms": 11.2
       },
       {
         "time": "2026-08-10T13:00",
@@ -149,7 +166,8 @@
         "symbol": "fair",
         "precipitation_mm": 0.0,
         "wind_ms": 7.4,
-        "wind_direction_deg": 147.8
+        "wind_direction_deg": 147.8,
+        "gust_ms": 13.5
       },
       {
         "time": "2026-08-10T14:00",
@@ -157,7 +175,8 @@
         "symbol": "partlycloudy",
         "precipitation_mm": 0.0,
         "wind_ms": 8.0,
-        "wind_direction_deg": 149.6
+        "wind_direction_deg": 149.6,
+        "gust_ms": 14.3
       },
       {
         "time": "2026-08-10T15:00",
@@ -165,7 +184,8 @@
         "symbol": "partlycloudy",
         "precipitation_mm": 0.0,
         "wind_ms": 8.0,
-        "wind_direction_deg": 148.1
+        "wind_direction_deg": 148.1,
+        "gust_ms": 14.3
       },
       {
         "time": "2026-08-10T16:00",
@@ -173,7 +193,8 @@
         "symbol": "partlycloudy",
         "precipitation_mm": 0.0,
         "wind_ms": 7.6,
-        "wind_direction_deg": 153.4
+        "wind_direction_deg": 153.4,
+        "gust_ms": 13.7
       },
       {
         "time": "2026-08-10T17:00",
@@ -181,7 +202,8 @@
         "symbol": "partlycloudy",
         "precipitation_mm": 0.0,
         "wind_ms": 7.6,
-        "wind_direction_deg": 155.0
+        "wind_direction_deg": 155.0,
+        "gust_ms": 13.2
       },
       {
         "time": "2026-08-10T18:00",
@@ -189,7 +211,8 @@
         "symbol": "fair",
         "precipitation_mm": 0.0,
         "wind_ms": 6.8,
-        "wind_direction_deg": 145.6
+        "wind_direction_deg": 145.6,
+        "gust_ms": 11.5
       },
       {
         "time": "2026-08-10T19:00",
@@ -197,7 +220,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 7.2,
-        "wind_direction_deg": 144.5
+        "wind_direction_deg": 144.5,
+        "gust_ms": 10.3
       },
       {
         "time": "2026-08-10T20:00",
@@ -205,7 +229,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 7.1,
-        "wind_direction_deg": 150.8
+        "wind_direction_deg": 150.8,
+        "gust_ms": 9.9
       },
       {
         "time": "2026-08-10T21:00",
@@ -213,7 +238,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 6.8,
-        "wind_direction_deg": 154.1
+        "wind_direction_deg": 154.1,
+        "gust_ms": 8.7
       },
       {
         "time": "2026-08-10T22:00",
@@ -221,7 +247,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 6.5,
-        "wind_direction_deg": 154.3
+        "wind_direction_deg": 154.3,
+        "gust_ms": 8.7
       },
       {
         "time": "2026-08-10T23:00",
@@ -229,7 +256,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 6.0,
-        "wind_direction_deg": 150.9
+        "wind_direction_deg": 150.9,
+        "gust_ms": 8.4
       },
       {
         "time": "2026-08-11T00:00",
@@ -237,7 +265,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 5.6,
-        "wind_direction_deg": 149.9
+        "wind_direction_deg": 149.9,
+        "gust_ms": 8.2
       },
       {
         "time": "2026-08-11T01:00",
@@ -245,7 +274,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 5.4,
-        "wind_direction_deg": 157.0
+        "wind_direction_deg": 157.0,
+        "gust_ms": 7.4
       },
       {
         "time": "2026-08-11T02:00",
@@ -253,7 +283,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 5.5,
-        "wind_direction_deg": 158.0
+        "wind_direction_deg": 158.0,
+        "gust_ms": 7.6
       },
       {
         "time": "2026-08-11T03:00",
@@ -261,7 +292,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 5.5,
-        "wind_direction_deg": 153.9
+        "wind_direction_deg": 153.9,
+        "gust_ms": 7.6
       },
       {
         "time": "2026-08-11T04:00",
@@ -269,7 +301,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 5.2,
-        "wind_direction_deg": 155.8
+        "wind_direction_deg": 155.8,
+        "gust_ms": 7.4
       },
       {
         "time": "2026-08-11T05:00",
@@ -277,7 +310,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 4.9,
-        "wind_direction_deg": 159.4
+        "wind_direction_deg": 159.4,
+        "gust_ms": 6.8
       },
       {
         "time": "2026-08-11T06:00",
@@ -285,7 +319,8 @@
         "symbol": "fair",
         "precipitation_mm": 0.0,
         "wind_ms": 4.7,
-        "wind_direction_deg": 163.5
+        "wind_direction_deg": 163.5,
+        "gust_ms": 6.4
       },
       {
         "time": "2026-08-11T07:00",
@@ -293,7 +328,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 4.9,
-        "wind_direction_deg": 170.3
+        "wind_direction_deg": 170.3,
+        "gust_ms": 6.4
       },
       {
         "time": "2026-08-11T08:00",
@@ -301,7 +337,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 5.2,
-        "wind_direction_deg": 162.0
+        "wind_direction_deg": 162.0,
+        "gust_ms": 6.1
       },
       {
         "time": "2026-08-11T09:00",
@@ -309,7 +346,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 4.9,
-        "wind_direction_deg": 170.9
+        "wind_direction_deg": 170.9,
+        "gust_ms": 6.4
       },
       {
         "time": "2026-08-11T10:00",
@@ -317,7 +355,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 4.5,
-        "wind_direction_deg": 167.1
+        "wind_direction_deg": 167.1,
+        "gust_ms": 7.3
       },
       {
         "time": "2026-08-11T11:00",
@@ -325,7 +364,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 4.1,
-        "wind_direction_deg": 164.6
+        "wind_direction_deg": 164.6,
+        "gust_ms": 7.4
       },
       {
         "time": "2026-08-11T12:00",
@@ -333,7 +373,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 4.1,
-        "wind_direction_deg": 173.5
+        "wind_direction_deg": 173.5,
+        "gust_ms": 6.2
       },
       {
         "time": "2026-08-11T13:00",
@@ -341,7 +382,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 4.8,
-        "wind_direction_deg": 184.2
+        "wind_direction_deg": 184.2,
+        "gust_ms": 5.6
       },
       {
         "time": "2026-08-11T14:00",
@@ -349,7 +391,8 @@
         "symbol": "partlycloudy",
         "precipitation_mm": 0.0,
         "wind_ms": 5.5,
-        "wind_direction_deg": 114.8
+        "wind_direction_deg": 114.8,
+        "gust_ms": 6.5
       },
       {
         "time": "2026-08-11T15:00",
@@ -357,7 +400,8 @@
         "symbol": "fair",
         "precipitation_mm": 0.0,
         "wind_ms": 5.0,
-        "wind_direction_deg": 106.8
+        "wind_direction_deg": 106.8,
+        "gust_ms": 7.8
       },
       {
         "time": "2026-08-11T16:00",
@@ -365,7 +409,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 6.0,
-        "wind_direction_deg": 116.8
+        "wind_direction_deg": 116.8,
+        "gust_ms": 10.2
       },
       {
         "time": "2026-08-11T17:00",
@@ -373,7 +418,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 6.2,
-        "wind_direction_deg": 145.9
+        "wind_direction_deg": 145.9,
+        "gust_ms": 9.7
       },
       {
         "time": "2026-08-11T18:00",
@@ -381,7 +427,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 5.5,
-        "wind_direction_deg": 152.6
+        "wind_direction_deg": 152.6,
+        "gust_ms": 6.4
       },
       {
         "time": "2026-08-11T19:00",
@@ -389,7 +436,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 4.7,
-        "wind_direction_deg": 155.4
+        "wind_direction_deg": 155.4,
+        "gust_ms": 5.2
       },
       {
         "time": "2026-08-11T20:00",
@@ -397,7 +445,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 5.1,
-        "wind_direction_deg": 163.1
+        "wind_direction_deg": 163.1,
+        "gust_ms": 6.3
       },
       {
         "time": "2026-08-11T21:00",
@@ -405,7 +454,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 6.1,
-        "wind_direction_deg": 165.5
+        "wind_direction_deg": 165.5,
+        "gust_ms": 7.6
       },
       {
         "time": "2026-08-11T22:00",
@@ -413,7 +463,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 6.4,
-        "wind_direction_deg": 160.6
+        "wind_direction_deg": 160.6,
+        "gust_ms": 9.0
       },
       {
         "time": "2026-08-11T23:00",
@@ -421,7 +472,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 7.0,
-        "wind_direction_deg": 154.7
+        "wind_direction_deg": 154.7,
+        "gust_ms": 9.9
       },
       {
         "time": "2026-08-12T00:00",
@@ -429,7 +481,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 7.1,
-        "wind_direction_deg": 146.8
+        "wind_direction_deg": 146.8,
+        "gust_ms": 11.5
       },
       {
         "time": "2026-08-12T01:00",
@@ -437,7 +490,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 5.8,
-        "wind_direction_deg": 153.1
+        "wind_direction_deg": 153.1,
+        "gust_ms": 11.5
       },
       {
         "time": "2026-08-12T02:00",
@@ -445,7 +499,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 4.6,
-        "wind_direction_deg": 146.9
+        "wind_direction_deg": 146.9,
+        "gust_ms": 8.9
       },
       {
         "time": "2026-08-12T03:00",
@@ -453,7 +508,8 @@
         "symbol": "fair",
         "precipitation_mm": 0.0,
         "wind_ms": 4.2,
-        "wind_direction_deg": 139.7
+        "wind_direction_deg": 139.7,
+        "gust_ms": 7.3
       },
       {
         "time": "2026-08-12T04:00",
@@ -461,7 +517,8 @@
         "symbol": "fair",
         "precipitation_mm": 0.0,
         "wind_ms": 4.2,
-        "wind_direction_deg": 136.0
+        "wind_direction_deg": 136.0,
+        "gust_ms": 6.9
       },
       {
         "time": "2026-08-12T05:00",
@@ -469,7 +526,8 @@
         "symbol": "fair",
         "precipitation_mm": 0.0,
         "wind_ms": 4.3,
-        "wind_direction_deg": 136.8
+        "wind_direction_deg": 136.8,
+        "gust_ms": 6.1
       },
       {
         "time": "2026-08-12T06:00",
@@ -477,7 +535,8 @@
         "symbol": "partlycloudy",
         "precipitation_mm": 0.0,
         "wind_ms": 4.0,
-        "wind_direction_deg": 132.5
+        "wind_direction_deg": 132.5,
+        "gust_ms": 6.2
       },
       {
         "time": "2026-08-12T07:00",
@@ -485,7 +544,8 @@
         "symbol": "clearsky",
         "precipitation_mm": 0.0,
         "wind_ms": 4.2,
-        "wind_direction_deg": 137.9
+        "wind_direction_deg": 137.9,
+        "gust_ms": 6.1
       }
     ],
     "days": [
@@ -880,13 +940,15 @@
   "surf": [
     {
       "name": "Muizenberg",
-      "wave_height_m": 2.48,
-      "swell_height_m": 2.1,
+      "wave_height_m": 2.46,
+      "swell_height_m": 2.08,
       "swell_period_s": 8.1,
       "swell_direction_deg": 217.0,
-      "wind_ms": 5.23,
-      "wind_direction_deg": 153.0,
+      "wind_ms": 5.19,
+      "wind_direction_deg": 154.0,
       "rating": "poor_fair",
+      "water_temp_c": 14.6,
+      "analysis_no": "Nybegynnerspot — offshore NV. Vinden blåser fra SØ-S (121°-152°), altså pålandsvind hele perioden, noe som gjør paddling svært vanskelig og farlig. Lørdag 10. aug kl 08:00 (4 m/s fra 127°) er minst dårlig, men fortsatt påland. Søndag 11. aug: svellet minker til 1.0–1.5m og vinden blir sterkere (6–8 m/s fra 116°–137°). **Dropp Muizenberg de neste 48 timene — pålandsvind gjør det nesten umulig å padle ut.** 3mm våtdrakt (15°C).",
       "hourly": [
         {
           "time": "2026-08-09T20:00",
@@ -895,6 +957,9 @@
           "swell_direction_deg": 217.0,
           "wind_ms": 5.3,
           "wind_direction_deg": 152.0,
+          "tide_m": -0.81,
+          "current_kmh": 0.5,
+          "current_direction_deg": 315.0,
           "rating": "poor_fair"
         },
         {
@@ -904,6 +969,9 @@
           "swell_direction_deg": 217.0,
           "wind_ms": 5.05,
           "wind_direction_deg": 154.0,
+          "tide_m": -0.62,
+          "current_kmh": 0.5,
+          "current_direction_deg": 315.0,
           "rating": "poor_fair"
         },
         {
@@ -913,6 +981,9 @@
           "swell_direction_deg": 216.0,
           "wind_ms": 4.94,
           "wind_direction_deg": 148.0,
+          "tide_m": -0.38,
+          "current_kmh": 0.5,
+          "current_direction_deg": 315.0,
           "rating": "poor_fair"
         },
         {
@@ -922,6 +993,9 @@
           "swell_direction_deg": 216.0,
           "wind_ms": 4.72,
           "wind_direction_deg": 146.0,
+          "tide_m": -0.17,
+          "current_kmh": 0.5,
+          "current_direction_deg": 315.0,
           "rating": "poor_fair"
         },
         {
@@ -931,6 +1005,9 @@
           "swell_direction_deg": 216.0,
           "wind_ms": 4.42,
           "wind_direction_deg": 142.0,
+          "tide_m": -0.04,
+          "current_kmh": 0.5,
+          "current_direction_deg": 315.0,
           "rating": "poor_fair"
         },
         {
@@ -940,6 +1017,9 @@
           "swell_direction_deg": 217.0,
           "wind_ms": 4.56,
           "wind_direction_deg": 145.0,
+          "tide_m": -0.04,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
           "rating": "poor_fair"
         },
         {
@@ -949,6 +1029,9 @@
           "swell_direction_deg": 217.0,
           "wind_ms": 4.31,
           "wind_direction_deg": 142.0,
+          "tide_m": -0.16,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
           "rating": "fair"
         },
         {
@@ -958,6 +1041,9 @@
           "swell_direction_deg": 216.0,
           "wind_ms": 4.38,
           "wind_direction_deg": 148.0,
+          "tide_m": -0.38,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
           "rating": "fair"
         },
         {
@@ -967,6 +1053,9 @@
           "swell_direction_deg": 214.0,
           "wind_ms": 4.37,
           "wind_direction_deg": 150.0,
+          "tide_m": -0.65,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
           "rating": "poor_fair"
         },
         {
@@ -976,6 +1065,9 @@
           "swell_direction_deg": 213.0,
           "wind_ms": 4.57,
           "wind_direction_deg": 151.0,
+          "tide_m": -0.91,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
           "rating": "poor_fair"
         },
         {
@@ -985,6 +1077,9 @@
           "swell_direction_deg": 211.0,
           "wind_ms": 4.47,
           "wind_direction_deg": 155.0,
+          "tide_m": -1.1,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
           "rating": "poor_fair"
         },
         {
@@ -994,6 +1089,9 @@
           "swell_direction_deg": 210.0,
           "wind_ms": 4.14,
           "wind_direction_deg": 135.0,
+          "tide_m": -1.19,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
           "rating": "fair"
         },
         {
@@ -1003,6 +1101,9 @@
           "swell_direction_deg": 208.0,
           "wind_ms": 4.32,
           "wind_direction_deg": 127.0,
+          "tide_m": -1.13,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
           "rating": "poor_fair"
         },
         {
@@ -1012,6 +1113,9 @@
           "swell_direction_deg": 209.0,
           "wind_ms": 4.19,
           "wind_direction_deg": 121.0,
+          "tide_m": -0.93,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
           "rating": "fair_good"
         },
         {
@@ -1021,7 +1125,10 @@
           "swell_direction_deg": 210.0,
           "wind_ms": 5.8,
           "wind_direction_deg": 136.0,
-          "rating": "fair"
+          "tide_m": -0.66,
+          "current_kmh": 0.6,
+          "current_direction_deg": 304.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-10T11:00",
@@ -1030,7 +1137,10 @@
           "swell_direction_deg": 211.0,
           "wind_ms": 6.26,
           "wind_direction_deg": 135.0,
-          "rating": "fair"
+          "tide_m": -0.38,
+          "current_kmh": 0.6,
+          "current_direction_deg": 304.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-10T12:00",
@@ -1039,7 +1149,10 @@
           "swell_direction_deg": 210.0,
           "wind_ms": 7.01,
           "wind_direction_deg": 133.0,
-          "rating": "fair"
+          "tide_m": -0.15,
+          "current_kmh": 0.6,
+          "current_direction_deg": 304.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-10T13:00",
@@ -1048,7 +1161,10 @@
           "swell_direction_deg": 208.0,
           "wind_ms": 7.6,
           "wind_direction_deg": 135.0,
-          "rating": "fair"
+          "tide_m": -0.03,
+          "current_kmh": 0.6,
+          "current_direction_deg": 304.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-10T14:00",
@@ -1057,7 +1173,10 @@
           "swell_direction_deg": 207.0,
           "wind_ms": 7.92,
           "wind_direction_deg": 134.0,
-          "rating": "fair"
+          "tide_m": -0.07,
+          "current_kmh": 0.6,
+          "current_direction_deg": 304.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-10T15:00",
@@ -1066,7 +1185,10 @@
           "swell_direction_deg": 205.0,
           "wind_ms": 7.67,
           "wind_direction_deg": 135.0,
-          "rating": "fair"
+          "tide_m": -0.24,
+          "current_kmh": 0.6,
+          "current_direction_deg": 304.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-10T16:00",
@@ -1075,7 +1197,10 @@
           "swell_direction_deg": 204.0,
           "wind_ms": 7.57,
           "wind_direction_deg": 135.0,
-          "rating": "fair"
+          "tide_m": -0.51,
+          "current_kmh": 0.6,
+          "current_direction_deg": 288.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-10T17:00",
@@ -1084,7 +1209,10 @@
           "swell_direction_deg": 202.0,
           "wind_ms": 6.94,
           "wind_direction_deg": 131.0,
-          "rating": "fair"
+          "tide_m": -0.8,
+          "current_kmh": 0.6,
+          "current_direction_deg": 288.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-10T18:00",
@@ -1093,7 +1221,10 @@
           "swell_direction_deg": 201.0,
           "wind_ms": 6.71,
           "wind_direction_deg": 123.0,
-          "rating": "fair"
+          "tide_m": -1.04,
+          "current_kmh": 0.6,
+          "current_direction_deg": 288.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-10T19:00",
@@ -1102,7 +1233,10 @@
           "swell_direction_deg": 199.0,
           "wind_ms": 6.59,
           "wind_direction_deg": 120.0,
-          "rating": "fair"
+          "tide_m": -1.19,
+          "current_kmh": 0.6,
+          "current_direction_deg": 288.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-10T20:00",
@@ -1111,7 +1245,10 @@
           "swell_direction_deg": 198.0,
           "wind_ms": 6.79,
           "wind_direction_deg": 121.0,
-          "rating": "fair"
+          "tide_m": -1.19,
+          "current_kmh": 0.6,
+          "current_direction_deg": 288.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-10T21:00",
@@ -1120,7 +1257,10 @@
           "swell_direction_deg": 197.0,
           "wind_ms": 6.33,
           "wind_direction_deg": 119.0,
-          "rating": "fair"
+          "tide_m": -1.03,
+          "current_kmh": 0.6,
+          "current_direction_deg": 288.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-10T22:00",
@@ -1129,7 +1269,10 @@
           "swell_direction_deg": 196.0,
           "wind_ms": 5.97,
           "wind_direction_deg": 118.0,
-          "rating": "fair"
+          "tide_m": -0.76,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-10T23:00",
@@ -1138,7 +1281,10 @@
           "swell_direction_deg": 195.0,
           "wind_ms": 5.63,
           "wind_direction_deg": 120.0,
-          "rating": "fair"
+          "tide_m": -0.45,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-11T00:00",
@@ -1147,6 +1293,9 @@
           "swell_direction_deg": 196.0,
           "wind_ms": 5.3,
           "wind_direction_deg": 122.0,
+          "tide_m": -0.17,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
           "rating": "fair"
         },
         {
@@ -1156,7 +1305,10 @@
           "swell_direction_deg": 197.0,
           "wind_ms": 5.62,
           "wind_direction_deg": 122.0,
-          "rating": "fair"
+          "tide_m": -0.01,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-11T02:00",
@@ -1165,7 +1317,10 @@
           "swell_direction_deg": 198.0,
           "wind_ms": 5.78,
           "wind_direction_deg": 123.0,
-          "rating": "fair"
+          "tide_m": -0.01,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-11T03:00",
@@ -1174,7 +1329,10 @@
           "swell_direction_deg": 198.0,
           "wind_ms": 5.76,
           "wind_direction_deg": 123.0,
-          "rating": "fair"
+          "tide_m": -0.16,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-11T04:00",
@@ -1183,7 +1341,10 @@
           "swell_direction_deg": 197.0,
           "wind_ms": 5.62,
           "wind_direction_deg": 124.0,
-          "rating": "fair_good"
+          "tide_m": -0.43,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-11T05:00",
@@ -1192,7 +1353,10 @@
           "swell_direction_deg": 197.0,
           "wind_ms": 5.52,
           "wind_direction_deg": 125.0,
-          "rating": "fair_good"
+          "tide_m": -0.76,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-11T06:00",
@@ -1201,7 +1365,10 @@
           "swell_direction_deg": 194.0,
           "wind_ms": 5.86,
           "wind_direction_deg": 127.0,
-          "rating": "fair"
+          "tide_m": -1.07,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-11T07:00",
@@ -1210,7 +1377,10 @@
           "swell_direction_deg": 191.0,
           "wind_ms": 6.17,
           "wind_direction_deg": 125.0,
-          "rating": "fair"
+          "tide_m": -1.28,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-11T08:00",
@@ -1219,7 +1389,10 @@
           "swell_direction_deg": 188.0,
           "wind_ms": 6.67,
           "wind_direction_deg": 127.0,
-          "rating": "fair"
+          "tide_m": -1.34,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-11T09:00",
@@ -1228,7 +1401,10 @@
           "swell_direction_deg": 188.0,
           "wind_ms": 6.55,
           "wind_direction_deg": 133.0,
-          "rating": "fair"
+          "tide_m": -1.21,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-11T10:00",
@@ -1237,7 +1413,10 @@
           "swell_direction_deg": 188.0,
           "wind_ms": 5.98,
           "wind_direction_deg": 137.0,
-          "rating": "fair"
+          "tide_m": -0.94,
+          "current_kmh": 0.5,
+          "current_direction_deg": 315.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-11T11:00",
@@ -1246,7 +1425,10 @@
           "swell_direction_deg": 188.0,
           "wind_ms": 5.77,
           "wind_direction_deg": 137.0,
-          "rating": "fair"
+          "tide_m": -0.57,
+          "current_kmh": 0.5,
+          "current_direction_deg": 315.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-11T12:00",
@@ -1255,7 +1437,10 @@
           "swell_direction_deg": 189.0,
           "wind_ms": 5.85,
           "wind_direction_deg": 139.0,
-          "rating": "fair"
+          "tide_m": -0.21,
+          "current_kmh": 0.5,
+          "current_direction_deg": 315.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-11T13:00",
@@ -1264,7 +1449,10 @@
           "swell_direction_deg": 189.0,
           "wind_ms": 6.7,
           "wind_direction_deg": 131.0,
-          "rating": "fair"
+          "tide_m": 0.06,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-11T14:00",
@@ -1273,7 +1461,10 @@
           "swell_direction_deg": 190.0,
           "wind_ms": 7.41,
           "wind_direction_deg": 123.0,
-          "rating": "fair"
+          "tide_m": 0.17,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-11T15:00",
@@ -1282,7 +1473,10 @@
           "swell_direction_deg": 192.0,
           "wind_ms": 6.78,
           "wind_direction_deg": 114.0,
-          "rating": "fair"
+          "tide_m": 0.08,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-11T16:00",
@@ -1291,7 +1485,10 @@
           "swell_direction_deg": 193.0,
           "wind_ms": 7.59,
           "wind_direction_deg": 119.0,
-          "rating": "fair"
+          "tide_m": -0.15,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-11T17:00",
@@ -1300,7 +1497,10 @@
           "swell_direction_deg": 195.0,
           "wind_ms": 7.67,
           "wind_direction_deg": 116.0,
-          "rating": "fair"
+          "tide_m": -0.49,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-11T18:00",
@@ -1309,7 +1509,10 @@
           "swell_direction_deg": 186.0,
           "wind_ms": 7.0,
           "wind_direction_deg": 117.0,
-          "rating": "fair"
+          "tide_m": -0.84,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
+          "rating": "poor_fair"
         },
         {
           "time": "2026-08-11T19:00",
@@ -1318,19 +1521,24 @@
           "swell_direction_deg": 176.0,
           "wind_ms": 6.74,
           "wind_direction_deg": 122.0,
-          "rating": "fair"
+          "tide_m": -1.11,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
+          "rating": "poor_fair"
         }
       ]
     },
     {
       "name": "Big Bay",
       "wave_height_m": 2.64,
-      "swell_height_m": 2.54,
+      "swell_height_m": 2.52,
       "swell_period_s": 8.75,
       "swell_direction_deg": 224.0,
-      "wind_ms": 5.23,
+      "wind_ms": 5.17,
       "wind_direction_deg": 155.0,
       "rating": "fair_good",
+      "water_temp_c": 14.0,
+      "analysis_no": "Offshore ØSØ (ca 100°). Lørdag 10. aug 08:00–14:00 er best: 2.1–2.3m, 4–7 m/s fra 146°–155° (tungt påland, men mindre enn Muizenberg). Søndag 11. aug 14:00 (1.3m @ 9s, 3 m/s fra 100°) kan være paddlbar — minste påland-vindu. Generelt krevende på grunn av strøm (0.4–1.0 km/t) og pålandsvind. 3mm våtdrakt (14°C).",
       "hourly": [
         {
           "time": "2026-08-09T20:00",
@@ -1339,6 +1547,9 @@
           "swell_direction_deg": 224.0,
           "wind_ms": 5.3,
           "wind_direction_deg": 155.0,
+          "tide_m": -0.86,
+          "current_kmh": 1.0,
+          "current_direction_deg": 315.0,
           "rating": "fair_good"
         },
         {
@@ -1348,6 +1559,9 @@
           "swell_direction_deg": 224.0,
           "wind_ms": 4.92,
           "wind_direction_deg": 156.0,
+          "tide_m": -0.67,
+          "current_kmh": 1.0,
+          "current_direction_deg": 315.0,
           "rating": "fair_good"
         },
         {
@@ -1357,6 +1571,9 @@
           "swell_direction_deg": 223.0,
           "wind_ms": 4.07,
           "wind_direction_deg": 154.0,
+          "tide_m": -0.45,
+          "current_kmh": 1.0,
+          "current_direction_deg": 315.0,
           "rating": "good"
         },
         {
@@ -1366,6 +1583,9 @@
           "swell_direction_deg": 223.0,
           "wind_ms": 4.5,
           "wind_direction_deg": 151.0,
+          "tide_m": -0.25,
+          "current_kmh": 1.0,
+          "current_direction_deg": 315.0,
           "rating": "good"
         },
         {
@@ -1375,6 +1595,9 @@
           "swell_direction_deg": 221.0,
           "wind_ms": 3.11,
           "wind_direction_deg": 154.0,
+          "tide_m": -0.12,
+          "current_kmh": 1.0,
+          "current_direction_deg": 315.0,
           "rating": "good"
         },
         {
@@ -1384,6 +1607,9 @@
           "swell_direction_deg": 219.0,
           "wind_ms": 2.69,
           "wind_direction_deg": 158.0,
+          "tide_m": -0.11,
+          "current_kmh": 0.9,
+          "current_direction_deg": 307.0,
           "rating": "fair_good"
         },
         {
@@ -1393,6 +1619,9 @@
           "swell_direction_deg": 217.0,
           "wind_ms": 2.76,
           "wind_direction_deg": 158.0,
+          "tide_m": -0.23,
+          "current_kmh": 0.8,
+          "current_direction_deg": 297.0,
           "rating": "fair_good"
         },
         {
@@ -1402,6 +1631,9 @@
           "swell_direction_deg": 218.0,
           "wind_ms": 2.66,
           "wind_direction_deg": 152.0,
+          "tide_m": -0.45,
+          "current_kmh": 0.8,
+          "current_direction_deg": 297.0,
           "rating": "good"
         },
         {
@@ -1411,6 +1643,9 @@
           "swell_direction_deg": 219.0,
           "wind_ms": 1.81,
           "wind_direction_deg": 152.0,
+          "tide_m": -0.71,
+          "current_kmh": 0.6,
+          "current_direction_deg": 304.0,
           "rating": "good"
         },
         {
@@ -1420,6 +1655,9 @@
           "swell_direction_deg": 220.0,
           "wind_ms": 2.2,
           "wind_direction_deg": 163.0,
+          "tide_m": -0.97,
+          "current_kmh": 0.6,
+          "current_direction_deg": 304.0,
           "rating": "fair_good"
         },
         {
@@ -1429,6 +1667,9 @@
           "swell_direction_deg": 219.0,
           "wind_ms": 2.77,
           "wind_direction_deg": 173.0,
+          "tide_m": -1.15,
+          "current_kmh": 0.5,
+          "current_direction_deg": 315.0,
           "rating": "fair_good"
         },
         {
@@ -1438,6 +1679,9 @@
           "swell_direction_deg": 219.0,
           "wind_ms": 2.85,
           "wind_direction_deg": 162.0,
+          "tide_m": -1.24,
+          "current_kmh": 0.5,
+          "current_direction_deg": 315.0,
           "rating": "fair_good"
         },
         {
@@ -1447,6 +1691,9 @@
           "swell_direction_deg": 218.0,
           "wind_ms": 3.76,
           "wind_direction_deg": 155.0,
+          "tide_m": -1.17,
+          "current_kmh": 0.4,
+          "current_direction_deg": 333.0,
           "rating": "good"
         },
         {
@@ -1456,6 +1703,9 @@
           "swell_direction_deg": 218.0,
           "wind_ms": 4.41,
           "wind_direction_deg": 152.0,
+          "tide_m": -0.98,
+          "current_kmh": 0.4,
+          "current_direction_deg": 0.0,
           "rating": "good"
         },
         {
@@ -1465,6 +1715,9 @@
           "swell_direction_deg": 217.0,
           "wind_ms": 4.6,
           "wind_direction_deg": 149.0,
+          "tide_m": -0.72,
+          "current_kmh": 0.4,
+          "current_direction_deg": 0.0,
           "rating": "good"
         },
         {
@@ -1474,6 +1727,9 @@
           "swell_direction_deg": 217.0,
           "wind_ms": 4.85,
           "wind_direction_deg": 155.0,
+          "tide_m": -0.44,
+          "current_kmh": 0.4,
+          "current_direction_deg": 0.0,
           "rating": "good"
         },
         {
@@ -1483,6 +1739,9 @@
           "swell_direction_deg": 217.0,
           "wind_ms": 5.25,
           "wind_direction_deg": 149.0,
+          "tide_m": -0.22,
+          "current_kmh": 0.4,
+          "current_direction_deg": 0.0,
           "rating": "good"
         },
         {
@@ -1492,6 +1751,9 @@
           "swell_direction_deg": 216.0,
           "wind_ms": 6.27,
           "wind_direction_deg": 146.0,
+          "tide_m": -0.1,
+          "current_kmh": 0.4,
+          "current_direction_deg": 333.0,
           "rating": "good"
         },
         {
@@ -1501,6 +1763,9 @@
           "swell_direction_deg": 216.0,
           "wind_ms": 6.63,
           "wind_direction_deg": 146.0,
+          "tide_m": -0.13,
+          "current_kmh": 0.4,
+          "current_direction_deg": 333.0,
           "rating": "good"
         },
         {
@@ -1510,6 +1775,9 @@
           "swell_direction_deg": 215.0,
           "wind_ms": 6.62,
           "wind_direction_deg": 149.0,
+          "tide_m": -0.29,
+          "current_kmh": 0.5,
+          "current_direction_deg": 315.0,
           "rating": "good"
         },
         {
@@ -1519,6 +1787,9 @@
           "swell_direction_deg": 214.0,
           "wind_ms": 6.29,
           "wind_direction_deg": 152.0,
+          "tide_m": -0.55,
+          "current_kmh": 0.6,
+          "current_direction_deg": 304.0,
           "rating": "good"
         },
         {
@@ -1528,6 +1799,9 @@
           "swell_direction_deg": 213.0,
           "wind_ms": 5.86,
           "wind_direction_deg": 155.0,
+          "tide_m": -0.83,
+          "current_kmh": 0.8,
+          "current_direction_deg": 297.0,
           "rating": "good"
         },
         {
@@ -1537,6 +1811,9 @@
           "swell_direction_deg": 213.0,
           "wind_ms": 5.48,
           "wind_direction_deg": 148.0,
+          "tide_m": -1.07,
+          "current_kmh": 0.8,
+          "current_direction_deg": 297.0,
           "rating": "good"
         },
         {
@@ -1546,6 +1823,9 @@
           "swell_direction_deg": 212.0,
           "wind_ms": 5.74,
           "wind_direction_deg": 142.0,
+          "tide_m": -1.22,
+          "current_kmh": 0.8,
+          "current_direction_deg": 297.0,
           "rating": "good"
         },
         {
@@ -1555,6 +1835,9 @@
           "swell_direction_deg": 212.0,
           "wind_ms": 5.35,
           "wind_direction_deg": 143.0,
+          "tide_m": -1.22,
+          "current_kmh": 1.0,
+          "current_direction_deg": 292.0,
           "rating": "good"
         },
         {
@@ -1564,6 +1847,9 @@
           "swell_direction_deg": 211.0,
           "wind_ms": 4.76,
           "wind_direction_deg": 152.0,
+          "tide_m": -1.06,
+          "current_kmh": 1.0,
+          "current_direction_deg": 292.0,
           "rating": "good"
         },
         {
@@ -1573,6 +1859,9 @@
           "swell_direction_deg": 210.0,
           "wind_ms": 4.52,
           "wind_direction_deg": 152.0,
+          "tide_m": -0.8,
+          "current_kmh": 1.0,
+          "current_direction_deg": 292.0,
           "rating": "good"
         },
         {
@@ -1582,6 +1871,9 @@
           "swell_direction_deg": 209.0,
           "wind_ms": 4.27,
           "wind_direction_deg": 151.0,
+          "tide_m": -0.49,
+          "current_kmh": 0.8,
+          "current_direction_deg": 297.0,
           "rating": "good"
         },
         {
@@ -1591,6 +1883,9 @@
           "swell_direction_deg": 209.0,
           "wind_ms": 3.66,
           "wind_direction_deg": 148.0,
+          "tide_m": -0.22,
+          "current_kmh": 0.7,
+          "current_direction_deg": 284.0,
           "rating": "good"
         },
         {
@@ -1600,6 +1895,9 @@
           "swell_direction_deg": 208.0,
           "wind_ms": 3.7,
           "wind_direction_deg": 150.0,
+          "tide_m": -0.06,
+          "current_kmh": 0.6,
+          "current_direction_deg": 288.0,
           "rating": "good"
         },
         {
@@ -1609,6 +1907,9 @@
           "swell_direction_deg": 208.0,
           "wind_ms": 4.05,
           "wind_direction_deg": 153.0,
+          "tide_m": -0.05,
+          "current_kmh": 0.4,
+          "current_direction_deg": 270.0,
           "rating": "good"
         },
         {
@@ -1618,6 +1919,9 @@
           "swell_direction_deg": 207.0,
           "wind_ms": 4.3,
           "wind_direction_deg": 149.0,
+          "tide_m": -0.19,
+          "current_kmh": 0.4,
+          "current_direction_deg": 270.0,
           "rating": "good"
         },
         {
@@ -1627,6 +1931,9 @@
           "swell_direction_deg": 207.0,
           "wind_ms": 4.21,
           "wind_direction_deg": 152.0,
+          "tide_m": -0.46,
+          "current_kmh": 0.2,
+          "current_direction_deg": 270.0,
           "rating": "good"
         },
         {
@@ -1636,6 +1943,9 @@
           "swell_direction_deg": 206.0,
           "wind_ms": 4.0,
           "wind_direction_deg": 154.0,
+          "tide_m": -0.78,
+          "current_kmh": 0.0,
+          "current_direction_deg": 90.0,
           "rating": "good"
         },
         {
@@ -1645,6 +1955,9 @@
           "swell_direction_deg": 206.0,
           "wind_ms": 3.99,
           "wind_direction_deg": 156.0,
+          "tide_m": -1.08,
+          "current_kmh": 0.2,
+          "current_direction_deg": 90.0,
           "rating": "fair_good"
         },
         {
@@ -1654,6 +1967,9 @@
           "swell_direction_deg": 206.0,
           "wind_ms": 4.01,
           "wind_direction_deg": 156.0,
+          "tide_m": -1.29,
+          "current_kmh": 0.2,
+          "current_direction_deg": 90.0,
           "rating": "fair_good"
         },
         {
@@ -1663,6 +1979,9 @@
           "swell_direction_deg": 206.0,
           "wind_ms": 3.98,
           "wind_direction_deg": 153.0,
+          "tide_m": -1.34,
+          "current_kmh": 0.4,
+          "current_direction_deg": 90.0,
           "rating": "good"
         },
         {
@@ -1672,6 +1991,9 @@
           "swell_direction_deg": 205.0,
           "wind_ms": 4.07,
           "wind_direction_deg": 143.0,
+          "tide_m": -1.22,
+          "current_kmh": 0.4,
+          "current_direction_deg": 90.0,
           "rating": "good"
         },
         {
@@ -1681,6 +2003,9 @@
           "swell_direction_deg": 205.0,
           "wind_ms": 3.54,
           "wind_direction_deg": 149.0,
+          "tide_m": -0.95,
+          "current_kmh": 0.4,
+          "current_direction_deg": 90.0,
           "rating": "good"
         },
         {
@@ -1690,6 +2015,9 @@
           "swell_direction_deg": 204.0,
           "wind_ms": 2.6,
           "wind_direction_deg": 150.0,
+          "tide_m": -0.6,
+          "current_kmh": 0.2,
+          "current_direction_deg": 90.0,
           "rating": "good"
         },
         {
@@ -1699,6 +2027,9 @@
           "swell_direction_deg": 203.0,
           "wind_ms": 2.01,
           "wind_direction_deg": 145.0,
+          "tide_m": -0.24,
+          "current_kmh": 0.2,
+          "current_direction_deg": 90.0,
           "rating": "good"
         },
         {
@@ -1708,6 +2039,9 @@
           "swell_direction_deg": 203.0,
           "wind_ms": 1.6,
           "wind_direction_deg": 141.0,
+          "tide_m": 0.03,
+          "current_kmh": 0.0,
+          "current_direction_deg": 90.0,
           "rating": "good"
         },
         {
@@ -1717,6 +2051,9 @@
           "swell_direction_deg": 202.0,
           "wind_ms": 3.15,
           "wind_direction_deg": 100.0,
+          "tide_m": 0.14,
+          "current_kmh": 0.0,
+          "current_direction_deg": 90.0,
           "rating": "good"
         },
         {
@@ -1726,6 +2063,9 @@
           "swell_direction_deg": 203.0,
           "wind_ms": 3.05,
           "wind_direction_deg": 111.0,
+          "tide_m": 0.07,
+          "current_kmh": 0.2,
+          "current_direction_deg": 270.0,
           "rating": "good"
         },
         {
@@ -1735,6 +2075,9 @@
           "swell_direction_deg": 203.0,
           "wind_ms": 4.54,
           "wind_direction_deg": 104.0,
+          "tide_m": -0.16,
+          "current_kmh": 0.4,
+          "current_direction_deg": 270.0,
           "rating": "good"
         },
         {
@@ -1744,6 +2087,9 @@
           "swell_direction_deg": 204.0,
           "wind_ms": 2.69,
           "wind_direction_deg": 108.0,
+          "tide_m": -0.49,
+          "current_kmh": 0.4,
+          "current_direction_deg": 270.0,
           "rating": "good"
         },
         {
@@ -1753,6 +2099,9 @@
           "swell_direction_deg": 202.0,
           "wind_ms": 1.86,
           "wind_direction_deg": 117.0,
+          "tide_m": -0.82,
+          "current_kmh": 0.5,
+          "current_direction_deg": 270.0,
           "rating": "good"
         },
         {
@@ -1762,6 +2111,9 @@
           "swell_direction_deg": 200.0,
           "wind_ms": 2.65,
           "wind_direction_deg": 133.0,
+          "tide_m": -1.09,
+          "current_kmh": 0.6,
+          "current_direction_deg": 288.0,
           "rating": "good"
         }
       ]
@@ -1769,12 +2121,14 @@
     {
       "name": "Llandudno",
       "wave_height_m": 3.14,
-      "swell_height_m": 2.92,
-      "swell_period_s": 8.6,
+      "swell_height_m": 2.9,
+      "swell_period_s": 8.55,
       "swell_direction_deg": 218.0,
-      "wind_ms": 4.45,
+      "wind_ms": 4.38,
       "wind_direction_deg": 154.0,
       "rating": "fair_good",
+      "water_temp_c": 14.2,
+      "analysis_no": "Krevende spot for øvede, offshore Ø (ca 90°). Lørdag 10. aug 02:00–08:00: 2.6–2.8m @ 8–9s, svak vind fra SØ (135°–141°), godt paddlevindu før Cape Doctor setter inn. Søndag 11. aug 05:00–08:00: 2.0–2.2m, fortsatt svak vind (4–5 m/s fra 128°–129°). **Best valg for øvede:** lørdag 10. aug 06:00–09:00. 3mm våtdrakt (14°C).",
       "hourly": [
         {
           "time": "2026-08-09T20:00",
@@ -1783,6 +2137,9 @@
           "swell_direction_deg": 218.0,
           "wind_ms": 4.56,
           "wind_direction_deg": 154.0,
+          "tide_m": -0.86,
+          "current_kmh": 0.9,
+          "current_direction_deg": 307.0,
           "rating": "fair_good"
         },
         {
@@ -1792,6 +2149,9 @@
           "swell_direction_deg": 217.0,
           "wind_ms": 4.2,
           "wind_direction_deg": 155.0,
+          "tide_m": -0.67,
+          "current_kmh": 0.9,
+          "current_direction_deg": 307.0,
           "rating": "fair_good"
         },
         {
@@ -1801,6 +2161,9 @@
           "swell_direction_deg": 217.0,
           "wind_ms": 4.23,
           "wind_direction_deg": 151.0,
+          "tide_m": -0.44,
+          "current_kmh": 0.9,
+          "current_direction_deg": 307.0,
           "rating": "fair_good"
         },
         {
@@ -1810,6 +2173,9 @@
           "swell_direction_deg": 216.0,
           "wind_ms": 3.7,
           "wind_direction_deg": 145.0,
+          "tide_m": -0.24,
+          "current_kmh": 0.9,
+          "current_direction_deg": 307.0,
           "rating": "fair_good"
         },
         {
@@ -1819,6 +2185,9 @@
           "swell_direction_deg": 216.0,
           "wind_ms": 3.3,
           "wind_direction_deg": 145.0,
+          "tide_m": -0.12,
+          "current_kmh": 0.8,
+          "current_direction_deg": 315.0,
           "rating": "fair_good"
         },
         {
@@ -1828,6 +2197,9 @@
           "swell_direction_deg": 215.0,
           "wind_ms": 3.43,
           "wind_direction_deg": 146.0,
+          "tide_m": -0.11,
+          "current_kmh": 0.8,
+          "current_direction_deg": 315.0,
           "rating": "fair_good"
         },
         {
@@ -1837,6 +2209,9 @@
           "swell_direction_deg": 215.0,
           "wind_ms": 3.41,
           "wind_direction_deg": 141.0,
+          "tide_m": -0.23,
+          "current_kmh": 0.8,
+          "current_direction_deg": 315.0,
           "rating": "fair_good"
         },
         {
@@ -1846,6 +2221,9 @@
           "swell_direction_deg": 214.0,
           "wind_ms": 2.69,
           "wind_direction_deg": 145.0,
+          "tide_m": -0.44,
+          "current_kmh": 0.8,
+          "current_direction_deg": 315.0,
           "rating": "fair_good"
         },
         {
@@ -1855,6 +2233,9 @@
           "swell_direction_deg": 214.0,
           "wind_ms": 2.97,
           "wind_direction_deg": 153.0,
+          "tide_m": -0.71,
+          "current_kmh": 0.6,
+          "current_direction_deg": 304.0,
           "rating": "fair_good"
         },
         {
@@ -1864,6 +2245,9 @@
           "swell_direction_deg": 213.0,
           "wind_ms": 3.51,
           "wind_direction_deg": 147.0,
+          "tide_m": -0.96,
+          "current_kmh": 0.6,
+          "current_direction_deg": 304.0,
           "rating": "fair_good"
         },
         {
@@ -1873,6 +2257,9 @@
           "swell_direction_deg": 213.0,
           "wind_ms": 3.51,
           "wind_direction_deg": 154.0,
+          "tide_m": -1.14,
+          "current_kmh": 0.5,
+          "current_direction_deg": 315.0,
           "rating": "fair_good"
         },
         {
@@ -1882,6 +2269,9 @@
           "swell_direction_deg": 214.0,
           "wind_ms": 3.65,
           "wind_direction_deg": 144.0,
+          "tide_m": -1.23,
+          "current_kmh": 0.5,
+          "current_direction_deg": 315.0,
           "rating": "fair_good"
         },
         {
@@ -1891,6 +2281,9 @@
           "swell_direction_deg": 214.0,
           "wind_ms": 3.18,
           "wind_direction_deg": 135.0,
+          "tide_m": -1.17,
+          "current_kmh": 0.5,
+          "current_direction_deg": 315.0,
           "rating": "good"
         },
         {
@@ -1900,6 +2293,9 @@
           "swell_direction_deg": 213.0,
           "wind_ms": 3.48,
           "wind_direction_deg": 130.0,
+          "tide_m": -0.98,
+          "current_kmh": 0.8,
+          "current_direction_deg": 315.0,
           "rating": "good"
         },
         {
@@ -1909,6 +2305,9 @@
           "swell_direction_deg": 211.0,
           "wind_ms": 4.56,
           "wind_direction_deg": 135.0,
+          "tide_m": -0.73,
+          "current_kmh": 0.8,
+          "current_direction_deg": 315.0,
           "rating": "good"
         },
         {
@@ -1918,6 +2317,9 @@
           "swell_direction_deg": 210.0,
           "wind_ms": 5.39,
           "wind_direction_deg": 140.0,
+          "tide_m": -0.45,
+          "current_kmh": 0.8,
+          "current_direction_deg": 315.0,
           "rating": "fair_good"
         },
         {
@@ -1927,6 +2329,9 @@
           "swell_direction_deg": 209.0,
           "wind_ms": 5.91,
           "wind_direction_deg": 137.0,
+          "tide_m": -0.23,
+          "current_kmh": 0.8,
+          "current_direction_deg": 315.0,
           "rating": "fair_good"
         },
         {
@@ -1936,6 +2341,9 @@
           "swell_direction_deg": 208.0,
           "wind_ms": 6.58,
           "wind_direction_deg": 136.0,
+          "tide_m": -0.11,
+          "current_kmh": 0.8,
+          "current_direction_deg": 315.0,
           "rating": "fair_good"
         },
         {
@@ -1945,6 +2353,9 @@
           "swell_direction_deg": 207.0,
           "wind_ms": 7.04,
           "wind_direction_deg": 137.0,
+          "tide_m": -0.14,
+          "current_kmh": 0.9,
+          "current_direction_deg": 307.0,
           "rating": "fair_good"
         },
         {
@@ -1954,6 +2365,9 @@
           "swell_direction_deg": 206.0,
           "wind_ms": 6.55,
           "wind_direction_deg": 137.0,
+          "tide_m": -0.31,
+          "current_kmh": 0.8,
+          "current_direction_deg": 297.0,
           "rating": "fair_good"
         },
         {
@@ -1963,6 +2377,9 @@
           "swell_direction_deg": 206.0,
           "wind_ms": 6.5,
           "wind_direction_deg": 140.0,
+          "tide_m": -0.57,
+          "current_kmh": 0.8,
+          "current_direction_deg": 297.0,
           "rating": "fair_good"
         },
         {
@@ -1972,6 +2389,9 @@
           "swell_direction_deg": 205.0,
           "wind_ms": 5.81,
           "wind_direction_deg": 139.0,
+          "tide_m": -0.84,
+          "current_kmh": 0.8,
+          "current_direction_deg": 297.0,
           "rating": "fair_good"
         },
         {
@@ -1981,6 +2401,9 @@
           "swell_direction_deg": 204.0,
           "wind_ms": 5.54,
           "wind_direction_deg": 129.0,
+          "tide_m": -1.08,
+          "current_kmh": 0.8,
+          "current_direction_deg": 297.0,
           "rating": "good"
         },
         {
@@ -1990,6 +2413,9 @@
           "swell_direction_deg": 202.0,
           "wind_ms": 5.19,
           "wind_direction_deg": 126.0,
+          "tide_m": -1.22,
+          "current_kmh": 0.7,
+          "current_direction_deg": 284.0,
           "rating": "good"
         },
         {
@@ -1999,6 +2425,9 @@
           "swell_direction_deg": 201.0,
           "wind_ms": 5.53,
           "wind_direction_deg": 127.0,
+          "tide_m": -1.22,
+          "current_kmh": 0.8,
+          "current_direction_deg": 297.0,
           "rating": "good"
         },
         {
@@ -2008,6 +2437,9 @@
           "swell_direction_deg": 200.0,
           "wind_ms": 5.56,
           "wind_direction_deg": 125.0,
+          "tide_m": -1.07,
+          "current_kmh": 0.8,
+          "current_direction_deg": 297.0,
           "rating": "good"
         },
         {
@@ -2017,6 +2449,9 @@
           "swell_direction_deg": 199.0,
           "wind_ms": 5.44,
           "wind_direction_deg": 126.0,
+          "tide_m": -0.8,
+          "current_kmh": 0.8,
+          "current_direction_deg": 297.0,
           "rating": "good"
         },
         {
@@ -2026,6 +2461,9 @@
           "swell_direction_deg": 198.0,
           "wind_ms": 5.44,
           "wind_direction_deg": 126.0,
+          "tide_m": -0.5,
+          "current_kmh": 0.6,
+          "current_direction_deg": 304.0,
           "rating": "good"
         },
         {
@@ -2035,6 +2473,9 @@
           "swell_direction_deg": 198.0,
           "wind_ms": 5.19,
           "wind_direction_deg": 126.0,
+          "tide_m": -0.23,
+          "current_kmh": 0.6,
+          "current_direction_deg": 304.0,
           "rating": "good"
         },
         {
@@ -2044,6 +2485,9 @@
           "swell_direction_deg": 197.0,
           "wind_ms": 4.94,
           "wind_direction_deg": 129.0,
+          "tide_m": -0.07,
+          "current_kmh": 0.6,
+          "current_direction_deg": 304.0,
           "rating": "good"
         },
         {
@@ -2053,6 +2497,9 @@
           "swell_direction_deg": 197.0,
           "wind_ms": 5.08,
           "wind_direction_deg": 130.0,
+          "tide_m": -0.06,
+          "current_kmh": 0.6,
+          "current_direction_deg": 288.0,
           "rating": "good"
         },
         {
@@ -2062,6 +2509,9 @@
           "swell_direction_deg": 196.0,
           "wind_ms": 4.81,
           "wind_direction_deg": 128.0,
+          "tide_m": -0.21,
+          "current_kmh": 0.6,
+          "current_direction_deg": 288.0,
           "rating": "good"
         },
         {
@@ -2071,6 +2521,9 @@
           "swell_direction_deg": 196.0,
           "wind_ms": 4.32,
           "wind_direction_deg": 127.0,
+          "tide_m": -0.47,
+          "current_kmh": 0.4,
+          "current_direction_deg": 297.0,
           "rating": "good"
         },
         {
@@ -2080,6 +2533,9 @@
           "swell_direction_deg": 195.0,
           "wind_ms": 3.91,
           "wind_direction_deg": 129.0,
+          "tide_m": -0.79,
+          "current_kmh": 0.4,
+          "current_direction_deg": 270.0,
           "rating": "good"
         },
         {
@@ -2089,6 +2545,9 @@
           "swell_direction_deg": 195.0,
           "wind_ms": 4.05,
           "wind_direction_deg": 130.0,
+          "tide_m": -1.09,
+          "current_kmh": 0.5,
+          "current_direction_deg": 270.0,
           "rating": "good"
         },
         {
@@ -2098,6 +2557,9 @@
           "swell_direction_deg": 196.0,
           "wind_ms": 4.23,
           "wind_direction_deg": 130.0,
+          "tide_m": -1.29,
+          "current_kmh": 0.5,
+          "current_direction_deg": 270.0,
           "rating": "good"
         },
         {
@@ -2107,6 +2569,9 @@
           "swell_direction_deg": 196.0,
           "wind_ms": 4.74,
           "wind_direction_deg": 128.0,
+          "tide_m": -1.35,
+          "current_kmh": 0.5,
+          "current_direction_deg": 270.0,
           "rating": "good"
         },
         {
@@ -2116,6 +2581,9 @@
           "swell_direction_deg": 196.0,
           "wind_ms": 4.39,
           "wind_direction_deg": 132.0,
+          "tide_m": -1.23,
+          "current_kmh": 0.5,
+          "current_direction_deg": 270.0,
           "rating": "good"
         },
         {
@@ -2125,6 +2593,9 @@
           "swell_direction_deg": 195.0,
           "wind_ms": 3.86,
           "wind_direction_deg": 137.0,
+          "tide_m": -0.96,
+          "current_kmh": 0.5,
+          "current_direction_deg": 270.0,
           "rating": "fair_good"
         },
         {
@@ -2134,6 +2605,9 @@
           "swell_direction_deg": 195.0,
           "wind_ms": 3.54,
           "wind_direction_deg": 137.0,
+          "tide_m": -0.61,
+          "current_kmh": 0.5,
+          "current_direction_deg": 270.0,
           "rating": "fair_good"
         },
         {
@@ -2143,6 +2617,9 @@
           "swell_direction_deg": 196.0,
           "wind_ms": 3.56,
           "wind_direction_deg": 142.0,
+          "tide_m": -0.26,
+          "current_kmh": 0.5,
+          "current_direction_deg": 270.0,
           "rating": "fair_good"
         },
         {
@@ -2152,6 +2629,9 @@
           "swell_direction_deg": 196.0,
           "wind_ms": 4.17,
           "wind_direction_deg": 136.0,
+          "tide_m": 0.01,
+          "current_kmh": 0.6,
+          "current_direction_deg": 252.0,
           "rating": "fair_good"
         },
         {
@@ -2161,6 +2641,9 @@
           "swell_direction_deg": 197.0,
           "wind_ms": 4.75,
           "wind_direction_deg": 120.0,
+          "tide_m": 0.12,
+          "current_kmh": 0.6,
+          "current_direction_deg": 252.0,
           "rating": "good"
         },
         {
@@ -2170,6 +2653,9 @@
           "swell_direction_deg": 199.0,
           "wind_ms": 4.41,
           "wind_direction_deg": 108.0,
+          "tide_m": 0.05,
+          "current_kmh": 0.6,
+          "current_direction_deg": 236.0,
           "rating": "good"
         },
         {
@@ -2179,6 +2665,9 @@
           "swell_direction_deg": 200.0,
           "wind_ms": 5.31,
           "wind_direction_deg": 123.0,
+          "tide_m": -0.18,
+          "current_kmh": 0.6,
+          "current_direction_deg": 236.0,
           "rating": "good"
         },
         {
@@ -2188,6 +2677,9 @@
           "swell_direction_deg": 202.0,
           "wind_ms": 5.69,
           "wind_direction_deg": 129.0,
+          "tide_m": -0.5,
+          "current_kmh": 0.8,
+          "current_direction_deg": 225.0,
           "rating": "good"
         },
         {
@@ -2197,6 +2689,9 @@
           "swell_direction_deg": 192.0,
           "wind_ms": 5.0,
           "wind_direction_deg": 127.0,
+          "tide_m": -0.84,
+          "current_kmh": 0.8,
+          "current_direction_deg": 225.0,
           "rating": "good"
         },
         {
@@ -2206,6 +2701,9 @@
           "swell_direction_deg": 181.0,
           "wind_ms": 4.09,
           "wind_direction_deg": 129.0,
+          "tide_m": -1.1,
+          "current_kmh": 0.8,
+          "current_direction_deg": 225.0,
           "rating": "good"
         }
       ]
@@ -2507,5 +3005,6 @@
       "url": "https://www.quicket.co.za/events/365061-district-six-museum-september-2026-admission-tickets/"
     }
   ],
-  "todos": []
+  "todos": [],
+  "surf_summary_no": "**Beste vindu: Llandudno, lørdag 10. aug 06:00–09:00** — 2.6–2.7m swell, lett vind fra SØ (135°–140°), før Cape Doctor blir sterk. Big Bay også mulig hvis nybegynnere må, men mer påland. **Dropp Muizenberg helt** — pålandsvind hele perioden gjør paddling farlig. Søndag blir dårligere alle spots med synkende swell (1.0–2.2m) og sterkere vind."
 }

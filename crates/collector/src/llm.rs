@@ -99,6 +99,99 @@ pub async fn summarize(
         .collect())
 }
 
+const SURF_SYSTEM: &str = "Du er surfguide for to nybegynnere/lett øvede i \
+Cape Town. Vurder forholdene per spot for de neste 48 timene. Viktigst: \
+vindretning mot spotens offshore-retning — pålandsvind og strøm som presser \
+mot land gjør det nesten umulig å padle ut, spesielt på Muizenberg \
+(nybegynnerspot, offshore = NV). Big Bay: offshore ≈ ØSØ. Llandudno: \
+offshore ≈ Ø, krevende spot for øvede. Cape Doctor (frisk SØ) ødelegger \
+Muizenberg men gir offshore på Big Bay. Pek på konkrete tidsvinduer \
+(dag + klokkeslett), svellstørrelse/periode og padleforhold. Vanntemp \
+betyr våtdrakttykkelse. Vær konkret og ærlig — si «dropp det» når det er dårlig. Ren tekst uten markdown-formatering.";
+
+/// Claude-tolkning av surfforholdene. Kalles kun når varselet har endret
+/// seg (hash-cache i redb) — open-meteo oppdaterer modellen ca. hver 6. time.
+pub async fn analyze_surf(
+    client: &reqwest::Client,
+    api_key: &str,
+    spots: &[schema::SurfSpot],
+) -> Result<schema::SurfAnalysisBatch> {
+    let settings = schemars::gen::SchemaSettings::draft07().with(|s| {
+        s.inline_subschemas = true;
+    });
+    let schema_value = serde_json::to_value(
+        settings
+            .into_generator()
+            .into_root_schema_for::<schema::SurfAnalysisBatch>(),
+    )?;
+
+    let mut prompt = String::from(
+        "Varsel per spot (hver 3. time). Format: tid | svell m @ s fra retning | \
+         vind m/s fra retning | tidevann m | strøm km/t fra retning\n",
+    );
+    for spot in spots {
+        prompt.push_str(&format!(
+            "\n## {} (vanntemp {})\n",
+            spot.name,
+            spot.water_temp_c
+                .map(|t| format!("{t:.0}°C"))
+                .unwrap_or_else(|| "ukjent".into())
+        ));
+        for h in spot.hourly.iter().step_by(3) {
+            prompt.push_str(&format!(
+                "{} | {:.1}m @ {:.0}s fra {:.0}° | {:.0} m/s fra {:.0}° | {} | {}\n",
+                h.time,
+                h.swell_height_m,
+                h.swell_period_s,
+                h.swell_direction_deg,
+                h.wind_ms,
+                h.wind_direction_deg,
+                h.tide_m.map(|t| format!("{t:+.1}m")).unwrap_or_else(|| "-".into()),
+                match (h.current_kmh, h.current_direction_deg) {
+                    (Some(v), Some(d)) => format!("{v:.1} fra {d:.0}°"),
+                    _ => "-".into(),
+                },
+            ));
+        }
+    }
+    prompt.push_str("\nGi summary_no (2-3 setninger: beste spot/vindu fremover) og analysis_no per spot.");
+
+    let body = json!({
+        "model": MODEL,
+        "max_tokens": 2000,
+        "system": SURF_SYSTEM,
+        "messages": [{"role": "user", "content": prompt}],
+        "tools": [{
+            "name": "emit_surf_analysis",
+            "description": "Lever surfvurderingen",
+            "input_schema": schema_value,
+        }],
+        "tool_choice": {"type": "tool", "name": "emit_surf_analysis"},
+    });
+
+    let resp = client
+        .post("https://api.anthropic.com/v1/messages")
+        .timeout(std::time::Duration::from_secs(120))
+        .header("x-api-key", api_key)
+        .header("anthropic-version", "2023-06-01")
+        .json(&body)
+        .send()
+        .await
+        .context("POST surf-analyse til Claude API")?;
+
+    let status = resp.status();
+    let value: Value = resp.json().await.context("les Claude-svar")?;
+    if !status.is_success() {
+        bail!("Claude API ga {status}: {value}");
+    }
+    let input = value["content"]
+        .as_array()
+        .and_then(|blocks| blocks.iter().find(|b| b["type"] == "tool_use"))
+        .map(|b| b["input"].clone())
+        .context("ingen tool_use-blokk i surf-analysen")?;
+    Ok(serde_json::from_value(input).context("parse SurfAnalysisBatch")?)
+}
+
 /// Uten API-nøkkel (eller ved feilet kall): vis originaltekst uoversatt.
 /// Disse skal IKKE inn i cachen — de skal oversettes neste gang nøkkelen finnes.
 pub fn fallback(raw: &RawItem) -> NewsEntry {

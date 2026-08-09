@@ -75,7 +75,16 @@ pub fn rate(
         0.0 // frisk onshore = vaskemaskin
     };
 
+    // Padleregelen (viktigst på Muizenberg): frisk pålandsvind presser
+    // deg inn mot land — da hjelper det ikke hvor fint svellet er
+    let onshore = diff > 90.0;
+    if onshore && wind_ms >= 8.0 {
+        return SurfRating::Poor;
+    }
     let total = swell_score + period_score + wind_score;
+    if onshore && wind_ms >= 5.5 {
+        return if total < 4.5 { SurfRating::Poor } else { SurfRating::PoorFair };
+    }
     match total {
         t if t < 3.0 => SurfRating::Poor,
         t if t < 4.5 => SurfRating::PoorFair,
@@ -97,6 +106,7 @@ struct MarineCurrent {
     swell_wave_height: f64,
     swell_wave_period: f64,
     swell_wave_direction: f64,
+    sea_surface_temperature: Option<f64>,
 }
 
 #[derive(Deserialize)]
@@ -105,6 +115,12 @@ struct MarineHourly {
     swell_wave_height: Vec<f64>,
     swell_wave_period: Vec<f64>,
     swell_wave_direction: Vec<f64>,
+    #[serde(default)]
+    sea_level_height_msl: Vec<Option<f64>>,
+    #[serde(default)]
+    ocean_current_velocity: Vec<Option<f64>>,
+    #[serde(default)]
+    ocean_current_direction: Vec<Option<f64>>,
 }
 
 #[derive(Deserialize)]
@@ -131,8 +147,8 @@ struct WindHourly {
 pub async fn fetch_spot(client: &reqwest::Client, spot: &SpotDef) -> Result<SurfSpot> {
     let marine_url = format!(
         "https://marine-api.open-meteo.com/v1/marine?latitude={}&longitude={}\
-         &current=wave_height,swell_wave_height,swell_wave_period,swell_wave_direction\
-         &hourly=swell_wave_height,swell_wave_period,swell_wave_direction\
+         &current=wave_height,swell_wave_height,swell_wave_period,swell_wave_direction,sea_surface_temperature\
+         &hourly=swell_wave_height,swell_wave_period,swell_wave_direction,sea_level_height_msl,ocean_current_velocity,ocean_current_direction\
          &timezone=Africa%2FJohannesburg&forecast_hours=48",
         spot.lat, spot.lon
     );
@@ -194,6 +210,9 @@ pub async fn fetch_spot(client: &reqwest::Client, spot: &SpotDef) -> Result<Surf
                 swell_direction_deg: sd,
                 wind_ms: ws,
                 wind_direction_deg: wd,
+                tide_m: marine.hourly.sea_level_height_msl.get(i).copied().flatten(),
+                current_kmh: marine.hourly.ocean_current_velocity.get(i).copied().flatten(),
+                current_direction_deg: marine.hourly.ocean_current_direction.get(i).copied().flatten(),
                 rating: rate(spot, sh, sp, ws, wd),
             })
         })
@@ -207,6 +226,8 @@ pub async fn fetch_spot(client: &reqwest::Client, spot: &SpotDef) -> Result<Surf
         swell_direction_deg: marine.current.swell_wave_direction,
         wind_ms: wind.current.wind_speed_10m,
         wind_direction_deg: wind.current.wind_direction_10m,
+        water_temp_c: marine.current.sea_surface_temperature,
+        analysis_no: None,
         rating: rate(
             spot,
             marine.current.swell_wave_height,

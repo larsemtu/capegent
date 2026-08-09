@@ -8,6 +8,8 @@ use std::path::Path;
 
 // v2: NewsItem fikk detail_no — nytt tabellnavn så alt re-oppsummeres én gang
 const SUMMARIES: TableDefinition<&str, &str> = TableDefinition::new("summaries_v2");
+// Småting med hash-basert gjenbruk (surf-analyse o.l.)
+const META: TableDefinition<&str, &str> = TableDefinition::new("meta");
 
 pub struct Cache {
     db: Database,
@@ -21,6 +23,7 @@ impl Cache {
         let db = Database::create(path)?;
         let tx = db.begin_write()?;
         tx.open_table(SUMMARIES)?;
+        tx.open_table(META)?;
         tx.commit()?;
         Ok(Self { db })
     }
@@ -46,6 +49,23 @@ impl Cache {
                 let value = serde_json::to_string(entry)?;
                 table.insert(key.as_str(), value.as_str())?;
             }
+        }
+        tx.commit()?;
+        Ok(())
+    }
+
+    pub fn get_meta(&self, key: &str) -> Option<String> {
+        let tx = self.db.begin_read().ok()?;
+        let table = tx.open_table(META).ok()?;
+        let value = table.get(key).ok()??;
+        Some(value.value().to_string())
+    }
+
+    pub fn put_meta(&self, key: &str, value: &str) -> Result<()> {
+        let tx = self.db.begin_write()?;
+        {
+            let mut table = tx.open_table(META)?;
+            table.insert(key, value)?;
         }
         tx.commit()?;
         Ok(())

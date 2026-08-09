@@ -59,6 +59,7 @@ async fn main() -> Result<()> {
     );
 
     let news = process_news(&client, &cache, raw_news).await;
+    let surf = attach_surf_analysis(&client, &cache, surf, &previous).await;
 
     let data = DashboardData {
         generated_at: chrono::Utc::now().to_rfc3339(),
@@ -95,6 +96,7 @@ async fn main() -> Result<()> {
         },
         // Fylles når Linear-integrasjonen kobles på
         todos: previous.todos,
+        surf_summary_no: cache.get_meta("surf_summary_no").or(previous.surf_summary_no),
     };
 
     std::fs::create_dir_all("data")?;
@@ -120,6 +122,61 @@ async fn fetch_surf(client: &reqwest::Client) -> Vec<SurfSpot> {
         .into_iter()
         .filter_map(|r| r.map_err(|e| warn!("surf-spot feilet: {e:#}")).ok())
         .collect()
+}
+
+/// AI-tolkning av surfforholdene, cachet på innholds-hash så Claude bare
+/// kalles når varselet faktisk har endret seg (~4-8 ganger i døgnet).
+async fn attach_surf_analysis(
+    client: &reqwest::Client,
+    cache: &dedup::Cache,
+    mut spots: Vec<SurfSpot>,
+    previous: &DashboardData,
+) -> Vec<SurfSpot> {
+    if spots.is_empty() {
+        return spots;
+    }
+    let mut fingerprint = String::new();
+    for s in &spots {
+        for h in s.hourly.iter().step_by(3) {
+            fingerprint.push_str(&format!(
+                "{}|{:.1}|{:.0}|{:.0}|{:.0};",
+                h.time, h.swell_height_m, h.swell_period_s, h.wind_ms, h.wind_direction_deg
+            ));
+        }
+    }
+    let hash = blake3::hash(fingerprint.as_bytes()).to_hex().to_string();
+
+    if cache.get_meta("surf_hash").as_deref() == Some(hash.as_str()) {
+        // Uendret varsel — gjenbruk forrige analyse fra latest.json
+        for spot in &mut spots {
+            spot.analysis_no = previous
+                .surf
+                .iter()
+                .find(|p| p.name == spot.name)
+                .and_then(|p| p.analysis_no.clone());
+        }
+        return spots;
+    }
+
+    let Some(api_key) = sources::env_nonempty("ANTHROPIC_API_KEY") else {
+        return spots;
+    };
+    match llm::analyze_surf(client, &api_key, &spots).await {
+        Ok(batch) => {
+            for spot in &mut spots {
+                spot.analysis_no = batch
+                    .spots
+                    .iter()
+                    .find(|a| a.name == spot.name)
+                    .map(|a| a.analysis_no.clone());
+            }
+            let _ = cache.put_meta("surf_hash", &hash);
+            let _ = cache.put_meta("surf_summary_no", &batch.summary_no);
+            info!("ny surf-analyse generert");
+        }
+        Err(e) => warn!("surf-analyse feilet: {e:#}"),
+    }
+    spots
 }
 
 async fn fetch_news(client: &reqwest::Client) -> Vec<RawItem> {
