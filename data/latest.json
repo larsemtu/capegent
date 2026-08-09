@@ -1,24 +1,14 @@
 {
-  "generated_at": "2026-08-09T17:29:01.027659023+00:00",
+  "generated_at": "2026-08-09T18:00:57.300282228+00:00",
   "weather": {
     "temp_c": 10.8,
-    "apparent_temp_c": 7.0,
+    "apparent_temp_c": 7.1,
     "precipitation_mm": 0.0,
     "weather_code": 0,
-    "wind_speed_kmh": 17.1,
+    "wind_speed_kmh": 16.3,
     "wind_direction_deg": 155.0,
-    "wind_gusts_kmh": 37.4,
+    "wind_gusts_kmh": 35.3,
     "hourly": [
-      {
-        "time": "2026-08-09T19:00",
-        "temp_c": 10.9,
-        "weather_code": 0,
-        "precipitation_probability_pct": 12.0,
-        "precipitation_mm": 0.0,
-        "wind_speed_kmh": 17.5,
-        "wind_direction_deg": 155.0,
-        "wind_gusts_kmh": 38.5
-      },
       {
         "time": "2026-08-09T20:00",
         "temp_c": 10.8,
@@ -488,6 +478,16 @@
         "wind_speed_kmh": 9.3,
         "wind_direction_deg": 139.0,
         "wind_gusts_kmh": 23.0
+      },
+      {
+        "time": "2026-08-11T19:00",
+        "temp_c": 13.8,
+        "weather_code": 0,
+        "precipitation_probability_pct": 0.0,
+        "precipitation_mm": 0.0,
+        "wind_speed_kmh": 9.9,
+        "wind_direction_deg": 145.0,
+        "wind_gusts_kmh": 18.7
       }
     ],
     "daily": [
@@ -552,23 +552,14 @@
   "surf": [
     {
       "name": "Muizenberg",
-      "wave_height_m": 2.52,
-      "swell_height_m": 2.12,
-      "swell_period_s": 8.3,
-      "swell_direction_deg": 218.0,
-      "wind_speed_kmh": 20.0,
-      "wind_direction_deg": 153.0,
+      "wave_height_m": 2.48,
+      "swell_height_m": 2.1,
+      "swell_period_s": 8.15,
+      "swell_direction_deg": 217.0,
+      "wind_speed_kmh": 19.1,
+      "wind_direction_deg": 152.0,
       "rating": "poor_fair",
       "hourly": [
-        {
-          "time": "2026-08-09T19:00",
-          "swell_height_m": 2.14,
-          "swell_period_s": 8.4,
-          "swell_direction_deg": 218.0,
-          "wind_speed_kmh": 20.3,
-          "wind_direction_deg": 154.0,
-          "rating": "poor_fair"
-        },
         {
           "time": "2026-08-09T20:00",
           "swell_height_m": 2.1,
@@ -991,28 +982,28 @@
           "wind_speed_kmh": 25.2,
           "wind_direction_deg": 117.0,
           "rating": "fair"
+        },
+        {
+          "time": "2026-08-11T19:00",
+          "swell_height_m": 0.96,
+          "swell_period_s": 7.75,
+          "swell_direction_deg": 176.0,
+          "wind_speed_kmh": 24.3,
+          "wind_direction_deg": 122.0,
+          "rating": "fair"
         }
       ]
     },
     {
       "name": "Big Bay",
-      "wave_height_m": 2.7,
-      "swell_height_m": 2.58,
-      "swell_period_s": 8.8,
-      "swell_direction_deg": 225.0,
-      "wind_speed_kmh": 20.0,
-      "wind_direction_deg": 156.0,
-      "rating": "fair",
+      "wave_height_m": 2.66,
+      "swell_height_m": 2.54,
+      "swell_period_s": 8.75,
+      "swell_direction_deg": 224.0,
+      "wind_speed_kmh": 19.1,
+      "wind_direction_deg": 155.0,
+      "rating": "fair_good",
       "hourly": [
-        {
-          "time": "2026-08-09T19:00",
-          "swell_height_m": 2.58,
-          "swell_period_s": 8.8,
-          "swell_direction_deg": 225.0,
-          "wind_speed_kmh": 20.1,
-          "wind_direction_deg": 156.0,
-          "rating": "fair"
-        },
         {
           "time": "2026-08-09T20:00",
           "swell_height_m": 2.54,
@@ -1435,28 +1426,28 @@
           "wind_speed_kmh": 6.7,
           "wind_direction_deg": 117.0,
           "rating": "good"
+        },
+        {
+          "time": "2026-08-11T19:00",
+          "swell_height_m": 1.1,
+          "swell_period_s": 8.0,
+          "swell_direction_deg": 200.0,
+          "wind_speed_kmh": 9.6,
+          "wind_direction_deg": 133.0,
+          "rating": "good"
         }
       ]
     },
     {
       "name": "Llandudno",
-      "wave_height_m": 3.22,
-      "swell_height_m": 2.96,
-      "swell_period_s": 8.65,
-      "swell_direction_deg": 219.0,
-      "wind_speed_kmh": 17.3,
-      "wind_direction_deg": 153.0,
+      "wave_height_m": 3.16,
+      "swell_height_m": 2.92,
+      "swell_period_s": 8.6,
+      "swell_direction_deg": 218.0,
+      "wind_speed_kmh": 16.4,
+      "wind_direction_deg": 154.0,
       "rating": "fair_good",
       "hourly": [
-        {
-          "time": "2026-08-09T19:00",
-          "swell_height_m": 2.96,
-          "swell_period_s": 8.7,
-          "swell_direction_deg": 219.0,
-          "wind_speed_kmh": 17.5,
-          "wind_direction_deg": 154.0,
-          "rating": "fair_good"
-        },
         {
           "time": "2026-08-09T20:00",
           "swell_height_m": 2.92,
@@ -1879,6 +1870,15 @@
           "wind_speed_kmh": 18.0,
           "wind_direction_deg": 127.0,
           "rating": "good"
+        },
+        {
+          "time": "2026-08-11T19:00",
+          "swell_height_m": 1.16,
+          "swell_period_s": 8.5,
+          "swell_direction_deg": 181.0,
+          "wind_speed_kmh": 14.7,
+          "wind_direction_deg": 129.0,
+          "rating": "good"
         }
       ]
     }
@@ -2119,6 +2119,12 @@
       "url": "https://www.quicket.co.za/events/380997-peace-train-the-life-music-of-cat-stevensyusuf-islam/"
     },
     {
+      "title": "Breathwork with Remy",
+      "start": "2026-08-13T17:00:00Z",
+      "venue": "36 Buitenkant St",
+      "url": "https://www.quicket.co.za/events/390537-breathwork-with-remy/"
+    },
+    {
       "title": "Women's Health Expo 2026 Cape Town",
       "start": "2026-08-15T07:00:00Z",
       "venue": "Premier Hotel Cape Town",
@@ -2171,12 +2177,6 @@
       "start": "2026-08-29T06:45:00Z",
       "venue": "St James Church",
       "url": "https://www.quicket.co.za/events/370782-reach-women-conference-kenilworth/"
-    },
-    {
-      "title": "DISTRICT SIX MUSEUM: SEPTEMBER 2026 ADMISSION TICKETS",
-      "start": "2026-09-01T07:00:00Z",
-      "venue": "25A Buitenkant St",
-      "url": "https://www.quicket.co.za/events/365061-district-six-museum-september-2026-admission-tickets/"
     }
   ],
   "todos": []
