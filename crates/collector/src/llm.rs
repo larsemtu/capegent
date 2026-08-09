@@ -204,8 +204,11 @@ hovedeventer teller — det viktige er at det gir liv og røre eller en ekte \
 opplevelse. EKSTRA VIKTIG: events der man møter og blir kjent med unge folk \
 (20-30) — lokale, expats og tilreisende. De vil sosialisere seg og bygge \
 nettverk i byen, så sosiale settinger med mingling (uteliv, fester, run clubs, \
-sosiale markeder, quiz/spillkvelder med ung profil) skal vektes opp. IKKE aktuelt: barnearrangementer, religiøse møter, bedriftsseminarer, \
-nettverkstreff for bransjer vi ikke er i, pensjonistarrangementer.";
+sosiale markeder, quiz/spillkvelder med ung profil) skal vektes opp. OGSÅ \
+RELEVANT: teknologi og business — begge jobber med IT/AI/utvikling og studerer \
+MBA, så tech-konferanser, AI/utvikler-meetups, startup- og entreprenørevents \
+og seriøse businessarrangementer er midt i blinken (og nyttige nettverksarenaer). IKKE aktuelt: barnearrangementer, religiøse møter, bedriftsseminarer, \
+pensjonistarrangementer.";
 
 /// Claude scorer hvert event mot profilen. Kalles kun når event-listen
 /// endrer seg (hash-cache i redb).

@@ -4,6 +4,7 @@
 
 pub mod article;
 pub mod calendar;
+pub mod eventbrite;
 pub mod events;
 pub mod linear;
 pub mod loadshedding;

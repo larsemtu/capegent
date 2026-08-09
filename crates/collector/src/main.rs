@@ -8,7 +8,7 @@ mod llm;
 use anyhow::Result;
 use futures::future::join_all;
 use schema::{DashboardData, NewsEntry, SurfSpot};
-use sources::{article, calendar, events, linear, loadshedding, marine, rss::RssSource, ticketmaster, weather, RawItem, Source};
+use sources::{article, calendar, eventbrite, events, linear, loadshedding, marine, rss::RssSource, ticketmaster, weather, RawItem, Source};
 use std::collections::HashSet;
 use std::path::Path;
 use std::time::Duration;
@@ -49,12 +49,13 @@ async fn main() -> Result<()> {
 
     let cache = dedup::Cache::open(Path::new(".cache/dedup.redb"))?;
 
-    let (weather_res, surf, loadshedding_res, calendar_res, events_res, tm_res, todos_res, raw_news) = tokio::join!(
+    let (weather_res, surf, loadshedding_res, calendar_res, events_res, eb_res, tm_res, todos_res, raw_news) = tokio::join!(
         weather::fetch(&client),
         fetch_surf(&client),
         loadshedding::fetch(&client),
         calendar::fetch(&client),
         events::fetch(&client),
+        eventbrite::fetch(&client),
         ticketmaster::fetch(&client),
         linear::fetch(&client),
         fetch_news(&client),
@@ -71,6 +72,10 @@ async fn main() -> Result<()> {
                 vec![]
             }
         };
+        match eb_res {
+            Ok(mut eb) => all.append(&mut eb),
+            Err(e) => warn!("eventbrite feilet: {e:#}"),
+        }
         match tm_res {
             Ok(mut tm) => all.append(&mut tm),
             Err(e) => warn!("ticketmaster feilet: {e:#}"),
@@ -209,7 +214,7 @@ async fn curate_events(
 ) -> Vec<schema::EventItem> {
     let mut urls: Vec<&str> = events.iter().map(|e| e.url.as_str()).collect();
     urls.sort();
-    let hash = blake3::hash(format!("curation-v3;{}", urls.join(";")).as_bytes()).to_hex().to_string();
+    let hash = blake3::hash(format!("curation-v4;{}", urls.join(";")).as_bytes()).to_hex().to_string();
 
     if cache.get_meta("events_hash").as_deref() == Some(hash.as_str()) {
         for e in &mut events {

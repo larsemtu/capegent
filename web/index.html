@@ -150,6 +150,10 @@
   .list-item:last-child { border-bottom: none; }
   .list-item .when { color: var(--accent); white-space: nowrap; font-variant-numeric: tabular-nums;
                      font-size: 12.5px; min-width: 58px; }
+  .addcal { background: var(--panel2); border: 1px solid var(--border); color: var(--muted);
+            border-radius: 7px; font-size: 11px; padding: 2px 7px; cursor: pointer;
+            align-self: center; flex-shrink: 0; }
+  .addcal:hover { color: var(--accent); border-color: var(--accent); }
   .empty { color: var(--muted); font-size: 13px; font-style: italic; }
   /* Kalender + gjøremål: hovedpanelene */
   .cal-row { display: flex; gap: 12px; padding: 9px 6px; border-bottom: 1px solid var(--border);
@@ -159,6 +163,12 @@
                    font-variant-numeric: tabular-nums; font-weight: 600; }
   .cal-row .when.today { color: var(--r-good); }
   .cal-row .t { font-size: 17px; font-weight: 500; }
+  .cal-row.big .t { font-size: 20px; font-weight: 700; }
+  .cal-row.big .when { font-size: 15px; }
+  .cal-row.big { padding: 11px 6px; }
+  .cal-row.dim .t { font-size: 14px; font-weight: 400; color: var(--muted); }
+  .cal-row.dim .when { font-size: 12px; color: var(--muted); }
+  .cal-row.dim { padding: 5px 6px; }
   .todo-row { display: flex; gap: 10px; padding: 8px 6px; border-bottom: 1px solid var(--border);
               align-items: baseline; border-radius: 6px; }
   .todo-row:last-of-type { border-bottom: none; }
@@ -326,6 +336,26 @@ const RATING = {
 const rating = r => RATING[r] || RATING.poor;
 
 const noMd = s => String(s ?? '').replace(/\*\*?/g, '');
+function gcalUrl(e) {
+  const pad = n => String(n).padStart(2, '0');
+  const d = new Date(e.start);
+  let dates;
+  if (e.start.includes('T') && !e.start.endsWith('T12:00:00Z')) {
+    const f = x => x.getUTCFullYear() + pad(x.getUTCMonth() + 1) + pad(x.getUTCDate()) +
+      'T' + pad(x.getUTCHours()) + pad(x.getUTCMinutes()) + '00Z';
+    dates = f(d) + '/' + f(new Date(d.getTime() + 3 * 3600000));
+  } else {
+    const day = e.start.slice(0, 10).replaceAll('-', '');
+    const next = new Date(d); next.setDate(next.getDate() + 1);
+    dates = day + '/' + next.getFullYear() + pad(next.getMonth() + 1) + pad(next.getDate());
+  }
+  return 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+    '&text=' + encodeURIComponent(e.title) +
+    '&dates=' + dates +
+    '&location=' + encodeURIComponent(e.venue || '') +
+    '&details=' + encodeURIComponent('Billetter/info: ' + e.url);
+}
+
 const esc = s => String(s ?? '').replace(/[&<>"]/g,
   c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
@@ -395,7 +425,7 @@ function renderWeather(w) {
     </div>
     <div class="hours">${nextHours}</div>
     <div class="daysrows">${dayRows}</div>
-    <div class="src">Yr · MET Norway</div>`;
+    <div class="src"><a href="https://www.yr.no/nb/v%C3%A6rvarsel/daglig-tabell/2-3369157" target="_blank" rel="noopener" style="color:inherit" onclick="event.stopPropagation()">Yr · MET Norway ↗</a></div>`;
 }
 
 function weatherModal() {
@@ -441,7 +471,7 @@ function weatherModal() {
       <tr><th>Kl</th><th></th><th>Temp</th><th>Nedbør</th><th>Vind (kast)</th></tr>
       ${rows}
     </table>
-    <div class="src">Data fra MET Norway (Yr) · Locationforecast 2.0 · CC-BY 4.0</div>`);
+    <div class="src"><a href="https://www.yr.no/nb/v%C3%A6rvarsel/daglig-tabell/2-3369157" target="_blank" rel="noopener" style="color:var(--accent)">Åpne Cape Town på Yr ↗</a> · Data fra MET Norway, CC-BY 4.0</div>`);
 }
 document.getElementById('weather').addEventListener('click', weatherModal);
 
@@ -461,7 +491,7 @@ function renderSurf(spots) {
     </div>`;
   }).join('')
   + (D?.surf_summary_no ? `<div style="color:var(--muted);font-size:12.5px;line-height:1.4;margin-top:8px;border-top:1px solid var(--border);padding-top:7px">🤖 ${esc(noMd(D.surf_summary_no))}</div>` : '')
-  + '<div class="src">Open-Meteo marine (MFWAM) · rating + AI-tolkning beregnet lokalt</div>';
+  + '<div class="src"><a href="https://www.surfline.com/surf-reports-forecasts-cams/south-africa/953987" target="_blank" rel="noopener" style="color:inherit">Sjekk Surfline ↗</a> · Open-Meteo (MFWAM) · rating + AI lokalt</div>';
   document.querySelectorAll('#surf .spot').forEach(el =>
     el.addEventListener('click', () => surfModal(+el.dataset.spot)));
 }
@@ -499,7 +529,7 @@ function surfModal(i) {
       <tr><th>Kl</th><th>Forhold</th><th>Svell</th><th>Retning</th><th>Vind</th><th>Tidevann</th></tr>
       ${rows}
     </table>
-    <div class="src">Open-Meteo marine (MFWAM-bølgemodell) + Open-Meteo vind · rating: egen beregning fra svell, periode og vindretning mot spotens offshore-retning</div>`);
+    <div class="src"><a href="https://www.surfline.com/search/${encodeURIComponent(s.name)}" target="_blank" rel="noopener" style="color:var(--accent)">Åpne ${esc(s.name)} på Surfline ↗</a> · Open-Meteo (MFWAM) · rating: egen beregning fra svell, periode og vindretning mot spotens offshore-retning</div>`);
 }
 
 /* ---------- Nyheter ---------- */
@@ -547,8 +577,10 @@ function renderEvents(events) {
     <a class="list-item clickable" href="${esc(e.url)}" target="_blank" rel="noopener"
        style="text-decoration:none;color:inherit${e.relevance >= 5 ? ';border-left:3px solid var(--r-good);padding-left:7px' : ''}">
       <span class="when">${esc(fmtWhen(e))}</span>
-      <span><span class="dot" style="background:${relColor(e.relevance || 0)};width:7px;height:7px"></span>${esc(e.title)}<span style="color:var(--muted)"> · ${esc(e.venue)}</span>${
+      <span style="flex:1"><span class="dot" style="background:${relColor(e.relevance || 0)};width:7px;height:7px"></span>${esc(e.title)}<span style="color:var(--muted)"> · ${esc(e.venue)}</span>${
         showWhy && e.why_no ? `<div style="color:var(--muted);font-size:12px;margin-top:1px">🤖 ${esc(e.why_no)}</div>` : ''}</span>
+      <button class="addcal" title="Legg til i felleskalenderen"
+        onclick="event.preventDefault();event.stopPropagation();window.open('${esc(gcalUrl(e))}','_blank')">📅+</button>
     </a>`;
   const picks = events.filter(e => (e.relevance || 0) >= 4);
   const rest = events.filter(e => (e.relevance || 0) < 4 && (e.relevance || 0) !== 1 && (e.relevance || 0) !== 2);
@@ -574,16 +606,28 @@ function calWhen(e) {
 }
 
 function renderCalendar(cal) {
-  const rows = cal.slice(0, 7).map(e => {
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const dayDiff = e => Math.round((new Date(e.start.slice(0, 10) + 'T00:00:00') - today) / 86400000);
+  const started = cal.filter(e => dayDiff(e) <= 1 && (!e.end || new Date(e.end.slice(0,10)) >= today));
+  const naer = cal.filter(e => dayDiff(e) > 1 && dayDiff(e) <= 7);
+  const senere = cal.filter(e => dayDiff(e) > 7).slice(0, 5);
+
+  const row = (e, cls) => {
     const w = calWhen(e);
-    return `<div class="cal-row">
+    return `<div class="cal-row ${cls}">
       <span class="when ${w.today ? 'today' : ''}">${esc(w.label)}</span>
       <span class="t">${esc(e.title)}</span>
     </div>`;
-  }).join('');
+  };
+  const head = t => `<div style="font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;margin:9px 0 2px">${t}</div>`;
+
+  let html = '';
+  if (started.length) html += head('Nå og i morgen') + started.map(e => row(e, 'big')).join('');
+  if (naer.length) html += head('Denne uka') + naer.map(e => row(e, '')).join('');
+  if (senere.length) html += head('Senere') + senere.map(e => row(e, 'dim')).join('');
   document.getElementById('calendar').innerHTML = '<h2>Kalender · Felles</h2>' +
-    (rows || '<div class="empty">Ingen hendelser de neste 30 dagene</div>') +
-    (cal.length > 7 ? `<div class="src">+ ${cal.length - 7} til — trykk for alle</div>` : '');
+    (html || '<div class="empty">Ingen hendelser de neste 30 dagene</div>') +
+    '<div class="src">Trykk for 60-dagersvisning · hele året i årshjulet nederst</div>';
 }
 
 function calendarModal() {

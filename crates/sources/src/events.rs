@@ -18,7 +18,7 @@ const PAGES: &[&str] = &[
 
 /// Stor-Cape Town pluss vinlandet — dashbordet er for inspirasjon, så
 /// Stellenbosch/Franschhoek er innenfor rekkevidde.
-const AREA_TERMS: &[&str] = &[
+pub(crate) const AREA_TERMS: &[&str] = &[
     "cape town", "kaapstad", "sea point", "green point", "camps bay", "clifton",
     "century city", "woodstock", "observatory", "salt river", "gardens", "bo-kaap",
     "waterfront", "v&a", "claremont", "newlands", "kirstenbosch", "rondebosch",
@@ -108,7 +108,7 @@ async fn fetch_page(client: &reqwest::Client, url: &str) -> Result<Vec<EventItem
 }
 
 /// Plukk ut <script type="application/ld+json">-innhold uten full HTML-parser.
-fn extract_ld_json(html: &str) -> Vec<String> {
+pub(crate) fn extract_ld_json(html: &str) -> Vec<String> {
     let mut blocks = vec![];
     let mut rest = html;
     while let Some(start) = rest.find("application/ld+json") {
