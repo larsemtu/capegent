@@ -1,0 +1,268 @@
+{
+  "generated_at": "2026-08-09T13:45:15.538718+00:00",
+  "weather": {
+    "temp_c": 13.6,
+    "apparent_temp_c": 8.6,
+    "precipitation_mm": 0.0,
+    "weather_code": 0,
+    "wind_speed_kmh": 24.3,
+    "wind_direction_deg": 157.0,
+    "wind_gusts_kmh": 54.4,
+    "daily": [
+      {
+        "date": "2026-08-09",
+        "temp_min_c": 8.4,
+        "temp_max_c": 14.3,
+        "weather_code": 51,
+        "precipitation_probability_pct": 100.0,
+        "wind_speed_max_kmh": 24.8
+      },
+      {
+        "date": "2026-08-10",
+        "temp_min_c": 8.4,
+        "temp_max_c": 14.9,
+        "weather_code": 51,
+        "precipitation_probability_pct": 73.0,
+        "wind_speed_max_kmh": 22.6
+      },
+      {
+        "date": "2026-08-11",
+        "temp_min_c": 8.8,
+        "temp_max_c": 18.3,
+        "weather_code": 2,
+        "precipitation_probability_pct": 0.0,
+        "wind_speed_max_kmh": 18.4
+      },
+      {
+        "date": "2026-08-12",
+        "temp_min_c": 10.1,
+        "temp_max_c": 23.3,
+        "weather_code": 2,
+        "precipitation_probability_pct": 2.0,
+        "wind_speed_max_kmh": 21.3
+      },
+      {
+        "date": "2026-08-13",
+        "temp_min_c": 14.1,
+        "temp_max_c": 25.1,
+        "weather_code": 0,
+        "precipitation_probability_pct": 4.0,
+        "wind_speed_max_kmh": 14.7
+      }
+    ]
+  },
+  "surf": [
+    {
+      "name": "Muizenberg",
+      "wave_height_m": 2.68,
+      "swell_height_m": 2.24,
+      "swell_period_s": 9.05,
+      "swell_direction_deg": 220.0,
+      "wind_speed_kmh": 26.8,
+      "wind_direction_deg": 159.0
+    },
+    {
+      "name": "Big Bay",
+      "wave_height_m": 2.88,
+      "swell_height_m": 2.7,
+      "swell_period_s": 8.95,
+      "swell_direction_deg": 226.0,
+      "wind_speed_kmh": 26.2,
+      "wind_direction_deg": 157.0
+    },
+    {
+      "name": "Llandudno",
+      "wave_height_m": 3.44,
+      "swell_height_m": 3.08,
+      "swell_period_s": 8.95,
+      "swell_direction_deg": 223.0,
+      "wind_speed_kmh": 25.5,
+      "wind_direction_deg": 160.0
+    }
+  ],
+  "news": [
+    {
+      "headline_no": "HOT SEAT: ‘Workshop Mom’ at the wheel of big change for women in Nigeria",
+      "summary_no": "Tokunbo Adegoju never intended to fix cars, but these days, on the radio and at work, she is called on as a trusted expert to diagnose vehicle defects. Her mentoring of trainees is opening doors for o",
+      "category": "other",
+      "urgency": 2,
+      "source_url": "https://www.dailymaverick.co.za/article/2026-08-09-workshop-mom-at-the-wheel-of-big-change-for-women-in-nigeria/",
+      "source": "dailymaverick",
+      "published_at": "2026-08-09T09:00:00Z"
+    },
+    {
+      "headline_no": "Tragic weekend: 11 killed in Cape Town shooting incidents",
+      "summary_no": "",
+      "category": "other",
+      "urgency": 2,
+      "source_url": "https://www.iol.co.za/news/crime-and-courts/tragic-weekend-11-killed-in-cape-town-shooting-incidents-7f76d81b-5ea9-4b92-bbd5-ab2d6ee911cb",
+      "source": "iol",
+      "published_at": "2026-08-09T08:52:23Z"
+    },
+    {
+      "headline_no": "NO HALFWAY: The lessons we learnt from Estelle, the journalist who could",
+      "summary_no": "This column about our former colleague went out to Baywatch readers in Nelson Mandela Bay on Friday, 7 August.",
+      "category": "other",
+      "urgency": 2,
+      "source_url": "https://www.dailymaverick.co.za/article/2026-08-09-the-lessons-we-learnt-from-estelle-the-journalist-who-could/",
+      "source": "dailymaverick",
+      "published_at": "2026-08-09T06:00:00Z"
+    },
+    {
+      "headline_no": "WOMEN’S DAY 1956-2026: Numbers game cannot cure South Africa of its gender-based violence",
+      "summary_no": "Statistics and budgets do not reflect whether the state’s interventions are fit for purpose and effective.",
+      "category": "other",
+      "urgency": 2,
+      "source_url": "https://www.dailymaverick.co.za/article/2026-08-09-numbers-game-cannot-cure-south-africa-of-its-violence-gender-based-violence/",
+      "source": "dailymaverick",
+      "published_at": "2026-08-09T05:34:28Z"
+    },
+    {
+      "headline_no": "THE LOWLY NEWSPAPERMAN: Wrangles over expropriation and Metro cops risk sinking to needless GNU depths",
+      "summary_no": "Although the Government of National Unity functions in unison, there are intractable issues that need clearer heads in order to avoid messy and drawn-out confrontations.",
+      "category": "other",
+      "urgency": 2,
+      "source_url": "https://www.dailymaverick.co.za/article/2026-08-09-wrangles-over-expropriation-and-metro-cops-risk-sinking-to-needless-gnu-depths/",
+      "source": "dailymaverick",
+      "published_at": "2026-08-09T05:00:00Z"
+    },
+    {
+      "headline_no": "RATTLED REVIVAL: Bomb squad saves the day for Boks against Argentina in Buenos Aires",
+      "summary_no": "The Springboks rallied in the second half when they were given the grunt to start winning the gainline battle. They beat Argentina 17-10 (halftime 10-10) in Buenos Aires thanks to strong performances ",
+      "category": "other",
+      "urgency": 2,
+      "source_url": "https://www.dailymaverick.co.za/article/2026-08-09-bomb-squad-saves-the-day-for-boks-against-argentina-in-buenos-aires/",
+      "source": "dailymaverick",
+      "published_at": "2026-08-09T00:43:34Z"
+    },
+    {
+      "headline_no": "WOMEN’S DAY 1956-2026: SA women advance in home ownership and education, but GBV and pay gap linger",
+      "summary_no": "Seventy years on, South African women have the right to be wherever they want, but they still don’t have the money, the safety or the equal share of the load.",
+      "category": "other",
+      "urgency": 2,
+      "source_url": "https://www.dailymaverick.co.za/article/2026-08-09-a-woman-s-work-is-never-done-and-she-knows-it/",
+      "source": "dailymaverick",
+      "published_at": "2026-08-09T00:00:00Z"
+    },
+    {
+      "headline_no": "MEMORABLE MOMENTS: The day Janine van Wyk helped Banyana conquer mighty Nigeria",
+      "summary_no": "In this book extract, South Africa’s former soccer captain recalls the sweetest victory of her career.",
+      "category": "other",
+      "urgency": 2,
+      "source_url": "https://www.dailymaverick.co.za/article/2026-08-08-the-day-janine-van-wyk-helped-banyana-conquer-mighty-nigeria/",
+      "source": "dailymaverick",
+      "published_at": "2026-08-08T21:05:54Z"
+    },
+    {
+      "headline_no": "FOR THE RECORD: No denying All Blacks vs the Boks is the greatest rivalry",
+      "summary_no": "After 30 years, the All Blacks have embarked on a full tour of SA, capturing the attention of the sporting world.",
+      "category": "other",
+      "urgency": 2,
+      "source_url": "https://www.dailymaverick.co.za/article/2026-08-08-no-denying-all-blacks-vs-the-boks-is-the-greatest-rivalry/",
+      "source": "dailymaverick",
+      "published_at": "2026-08-08T21:02:04Z"
+    },
+    {
+      "headline_no": "WOMEN’S DAY 1956-2026: 2026 marks the shift from glass ceiling to cyberceiling in media",
+      "summary_no": "Research reveals a gender equality backlash as many women journalists face online abuse.",
+      "category": "other",
+      "urgency": 2,
+      "source_url": "https://www.dailymaverick.co.za/article/2026-08-08-2026-marks-the-shift-from-glass-ceiling-to-cyberceiling-in-media/",
+      "source": "dailymaverick",
+      "published_at": "2026-08-08T20:42:04Z"
+    },
+    {
+      "headline_no": "LOCAL ELECTIONS 2026: New rule: DA will ringfence water, electricity revenue for services",
+      "summary_no": "The DA wants to double the number of municipalities it governs and on Saturday outlined its national election manifesto in Johannesburg.",
+      "category": "other",
+      "urgency": 2,
+      "source_url": "https://www.dailymaverick.co.za/article/2026-08-08-new-rule-da-will-ringfence-water-electricity-revenue-for-services/",
+      "source": "dailymaverick",
+      "published_at": "2026-08-08T17:32:02Z"
+    },
+    {
+      "headline_no": "WEEKEND WRAP: Madlanga effect, Cape Town housing squeeze, and why buy books we never read",
+      "summary_no": "This edition of the Weekend Wrap pays tribute to the life and work of Estelle Ellis, whose fearless reporting exposed broken hospitals, failing infrastructure and broken promises. We also unpack the s",
+      "category": "other",
+      "urgency": 2,
+      "source_url": "https://www.dailymaverick.co.za/article/2026-08-08-madlanga-effect-cape-town-housing-squeeze-and-why-buy-books-we-never-read/",
+      "source": "dailymaverick",
+      "published_at": "2026-08-08T12:47:15Z"
+    },
+    {
+      "headline_no": "INSPIRE: Children can play in Joburg’s infamous jail",
+      "summary_no": "An interactive museum is reimagining Jozi’s Old Fort for curious young minds.",
+      "category": "other",
+      "urgency": 2,
+      "source_url": "https://www.dailymaverick.co.za/article/2026-08-08-children-can-play-in-joburg-s-infamous-jail/",
+      "source": "dailymaverick",
+      "published_at": "2026-08-08T11:00:00Z"
+    },
+    {
+      "headline_no": "Meet Malaysian chef Shankar Santhiram, who is sparking SA's unlikely goat revolution",
+      "summary_no": "",
+      "category": "other",
+      "urgency": 2,
+      "source_url": "https://www.iol.co.za/lifestyle/food-drink/meet-malaysian-chef-shankar-santhiram-who-is-sparking-sas-unlikely-goat-revolution-a148d81f-9180-40d2-871d-2ecbd8e93f65",
+      "source": "iol",
+      "published_at": "2026-08-08T08:13:10Z"
+    },
+    {
+      "headline_no": "WINNING START: Ill-disciplined All Blacks survive Stormers scare in tour opener",
+      "summary_no": "The All Blacks started their South African tour with a 38-21 (halftime 14-7) victory over the Stormers at DHL Stadium on Friday.",
+      "category": "other",
+      "urgency": 2,
+      "source_url": "https://www.dailymaverick.co.za/article/2026-08-07-ill-disciplined-all-blacks-survive-stormers-scare-in-tour-opener/",
+      "source": "dailymaverick",
+      "published_at": "2026-08-07T22:33:04Z"
+    },
+    {
+      "headline_no": "I have a picture for you! 01 August-07 August 2026",
+      "summary_no": "The First Thing newsletter's Ever-lasting Subscriber Photo Gallery.",
+      "category": "other",
+      "urgency": 2,
+      "source_url": "https://www.dailymaverick.co.za/article/2026-08-07-i-have-a-picture-for-you-01-august-07-august-2026/",
+      "source": "dailymaverick",
+      "published_at": "2026-08-07T18:05:23Z"
+    },
+    {
+      "headline_no": "EXCLUSIVE: Another UCT leadership crisis: 34 complaints, secret findings and a VC in court",
+      "summary_no": "A new leadership row unfolding at the University of Cape Town has seen Vice-Chancellor Mosa Moshabela taking the UCT Council to court over investigations into his conduct.",
+      "category": "other",
+      "urgency": 2,
+      "source_url": "https://www.dailymaverick.co.za/article/2026-08-07-another-uct-leadership-crisis-34-complaints-secret-findings-and-a-vc-in-court/",
+      "source": "dailymaverick",
+      "published_at": "2026-08-07T16:08:58Z"
+    },
+    {
+      "headline_no": "Construction Update: From ashes to Assembly as Parliament targets 2027 return",
+      "summary_no": "Five years after a devastating fire, Parliament says its rebuilt National Assembly will be ready to host the 2027 State of the Nation Address.",
+      "category": "other",
+      "urgency": 2,
+      "source_url": "https://www.dailymaverick.co.za/article/2026-08-07-from-ashes-to-assembly-as-parliament-targets-2027-return/",
+      "source": "dailymaverick",
+      "published_at": "2026-08-07T15:58:04Z"
+    },
+    {
+      "headline_no": "National Water Action Plan gets the diagnosis right but misses the real fix",
+      "summary_no": "The action plan continues to treat water primarily as an engineering, management and service delivery issue rather than as a systemic national crisis driven by the interaction of failing institutions,",
+      "category": "other",
+      "urgency": 2,
+      "source_url": "https://www.dailymaverick.co.za/opinionista/2026-08-07-national-water-action-plan-gets-the-diagnosis-right-but-misses-the-real-fix/",
+      "source": "dailymaverick",
+      "published_at": "2026-08-07T14:21:32Z"
+    },
+    {
+      "headline_no": "MEDICAL ETHICS: Formula firms targeting healthcare workers to shape feeding advice",
+      "summary_no": "Experts called on healthcare workers to promote breastfeeding and protect parents and children from the commercial milk formula industry’s influences at a panel discussion for World Breastfeeding We",
+      "category": "other",
+      "urgency": 2,
+      "source_url": "https://www.dailymaverick.co.za/article/2026-08-07-formula-firms-targeting-healthcare-workers-to-shape-feeding-advice/",
+      "source": "dailymaverick",
+      "published_at": "2026-08-07T14:19:41Z"
+    }
+  ],
+  "load_shedding": null,
+  "calendar": [],
+  "events": []
+}

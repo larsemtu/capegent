@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cape Town</title>
+<style>
+  :root {
+    --bg: #0b0f14;
+    --panel: #131a22;
+    --border: #1f2a36;
+    --text: #e8eef4;
+    --muted: #8fa1b3;
+    --accent: #4cc2ff;
+    --warn: #ffb454;
+    --alert: #ff5c5c;
+    --ok: #3fdf8f;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    overflow: hidden;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  header {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+  }
+  header h1 { font-size: 30px; font-weight: 700; letter-spacing: 2px; }
+  #clock { font-size: 30px; font-weight: 300; font-variant-numeric: tabular-nums; }
+  #updated { margin-left: auto; color: var(--muted); font-size: 15px; }
+  #updated.stale { color: var(--warn); }
+
+  main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 27fr 46fr 27fr;
+    gap: 14px;
+    min-height: 0;
+  }
+  .col { display: flex; flex-direction: column; gap: 14px; min-height: 0; }
+  section {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    overflow: hidden;
+  }
+  section h2 {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  /* Vær */
+  .now { display: flex; align-items: center; gap: 16px; }
+  .now .icon { font-size: 52px; line-height: 1; }
+  .now .temp { font-size: 46px; font-weight: 200; }
+  .now .desc { color: var(--muted); font-size: 15px; }
+  .wind-row { display: flex; gap: 18px; margin-top: 10px; font-size: 16px; }
+  .wind-row .lbl { color: var(--muted); font-size: 12px; display: block; }
+  .daily { display: flex; margin-top: 12px; gap: 6px; }
+  .daily .day {
+    flex: 1; text-align: center; background: rgba(255,255,255,.03);
+    border-radius: 8px; padding: 8px 2px; font-size: 14px;
+  }
+  .daily .day .d { color: var(--muted); font-size: 12px; text-transform: uppercase; }
+  .daily .day .i { font-size: 22px; margin: 2px 0; }
+
+  /* Surf */
+  .spot { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; padding: 9px 0; border-bottom: 1px solid var(--border); }
+  .spot:last-child { border-bottom: none; padding-bottom: 0; }
+  .spot .name { font-size: 17px; font-weight: 600; }
+  .spot .meta { color: var(--muted); font-size: 13.5px; grid-column: 1 / -1; }
+  .spot .h { font-size: 21px; font-weight: 300; color: var(--accent); }
+
+  /* Nyheter */
+  #news { flex: 1; display: flex; flex-direction: column; }
+  .news-list { flex: 1; display: flex; flex-direction: column; justify-content: space-between; gap: 8px; overflow: hidden; }
+  .news-item { padding: 8px 0 8px 12px; border-left: 3px solid var(--border); }
+  .news-item.hot { border-left-color: var(--alert); }
+  .news-item .head { font-size: 19px; font-weight: 600; line-height: 1.25; }
+  .news-item .sum { color: var(--muted); font-size: 14.5px; line-height: 1.35; margin-top: 3px; }
+  .news-item .meta { font-size: 12px; color: var(--muted); margin-top: 4px; display: flex; gap: 8px; align-items: center; }
+  .badge {
+    font-size: 11px; padding: 1px 8px; border-radius: 99px;
+    background: rgba(76,194,255,.12); color: var(--accent); text-transform: uppercase; letter-spacing: .5px;
+  }
+  .badge.crime { background: rgba(255,92,92,.12); color: var(--alert); }
+  .badge.traffic { background: rgba(255,180,84,.14); color: var(--warn); }
+  .badge.weather { background: rgba(63,223,143,.12); color: var(--ok); }
+
+  /* Load shedding */
+  #loadshedding .stage { display: flex; align-items: center; gap: 14px; }
+  #loadshedding .num { font-size: 40px; font-weight: 200; }
+  #loadshedding .num.ok { color: var(--ok); }
+  #loadshedding .num.bad { color: var(--alert); }
+  #loadshedding .note { color: var(--muted); font-size: 13px; }
+
+  /* Kalender + events */
+  .cal-item { display: flex; gap: 12px; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 15px; }
+  .cal-item:last-child { border-bottom: none; }
+  .cal-item .when { color: var(--accent); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .empty { color: var(--muted); font-size: 14px; font-style: italic; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>CAPE TOWN</h1>
+    <div id="clock">--:--</div>
+    <div id="updated">venter på data …</div>
+  </header>
+  <main>
+    <div class="col">
+      <section id="weather">
+        <h2>Vær · Green Point</h2>
+        <div class="empty">Ingen data ennå</div>
+      </section>
+      <section id="surf">
+        <h2>Surf</h2>
+        <div class="empty">Ingen data ennå</div>
+      </section>
+    </div>
+    <div class="col">
+      <section id="news">
+        <h2>Nyheter</h2>
+        <div class="news-list"><div class="empty">Ingen data ennå</div></div>
+      </section>
+    </div>
+    <div class="col">
+      <section id="loadshedding">
+        <h2>Load shedding</h2>
+        <div class="empty">Ingen data</div>
+      </section>
+      <section id="calendar">
+        <h2>Kalender</h2>
+        <div class="empty">Ingen hendelser</div>
+      </section>
+      <section id="events">
+        <h2>Det skjer</h2>
+        <div class="empty">Kommer i v2</div>
+      </section>
+    </div>
+  </main>
+
+<script>
+const TZ = 'Africa/Johannesburg';
+const DATA_URL = '../data/latest.json';
+
+const WMO = {
+  0:  ['☀️','Klarvær'],   1: ['🌤️','Lettskyet'], 2: ['⛅','Delvis skyet'], 3: ['☁️','Overskyet'],
+  45: ['🌫️','Tåke'],      48: ['🌫️','Rimtåke'],
+  51: ['🌦️','Lett yr'],   53: ['🌦️','Yr'],       55: ['🌧️','Tett yr'],
+  56: ['🌧️','Yr, is'],    57: ['🌧️','Yr, is'],
+  61: ['🌧️','Lett regn'], 63: ['🌧️','Regn'],     65: ['🌧️','Kraftig regn'],
+  66: ['🌧️','Isregn'],    67: ['🌧️','Isregn'],
+  71: ['🌨️','Lett snø'],  73: ['🌨️','Snø'],      75: ['❄️','Kraftig snø'], 77: ['❄️','Snøkorn'],
+  80: ['🌦️','Regnbyger'], 81: ['🌧️','Byger'],    82: ['⛈️','Kraftige byger'],
+  85: ['🌨️','Snøbyger'],  86: ['🌨️','Snøbyger'],
+  95: ['⛈️','Torden'],    96: ['⛈️','Torden, hagl'], 99: ['⛈️','Torden, hagl'],
+};
+const wmo = c => WMO[c] || ['🌡️',''];
+
+const DIRS = ['N','NNØ','NØ','ØNØ','Ø','ØSØ','SØ','SSØ','S','SSV','SV','VSV','V','VNV','NV','NNV'];
+const compass = deg => DIRS[Math.round(deg / 22.5) % 16];
+
+const CAT = {
+  crime: 'Krim', traffic: 'Trafikk', weather: 'Vær', politics: 'Politikk',
+  event: 'Event', infrastructure: 'Infrastruktur', other: 'Nyheter',
+};
+
+const esc = s => String(s ?? '').replace(/[&<>"]/g,
+  c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function tickClock() {
+  document.getElementById('clock').textContent =
+    new Intl.DateTimeFormat('no', { hour: '2-digit', minute: '2-digit', timeZone: TZ }).format(new Date());
+}
+
+function relTime(iso) {
+  if (!iso) return '';
+  const mins = Math.round((Date.now() - new Date(iso).getTime()) / 60000);
+  if (mins < 60) return mins + ' min siden';
+  if (mins < 60 * 24) return Math.round(mins / 60) + ' t siden';
+  return Math.round(mins / 1440) + ' d siden';
+}
+
+function render(data) {
+  const upd = document.getElementById('updated');
+  upd.textContent = 'Oppdatert ' + relTime(data.generated_at);
+  upd.classList.toggle('stale',
+    Date.now() - new Date(data.generated_at).getTime() > 90 * 60000);
+
+  // Vær
+  if (data.weather) {
+    const w = data.weather;
+    const [icon, desc] = wmo(w.weather_code);
+    const days = (w.daily || []).slice(1, 5).map(d => {
+      const name = new Intl.DateTimeFormat('no', { weekday: 'short', timeZone: TZ })
+        .format(new Date(d.date + 'T12:00:00'));
+      return `<div class="day">
+        <div class="d">${esc(name)}</div>
+        <div class="i">${wmo(d.weather_code)[0]}</div>
+        <div>${Math.round(d.temp_max_c)}° <span style="color:var(--muted)">${Math.round(d.temp_min_c)}°</span></div>
+      </div>`;
+    }).join('');
+    document.getElementById('weather').innerHTML = `
+      <h2>Vær · Green Point</h2>
+      <div class="now">
+        <div class="icon">${icon}</div>
+        <div>
+          <div class="temp">${Math.round(w.temp_c)}°</div>
+          <div class="desc">${esc(desc)} · føles som ${Math.round(w.apparent_temp_c)}°</div>
+        </div>
+      </div>
+      <div class="wind-row">
+        <div><span class="lbl">Vind</span>${Math.round(w.wind_speed_kmh)} km/t ${compass(w.wind_direction_deg)}</div>
+        <div><span class="lbl">Kast</span>${Math.round(w.wind_gusts_kmh)} km/t</div>
+        <div><span class="lbl">Nedbør</span>${w.precipitation_mm} mm</div>
+      </div>
+      <div class="daily">${days}</div>`;
+  }
+
+  // Surf
+  if (data.surf && data.surf.length) {
+    const spots = data.surf.map(s => `
+      <div class="spot">
+        <div class="name">${esc(s.name)}</div>
+        <div class="h">${s.swell_height_m.toFixed(1)} m</div>
+        <div class="meta">
+          ${s.swell_period_s.toFixed(0)} s · svell fra ${compass(s.swell_direction_deg)} ·
+          vind ${Math.round(s.wind_speed_kmh)} km/t ${compass(s.wind_direction_deg)}
+        </div>
+      </div>`).join('');
+    document.getElementById('surf').innerHTML = `<h2>Surf</h2>${spots}`;
+  }
+
+  // Nyheter
+  if (data.news && data.news.length) {
+    const items = data.news.slice(0, 6).map(n => `
+      <div class="news-item ${n.urgency >= 4 ? 'hot' : ''}">
+        <div class="head">${esc(n.headline_no)}</div>
+        <div class="sum">${esc(n.summary_no)}</div>
+        <div class="meta">
+          <span class="badge ${esc(n.category)}">${CAT[n.category] || esc(n.category)}</span>
+          <span>${esc(n.source)}</span>
+          <span>${relTime(n.published_at)}</span>
+        </div>
+      </div>`).join('');
+    document.querySelector('#news .news-list').innerHTML = items;
+  }
+
+  // Load shedding
+  const ls = document.getElementById('loadshedding');
+  if (data.load_shedding) {
+    const s = data.load_shedding;
+    ls.innerHTML = `<h2>Load shedding</h2>
+      <div class="stage">
+        <div class="num ${s.stage === 0 ? 'ok' : 'bad'}">${s.stage === 0 ? '✓' : 'Stage ' + s.stage}</div>
+        <div class="note">${s.stage === 0 ? 'Ingen load shedding' : ''} ${esc(s.note)}</div>
+      </div>`;
+  }
+
+  // Kalender
+  if (data.calendar && data.calendar.length) {
+    const rows = data.calendar.map(e => {
+      const when = e.all_day
+        ? new Intl.DateTimeFormat('no', { day: 'numeric', month: 'short' }).format(new Date(e.start + 'T12:00:00'))
+        : new Intl.DateTimeFormat('no', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date(e.start));
+      return `<div class="cal-item"><span class="when">${esc(when)}</span><span>${esc(e.title)}</span></div>`;
+    }).join('');
+    document.getElementById('calendar').innerHTML = `<h2>Kalender</h2>${rows}`;
+  }
+
+  // Events
+  if (data.events && data.events.length) {
+    const rows = data.events.map(e =>
+      `<div class="cal-item"><span class="when">${esc(e.date)}</span><span>${esc(e.title)} · ${esc(e.venue)}</span></div>`
+    ).join('');
+    document.getElementById('events').innerHTML = `<h2>Det skjer</h2>${rows}`;
+  }
+}
+
+let lastGood = null;
+async function refresh() {
+  try {
+    const resp = await fetch(DATA_URL + '?t=' + Date.now(), { cache: 'no-store' });
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    lastGood = await resp.json();
+    render(lastGood);
+  } catch (err) {
+    // Behold siste kjente data på skjermen; marker bare alderen
+    console.warn('fetch feilet:', err);
+    if (lastGood) render(lastGood);
+  }
+}
+
+tickClock();
+setInterval(tickClock, 1000);
+refresh();
+setInterval(refresh, 60000);
+</script>
+</body>
+</html>
