@@ -524,13 +524,18 @@ function renderCalendar(cal) {
 }
 
 function renderTodos(todos) {
-  const rows = todos.map(t => `
-    <div class="list-item">
+  const rows = todos.slice(0, 8).map(t => {
+    const due = t.due
+      ? ` <span style="color:${new Date(t.due) < new Date() ? 'var(--alert)' : 'var(--warn)'};font-size:12px">${new Intl.DateTimeFormat('no', { day: 'numeric', month: 'short' }).format(new Date(t.due + 'T12:00:00'))}</span>`
+      : '';
+    return `<div class="list-item">
       <span class="when">${esc(t.status)}</span>
-      <span>${esc(t.title)}${t.project ? `<span style="color:var(--muted)"> · ${esc(t.project)}</span>` : ''}</span>
-    </div>`).join('');
+      <span>${esc(t.title)}${t.project ? `<span style="color:var(--muted)"> · ${esc(t.project)}</span>` : ''}${due}</span>
+    </div>`;
+  }).join('');
   document.getElementById('todos').innerHTML = '<h2>Gjøremål</h2>' +
-    (rows || '<div class="empty">Kobles til Linear</div>');
+    (rows || '<div class="empty">Kobles til Linear</div>') +
+    (rows ? '<div class="src">Linear</div>' : '');
 }
 
 /* ---------- Hovedrender ---------- */

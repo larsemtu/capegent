@@ -8,7 +8,7 @@ mod llm;
 use anyhow::Result;
 use futures::future::join_all;
 use schema::{DashboardData, NewsEntry, SurfSpot};
-use sources::{article, calendar, events, loadshedding, marine, rss::RssSource, weather, RawItem, Source};
+use sources::{article, calendar, events, linear, loadshedding, marine, rss::RssSource, weather, RawItem, Source};
 use std::collections::HashSet;
 use std::path::Path;
 use std::time::Duration;
@@ -49,12 +49,13 @@ async fn main() -> Result<()> {
 
     let cache = dedup::Cache::open(Path::new(".cache/dedup.redb"))?;
 
-    let (weather_res, surf, loadshedding_res, calendar_res, events_res, raw_news) = tokio::join!(
+    let (weather_res, surf, loadshedding_res, calendar_res, events_res, todos_res, raw_news) = tokio::join!(
         weather::fetch(&client),
         fetch_surf(&client),
         loadshedding::fetch(&client),
         calendar::fetch(&client),
         events::fetch(&client),
+        linear::fetch(&client),
         fetch_news(&client),
     );
 
@@ -94,8 +95,13 @@ async fn main() -> Result<()> {
                 previous.events
             }
         },
-        // Fylles når Linear-integrasjonen kobles på
-        todos: previous.todos,
+        todos: match todos_res {
+            Ok(todos) => todos,
+            Err(e) => {
+                warn!("linear feilet, bruker forrige: {e:#}");
+                previous.todos
+            }
+        },
         surf_summary_no: cache.get_meta("surf_summary_no").or(previous.surf_summary_no),
     };
 

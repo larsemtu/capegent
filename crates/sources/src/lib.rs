@@ -5,6 +5,7 @@
 pub mod article;
 pub mod calendar;
 pub mod events;
+pub mod linear;
 pub mod loadshedding;
 pub mod marine;
 pub mod rss;
