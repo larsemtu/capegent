@@ -197,6 +197,10 @@ pub struct LoadShedding {
 pub struct CalendarEvent {
     /// ISO 8601, lokal tid
     pub start: String,
+    /// Sluttdato/-tid. For heldagsavtaler er denne EKSLUSIV (iCal-semantikk):
+    /// en ferie 10.-12. aug har end = 13. aug
+    #[serde(default)]
+    pub end: Option<String>,
     pub title: String,
     pub all_day: bool,
 }

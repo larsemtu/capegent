@@ -10,8 +10,8 @@ use schema::CalendarEvent;
 use std::io::BufReader;
 use tracing::warn;
 
-const HORIZON_DAYS: i64 = 30;
-const MAX_EVENTS: usize = 20;
+const HORIZON_DAYS: i64 = 370;
+const MAX_EVENTS: usize = 120;
 
 /// Cape Town har ikke sommertid, fast UTC+2 holder.
 fn sast() -> FixedOffset {
@@ -63,11 +63,13 @@ pub fn parse_ics(body: &str) -> Vec<(NaiveDateTime, CalendarEvent)> {
         for event in cal.events {
             let mut title = String::new();
             let mut dtstart_raw: Option<String> = None;
+            let mut dtend_raw: Option<String> = None;
             let mut rrule_raw: Option<String> = None;
             for prop in &event.properties {
                 match prop.name.as_str() {
                     "SUMMARY" => title = prop.value.clone().unwrap_or_default(),
                     "DTSTART" => dtstart_raw = prop.value.clone(),
+                    "DTEND" => dtend_raw = prop.value.clone(),
                     "RRULE" => rrule_raw = prop.value.clone(),
                     _ => {}
                 }
@@ -78,6 +80,12 @@ pub fn parse_ics(body: &str) -> Vec<(NaiveDateTime, CalendarEvent)> {
             let Some((first, all_day)) = parse_dtstart(&raw) else {
                 continue;
             };
+            // Varighet fra DTEND, gjenbrukes per forekomst for gjentakende
+            let duration = dtend_raw
+                .as_deref()
+                .and_then(parse_dtstart)
+                .map(|(end, _)| end - first)
+                .filter(|d| d.num_seconds() > 0);
 
             let starts: Vec<NaiveDateTime> = match &rrule_raw {
                 // Gjentakende: ekspander forekomster innen horisonten
@@ -89,17 +97,26 @@ pub fn parse_ics(body: &str) -> Vec<(NaiveDateTime, CalendarEvent)> {
             };
 
             for dt in starts {
-                if dt.date() < today || dt.date() > horizon {
+                let event_end = duration.map(|d| dt + d);
+                // Behold pågående flerdagersavtaler (ferier!) selv om starten
+                // er passert
+                let effective_end = event_end.unwrap_or(dt);
+                if effective_end.date() < today || dt.date() > horizon {
                     continue;
                 }
-                let iso = if all_day {
-                    dt.date().to_string()
+                let fmt = |t: NaiveDateTime| if all_day {
+                    t.date().to_string()
                 } else {
-                    dt.format("%Y-%m-%dT%H:%M").to_string()
+                    t.format("%Y-%m-%dT%H:%M").to_string()
                 };
                 events.push((
                     dt,
-                    CalendarEvent { start: iso, title: title.clone(), all_day },
+                    CalendarEvent {
+                        start: fmt(dt),
+                        end: event_end.map(fmt),
+                        title: title.clone(),
+                        all_day,
+                    },
                 ));
             }
         }

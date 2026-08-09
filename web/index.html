@@ -98,6 +98,32 @@
     color: #08110c; text-transform: uppercase; letter-spacing: .5px; white-space: nowrap;
   }
 
+  /* Årshjul — full bredde, horisontal scroll */
+  #yearwheel { padding-bottom: 8px; }
+  .yw-scroll { overflow-x: auto; scrollbar-width: thin; }
+  .yw-inner { position: relative; }
+  .yw-month {
+    position: absolute; top: 0; bottom: 0; border-left: 1px solid var(--border);
+    color: var(--muted); font-size: 11px; text-transform: uppercase;
+    letter-spacing: 1px; padding: 2px 0 0 7px;
+  }
+  .yw-now { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--alert); z-index: 3; }
+  .yw-bar {
+    position: absolute; height: 22px; border-radius: 6px; font-size: 12px;
+    line-height: 22px; padding: 0 8px; white-space: nowrap; overflow: hidden;
+    background: rgba(76,194,255,.18); color: var(--accent);
+    border: 1px solid rgba(76,194,255,.35); z-index: 2;
+  }
+  .yw-bar.multi { background: rgba(63,223,143,.16); color: var(--ok); border-color: rgba(63,223,143,.4); }
+  .yw-dot {
+    position: absolute; z-index: 2; font-size: 11.5px; color: var(--text);
+    white-space: nowrap; line-height: 20px;
+  }
+  .yw-dot::before {
+    content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 99px;
+    background: var(--accent); margin-right: 5px; vertical-align: middle;
+  }
+
   /* Nyheter — kompakt, under hovedgriden */
   .news-list { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 14px; }
   .news-item { padding: 5px 8px 5px 11px; border-left: 3px solid var(--border); border-radius: 4px; }
@@ -238,6 +264,12 @@
       </section>
     </div>
   </main>
+  <section id="yearwheel">
+    <h2>Årshjul · 12 måneder</h2>
+    <div class="yw-scroll"><div class="yw-inner" id="yw-inner">
+      <div class="empty">Kommer når kalenderen har avtaler</div>
+    </div></div>
+  </section>
   <section id="news">
     <h2>Nyheter</h2>
     <div class="news-list"><div class="empty">Ingen data ennå</div></div>
@@ -555,7 +587,10 @@ function renderCalendar(cal) {
 }
 
 function calendarModal() {
-  const cal = D?.calendar || [];
+  // Modalen viser de neste 60 dagene — årshjulet tar langtidsbildet
+  const cutoff = new Date(); cutoff.setDate(cutoff.getDate() + 60);
+  const cal = (D?.calendar || []).filter(e =>
+    new Date(e.start.slice(0, 10) + 'T12:00:00') <= cutoff);
   if (!cal.length) return;
   let html = '', lastDay = '';
   for (const e of cal) {
@@ -605,6 +640,76 @@ function todosModal() {
 }
 document.getElementById('todos').addEventListener('click', todosModal);
 
+/* ---------- Årshjul ---------- */
+const MONTH_PX = 300;
+let ywScrolled = false;
+
+function renderYearWheel(cal) {
+  const inner = document.getElementById('yw-inner');
+  const start = new Date(); start.setDate(1); start.setHours(0, 0, 0, 0);
+  const months = [];
+  for (let i = 0; i < 12; i++) {
+    months.push(new Date(start.getFullYear(), start.getMonth() + i, 1));
+  }
+  const rangeEnd = new Date(start.getFullYear(), start.getMonth() + 12, 1);
+  const xPos = date => {
+    const mIdx = (date.getFullYear() - start.getFullYear()) * 12 + date.getMonth() - start.getMonth();
+    const dim = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+    return (mIdx + (date.getDate() - 1) / dim) * MONTH_PX;
+  };
+
+  // Avtaler -> plasserte elementer
+  const items = cal.map(e => {
+    const s = new Date(e.start.slice(0, 10) + 'T12:00:00');
+    let en = e.end ? new Date(e.end.slice(0, 10) + 'T12:00:00') : null;
+    if (en && e.all_day) en.setDate(en.getDate() - 1); // iCal-eksklusiv slutt
+    if (!en || en < s) en = s;
+    return { s, en, e };
+  }).filter(i => i.en >= start && i.s < rangeEnd)
+    .sort((a, b) => a.s - b.s || b.en - a.en);
+
+  // Lane-tildeling så overlappende avtaler stables
+  const laneEnds = [];
+  const placed = items.map(it => {
+    const x1 = Math.max(0, xPos(it.s));
+    const multi = (it.en - it.s) > 86400000;
+    const w = multi ? Math.max(60, xPos(it.en) + MONTH_PX / 31 - x1) : 0;
+    const needed = x1 + (multi ? w : 140);
+    let lane = laneEnds.findIndex(end => x1 > end + 8);
+    if (lane === -1) { lane = laneEnds.length; laneEnds.push(0); }
+    laneEnds[lane] = needed;
+    return { ...it, x1, w, multi, lane };
+  });
+  const laneCount = Math.max(3, laneEnds.length);
+  const topOff = 26;
+  const height = topOff + laneCount * 27 + 6;
+
+  let html = '';
+  months.forEach((m, i) => {
+    html += `<div class="yw-month" style="left:${i * MONTH_PX}px;width:${MONTH_PX}px">${
+      new Intl.DateTimeFormat('no', { month: 'long', year: i === 0 || m.getMonth() === 0 ? 'numeric' : undefined }).format(m)}</div>`;
+  });
+  const now = new Date();
+  html += `<div class="yw-now" style="left:${xPos(now)}px"></div>`;
+  for (const p of placed) {
+    const top = topOff + p.lane * 27;
+    if (p.multi) {
+      html += `<div class="yw-bar multi" style="left:${p.x1}px;width:${p.w}px;top:${top}px" title="${esc(p.e.title)}">${esc(p.e.title)}</div>`;
+    } else {
+      html += `<div class="yw-dot" style="left:${p.x1}px;top:${top}px" title="${esc(p.e.title)}">${esc(p.e.title)}</div>`;
+    }
+  }
+  inner.style.width = (12 * MONTH_PX) + 'px';
+  inner.style.height = height + 'px';
+  inner.innerHTML = html;
+
+  // Autoscroll til i dag (litt margin), kun første render
+  if (!ywScrolled) {
+    inner.parentElement.scrollLeft = Math.max(0, xPos(now) - 120);
+    ywScrolled = true;
+  }
+}
+
 /* ---------- Hovedrender ---------- */
 function render(data) {
   D = data;
@@ -618,6 +723,7 @@ function render(data) {
   if (data.news?.length) renderNews(data.news);
   renderEvents(data.events || []);
   renderCalendar(data.calendar || []);
+  renderYearWheel(data.calendar || []);
   renderTodos(data.todos || []);
 
   const ls = document.getElementById('loadshedding');
