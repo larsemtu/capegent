@@ -66,10 +66,3 @@ jobs:
               --data-binary @data/latest.json \
               "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/storage/kv/namespaces/$CLOUDFLARE_KV_NAMESPACE_ID/values/latest.json"
           fi
-
-      # Overgangsfase til Cloudflare Access er verifisert — fjernes når
-      # GitHub Pages slås av, og FØR persondata (kalender) aktiveres
-      - uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "data: oppdater latest.json"
-          file_pattern: data/latest.json

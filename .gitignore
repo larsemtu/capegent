@@ -2,3 +2,4 @@
 /.cache
 .env
 .DS_Store
+/data/latest.json
