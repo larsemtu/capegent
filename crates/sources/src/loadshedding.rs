@@ -22,7 +22,7 @@ struct AreaStatus {
 /// EskomSePush-status for Cape Town. Returnerer Ok(None) uten token,
 /// slik at lokal kjøring fungerer uten oppsett.
 pub async fn fetch(client: &reqwest::Client) -> Result<Option<LoadShedding>> {
-    let Ok(token) = std::env::var("SEPUSH_TOKEN") else {
+    let Some(token) = crate::env_nonempty("SEPUSH_TOKEN") else {
         return Ok(None);
     };
     let resp: StatusResp = client

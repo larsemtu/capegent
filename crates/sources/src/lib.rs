@@ -53,6 +53,12 @@ pub fn strip_html(input: &str) -> String {
     out.split_whitespace().collect::<Vec<_>>().join(" ")
 }
 
+/// Miljøvariabel som er satt OG ikke-tom. `.env`-maler og Actions-secrets
+/// uten verdi gir tom streng, som skal bety «ikke konfigurert».
+pub fn env_nonempty(key: &str) -> Option<String> {
+    std::env::var(key).ok().filter(|v| !v.trim().is_empty())
+}
+
 /// Kutt en streng på nærmeste char-grense ≤ max_bytes (String::truncate
 /// panikker midt i en multibyte-char).
 pub fn truncate_chars(s: &mut String, max_bytes: usize) {

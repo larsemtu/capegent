@@ -13,7 +13,7 @@ fn sast() -> FixedOffset {
 /// Returnerer de neste 5 kommende hendelsene. Ok(vec![]) uten URL.
 /// Begrensning v1: RRULE (gjentakende hendelser) ekspanderes ikke.
 pub async fn fetch(client: &reqwest::Client) -> Result<Vec<CalendarEvent>> {
-    let Ok(url) = std::env::var("CALENDAR_ICS_URL") else {
+    let Some(url) = crate::env_nonempty("CALENDAR_ICS_URL") else {
         return Ok(vec![]);
     };
     let body = client

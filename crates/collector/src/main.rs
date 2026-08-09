@@ -152,7 +152,7 @@ async fn process_news(
     }
     info!(cached = entries.len(), new = fresh.len(), "dedup mot cache");
 
-    let api_key = std::env::var("ANTHROPIC_API_KEY").ok();
+    let api_key = sources::env_nonempty("ANTHROPIC_API_KEY");
     for chunk in fresh.chunks(LLM_BATCH) {
         match &api_key {
             Some(key) => match llm::summarize(client, key, chunk).await {
