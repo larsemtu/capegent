@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-09T14:15:07.512702+00:00",
+  "generated_at": "2026-08-09T14:25:21.888679584+00:00",
   "weather": {
     "temp_c": 13.3,
     "apparent_temp_c": 8.4,
@@ -82,17 +82,17 @@
   ],
   "news": [
     {
-      "headline_no": "INSPIRASJON: 'Workshop Mom' leder veien for kvinner i Nigeria",
-      "summary_no": "Tokunbo Adegoju har blitt en tillittet ekspert på bilreparasjon og er nå en mentor for unge kvinner i bransjen. Hun åpner dører for andre gjennom sitt dedikerte arbeid.",
+      "headline_no": "«Workshop Mom» leder teknologiskift for kvinner i Nigeria",
+      "summary_no": "Tokunbo Adegoju er blitt en respektert ekspert på bilreparasjon i Nigeria og inspirerer andre kvinner gjennom mentoring og radioprogram. Hun åpner nye dører for kvinners deltagelse i automotivindustrien.",
       "category": "other",
-      "urgency": 1,
+      "urgency": 2,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-09-workshop-mom-at-the-wheel-of-big-change-for-women-in-nigeria/",
       "source": "dailymaverick",
       "published_at": "2026-08-09T09:00:00Z"
     },
     {
-      "headline_no": "TRAGISK HELG: 11 personer drept i skyteepisoder i Cape Town",
-      "summary_no": "En tragisk helg i Cape Town resulterte i 11 dødsfall fra skyteepisoder. Dette understreker den vedvarende problemet med væpnet vold i byen.",
+      "headline_no": "Tragisk helg: 11 drept i skyteepisoder i Cape Town",
+      "summary_no": "11 personer ble drept i flere skyteepisoder i Cape Town i løpet av helgen. Dette understreker den alvorlige voldsproblematikken i byen.",
       "category": "crime",
       "urgency": 5,
       "source_url": "https://www.iol.co.za/news/crime-and-courts/tragic-weekend-11-killed-in-cape-town-shooting-incidents-7f76d81b-5ea9-4b92-bbd5-ab2d6ee911cb",
@@ -100,8 +100,8 @@
       "published_at": "2026-08-09T08:52:23Z"
     },
     {
-      "headline_no": "MINNEORD: Journalisten Estelle som kunne så mye",
-      "summary_no": "En minneord over tidligere kollega Estelle som var kjent for sitt dedikerte journalistiske arbeid. Hennes arbeid bidro til å avsløre og eksponere flere samfunnsproblemer.",
+      "headline_no": "Erindringer om Estelle: Journalisten som kunne gjøre en forskjell",
+      "summary_no": "En minneartikkel om kollega Estelle som imponerte gjennom sitt journalistiske arbeid. Artikkelen ble publisert til leserne i Nelson Mandela Bay.",
       "category": "other",
       "urgency": 1,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-09-the-lessons-we-learnt-from-estelle-the-journalist-who-could/",
@@ -109,44 +109,44 @@
       "published_at": "2026-08-09T06:00:00Z"
     },
     {
-      "headline_no": "KVINNEDAGEN 1956-2026: Statistikk løser ikke Sør-Afrikas kjønnsbaserte vold",
-      "summary_no": "En analyse av hvordan statistikk og budsjetter ikke reflekterer hvorvidt statens tiltak mot kjønnsbasert vold er effektive. Problemet krever dypere løsninger enn tall.",
+      "headline_no": "Tall løser ikke kjønnsbasert vold i Sør-Afrika",
+      "summary_no": "Statistikker og budsjetter reflekterer ikke om statens innsats mot kjønnsbasert vold er effektiv. Artikkelen stilles spørsmål ved om metodene brukt faktisk løser problemet.",
       "category": "politics",
-      "urgency": 3,
+      "urgency": 4,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-09-numbers-game-cannot-cure-south-africa-of-its-violence-gender-based-violence/",
       "source": "dailymaverick",
       "published_at": "2026-08-09T05:34:28Z"
     },
     {
-      "headline_no": "GNU-STRIDIGHETER: Ekspropriasjon og metro-politi risikerer å dykke ned i unødige konflikter",
-      "summary_no": "Regjeringen av nasjonalt enhet står overfor vanskelige spørsmål om ekspropriasjon og metro-politi som truer med å skape unødvendige konfrontasjoner.",
+      "headline_no": "GNU-stridigheter om ekspropriasjon og Metro-politi riskerer å dra på dybden",
+      "summary_no": "Selv om Regjeringen av Nasjonal Enhet fungerer samlet, er det intrikate spørsmål som krever klarere tankegang for å unngå rotete konfrontasjoner. Stridigheter over ekspropriasjon og Metro-politi truer stabiliteten.",
       "category": "politics",
-      "urgency": 2,
+      "urgency": 3,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-09-wrangles-over-expropriation-and-metro-cops-risk-sinking-to-needless-gnu-depths/",
       "source": "dailymaverick",
       "published_at": "2026-08-09T05:00:00Z"
     },
     {
-      "headline_no": "RUGBY: Boks slår Argentina etter sterk andreomgang i Buenos Aires",
-      "summary_no": "Springboks vant mot Argentina 17-10 i Buenos Aires med sterk innsats fra utskiftingsspillerne i andreomgang. En imponerende comeback sikret seieren.",
+      "headline_no": "Springboks vinner mot Argentina takket være sterk bench",
+      "summary_no": "Springboks slo Argentina 17-10 i Buenos Aires med sterke innbyttere som endret kampen i annen omgang. Laget vant med god spill fra bench og sterke gainline-kamper.",
       "category": "event",
-      "urgency": 1,
+      "urgency": 2,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-09-bomb-squad-saves-the-day-for-boks-against-argentina-in-buenos-aires/",
       "source": "dailymaverick",
       "published_at": "2026-08-09T00:43:34Z"
     },
     {
-      "headline_no": "KVINNEDAGEN 1956-2026: Sør-Afrika gjør fremskritt i eiendomsrett og utdanning, men vold og lønngap gjenstår",
-      "summary_no": "70 år etter får sørafrikanske kvinner juridisk tilgang til alle steder, men mangler fortsatt økonomisk sikkerhet, fysisk trygghet og rettferdig arbeidsdeling.",
+      "headline_no": "Sør-afrikanske kvinner frem i eiendomsbesittelse og utdanning, men vold og lønnsgap vedvarer",
+      "summary_no": "70 år etter kvinners rettigheter har sør-afrikanske kvinner formelt rett til å være hvor som helst, men de mangler fortsatt økonomisk sikkerhet, trygghet og likestilt fordeling av ansvar. Kjønnsbasert vold og lønnsgap persisterer.",
       "category": "politics",
-      "urgency": 3,
+      "urgency": 4,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-09-a-woman-s-work-is-never-done-and-she-knows-it/",
       "source": "dailymaverick",
       "published_at": "2026-08-09T00:00:00Z"
     },
     {
-      "headline_no": "FOTBALL: Janine van Wyk hjalp Banyana til seier over Nigeria",
-      "summary_no": "Sør-Afrikas tidligere fotballkaptein Janine van Wyk deler minnene fra seieren over Nigeria som hun mener var karrierens søteste prestasjon.",
+      "headline_no": "Janine van Wyk hjalp Banyana til seier over Nigeria",
+      "summary_no": "Tidligere Banyana-kaptein Janine van Wyk minnes en av karrierens søteste seiere da hun hjalp Sør-Afrika til seier over stormakten Nigeria. En minneverdig prestasjon i kvinnefotballen.",
       "category": "event",
       "urgency": 1,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-08-the-day-janine-van-wyk-helped-banyana-conquer-mighty-nigeria/",
@@ -154,26 +154,26 @@
       "published_at": "2026-08-08T21:05:54Z"
     },
     {
-      "headline_no": "RUGBY: All Blacks mot Boks er verdens beste rivalisering",
-      "summary_no": "Etter 30 år er All Blacks tilbake på full turné i Sør-Afrika, og deres klassiske rivalisering med Boks fanger verdens oppmerksomhet.",
+      "headline_no": "All Blacks mot Boks er sport høyeste rivalitet",
+      "summary_no": "Etter 30 år har All Blacks startet full turnè i Sør-Afrika og har fanget verdens oppmerksomhet. Rivaliteten mellom All Blacks og Boks regnes som sportens største.",
       "category": "event",
-      "urgency": 1,
+      "urgency": 2,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-08-no-denying-all-blacks-vs-the-boks-is-the-greatest-rivalry/",
       "source": "dailymaverick",
       "published_at": "2026-08-08T21:02:04Z"
     },
     {
-      "headline_no": "KVINNEDAGEN 1956-2026: Fra glasstak til cybertak for journalister",
-      "summary_no": "Forskning viser en tilbakegang i kjønnequlitet da mange kvinnelige journalister møter nettmobbing og overgrep. Det digitale området er blitt et nytt kampfelt.",
+      "headline_no": "Fra glastak til digitalt glastak: Kvinnejournalister under online-angrep",
+      "summary_no": "Forskning viser tilbakegang i likestilling da mange kvinnejournalister møter netthets og online-trakassering. Kjønnsbasert diskriminering har beveget seg fra tradisjonelle barrierer til digitale plattformer.",
       "category": "politics",
-      "urgency": 2,
+      "urgency": 3,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-08-2026-marks-the-shift-from-glass-ceiling-to-cyberceiling-in-media/",
       "source": "dailymaverick",
       "published_at": "2026-08-08T20:42:04Z"
     },
     {
-      "headline_no": "VALG 2026: DA vil sikre vann- og strøminntekter til tjenester",
-      "summary_no": "DA ønsker å doble antallet kommuner den styrer og presenterte på lørdag sitt nasjonale valgmanifest med fokus på å sikre inntekter fra vann og strøm.",
+      "headline_no": "DA vil sikre vann- og strøminntekter til tjenester i kommuner",
+      "summary_no": "Demokratene ønsker å doble antall kommuner de styrer og presenterte sitt valgmanifest lørdag. Partiet vil øremerke inntekter fra vann og elektrisitet direkte til offentlige tjenester.",
       "category": "politics",
       "urgency": 2,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-08-new-rule-da-will-ringfence-water-electricity-revenue-for-services/",
@@ -181,8 +181,8 @@
       "published_at": "2026-08-08T17:32:02Z"
     },
     {
-      "headline_no": "WEEKEND-SAMMENDRAG: Cape Town boligkrise og andre kritiske saker",
-      "summary_no": "Ukens sammendrag tar opp Cape Towns boligkrise i sentrum og Madlanga-effektens påvirkning på kommunal styring. Minneord til reporteren Estelle Ellis som avdekket systemfeil.",
+      "headline_no": "Helgeoppsummering: Cape Towns boligkrise og mangelfull infrastruktur",
+      "summary_no": "Helgeoppsummeringen fokuserer på Cape Towns indrekity-boligkrise og om byen gjør nok for å løse problemet. Den minnes også journalist Estelle Ellis sitt arbeid med å avsløre brutt infrastruktur og brutte løfter.",
       "category": "infrastructure",
       "urgency": 4,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-08-madlanga-effect-cape-town-housing-squeeze-and-why-buy-books-we-never-read/",
@@ -190,17 +190,17 @@
       "published_at": "2026-08-08T12:47:15Z"
     },
     {
-      "headline_no": "Museum i Johannesburgs berømte fengsel inviterer barn til interaktiv opplevelse",
-      "summary_no": "Det gamle fort i Johannesburg skal gjøres om til et interaktivt museum for barn. Tiltaket gir det kjente fengselet et nytt formål.",
+      "headline_no": "INSPIRASJON: Barn kan leke i Johannesburg's beryktede fengsel",
+      "summary_no": "Et interaktivt museum gjengir Joburgs Old Fort for nysgjerrige barn. Stedet åpner opp historisk fengsel for familier på innovativ måte.",
       "category": "event",
-      "urgency": 2,
+      "urgency": 1,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-08-children-can-play-in-joburg-s-infamous-jail/",
       "source": "dailymaverick",
       "published_at": "2026-08-08T11:00:00Z"
     },
     {
-      "headline_no": "Malaysisk kokk starter geitekjøtt-revolusjon i Sør-Afrika",
-      "summary_no": "Chef Shankar Santhiram fra Malaysia inspirerer Sør-Afrika til å oppdage geitekjøtt som matressurs. Initiativet viser økende interesse for denne kjøttkvaliteten.",
+      "headline_no": "Malaysisk sjef Shankar Santhiram fører geitrevolusjonen i Sør-Afrika",
+      "summary_no": "En malaysisk sjef inspirerer Sør-Afrika til å omfavne geit som ingrediens i moderne matlagning. Trenden vekker interesse for tradisjonelle dyrkingsmetoder.",
       "category": "event",
       "urgency": 1,
       "source_url": "https://www.iol.co.za/lifestyle/food-drink/meet-malaysian-chef-shankar-santhiram-who-is-sparking-sas-unlikely-goat-revolution-a148d81f-9180-40d2-871d-2ecbd8e93f65",
@@ -208,17 +208,17 @@
       "published_at": "2026-08-08T08:13:10Z"
     },
     {
-      "headline_no": "All Blacks starter turne med seier over Stormers på Cape Town Stadium",
-      "summary_no": "All Blacks vant 38-21 mot Stormers på DHL Stadium i Cape Town til tross for dårlig disiplin. Neusealenderne starter sin Sør-Afrika-turne med seier.",
+      "headline_no": "ALL BLACKS SEIER: Stormers holder ikke stand mot New Zealand i turneringsstarten",
+      "summary_no": "All Blacks vant 38-21 mot Stormers på DHL Stadium i Cape Town. Gjestene fra New Zealand startet sin Sør-Afrika-turnering med seier.",
       "category": "event",
-      "urgency": 3,
+      "urgency": 2,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-07-ill-disciplined-all-blacks-survive-stormers-scare-in-tour-opener/",
       "source": "dailymaverick",
       "published_at": "2026-08-07T22:33:04Z"
     },
     {
-      "headline_no": "Leserbilde-arkiv fra First Thing-nyhetsbrevet",
-      "summary_no": "Daily Maverick presenterer lesernes beste bilder fra forrige uke i sitt fotogalleri. En ukentlig samling av leserinnsendte fotografier.",
+      "headline_no": "Se bildene: 01.-07. august 2026",
+      "summary_no": "Daily Maverick presenterer sitt ukentlige bildegalleri fra abonnentfotografi. En visuell samling fra siste uke.",
       "category": "other",
       "urgency": 1,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-07-i-have-a-picture-for-you-01-august-07-august-2026/",
@@ -226,17 +226,17 @@
       "published_at": "2026-08-07T18:05:23Z"
     },
     {
-      "headline_no": "Ny ledelses-krise på UCT: 34 klager, hemmelige funn og viserektor i retten",
-      "summary_no": "Viserektor Mosa Moshabela tar UCT-rådet til retten over undersøkelser av hans oppførsel midt i ledelseskrise. Over 30 klager er fremmet mot ham.",
+      "headline_no": "KRISE VED UCT: 34 klager, hemmelig rapport og rektor i retten",
+      "summary_no": "University of Cape Town står i ledelseskrise etter at rektor Mosa Moshabela stevner universitetsstyret over undersøkelser av hans oppførsel. Over 30 klager mot ham foreligger.",
       "category": "politics",
-      "urgency": 4,
+      "urgency": 3,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-07-another-uct-leadership-crisis-34-complaints-secret-findings-and-a-vc-in-court/",
       "source": "dailymaverick",
       "published_at": "2026-08-07T16:08:58Z"
     },
     {
-      "headline_no": "Parlamentet skal gjenåpnes i 2027 etter brannskader",
-      "summary_no": "Fem år etter katastrofal brann skal Parlamentets gjenoppbygget nasjonalforsamling være klar til å huse 2027 State of the Nation Address. Rekonstruksjonen nærmer seg fullførelse.",
+      "headline_no": "PARLAMENTETS GJENOPPRISING: Rekonstruert forsamling klar til 2027",
+      "summary_no": "Fem år etter katastrofalbranden sier Parlamentet at den gjenoppbygget nasjonalforsamlingen er klar til å være vertskap for statsoverhovedets tale i 2027. Hovedrekonstruksjon nærmer seg fullførelse.",
       "category": "infrastructure",
       "urgency": 2,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-07-from-ashes-to-assembly-as-parliament-targets-2027-return/",
@@ -244,22 +244,22 @@
       "published_at": "2026-08-07T15:58:04Z"
     },
     {
-      "headline_no": "Nasjonalt vanningsaksjonplan mangler løsninger på systemkrise",
-      "summary_no": "Sør-Afrikas nye vanningsaksjonplan identifiserer problemer som svikt i institusjoner, korrupsjon og forringede vassdrag, men fokuserer for mye på tekniske løsninger og unnlater å adressere de dypere systemiske årsakene. Eksperten mener planen ikke håndterer hvordan finansiell ustabilitet, klimaendringer og sosial ulikhet påvirker vannkrisen.",
-      "category": "infrastructure",
-      "urgency": 3,
-      "source_url": "https://www.dailymaverick.co.za/opinionista/2026-08-07-national-water-action-plan-gets-the-diagnosis-right-but-misses-the-real-fix/",
-      "source": "dailymaverick",
-      "published_at": "2026-08-07T14:21:32Z"
-    },
-    {
-      "headline_no": "Morsmelk-kampanje: Helsepersonell oppfordres til å motstå formelprodusenter",
-      "summary_no": "På World Breastfeeding Week oppfordres helsepersonell til å promotere amming og beskytte foreldre fra melkepulverformlers påvirkning. Eksperter advarer mot kommersiell innflytelse.",
+      "headline_no": "MEDISINSK ETIKK: Formulafirmaer påvirker helsepersonell",
+      "summary_no": "Eksperter oppfordrer helsepersonell til å fremme amming og beskytte foreldre mot meieriindustriens påvirkninger. Verdens ammingsuke markeres med debatt om kommersiell påvirkning.",
       "category": "other",
       "urgency": 2,
       "source_url": "https://www.dailymaverick.co.za/article/2026-08-07-formula-firms-targeting-healthcare-workers-to-shape-feeding-advice/",
       "source": "dailymaverick",
       "published_at": "2026-08-07T14:19:41Z"
+    },
+    {
+      "headline_no": "RUGBY TEST: Springboks fokus på Argentina før All Blacks-møte",
+      "summary_no": "Springboks møter Argentina i Buenos Aires med mål om 12. strake seier. Rassie Erasmus må avklare skader og form før møtet med All Blacks.",
+      "category": "event",
+      "urgency": 2,
+      "source_url": "https://www.dailymaverick.co.za/article/2026-08-07-boks-have-a-long-to-do-list-against-argentina-before-turning-attention-to-all-blacks/",
+      "source": "dailymaverick",
+      "published_at": "2026-08-07T13:50:09Z"
     }
   ],
   "load_shedding": null,
