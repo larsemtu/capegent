@@ -209,7 +209,7 @@ async fn curate_events(
 ) -> Vec<schema::EventItem> {
     let mut urls: Vec<&str> = events.iter().map(|e| e.url.as_str()).collect();
     urls.sort();
-    let hash = blake3::hash(format!("curation-v2;{}", urls.join(";")).as_bytes()).to_hex().to_string();
+    let hash = blake3::hash(format!("curation-v3;{}", urls.join(";")).as_bytes()).to_hex().to_string();
 
     if cache.get_meta("events_hash").as_deref() == Some(hash.as_str()) {
         for e in &mut events {

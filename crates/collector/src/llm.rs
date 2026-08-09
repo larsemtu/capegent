@@ -201,7 +201,10 @@ Konserter og musikkfestivaler generelt. Sport: rugby er kritisk (Springboks/All 
 Blacks = relevans 5), løping/run clubs, surfing. Mat- og nattmarkeder, \
 matopplevelser. Kunstutstillinger og kultur. Både små lettbeinte ting og store \
 hovedeventer teller — det viktige er at det gir liv og røre eller en ekte \
-opplevelse. IKKE aktuelt: barnearrangementer, religiøse møter, bedriftsseminarer, \
+opplevelse. EKSTRA VIKTIG: events der man møter og blir kjent med unge folk \
+(20-30) — lokale, expats og tilreisende. De vil sosialisere seg og bygge \
+nettverk i byen, så sosiale settinger med mingling (uteliv, fester, run clubs, \
+sosiale markeder, quiz/spillkvelder med ung profil) skal vektes opp. IKKE aktuelt: barnearrangementer, religiøse møter, bedriftsseminarer, \
 nettverkstreff for bransjer vi ikke er i, pensjonistarrangementer.";
 
 /// Claude scorer hvert event mot profilen. Kalles kun når event-listen
