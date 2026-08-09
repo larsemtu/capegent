@@ -63,20 +63,22 @@ pub struct NewsEntry {
     pub published_at: Option<DateTime<Utc>>,
 }
 
+/// Vær fra MET Norway (Yr) Locationforecast 2.0 — samme data som yr.no.
+/// All vind i m/s. Symbol er MET-symbolkode uten _day/_night-suffiks.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Weather {
     pub temp_c: f64,
-    pub apparent_temp_c: f64,
+    pub symbol: String,
+    /// Nedbør neste time
     pub precipitation_mm: f64,
-    pub weather_code: u8,
-    pub wind_speed_kmh: f64,
+    pub wind_ms: f64,
     pub wind_direction_deg: f64,
-    pub wind_gusts_kmh: f64,
-    /// Neste 48 timer, time for time
+    /// Time for time så langt MET leverer timesoppløsning (~60-70 t)
     #[serde(default)]
     pub hourly: Vec<HourlyForecast>,
-    /// 7 dager
-    pub daily: Vec<DailyForecast>,
+    /// Alle dager (~9-10) med fire 6-timersperioder per dag, yr-stil
+    #[serde(default)]
+    pub days: Vec<DayForecast>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -84,23 +86,34 @@ pub struct HourlyForecast {
     /// ISO 8601 lokal tid (Africa/Johannesburg)
     pub time: String,
     pub temp_c: f64,
-    pub weather_code: u8,
-    pub precipitation_probability_pct: Option<f64>,
+    pub symbol: String,
     pub precipitation_mm: f64,
-    pub wind_speed_kmh: f64,
+    pub wind_ms: f64,
     pub wind_direction_deg: f64,
-    pub wind_gusts_kmh: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct DailyForecast {
-    /// ISO-dato i lokal tid (Africa/Johannesburg)
+pub struct DayForecast {
+    /// ISO-dato i lokal tid
     pub date: String,
     pub temp_min_c: f64,
     pub temp_max_c: f64,
-    pub weather_code: u8,
-    pub precipitation_probability_pct: Option<f64>,
-    pub wind_speed_max_kmh: f64,
+    /// Summert nedbør for hele dagen — skiller regnværsdag fra korte byger
+    pub precipitation_mm_total: f64,
+    pub wind_max_ms: f64,
+    /// Inntil fire 6-timersperioder
+    pub periods: Vec<PeriodForecast>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct PeriodForecast {
+    /// Lokal starttime for perioden (f.eks. 0, 6, 12, 18)
+    pub from_hour: u8,
+    pub symbol: String,
+    pub temp_c: f64,
+    pub precipitation_mm: f64,
+    pub wind_ms: f64,
+    pub wind_direction_deg: f64,
 }
 
 /// Surfline-inspirert kvalitetsvurdering, beregnet fra svell + vind.
@@ -121,7 +134,7 @@ pub struct SurfSpot {
     pub swell_height_m: f64,
     pub swell_period_s: f64,
     pub swell_direction_deg: f64,
-    pub wind_speed_kmh: f64,
+    pub wind_ms: f64,
     pub wind_direction_deg: f64,
     pub rating: SurfRating,
     /// Neste 48 timer for detaljvisning
@@ -135,7 +148,7 @@ pub struct SurfHour {
     pub swell_height_m: f64,
     pub swell_period_s: f64,
     pub swell_direction_deg: f64,
-    pub wind_speed_kmh: f64,
+    pub wind_ms: f64,
     pub wind_direction_deg: f64,
     pub rating: SurfRating,
 }

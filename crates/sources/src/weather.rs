@@ -1,112 +1,207 @@
+//! Vær fra MET Norway (Yr) Locationforecast 2.0 — nøyaktig samme data som
+//! yr.no viser for Cape Town. Gratis, CC-BY 4.0, krever identifiserende
+//! User-Agent (satt på klienten). Tider fra API-et er UTC; vi konverterer
+//! til SAST (fast UTC+2, ingen sommertid).
+
 use anyhow::{Context, Result};
-use schema::{DailyForecast, HourlyForecast, Weather};
+use chrono::{DateTime, FixedOffset, Timelike, Utc};
+use schema::{DayForecast, HourlyForecast, PeriodForecast, Weather};
 use serde::Deserialize;
+use std::collections::BTreeMap;
 
 pub const GREEN_POINT: (f64, f64) = (-33.906, 18.410);
 
-#[derive(Deserialize)]
-struct ForecastResp {
-    current: Current,
-    hourly: Hourly,
-    daily: Daily,
+fn sast() -> FixedOffset {
+    FixedOffset::east_opt(2 * 3600).unwrap()
 }
 
 #[derive(Deserialize)]
-struct Current {
-    temperature_2m: f64,
-    apparent_temperature: f64,
-    precipitation: f64,
-    weather_code: u8,
-    wind_speed_10m: f64,
-    wind_direction_10m: f64,
-    wind_gusts_10m: f64,
+struct MetResp {
+    properties: Properties,
 }
 
 #[derive(Deserialize)]
-struct Hourly {
-    time: Vec<String>,
-    temperature_2m: Vec<f64>,
-    weather_code: Vec<u8>,
-    precipitation_probability: Vec<Option<f64>>,
-    precipitation: Vec<f64>,
-    wind_speed_10m: Vec<f64>,
-    wind_direction_10m: Vec<f64>,
-    wind_gusts_10m: Vec<f64>,
+struct Properties {
+    timeseries: Vec<Point>,
 }
 
 #[derive(Deserialize)]
-struct Daily {
-    time: Vec<String>,
-    temperature_2m_max: Vec<f64>,
-    temperature_2m_min: Vec<f64>,
-    weather_code: Vec<u8>,
-    precipitation_probability_max: Vec<Option<f64>>,
-    wind_speed_10m_max: Vec<f64>,
+struct Point {
+    time: DateTime<Utc>,
+    data: PointData,
+}
+
+#[derive(Deserialize)]
+struct PointData {
+    instant: Instant,
+    next_1_hours: Option<NextHours>,
+    next_6_hours: Option<NextHours>,
+}
+
+#[derive(Deserialize)]
+struct Instant {
+    details: InstantDetails,
+}
+
+#[derive(Deserialize)]
+struct InstantDetails {
+    air_temperature: f64,
+    wind_speed: f64,
+    wind_from_direction: f64,
+}
+
+#[derive(Deserialize)]
+struct NextHours {
+    summary: Option<Summary>,
+    details: Option<NextDetails>,
+}
+
+#[derive(Deserialize)]
+struct Summary {
+    symbol_code: String,
+}
+
+#[derive(Deserialize, Default)]
+struct NextDetails {
+    #[serde(default)]
+    precipitation_amount: f64,
+}
+
+/// MET-symbolkoder har _day/_night/_polartwilight-suffiks — stripp dem,
+/// frontend velger visning selv.
+fn base_symbol(code: &str) -> String {
+    code.split('_').next().unwrap_or(code).to_string()
 }
 
 pub async fn fetch(client: &reqwest::Client) -> Result<Weather> {
     let (lat, lon) = GREEN_POINT;
     let url = format!(
-        "https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}\
-         &current=temperature_2m,apparent_temperature,precipitation,weather_code,\
-         wind_speed_10m,wind_direction_10m,wind_gusts_10m\
-         &hourly=temperature_2m,weather_code,precipitation_probability,precipitation,\
-         wind_speed_10m,wind_direction_10m,wind_gusts_10m\
-         &daily=temperature_2m_max,temperature_2m_min,weather_code,\
-         precipitation_probability_max,wind_speed_10m_max\
-         &timezone=Africa%2FJohannesburg&forecast_days=7&forecast_hours=48"
+        "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat={lat}&lon={lon}"
     );
-    let resp: ForecastResp = client
+    let resp: MetResp = client
         .get(&url)
         .send()
         .await
-        .context("GET open-meteo forecast")?
+        .context("GET met.no locationforecast")?
         .error_for_status()?
         .json()
         .await
-        .context("parse open-meteo forecast")?;
+        .context("parse met.no locationforecast")?;
 
-    let hourly = resp
-        .hourly
-        .time
+    let ts = &resp.properties.timeseries;
+    let first = ts.first().context("tom timeserie fra met.no")?;
+
+    // Time-for-time så lenge next_1_hours finnes (MET gir ~60-70 t)
+    let hourly: Vec<HourlyForecast> = ts
         .iter()
-        .enumerate()
-        .map(|(i, time)| HourlyForecast {
-            time: time.clone(),
-            temp_c: resp.hourly.temperature_2m[i],
-            weather_code: resp.hourly.weather_code[i],
-            precipitation_probability_pct: resp.hourly.precipitation_probability[i],
-            precipitation_mm: resp.hourly.precipitation[i],
-            wind_speed_kmh: resp.hourly.wind_speed_10m[i],
-            wind_direction_deg: resp.hourly.wind_direction_10m[i],
-            wind_gusts_kmh: resp.hourly.wind_gusts_10m[i],
+        .filter_map(|p| {
+            let n1 = p.data.next_1_hours.as_ref()?;
+            let local = p.time.with_timezone(&sast());
+            Some(HourlyForecast {
+                time: local.format("%Y-%m-%dT%H:%M").to_string(),
+                temp_c: p.data.instant.details.air_temperature,
+                symbol: n1
+                    .summary
+                    .as_ref()
+                    .map(|s| base_symbol(&s.symbol_code))
+                    .unwrap_or_default(),
+                precipitation_mm: n1
+                    .details
+                    .as_ref()
+                    .map(|d| d.precipitation_amount)
+                    .unwrap_or(0.0),
+                wind_ms: p.data.instant.details.wind_speed,
+                wind_direction_deg: p.data.instant.details.wind_from_direction,
+            })
         })
         .collect();
 
-    let daily = resp
-        .daily
-        .time
-        .iter()
-        .enumerate()
-        .map(|(i, date)| DailyForecast {
-            date: date.clone(),
-            temp_min_c: resp.daily.temperature_2m_min[i],
-            temp_max_c: resp.daily.temperature_2m_max[i],
-            weather_code: resp.daily.weather_code[i],
-            precipitation_probability_pct: resp.daily.precipitation_probability_max[i],
-            wind_speed_max_kmh: resp.daily.wind_speed_10m_max[i],
+    // Dager: grupper på lokal dato. Fire 6-timersperioder per dag — første
+    // punkt i hver bøtte [0-6, 6-12, 12-18, 18-24) som har next_6_hours.
+    let mut by_day: BTreeMap<String, Vec<&Point>> = BTreeMap::new();
+    for p in ts {
+        let local = p.time.with_timezone(&sast());
+        by_day
+            .entry(local.format("%Y-%m-%d").to_string())
+            .or_default()
+            .push(p);
+    }
+
+    let days: Vec<DayForecast> = by_day
+        .into_iter()
+        .map(|(date, points)| {
+            let temps: Vec<f64> = points
+                .iter()
+                .map(|p| p.data.instant.details.air_temperature)
+                .collect();
+            let wind_max = points
+                .iter()
+                .map(|p| p.data.instant.details.wind_speed)
+                .fold(0.0_f64, f64::max);
+
+            let mut periods = vec![];
+            for bucket in 0..4u8 {
+                let (lo, hi) = (bucket * 6, bucket * 6 + 6);
+                let point = points.iter().find(|p| {
+                    let h = p.time.with_timezone(&sast()).hour() as u8;
+                    h >= lo && h < hi && p.data.next_6_hours.is_some()
+                });
+                let Some(p) = point else { continue };
+                let n6 = p.data.next_6_hours.as_ref().unwrap();
+                periods.push(PeriodForecast {
+                    from_hour: p.time.with_timezone(&sast()).hour() as u8,
+                    symbol: n6
+                        .summary
+                        .as_ref()
+                        .map(|s| base_symbol(&s.symbol_code))
+                        .unwrap_or_default(),
+                    temp_c: p.data.instant.details.air_temperature,
+                    precipitation_mm: n6
+                        .details
+                        .as_ref()
+                        .map(|d| d.precipitation_amount)
+                        .unwrap_or(0.0),
+                    wind_ms: p.data.instant.details.wind_speed,
+                    wind_direction_deg: p.data.instant.details.wind_from_direction,
+                });
+            }
+            let precip_total = periods.iter().map(|p| p.precipitation_mm).sum();
+
+            DayForecast {
+                date,
+                temp_min_c: temps.iter().copied().fold(f64::INFINITY, f64::min),
+                temp_max_c: temps.iter().copied().fold(f64::NEG_INFINITY, f64::max),
+                precipitation_mm_total: precip_total,
+                wind_max_ms: wind_max,
+                periods,
+            }
         })
+        // Dager helt uten perioder (halespiss av serien) er ikke visbare
+        .filter(|d| !d.periods.is_empty())
         .collect();
+
+    let current_symbol = first
+        .data
+        .next_1_hours
+        .as_ref()
+        .or(first.data.next_6_hours.as_ref())
+        .and_then(|n| n.summary.as_ref())
+        .map(|s| base_symbol(&s.symbol_code))
+        .unwrap_or_default();
 
     Ok(Weather {
-        temp_c: resp.current.temperature_2m,
-        apparent_temp_c: resp.current.apparent_temperature,
-        precipitation_mm: resp.current.precipitation,
-        weather_code: resp.current.weather_code,
-        wind_speed_kmh: resp.current.wind_speed_10m,
-        wind_direction_deg: resp.current.wind_direction_10m,
-        wind_gusts_kmh: resp.current.wind_gusts_10m,
+        temp_c: first.data.instant.details.air_temperature,
+        symbol: current_symbol,
+        precipitation_mm: first
+            .data
+            .next_1_hours
+            .as_ref()
+            .and_then(|n| n.details.as_ref())
+            .map(|d| d.precipitation_amount)
+            .unwrap_or(0.0),
+        wind_ms: first.data.instant.details.wind_speed,
+        wind_direction_deg: first.data.instant.details.wind_from_direction,
         hourly,
-        daily,
+        days,
     })
 }

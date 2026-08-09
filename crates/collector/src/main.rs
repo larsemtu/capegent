@@ -36,7 +36,8 @@ async fn main() -> Result<()> {
         .init();
 
     let client = reqwest::Client::builder()
-        .user_agent("Mozilla/5.0 (compatible; capetown-dashboard/0.1)")
+        // MET Norway krever identifiserende UA med kontaktpunkt
+        .user_agent("Mozilla/5.0 (compatible; capegent/0.3; +https://github.com/larsemtu/capegent)")
         .timeout(Duration::from_secs(30))
         .build()?;
 

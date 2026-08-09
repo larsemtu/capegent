@@ -27,7 +27,7 @@ pub fn rate(
     spot: &SpotDef,
     swell_m: f64,
     period_s: f64,
-    wind_kmh: f64,
+    wind_ms: f64,
     wind_deg: f64,
 ) -> SurfRating {
     // Svellhøyde: ramp opp mot optimalt intervall, straff over
@@ -61,15 +61,15 @@ pub fn rate(
     if diff > 180.0 {
         diff = 360.0 - diff;
     }
-    let wind_score = if wind_kmh < 8.0 {
+    let wind_score = if wind_ms < 2.2 {
         2.7 // glassy uansett retning
     } else if diff <= 45.0 {
-        if wind_kmh < 35.0 { 3.0 } else { 1.5 } // offshore
+        if wind_ms < 10.0 { 3.0 } else { 1.5 } // offshore
     } else if diff <= 90.0 {
-        if wind_kmh < 20.0 { 2.0 } else { 1.0 } // cross
-    } else if wind_kmh < 15.0 {
+        if wind_ms < 5.5 { 2.0 } else { 1.0 } // cross
+    } else if wind_ms < 4.2 {
         1.2 // svak onshore
-    } else if wind_kmh < 25.0 {
+    } else if wind_ms < 7.0 {
         0.5
     } else {
         0.0 // frisk onshore = vaskemaskin
@@ -139,7 +139,7 @@ pub async fn fetch_spot(client: &reqwest::Client, spot: &SpotDef) -> Result<Surf
     let wind_url = format!(
         "https://api.open-meteo.com/v1/forecast?latitude={}&longitude={}\
          &current=wind_speed_10m,wind_direction_10m\
-         &hourly=wind_speed_10m,wind_direction_10m\
+         &hourly=wind_speed_10m,wind_direction_10m&wind_speed_unit=ms\
          &timezone=Africa%2FJohannesburg&forecast_hours=48",
         spot.lat, spot.lon
     );
@@ -192,7 +192,7 @@ pub async fn fetch_spot(client: &reqwest::Client, spot: &SpotDef) -> Result<Surf
                 swell_height_m: sh,
                 swell_period_s: sp,
                 swell_direction_deg: sd,
-                wind_speed_kmh: ws,
+                wind_ms: ws,
                 wind_direction_deg: wd,
                 rating: rate(spot, sh, sp, ws, wd),
             })
@@ -205,7 +205,7 @@ pub async fn fetch_spot(client: &reqwest::Client, spot: &SpotDef) -> Result<Surf
         swell_height_m: marine.current.swell_wave_height,
         swell_period_s: marine.current.swell_wave_period,
         swell_direction_deg: marine.current.swell_wave_direction,
-        wind_speed_kmh: wind.current.wind_speed_10m,
+        wind_ms: wind.current.wind_speed_10m,
         wind_direction_deg: wind.current.wind_direction_10m,
         rating: rate(
             spot,

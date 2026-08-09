@@ -125,6 +125,15 @@
   .list-item .when { color: var(--accent); white-space: nowrap; font-variant-numeric: tabular-nums;
                      font-size: 12.5px; min-width: 58px; }
   .empty { color: var(--muted); font-size: 13px; font-style: italic; }
+  .src { color: var(--muted); font-size: 10px; margin-top: 6px; opacity: .75; text-align: right; }
+  .daysrows { margin-top: 8px; }
+  .dayrow { display: grid; grid-template-columns: 44px 1fr auto auto auto; gap: 8px;
+            align-items: center; padding: 3px 4px; border-top: 1px solid var(--border);
+            font-size: 13px; font-variant-numeric: tabular-nums; }
+  .dayrow .d { color: var(--muted); font-size: 11.5px; text-transform: uppercase; }
+  .dayrow .icons { display: flex; gap: 7px; font-size: 16px; }
+  .dayrow .rain { color: var(--accent); font-size: 12px; min-width: 52px; text-align: right; }
+  .dayrow .wind { color: var(--muted); font-size: 12px; min-width: 48px; text-align: right; }
   #events { flex: 1; display: flex; flex-direction: column; min-height: 0; }
   #events .ev-list { flex: 1; overflow-y: auto; }
   #loadshedding .stage { display: flex; align-items: center; gap: 12px; }
@@ -238,22 +247,27 @@ const DATA_URL = location.hostname.endsWith('github.io')
   ? '../data/latest.json'
   : '/data/latest.json';
 
-const WMO = {
-  0:  ['☀️','Klarvær'],   1: ['🌤️','Lettskyet'], 2: ['⛅','Delvis skyet'], 3: ['☁️','Overskyet'],
-  45: ['🌫️','Tåke'],      48: ['🌫️','Rimtåke'],
-  51: ['🌦️','Lett yr'],   53: ['🌦️','Yr'],       55: ['🌧️','Tett yr'],
-  56: ['🌧️','Yr, is'],    57: ['🌧️','Yr, is'],
-  61: ['🌧️','Lett regn'], 63: ['🌧️','Regn'],     65: ['🌧️','Kraftig regn'],
-  66: ['🌧️','Isregn'],    67: ['🌧️','Isregn'],
-  71: ['🌨️','Lett snø'],  73: ['🌨️','Snø'],      75: ['❄️','Kraftig snø'], 77: ['❄️','Snøkorn'],
-  80: ['🌦️','Regnbyger'], 81: ['🌧️','Byger'],    82: ['⛈️','Kraftige byger'],
-  85: ['🌨️','Snøbyger'],  86: ['🌨️','Snøbyger'],
-  95: ['⛈️','Torden'],    96: ['⛈️','Torden, hagl'], 99: ['⛈️','Torden, hagl'],
+// MET/Yr-symbolkoder (uten _day/_night) -> ikon + norsk tekst
+const MET_SYM = {
+  clearsky: ['☀️','Klarvær'], fair: ['🌤️','Lettskyet'], partlycloudy: ['⛅','Delvis skyet'],
+  cloudy: ['☁️','Overskyet'], fog: ['🌫️','Tåke'],
+  lightrain: ['🌦️','Lett regn'], rain: ['🌧️','Regn'], heavyrain: ['🌧️','Kraftig regn'],
+  lightrainshowers: ['🌦️','Lette byger'], rainshowers: ['🌦️','Regnbyger'],
+  heavyrainshowers: ['🌧️','Kraftige byger'],
+  drizzle: ['🌦️','Yr'], lightsleet: ['🌨️','Lett sludd'], sleet: ['🌨️','Sludd'],
+  heavysleet: ['🌨️','Kraftig sludd'], sleetshowers: ['🌨️','Sluddbyger'],
+  lightsnow: ['🌨️','Lett snø'], snow: ['❄️','Snø'], heavysnow: ['❄️','Kraftig snø'],
+  snowshowers: ['🌨️','Snøbyger'],
 };
-const wmo = c => WMO[c] || ['🌡️',''];
+const sym = code => {
+  if (!code) return ['🌡️',''];
+  if (code.includes('thunder')) return ['⛈️','Torden'];
+  return MET_SYM[code] || MET_SYM[code.replace(/showers.*/,'showers')] || ['🌡️', code];
+};
 
 const DIRS = ['N','NNØ','NØ','ØNØ','Ø','ØSØ','SØ','SSØ','S','SSV','SV','VSV','V','VNV','NV','NNV'];
 const compass = deg => DIRS[Math.round(deg / 22.5) % 16];
+const wind = (ms, deg) => `${Math.round(ms)} m/s ${compass(deg)}`;
 
 const CAT = {
   crime: 'Krim', traffic: 'Trafikk', weather: 'Vær', politics: 'Politikk',
@@ -307,18 +321,21 @@ let D = null; // siste data, for modal-innhold
 
 /* ---------- Vær ---------- */
 function renderWeather(w) {
-  const [icon, desc] = wmo(w.weather_code);
-  const nextHours = (w.hourly || []).slice(0, 6).map(h => `
+  const [icon, desc] = sym(w.symbol);
+  const nextHours = (w.hourly || []).slice(0, 8).map(h => `
     <div class="h">
       <div class="t">${esc(hhmm(h.time))}</div>
-      <div class="i">${wmo(h.weather_code)[0]}</div>
+      <div class="i">${sym(h.symbol)[0]}</div>
       <div>${Math.round(h.temp_c)}°</div>
+      <div class="t">${h.precipitation_mm > 0 ? h.precipitation_mm.toFixed(1) : ''}</div>
     </div>`).join('');
-  const days = (w.daily || []).slice(1, 7).map(d => `
-    <div class="day">
-      <div class="d">${esc(shortDay(d.date))}</div>
-      <div class="i">${wmo(d.weather_code)[0]}</div>
-      <div>${Math.round(d.temp_max_c)}° <span style="color:var(--muted)">${Math.round(d.temp_min_c)}°</span></div>
+  const dayRows = (w.days || []).slice(1, 10).map(d => `
+    <div class="dayrow">
+      <span class="d">${esc(shortDay(d.date))}</span>
+      <span class="icons">${d.periods.map(p => sym(p.symbol)[0]).join('')}</span>
+      <span>${Math.round(d.temp_max_c)}° <span style="color:var(--muted)">${Math.round(d.temp_min_c)}°</span></span>
+      <span class="rain">${d.precipitation_mm_total >= 0.1 ? d.precipitation_mm_total.toFixed(1) + ' mm' : ''}</span>
+      <span class="wind">${Math.round(d.wind_max_ms)} m/s</span>
     </div>`).join('');
   document.getElementById('weather').innerHTML = `
     <h2>Vær · Green Point</h2>
@@ -326,51 +343,62 @@ function renderWeather(w) {
       <div class="icon">${icon}</div>
       <div>
         <div class="temp">${Math.round(w.temp_c)}°</div>
-        <div class="desc">${esc(desc)} · føles som ${Math.round(w.apparent_temp_c)}°</div>
+        <div class="desc">${esc(desc)}</div>
       </div>
       <div style="margin-left:auto;text-align:right">
-        <div class="wind-row" style="margin:0"><div><span class="lbl">Vind</span>${Math.round(w.wind_speed_kmh)} km/t ${compass(w.wind_direction_deg)}</div></div>
-        <div class="wind-row" style="margin:4px 0 0"><div><span class="lbl">Kast</span>${Math.round(w.wind_gusts_kmh)} km/t</div></div>
+        <div class="wind-row" style="margin:0"><div><span class="lbl">Vind</span>${wind(w.wind_ms, w.wind_direction_deg)}</div></div>
+        <div class="wind-row" style="margin:4px 0 0"><div><span class="lbl">Nedbør neste time</span>${w.precipitation_mm.toFixed(1)} mm</div></div>
       </div>
     </div>
     <div class="hours">${nextHours}</div>
-    <div class="daily">${days}</div>`;
+    <div class="daysrows">${dayRows}</div>
+    <div class="src">Yr · MET Norway</div>`;
 }
 
 function weatherModal() {
   const w = D?.weather;
   if (!w) return;
-  const week = (w.daily || []).map(d => `
-    <div class="day">
-      <div class="d">${esc(shortDay(d.date))}</div>
-      <div class="i">${wmo(d.weather_code)[0]}</div>
-      <div>${Math.round(d.temp_max_c)}° <span style="color:var(--muted)">${Math.round(d.temp_min_c)}°</span></div>
-      <div class="w">${d.precipitation_probability_pct != null ? Math.round(d.precipitation_probability_pct) + '%' : ''} · ${Math.round(d.wind_speed_max_kmh)} km/t</div>
-    </div>`).join('');
 
-  let rows = '', lastDay = '';
+  // dager med timesoppløsning
+  const hourlyByDay = {};
   for (const h of (w.hourly || [])) {
-    const day = h.time.slice(0, 10);
-    if (day !== lastDay) {
-      rows += `<tr class="dayhead"><td colspan="5">${esc(dayName(h.time))}</td></tr>`;
-      lastDay = day;
+    (hourlyByDay[h.time.slice(0, 10)] ||= []).push(h);
+  }
+
+  let rows = '';
+  for (const d of (w.days || [])) {
+    const rain = d.precipitation_mm_total >= 0.1 ? ` · ${d.precipitation_mm_total.toFixed(1)} mm` : '';
+    rows += `<tr class="dayhead"><td colspan="5">${esc(dayName(d.date + 'T12:00'))}
+      <span style="color:var(--muted);font-weight:400">${Math.round(d.temp_max_c)}°/${Math.round(d.temp_min_c)}°${rain}</span></td></tr>`;
+    const hours = hourlyByDay[d.date];
+    if (hours) {
+      for (const h of hours) {
+        rows += `<tr>
+          <td>${esc(hhmm(h.time))}</td>
+          <td>${sym(h.symbol)[0]} <span style="color:var(--muted);font-size:12px">${esc(sym(h.symbol)[1])}</span></td>
+          <td>${Math.round(h.temp_c)}°</td>
+          <td>${h.precipitation_mm > 0 ? h.precipitation_mm.toFixed(1) + ' mm' : '–'}</td>
+          <td>${wind(h.wind_ms, h.wind_direction_deg)}</td>
+        </tr>`;
+      }
+    } else {
+      for (const p of d.periods) {
+        rows += `<tr>
+          <td>${String(p.from_hour).padStart(2, '0')}–${String((p.from_hour + 6) % 24).padStart(2, '0')}</td>
+          <td>${sym(p.symbol)[0]} <span style="color:var(--muted);font-size:12px">${esc(sym(p.symbol)[1])}</span></td>
+          <td>${Math.round(p.temp_c)}°</td>
+          <td>${p.precipitation_mm > 0 ? p.precipitation_mm.toFixed(1) + ' mm' : '–'}</td>
+          <td>${wind(p.wind_ms, p.wind_direction_deg)}</td>
+        </tr>`;
+      }
     }
-    const precip = (h.precipitation_probability_pct != null ? Math.round(h.precipitation_probability_pct) + '%' : '–')
-      + (h.precipitation_mm > 0 ? ` · ${h.precipitation_mm.toFixed(1)} mm` : '');
-    rows += `<tr>
-      <td>${esc(hhmm(h.time))}</td>
-      <td>${wmo(h.weather_code)[0]} <span style="color:var(--muted);font-size:12px">${esc(wmo(h.weather_code)[1])}</span></td>
-      <td>${Math.round(h.temp_c)}°</td>
-      <td>${precip}</td>
-      <td>${Math.round(h.wind_speed_kmh)} (${Math.round(h.wind_gusts_kmh)}) km/t ${compass(h.wind_direction_deg)}</td>
-    </tr>`;
   }
   openModal('Vær · Green Point', `
-    <div class="week-grid">${week}</div>
     <table class="fc">
-      <tr><th>Kl</th><th></th><th>Temp</th><th>Nedbør</th><th>Vind (kast)</th></tr>
+      <tr><th>Kl</th><th></th><th>Temp</th><th>Nedbør</th><th>Vind</th></tr>
       ${rows}
-    </table>`);
+    </table>
+    <div class="src">Data fra MET Norway (Yr) · Locationforecast 2.0 · CC-BY 4.0</div>`);
 }
 document.getElementById('weather').addEventListener('click', weatherModal);
 
@@ -385,10 +413,10 @@ function renderSurf(spots) {
       <div class="h">${s.swell_height_m.toFixed(1)} m</div>
       <div class="meta">
         ${s.swell_period_s.toFixed(0)} s · svell fra ${compass(s.swell_direction_deg)} ·
-        vind ${Math.round(s.wind_speed_kmh)} km/t ${compass(s.wind_direction_deg)}
+        vind ${wind(s.wind_ms, s.wind_direction_deg)}
       </div>
     </div>`;
-  }).join('');
+  }).join('') + '<div class="src">Open-Meteo marine (MFWAM) · rating beregnet lokalt</div>';
   document.querySelectorAll('#surf .spot').forEach(el =>
     el.addEventListener('click', () => surfModal(+el.dataset.spot)));
 }
@@ -410,19 +438,20 @@ function surfModal(i) {
       <td><span class="dot" style="background:${hr.color}"></span>${hr.label}</td>
       <td>${h.swell_height_m.toFixed(1)} m @ ${h.swell_period_s.toFixed(0)} s</td>
       <td>${compass(h.swell_direction_deg)}</td>
-      <td>${Math.round(h.wind_speed_kmh)} km/t ${compass(h.wind_direction_deg)}</td>
+      <td>${wind(h.wind_ms, h.wind_direction_deg)}</td>
     </tr>`;
   }
   openModal(`${esc(s.name)} <span class="pill" style="background:${r.color};vertical-align:middle">${r.label}</span>`, `
     <div class="m-meta">
       <span>Svell ${s.swell_height_m.toFixed(1)} m @ ${s.swell_period_s.toFixed(0)} s fra ${compass(s.swell_direction_deg)}</span>
       <span>·</span><span>Bølge ${s.wave_height_m.toFixed(1)} m</span>
-      <span>·</span><span>Vind ${Math.round(s.wind_speed_kmh)} km/t fra ${compass(s.wind_direction_deg)}</span>
+      <span>·</span><span>Vind ${wind(s.wind_ms, s.wind_direction_deg)}</span>
     </div>
     <table class="fc">
       <tr><th>Kl</th><th>Forhold</th><th>Svell</th><th>Retning</th><th>Vind</th></tr>
       ${rows}
-    </table>`);
+    </table>
+    <div class="src">Open-Meteo marine (MFWAM-bølgemodell) + Open-Meteo vind · rating: egen beregning fra svell, periode og vindretning mot spotens offshore-retning</div>`);
 }
 
 /* ---------- Nyheter ---------- */
@@ -473,7 +502,8 @@ function renderEvents(events) {
     </a>`;
   }).join('');
   document.querySelector('#events .ev-list').innerHTML =
-    rows || '<div class="empty">Ingen events funnet</div>';
+    (rows || '<div class="empty">Ingen events funnet</div>') +
+    '<div class="src">Quicket</div>';
 }
 
 function renderCalendar(cal) {
@@ -519,7 +549,8 @@ function render(data) {
       <div class="stage">
         <div class="num ${s.stage === 0 ? 'ok' : 'bad'}">${s.stage === 0 ? '✓' : 'Stage ' + s.stage}</div>
         <div class="note">${s.stage === 0 ? 'Ingen load shedding' : ''} ${esc(s.note)}</div>
-      </div>`;
+      </div>
+      <div class="src">EskomSePush</div>`;
   }
 }
 
