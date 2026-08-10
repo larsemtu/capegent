@@ -164,6 +164,10 @@
   .vote:hover { opacity: 1; filter: none; border-color: var(--accent); }
   .vote.chosen { opacity: 1; filter: none; border-color: var(--accent);
                  background: rgba(76,194,255,.12); }
+  .list-item.ev { position: relative; }
+  .ev-actions { position: absolute; top: 5px; right: 4px; display: flex; gap: 3px; }
+  .ev-actions .vote, .ev-actions .addcal { padding: 0 5px; height: 20px; line-height: 18px;
+                                           font-size: 11px; }
   .empty { color: var(--muted); font-size: 13px; font-style: italic; }
   /* Kalender + gjøremål: hovedpanelene */
   .cal-row { display: flex; gap: 12px; padding: 9px 6px; border-bottom: 1px solid var(--border);
@@ -644,17 +648,20 @@ function renderEvents(events) {
     .format(new Date(e.start));
   const relColor = r => r >= 5 ? 'var(--r-good)' : r >= 4 ? 'var(--r-fair)' : 'var(--border)';
   const row = (e, showWhy) => `
-    <a class="list-item clickable" href="${esc(e.url)}" target="_blank" rel="noopener"
+    <a class="list-item ev clickable" href="${esc(e.url)}" target="_blank" rel="noopener"
        style="text-decoration:none;color:inherit${e.relevance >= 5 ? ';border-left:3px solid var(--r-good);padding-left:7px' : ''}">
       <span class="when">${esc(fmtWhen(e))}</span>
-      <span style="flex:1"><span class="dot" style="background:${relColor(e.relevance || 0)};width:7px;height:7px"></span>${esc(e.title)}<span style="color:var(--muted)"> · ${esc(e.venue)}</span>${
+      <span style="flex:1;min-width:0">
+        <div style="padding-right:92px"><span class="dot" style="background:${relColor(e.relevance || 0)};width:7px;height:7px"></span>${esc(e.title)}<span style="color:var(--muted)"> · ${esc(e.venue)}</span></div>${
         showWhy && e.why_no ? `<div style="color:var(--muted);font-size:12px;margin-top:1px">🤖 ${esc(e.why_no)}</div>` : ''}</span>
-      <button class="vote ${myVotes[e.url] === 'up' ? 'chosen' : ''}" title="Mer som dette"
-        onclick="event.preventDefault();event.stopPropagation();castVote('${esc(e.url)}', '${esc(e.title)}', 'up', this)">👍</button>
-      <button class="vote ${myVotes[e.url] === 'down' ? 'chosen' : ''}" title="Mindre som dette"
-        onclick="event.preventDefault();event.stopPropagation();castVote('${esc(e.url)}', '${esc(e.title)}', 'down', this)">👎</button>
-      <button class="addcal" title="Legg til i felleskalenderen"
-        onclick="event.preventDefault();event.stopPropagation();window.open('${esc(gcalUrl(e))}','_blank')">📅+</button>
+      <span class="ev-actions">
+        <button class="vote ${myVotes[e.url] === 'up' ? 'chosen' : ''}" title="Mer som dette"
+          onclick="event.preventDefault();event.stopPropagation();castVote('${esc(e.url)}', '${esc(e.title)}', 'up', this)">👍</button>
+        <button class="vote ${myVotes[e.url] === 'down' ? 'chosen' : ''}" title="Mindre som dette"
+          onclick="event.preventDefault();event.stopPropagation();castVote('${esc(e.url)}', '${esc(e.title)}', 'down', this)">👎</button>
+        <button class="addcal" title="Legg til i felleskalenderen"
+          onclick="event.preventDefault();event.stopPropagation();window.open('${esc(gcalUrl(e))}','_blank')">📅+</button>
+      </span>
     </a>`;
   const picks = events.filter(e => (e.relevance || 0) >= 4);
   const rest = events.filter(e => (e.relevance || 0) < 4 && (e.relevance || 0) !== 1 && (e.relevance || 0) !== 2);
