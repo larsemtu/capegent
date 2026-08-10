@@ -247,6 +247,36 @@
   .week-grid .day .d { color: var(--muted); font-size: 11px; text-transform: uppercase; }
   .week-grid .day .i { font-size: 22px; margin: 2px 0; }
   .week-grid .day .w { color: var(--muted); font-size: 11px; }
+
+  #refresh-btn {
+    background: var(--panel); border: 1px solid var(--border); color: var(--muted);
+    border-radius: 9px; width: 34px; height: 34px; font-size: 17px; cursor: pointer;
+    align-self: center;
+  }
+  #refresh-btn:hover { color: var(--accent); border-color: var(--accent); }
+  #refresh-btn.spin { animation: spin .8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Mobil: én kolonne, full høyde, scroll */
+  @media (max-width: 900px) {
+    body { padding: 10px; gap: 10px; }
+    header { gap: 10px; flex-wrap: wrap; }
+    header h1 { font-size: 19px; letter-spacing: 1px; }
+    #clock { font-size: 19px; }
+    #updated { font-size: 11px; width: 100%; order: 5; margin-left: 0; }
+    main { grid-template-columns: 1fr; }
+    .news-list { grid-template-columns: 1fr; }
+    .hours { overflow-x: auto; }
+    .hours .h { min-width: 54px; }
+    .now .temp { font-size: 34px; }
+    .now .icon { font-size: 36px; }
+    #events .ev-list { max-height: none; }
+    #modal { width: 96vw; max-height: 92vh; }
+    #modal .m-head { padding: 13px 14px 8px; }
+    #modal .m-body { padding: 4px 14px 16px; }
+    table.fc { font-size: 12px; }
+    table.fc th, table.fc td { padding: 3px 5px; }
+  }
 </style>
 </head>
 <body>
@@ -254,6 +284,7 @@
     <h1>CAPE TOWN</h1>
     <div id="clock">--:--</div>
     <div id="updated">venter på data …</div>
+    <button id="refresh-btn" title="Hent siste data">⟳</button>
   </header>
   <main>
     <div class="col">
@@ -855,6 +886,17 @@ tickClock();
 setInterval(tickClock, 1000);
 refresh();
 setInterval(refresh, 60000);
+
+// Manuell refresh + automatisk når skjermen/fanen våkner (mobil!)
+const refreshBtn = document.getElementById('refresh-btn');
+refreshBtn.addEventListener('click', async () => {
+  refreshBtn.classList.add('spin');
+  await refresh();
+  setTimeout(() => refreshBtn.classList.remove('spin'), 500);
+});
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') refresh();
+});
 </script>
 </body>
 </html>

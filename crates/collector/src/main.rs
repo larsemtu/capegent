@@ -52,7 +52,7 @@ async fn main() -> Result<()> {
     let (weather_res, surf, loadshedding_res, calendar_res, events_res, eb_res, tm_res, todos_res, raw_news) = tokio::join!(
         weather::fetch(&client),
         fetch_surf(&client),
-        loadshedding::fetch(&client),
+        loadshedding::fetch(&client, previous.load_shedding.as_ref().is_some_and(|ls| ls.stage > 0)),
         calendar::fetch(&client),
         events::fetch(&client),
         eventbrite::fetch(&client),
