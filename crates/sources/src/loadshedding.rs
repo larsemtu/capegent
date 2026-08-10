@@ -21,10 +21,17 @@ struct AreaStatus {
 
 /// EskomSePush-status for Cape Town. Returnerer Ok(None) uten token,
 /// slik at lokal kjøring fungerer uten oppsett.
+/// Gratis-kvoten er 50 kall/døgn og cron kjører 48 ganger — derfor kalles
+/// API-et kun på hel time (:00-kjøringen); :30-kjøringen gjenbruker forrige.
 pub async fn fetch(client: &reqwest::Client) -> Result<Option<LoadShedding>> {
     let Some(token) = crate::env_nonempty("SEPUSH_TOKEN") else {
         return Ok(None);
     };
+    use chrono::Timelike;
+    if chrono::Utc::now().minute() >= 15 && crate::env_nonempty("SEPUSH_FORCE").is_none() {
+        // Signaliserer «bruk forrige verdi» til collectoren
+        return Ok(None);
+    }
     let resp: StatusResp = client
         .get("https://developer.sepush.co.za/business/2.0/status")
         .header("token", token)
