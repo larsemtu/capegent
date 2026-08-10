@@ -182,6 +182,13 @@
                   background: rgba(143,161,179,.15); color: var(--muted); text-transform: uppercase; }
   .todo-row .st.active { background: rgba(76,194,255,.15); color: var(--accent); }
   .todo-row .t { font-size: 16px; font-weight: 500; }
+  .guide-row { display: flex; gap: 12px; padding: 9px 6px; align-items: center;
+               border-bottom: 1px solid var(--border); border-radius: 6px; }
+  .guide-row:last-of-type { border-bottom: none; }
+  .guide-row .ic { font-size: 24px; }
+  .guide-row .t { font-size: 16px; font-weight: 600; }
+  .guide-row .tag { color: var(--muted); font-size: 12.5px; }
+  #modal .m-body h4 { margin: 14px 0 4px; font-size: 15px; color: var(--accent); }
   .src { color: var(--muted); font-size: 10px; margin-top: 6px; opacity: .75; text-align: right; }
   .daysrows { margin-top: 8px; }
   .dayrow { display: grid; grid-template-columns: 44px 1fr auto auto auto; gap: 8px;
@@ -268,6 +275,9 @@
         <h2>Gjøremål</h2>
         <div class="empty">Kobles til Linear</div>
       </section>
+      <section id="guides">
+        <h2>Guider</h2>
+      </section>
     </div>
     <div class="col">
       <section id="loadshedding">
@@ -301,6 +311,7 @@
     </div>
   </div>
 
+<script src="guides.js"></script>
 <script>
 const TZ = 'Africa/Johannesburg';
 const DATA_URL = '/data/latest.json';
@@ -780,6 +791,24 @@ function renderYearWheel(cal) {
     ywScrolled = true;
   }
 }
+
+/* ---------- Guider (statisk innhold fra CapeTasks) ---------- */
+function renderGuides() {
+  if (typeof GUIDES === 'undefined' || !GUIDES.length) return;
+  document.getElementById('guides').innerHTML = '<h2>Guider</h2>' + GUIDES.map((g, i) => `
+    <div class="guide-row clickable" data-guide="${i}" title="Trykk for hele guiden">
+      <span class="ic">${g.icon}</span>
+      <span><div class="t">${esc(g.title)}</div><div class="tag">${esc(g.tagline)}</div></span>
+    </div>`).join('') +
+    '<div class="src">Egne notater · CapeTasks</div>';
+  document.querySelectorAll('#guides .guide-row').forEach(el =>
+    el.addEventListener('click', () => {
+      const g = GUIDES[+el.dataset.guide];
+      openModal(`${g.icon} ${esc(g.title)}`, g.html +
+        '<div class="src">Fra CapeTasks (LAR-23) · si til Claude for å endre</div>');
+    }));
+}
+renderGuides();
 
 /* ---------- Hovedrender ---------- */
 function render(data) {
