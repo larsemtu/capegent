@@ -289,6 +289,63 @@ pub async fn curate_events(
     Ok(serde_json::from_value(input).context("parse EventCurationBatch")?)
 }
 
+/// Strukturerer whatsonincapetown-artikkelen til konsertliste. Kalles kun
+/// når sideinnholdet endrer seg (ukentlig oppdatert side, hash-cache).
+pub async fn extract_concerts(
+    client: &reqwest::Client,
+    api_key: &str,
+    article_text: &str,
+) -> Result<schema::ConcertBatch> {
+    let settings = schemars::gen::SchemaSettings::draft07().with(|s| {
+        s.inline_subschemas = true;
+    });
+    let schema_value = serde_json::to_value(
+        settings
+            .into_generator()
+            .into_root_schema_for::<schema::ConcertBatch>(),
+    )?;
+
+    let prompt = format!(
+        "Under er en redaksjonell artikkel om kommende konserter i Sør-Afrika.          Trekk ut HVER konsert som eget objekt: title (artist/eventnavn), start          som ISO-dato YYYY-MM-DD (artikkelen skriver datoer som «27 August 2026»),          venue, price_from (f.eks. «R495», tom hvis ukjent), ticket_url (fra          «(billett: …)»-markørene der de finnes, ellers tom), city («Cape Town»          eller «Johannesburg» — GrandWest/Kirstenbosch/V&A/Green Point er Cape          Town, FNB Stadium/Nasrec er Johannesburg). Hopp over utsolgte og events          uten konkret dato.
+
+{article_text}"
+    );
+
+    let body = json!({
+        "model": MODEL,
+        "max_tokens": 4000,
+        "messages": [{"role": "user", "content": prompt}],
+        "tools": [{
+            "name": "emit_concerts",
+            "description": "Lever konsertlisten",
+            "input_schema": schema_value,
+        }],
+        "tool_choice": {"type": "tool", "name": "emit_concerts"},
+    });
+
+    let resp = client
+        .post("https://api.anthropic.com/v1/messages")
+        .timeout(std::time::Duration::from_secs(120))
+        .header("x-api-key", api_key)
+        .header("anthropic-version", "2023-06-01")
+        .json(&body)
+        .send()
+        .await
+        .context("POST konsert-ekstraksjon til Claude API")?;
+
+    let status = resp.status();
+    let value: Value = resp.json().await.context("les Claude-svar")?;
+    if !status.is_success() {
+        bail!("Claude API ga {status}: {value}");
+    }
+    let input = value["content"]
+        .as_array()
+        .and_then(|blocks| blocks.iter().find(|b| b["type"] == "tool_use"))
+        .map(|b| b["input"].clone())
+        .context("ingen tool_use-blokk i konsert-ekstraksjonen")?;
+    Ok(serde_json::from_value(input).context("parse ConcertBatch")?)
+}
+
 /// Uten API-nøkkel (eller ved feilet kall): vis originaltekst uoversatt.
 /// Disse skal IKKE inn i cachen — de skal oversettes neste gang nøkkelen finnes.
 pub fn fallback(raw: &RawItem) -> NewsEntry {

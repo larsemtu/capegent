@@ -53,6 +53,45 @@ pub struct NewsBatch {
     pub items: Vec<NewsItem>,
 }
 
+/// Konsert ekstrahert fra whatsonincapetown av Claude — tvunget tool-output.
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+pub struct Concert {
+    pub title: String,
+    /// ISO-dato (YYYY-MM-DD)
+    pub start: String,
+    pub venue: String,
+    /// F.eks. "R495" — tom streng hvis ukjent
+    #[serde(default)]
+    pub price_from: String,
+    /// Billettlenke hvis funnet i artikkelen, ellers tom
+    #[serde(default)]
+    pub ticket_url: String,
+    /// By, f.eks. "Cape Town" eller "Johannesburg"
+    #[serde(default)]
+    pub city: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+pub struct ConcertBatch {
+    pub concerts: Vec<Concert>,
+}
+
+/// NOK/ZAR-kurs med 30-dagers historikk (LAR-25).
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Currency {
+    /// 1 NOK = rate ZAR
+    pub rate: f64,
+    pub change_pct_30d: f64,
+    pub updated: String,
+    pub series: Vec<FxPoint>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct FxPoint {
+    pub date: String,
+    pub rate: f64,
+}
+
 /// Claude sin surf-tolkning — tvunget tool-output.
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
 pub struct SurfAnalysisBatch {
@@ -268,4 +307,9 @@ pub struct DashboardData {
     /// Claude sin samlede surfvurdering på tvers av spotene
     #[serde(default)]
     pub surf_summary_no: Option<String>,
+    /// Konserter/storarrangementer fra whatsonincapetown (LLM-ekstrahert)
+    #[serde(default)]
+    pub concerts: Vec<Concert>,
+    #[serde(default)]
+    pub currency: Option<Currency>,
 }

@@ -197,6 +197,17 @@
   .guide-row .t { font-size: 16px; font-weight: 600; }
   .guide-row .tag { color: var(--muted); font-size: 12.5px; }
   #modal .m-body h4 { margin: 14px 0 4px; font-size: 15px; color: var(--accent); }
+  .concert-row { display: flex; gap: 10px; padding: 7px 6px; border-bottom: 1px solid var(--border);
+                 align-items: baseline; font-size: 14px; }
+  .concert-row:last-of-type { border-bottom: none; }
+  .concert-row .when { color: var(--accent); font-size: 12.5px; min-width: 52px;
+                       font-variant-numeric: tabular-nums; }
+  .must { font-size: 10px; font-weight: 800; color: #08110c; background: var(--r-good);
+          border-radius: 99px; padding: 1px 7px; letter-spacing: .5px; vertical-align: middle; }
+  #currency .rate { font-size: 30px; font-weight: 200; }
+  #currency .chg { font-size: 13px; font-weight: 600; }
+  #currency .chg.up { color: var(--ok); }
+  #currency .chg.down { color: var(--alert); }
   .src { color: var(--muted); font-size: 10px; margin-top: 6px; opacity: .75; text-align: right; }
   .daysrows { margin-top: 8px; }
   .dayrow { display: grid; grid-template-columns: 44px 1fr auto auto auto; gap: 8px;
@@ -318,10 +329,18 @@
       <section id="guides">
         <h2>Guider</h2>
       </section>
+      <section id="concerts" class="clickable" title="Trykk for hele konsertoversikten">
+        <h2>Konserter</h2>
+        <div class="empty">Henter fra whatsonincapetown …</div>
+      </section>
     </div>
     <div class="col">
       <section id="loadshedding">
         <h2>Load shedding</h2>
+        <div class="empty">Ingen data</div>
+      </section>
+      <section id="currency">
+        <h2>Kronekurs</h2>
         <div class="empty">Ingen data</div>
       </section>
       <section id="events">
@@ -352,6 +371,7 @@
   </div>
 
 <script src="guides.js"></script>
+<script src="concerts.js"></script>
 <script>
 const TZ = 'Africa/Johannesburg';
 const DATA_URL = '/data/latest.json';
@@ -853,6 +873,88 @@ function renderGuides() {
 }
 renderGuides();
 
+/* ---------- Konserter ---------- */
+function concertRow(c, showBadge) {
+  const when = new Intl.DateTimeFormat('no', { day: 'numeric', month: 'short' })
+    .format(new Date(c.start + 'T12:00:00'));
+  const badge = showBadge && c.pri === 'MUST' ? ' <span class="must">MUST</span>' : '';
+  return `<div class="concert-row">
+    <span class="when">${esc(when)}</span>
+    <span style="flex:1">${esc(c.title)}${badge}<span style="color:var(--muted)"> · ${esc(c.venue)}</span></span>
+  </div>`;
+}
+
+function renderConcerts() {
+  const auto = (D?.concerts || []).filter(c => c.city !== 'Johannesburg');
+  const radar = (typeof LIVE_RADAR !== 'undefined' ? LIVE_RADAR : []);
+  const today = new Date().toISOString().slice(0, 10);
+  const merged = [...auto, ...radar]
+    .filter(c => c.start >= today)
+    .sort((a, b) => a.start.localeCompare(b.start));
+  const rows = merged.slice(0, 6).map(c => concertRow(c, true)).join('');
+  document.getElementById('concerts').innerHTML = '<h2>Konserter</h2>' +
+    (rows || '<div class="empty">Ingen kommende funnet</div>') +
+    `<div class="src">${merged.length} på lista — trykk for alt · whatsonincapetown + Live Radar</div>`;
+}
+
+function concertsModal() {
+  const today = new Date().toISOString().slice(0, 10);
+  const auto = (D?.concerts || []).filter(c => c.start >= today);
+  const radar = (typeof LIVE_RADAR !== 'undefined' ? LIVE_RADAR : []).filter(c => c.start >= today);
+  const fmtD = d => new Intl.DateTimeFormat('no', { day: 'numeric', month: 'short', year: 'numeric' })
+    .format(new Date(d + 'T12:00:00'));
+  let html = '<h4>🎤 De store (auto fra whatsonincapetown, ukentlig)</h4>';
+  html += auto.map(c => `
+    <div class="concert-row">
+      <span class="when" style="min-width:86px">${esc(fmtD(c.start))}</span>
+      <span style="flex:1">${esc(c.title)}${c.city === 'Johannesburg' ? ' <span style="color:var(--warn);font-size:11px">JOBURG</span>' : ''}
+        <span style="color:var(--muted)"> · ${esc(c.venue)}${c.price_from ? ` · fra ${esc(c.price_from)}` : ''}</span>
+        ${c.ticket_url ? `<a href="${esc(c.ticket_url)}" target="_blank" rel="noopener" style="color:var(--accent);font-size:12px"> billetter ↗</a>` : ''}
+      </span>
+      <button class="addcal" onclick="event.stopPropagation();window.open('${esc(gcalUrl({title: c.title, start: c.start, venue: c.venue, url: c.ticket_url || ''}))}','_blank')">📅+</button>
+    </div>`).join('');
+  html += '<h4>🎺 Live Radar — ekte livemusikk (kuratert)</h4>';
+  html += radar.map(c => `
+    <div class="concert-row">
+      <span class="when" style="min-width:86px">${esc(fmtD(c.start))}</span>
+      <span style="flex:1">${esc(c.title)}${c.pri === 'MUST' ? ' <span class="must">MUST</span>' : ''}
+        <span style="color:var(--muted)"> · ${esc(c.venue)} · ${esc(c.note)}</span></span>
+      <button class="addcal" onclick="event.stopPropagation();window.open('${esc(gcalUrl({title: c.title, start: c.start, venue: c.venue, url: ''}))}','_blank')">📅+</button>
+    </div>`).join('');
+  html += (typeof CONCERT_NOTES !== 'undefined' ? CONCERT_NOTES : '');
+  openModal('Konserter og store events', html +
+    '<div class="src">Auto: whatsonincapetown.com (LLM-strukturert, hash-cachet) · Live Radar/watchlist: LAR-24 — si til Claude for å oppdatere</div>');
+}
+document.getElementById('concerts').addEventListener('click', concertsModal);
+
+/* ---------- Kronekurs ---------- */
+function renderCurrency(c) {
+  if (!c) return;
+  const pts = c.series || [];
+  let spark = '';
+  if (pts.length > 1) {
+    const w = 220, h = 44, pad = 2;
+    const min = Math.min(...pts.map(p => p.rate)), max = Math.max(...pts.map(p => p.rate));
+    const x = i => pad + i * (w - 2 * pad) / (pts.length - 1);
+    const y = r => max === min ? h / 2 : pad + (max - r) * (h - 2 * pad) / (max - min);
+    const path = pts.map((p, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(p.rate).toFixed(1)}`).join('');
+    spark = `<svg viewBox="0 0 ${w} ${h}" style="width:100%;height:${h}px;display:block;margin-top:6px">
+      <path d="${path}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>
+    <div style="display:flex;justify-content:space-between;color:var(--muted);font-size:10.5px">
+      <span>${esc(pts[0].date.slice(5))}</span><span>min ${min.toFixed(2)} · maks ${max.toFixed(2)}</span><span>${esc(pts[pts.length-1].date.slice(5))}</span>
+    </div>`;
+  }
+  const up = c.change_pct_30d >= 0;
+  document.getElementById('currency').innerHTML = `<h2>Kronekurs</h2>
+    <div style="display:flex;align-items:baseline;gap:10px">
+      <span class="rate">1 NOK = ${c.rate.toFixed(2)}</span><span style="color:var(--muted)">ZAR</span>
+      <span class="chg ${up ? 'up' : 'down'}" style="margin-left:auto">${up ? '+' : ''}${c.change_pct_30d.toFixed(1)}% <span style="color:var(--muted);font-weight:400">30 d</span></span>
+    </div>
+    ${spark}
+    <div class="src">ECB via Frankfurter · ${esc(c.updated)}</div>`;
+}
+
 /* ---------- Hovedrender ---------- */
 function render(data) {
   D = data;
@@ -868,6 +970,8 @@ function render(data) {
   renderCalendar(data.calendar || []);
   renderYearWheel(data.calendar || []);
   renderTodos(data.todos || []);
+  renderConcerts();
+  renderCurrency(data.currency);
 
   const ls = document.getElementById('loadshedding');
   if (data.load_shedding) {

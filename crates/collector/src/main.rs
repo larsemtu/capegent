@@ -8,7 +8,7 @@ mod llm;
 use anyhow::Result;
 use futures::future::join_all;
 use schema::{DashboardData, NewsEntry, SurfSpot};
-use sources::{article, calendar, eventbrite, events, linear, loadshedding, marine, rss::RssSource, ticketmaster, weather, RawItem, Source};
+use sources::{article, calendar, currency, eventbrite, events, linear, loadshedding, marine, rss::RssSource, ticketmaster, weather, whatson, RawItem, Source};
 use std::collections::HashSet;
 use std::path::Path;
 use std::time::Duration;
@@ -49,7 +49,7 @@ async fn main() -> Result<()> {
 
     let cache = dedup::Cache::open(Path::new(".cache/dedup.redb"))?;
 
-    let (weather_res, surf, loadshedding_res, calendar_res, events_res, eb_res, tm_res, todos_res, raw_news) = tokio::join!(
+    let (weather_res, surf, loadshedding_res, calendar_res, events_res, eb_res, tm_res, todos_res, currency_res, whatson_res, raw_news) = tokio::join!(
         weather::fetch(&client),
         fetch_surf(&client),
         loadshedding::fetch(&client, previous.load_shedding.as_ref().is_some_and(|ls| ls.stage > 0)),
@@ -58,11 +58,14 @@ async fn main() -> Result<()> {
         eventbrite::fetch(&client),
         ticketmaster::fetch(&client),
         linear::fetch(&client),
+        currency::fetch(&client),
+        whatson::fetch_text(&client),
         fetch_news(&client),
     );
 
     let news = process_news(&client, &cache, raw_news).await;
     let surf = attach_surf_analysis(&client, &cache, surf, &previous).await;
+    let concerts = extract_concerts_cached(&client, &cache, whatson_res, &previous).await;
 
     let curated_events = {
         let mut all = match events_res {
@@ -123,6 +126,14 @@ async fn main() -> Result<()> {
             }
         },
         surf_summary_no: cache.get_meta("surf_summary_no").or(previous.surf_summary_no),
+        concerts,
+        currency: match currency_res {
+            Ok(c) => Some(c),
+            Err(e) => {
+                warn!("valutakurs feilet, bruker forrige: {e:#}");
+                previous.currency.clone()
+            }
+        },
     };
 
     std::fs::create_dir_all("data")?;
@@ -275,6 +286,56 @@ async fn curate_events(
         Err(e) => warn!("event-kuratering feilet: {e:#}"),
     }
     events
+}
+
+/// Konserter fra whatsonincapetown: LLM-strukturering, hash-cachet på
+/// sideinnholdet (siden oppdateres ~ukentlig). Ekstrahert JSON lagres i
+/// meta-cachen så uendret side aldri koster et Claude-kall.
+async fn extract_concerts_cached(
+    client: &reqwest::Client,
+    cache: &dedup::Cache,
+    whatson_res: anyhow::Result<String>,
+    previous: &DashboardData,
+) -> Vec<schema::Concert> {
+    let text = match whatson_res {
+        Ok(t) if t.len() > 500 => t,
+        Ok(_) => {
+            warn!("whatson-tekst for kort, bruker forrige konsertliste");
+            return previous.concerts.clone();
+        }
+        Err(e) => {
+            warn!("whatson feilet, bruker forrige konsertliste: {e:#}");
+            return previous.concerts.clone();
+        }
+    };
+    let hash = blake3::hash(text.as_bytes()).to_hex().to_string();
+    if cache.get_meta("concerts_hash").as_deref() == Some(hash.as_str()) {
+        if let Some(json) = cache.get_meta("concerts_json") {
+            if let Ok(concerts) = serde_json::from_str(&json) {
+                return concerts;
+            }
+        }
+        return previous.concerts.clone();
+    }
+    let Some(api_key) = sources::env_nonempty("ANTHROPIC_API_KEY") else {
+        return previous.concerts.clone();
+    };
+    match llm::extract_concerts(client, &api_key, &text).await {
+        Ok(batch) => {
+            let mut concerts = batch.concerts;
+            concerts.sort_by(|a, b| a.start.cmp(&b.start));
+            let _ = cache.put_meta("concerts_hash", &hash);
+            if let Ok(json) = serde_json::to_string(&concerts) {
+                let _ = cache.put_meta("concerts_json", &json);
+            }
+            info!(antall = concerts.len(), "ny konsertliste ekstrahert");
+            concerts
+        }
+        Err(e) => {
+            warn!("konsert-ekstraksjon feilet: {e:#}");
+            previous.concerts.clone()
+        }
+    }
 }
 
 async fn fetch_news(client: &reqwest::Client) -> Vec<RawItem> {

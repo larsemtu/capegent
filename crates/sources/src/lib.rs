@@ -4,6 +4,7 @@
 
 pub mod article;
 pub mod calendar;
+pub mod currency;
 pub mod eventbrite;
 pub mod events;
 pub mod linear;
@@ -12,6 +13,7 @@ pub mod marine;
 pub mod rss;
 pub mod ticketmaster;
 pub mod weather;
+pub mod whatson;
 
 use anyhow::Result;
 use async_trait::async_trait;
