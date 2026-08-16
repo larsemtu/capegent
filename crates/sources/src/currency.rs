@@ -1,4 +1,5 @@
-//! NOK/ZAR fra Frankfurter (ECB-kurser, gratis, uten nøkkel). LAR-25.
+//! Kronekurs fra Frankfurter (ECB, gratis, uten nøkkel). LAR-25.
+//! Primærvisning: 100 ZAR -> NOK (reiseperspektivet: «hva koster randen»).
 
 use anyhow::{Context, Result};
 use chrono::{Duration, Utc};
@@ -13,13 +14,13 @@ struct Resp {
 
 #[derive(Deserialize)]
 struct Rate {
-    #[serde(rename = "ZAR")]
-    zar: f64,
+    #[serde(rename = "NOK")]
+    nok: f64,
 }
 
 pub async fn fetch(client: &reqwest::Client) -> Result<Currency> {
     let from = (Utc::now() - Duration::days(32)).format("%Y-%m-%d");
-    let url = format!("https://api.frankfurter.dev/v1/{from}..?base=NOK&symbols=ZAR");
+    let url = format!("https://api.frankfurter.dev/v1/{from}..?base=ZAR&symbols=NOK");
     let resp: Resp = client
         .get(&url)
         .send()
@@ -33,7 +34,8 @@ pub async fn fetch(client: &reqwest::Client) -> Result<Currency> {
     let series: Vec<FxPoint> = resp
         .rates
         .into_iter()
-        .map(|(date, r)| FxPoint { date, rate: r.zar })
+        // 100 ZAR i NOK
+        .map(|(date, r)| FxPoint { date, rate: r.nok * 100.0 })
         .collect();
     let (first, last) = match (series.first(), series.last()) {
         (Some(f), Some(l)) => (f.rate, l.rate),

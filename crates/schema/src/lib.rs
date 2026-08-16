@@ -76,10 +76,10 @@ pub struct ConcertBatch {
     pub concerts: Vec<Concert>,
 }
 
-/// NOK/ZAR-kurs med 30-dagers historikk (LAR-25).
+/// Kronekurs med 30-dagers historikk (LAR-25).
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Currency {
-    /// 1 NOK = rate ZAR
+    /// 100 ZAR = rate NOK
     pub rate: f64,
     pub change_pct_30d: f64,
     pub updated: String,

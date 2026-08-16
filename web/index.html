@@ -942,13 +942,13 @@ function renderCurrency(c) {
       <path d="${path}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
     </svg>
     <div style="display:flex;justify-content:space-between;color:var(--muted);font-size:10.5px">
-      <span>${esc(pts[0].date.slice(5))}</span><span>min ${min.toFixed(2)} · maks ${max.toFixed(2)}</span><span>${esc(pts[pts.length-1].date.slice(5))}</span>
+      <span>${esc(pts[0].date.slice(5))}</span><span>min ${min.toFixed(1)} · maks ${max.toFixed(1)}</span><span>${esc(pts[pts.length-1].date.slice(5))}</span>
     </div>`;
   }
   const up = c.change_pct_30d >= 0;
   document.getElementById('currency').innerHTML = `<h2>Kronekurs</h2>
     <div style="display:flex;align-items:baseline;gap:10px">
-      <span class="rate">1 NOK = ${c.rate.toFixed(2)}</span><span style="color:var(--muted)">ZAR</span>
+      <span class="rate">100 ZAR = ${c.rate.toFixed(1)}</span><span style="color:var(--muted)">NOK</span>
       <span class="chg ${up ? 'up' : 'down'}" style="margin-left:auto">${up ? '+' : ''}${c.change_pct_30d.toFixed(1)}% <span style="color:var(--muted);font-weight:400">30 d</span></span>
     </div>
     ${spark}
