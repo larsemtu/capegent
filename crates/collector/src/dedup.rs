@@ -7,7 +7,7 @@ use schema::NewsEntry;
 use std::path::Path;
 
 // v2: NewsItem fikk detail_no — nytt tabellnavn så alt re-oppsummeres én gang
-const SUMMARIES: TableDefinition<&str, &str> = TableDefinition::new("summaries_v2");
+const SUMMARIES: TableDefinition<&str, &str> = TableDefinition::new("summaries_v3");
 // Småting med hash-basert gjenbruk (surf-analyse o.l.)
 const META: TableDefinition<&str, &str> = TableDefinition::new("meta");
 
@@ -85,9 +85,9 @@ mod tests {
 
         let entry = NewsEntry {
             item: NewsItem {
-                headline_no: "Testoverskrift".into(),
-                summary_no: "Et sammendrag.".into(),
-                detail_no: "Et lengre sammendrag.".into(),
+                headline: "Testoverskrift".into(),
+                summary: "Et sammendrag.".into(),
+                detail: "Et lengre sammendrag.".into(),
                 category: Category::Other,
                 urgency: 3,
                 source_url: "https://example.com/artikkel".into(),
@@ -99,7 +99,7 @@ mod tests {
         assert!(cache.get(&entry.item.source_url).is_none());
         cache.put(std::slice::from_ref(&entry)).unwrap();
         let fetched = cache.get(&entry.item.source_url).unwrap();
-        assert_eq!(fetched.item.headline_no, "Testoverskrift");
+        assert_eq!(fetched.item.headline, "Testoverskrift");
         let _ = std::fs::remove_dir_all(&dir);
     }
 }

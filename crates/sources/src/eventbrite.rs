@@ -74,7 +74,7 @@ async fn fetch_page(client: &reqwest::Client, url: &str) -> Result<Vec<EventItem
                 venue: venue.to_string(),
                 url,
                 relevance: None,
-                why_no: None,
+                why: None,
             });
         }
     }

@@ -13,6 +13,7 @@ pub enum Category {
     Weather,
     Politics,
     Event,
+    Sports,
     Infrastructure,
     Other,
 }
@@ -25,7 +26,7 @@ impl Category {
             Category::Crime => 0,
             Category::Politics | Category::Infrastructure | Category::Traffic => 1,
             Category::Weather => 2,
-            Category::Event => 3,
+            Category::Event | Category::Sports => 3,
             Category::Other => 4,
         }
     }
@@ -33,13 +34,12 @@ impl Category {
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
 pub struct NewsItem {
-    /// Overskrift oversatt til norsk
-    pub headline_no: String,
-    /// Norsk sammendrag, maks 2 setninger (oversiktsvisning)
-    pub summary_no: String,
-    /// Utfyllende norsk sammendrag, 4-8 setninger basert på hele
-    /// artikkelteksten (detaljvisning)
-    pub detail_no: String,
+    /// Headline, lett komprimert
+    pub headline: String,
+    /// Sammendrag på engelsk, maks 2 setninger (oversiktsvisning)
+    pub summary: String,
+    /// Fyldig engelsk sammendrag, 4-8 setninger fra hele artikkelteksten
+    pub detail: String,
     pub category: Category,
     /// 1 (uviktig) til 5 (kritisk for beboere i Cape Town)
     pub urgency: u8,
@@ -96,7 +96,7 @@ pub struct FxPoint {
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
 pub struct SurfAnalysisBatch {
     /// Kort samlet vurdering: hvilken spot/dag/vindu er best fremover
-    pub summary_no: String,
+    pub summary: String,
     pub spots: Vec<SpotAnalysis>,
 }
 
@@ -105,7 +105,7 @@ pub struct SpotAnalysis {
     /// Må matche spot-navnet nøyaktig
     pub name: String,
     /// 2-4 setninger: beste vinduer, vind/svell-begrunnelse, padleforhold
-    pub analysis_no: String,
+    pub analysis: String,
 }
 
 /// Det som faktisk lagres i latest.json: LLM-output pluss metadata vi
@@ -213,9 +213,9 @@ pub struct SurfSpot {
     /// Havtemperatur ved spoten (våtdraktvalg)
     #[serde(default)]
     pub water_temp_c: Option<f64>,
-    /// Claude sin tolkning av forholdene de neste dagene, norsk
+    /// Claude sin tolkning av forholdene de neste dagene
     #[serde(default)]
-    pub analysis_no: Option<String>,
+    pub analysis: Option<String>,
     /// Neste 48 timer for detaljvisning
     #[serde(default)]
     pub hourly: Vec<SurfHour>,
@@ -269,9 +269,9 @@ pub struct EventItem {
     /// AI-vurdert relevans for beboerne, 1-5 (5 = må ikke gå glipp av)
     #[serde(default)]
     pub relevance: Option<u8>,
-    /// Kort norsk begrunnelse når relevans >= 4
+    /// Kort begrunnelse når relevans >= 4
     #[serde(default)]
-    pub why_no: Option<String>,
+    pub why: Option<String>,
 }
 
 /// Claude sin event-kuratering — tvunget tool-output, matches på url.
@@ -286,8 +286,8 @@ pub struct EventCuration {
     pub url: String,
     /// 1-5: 5 = kritisk/må-med, 4 = veldig aktuelt, 3 = kanskje, 1-2 = ikke aktuelt
     pub relevance: u8,
-    /// Kort begrunnelse på norsk, kun for 4-5 (ellers tom streng)
-    pub why_no: String,
+    /// Kort begrunnelse, kun for 4-5 (ellers tom streng)
+    pub why: String,
 }
 
 /// Gjøremål — fylles fra Linear når integrasjonen kobles på.
@@ -321,7 +321,7 @@ pub struct DashboardData {
     pub todos: Vec<TodoItem>,
     /// Claude sin samlede surfvurdering på tvers av spotene
     #[serde(default)]
-    pub surf_summary_no: Option<String>,
+    pub surf_summary: Option<String>,
     /// Konserter/storarrangementer fra whatsonincapetown (LLM-ekstrahert)
     #[serde(default)]
     pub concerts: Vec<Concert>,

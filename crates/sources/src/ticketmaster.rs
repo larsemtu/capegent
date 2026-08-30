@@ -89,7 +89,7 @@ pub async fn fetch(client: &reqwest::Client) -> Result<Vec<EventItem>> {
                     .unwrap_or_default(),
                 url: e.url.unwrap_or_default(),
                 relevance: None,
-                why_no: None,
+                why: None,
             })
         })
         .collect())

@@ -125,7 +125,7 @@ async fn main() -> Result<()> {
                 previous.todos
             }
         },
-        surf_summary_no: cache.get_meta("surf_summary_no").or(previous.surf_summary_no),
+        surf_summary: cache.get_meta("surf_summary").or(previous.surf_summary.clone()),
         concerts,
         currency: match currency_res {
             Ok(c) => Some(c),
@@ -172,7 +172,7 @@ async fn attach_surf_analysis(
     if spots.is_empty() {
         return spots;
     }
-    let mut fingerprint = String::new();
+    let mut fingerprint = String::from("en-v1;");
     for s in &spots {
         for h in s.hourly.iter().step_by(3) {
             fingerprint.push_str(&format!(
@@ -186,11 +186,11 @@ async fn attach_surf_analysis(
     if cache.get_meta("surf_hash").as_deref() == Some(hash.as_str()) {
         // Uendret varsel — gjenbruk forrige analyse fra latest.json
         for spot in &mut spots {
-            spot.analysis_no = previous
+            spot.analysis = previous
                 .surf
                 .iter()
                 .find(|p| p.name == spot.name)
-                .and_then(|p| p.analysis_no.clone());
+                .and_then(|p| p.analysis.clone());
         }
         return spots;
     }
@@ -201,14 +201,14 @@ async fn attach_surf_analysis(
     match llm::analyze_surf(client, &api_key, &spots).await {
         Ok(batch) => {
             for spot in &mut spots {
-                spot.analysis_no = batch
+                spot.analysis = batch
                     .spots
                     .iter()
                     .find(|a| a.name == spot.name)
-                    .map(|a| a.analysis_no.clone());
+                    .map(|a| a.analysis.clone());
             }
             let _ = cache.put_meta("surf_hash", &hash);
-            let _ = cache.put_meta("surf_summary_no", &batch.summary_no);
+            let _ = cache.put_meta("surf_summary", &batch.summary);
             info!("ny surf-analyse generert");
         }
         Err(e) => warn!("surf-analyse feilet: {e:#}"),
@@ -264,7 +264,7 @@ async fn curate_events(
         for e in &mut events {
             if let Some(prev) = previous.events.iter().find(|p| p.url == e.url) {
                 e.relevance = prev.relevance;
-                e.why_no = prev.why_no.clone();
+                e.why = prev.why.clone();
             }
         }
         return events;
@@ -277,7 +277,7 @@ async fn curate_events(
             for e in &mut events {
                 if let Some(c) = batch.items.iter().find(|c| c.url == e.url) {
                     e.relevance = Some(c.relevance.clamp(1, 5));
-                    e.why_no = (!c.why_no.trim().is_empty()).then(|| c.why_no.clone());
+                    e.why = (!c.why.trim().is_empty()).then(|| c.why.clone());
                 }
             }
             let _ = cache.put_meta("events_hash", &hash);

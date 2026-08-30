@@ -9,10 +9,10 @@ use sources::{truncate_chars, RawItem};
 
 const MODEL: &str = "claude-haiku-4-5-20251001";
 
-const SYSTEM: &str = "Du lager nyhetssammendrag for et veggdashbord hos to \
-norske MBA-studenter i Green Point, Cape Town. Oversett til naturlig norsk \
-(bokmål). Urgency 5 = akutt fare/stor hendelse i Cape Town, 1 = kuriosa. \
-Saker om Western Cape og Cape Town er viktigere enn nasjonale saker.";
+const SYSTEM: &str = "You write news summaries for a wall dashboard used by \
+two Norwegian MBA students in Green Point, Cape Town. Write in clear, concise \
+English. Urgency 5 = acute danger/major Cape Town incident, 1 = trivia. \
+Western Cape and Cape Town stories matter more than national ones.";
 
 pub async fn summarize(
     client: &reqwest::Client,
@@ -26,11 +26,11 @@ pub async fn summarize(
     let schema_value = serde_json::to_value(schema)?;
 
     let mut prompt = String::from(
-        "Oppsummer og klassifiser hver av disse sakene. Behold source_url \
-         nøyaktig som oppgitt. Én output-item per input-sak. summary_no er \
-         maks 2 setninger for oversikten. detail_no er et fyldig sammendrag \
-         på 4-8 setninger basert på hele artikkelteksten der den finnes — \
-         få med konkrete fakta: hvem, hva, hvor, tall, sitater.\n",
+        "Summarize and classify each story below, in English. Keep source_url \
+         exactly as given. One output item per input story. summary: max 2 \
+         sentences for the overview. detail: a rich 4-8 sentence summary based \
+         on the full article text where available — include concrete facts: \
+         who, what, where, numbers, quotes.\n",
     );
     for (i, item) in batch.iter().enumerate() {
         prompt.push_str(&format!(
@@ -107,7 +107,7 @@ mot land gjør det nesten umulig å padle ut, spesielt på Muizenberg \
 offshore ≈ Ø, krevende spot for øvede. Cape Doctor (frisk SØ) ødelegger \
 Muizenberg men gir offshore på Big Bay. Pek på konkrete tidsvinduer \
 (dag + klokkeslett), svellstørrelse/periode og padleforhold. Vanntemp \
-betyr våtdrakttykkelse. Vær konkret og ærlig — si «dropp det» når det er dårlig. Ren tekst uten markdown-formatering.";
+betyr våtdrakttykkelse. Vær konkret og ærlig — si «skip it» når det er dårlig. SVAR PÅ ENGELSK. Ren tekst uten markdown.";
 
 /// Claude-tolkning av surfforholdene. Kalles kun når varselet har endret
 /// seg (hash-cache i redb) — open-meteo oppdaterer modellen ca. hver 6. time.
@@ -154,7 +154,7 @@ pub async fn analyze_surf(
             ));
         }
     }
-    prompt.push_str("\nGi summary_no (2-3 setninger: beste spot/vindu fremover) og analysis_no per spot.");
+    prompt.push_str("\nGive summary (2-3 sentences: best spot/window ahead) and analysis per spot. Write in English.");
 
     let body = json!({
         "model": MODEL,
@@ -353,9 +353,9 @@ pub fn fallback(raw: &RawItem) -> NewsEntry {
     truncate_chars(&mut summary, 200);
     NewsEntry {
         item: NewsItem {
-            headline_no: raw.title.clone(),
-            summary_no: summary,
-            detail_no: raw.full_text.clone().unwrap_or_default(),
+            headline: raw.title.clone(),
+            summary,
+            detail: raw.full_text.clone().unwrap_or_default(),
             category: Category::Other,
             urgency: 2,
             source_url: raw.url.clone(),

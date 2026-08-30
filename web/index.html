@@ -147,6 +147,7 @@
   .badge.politics { background: rgba(196,160,255,.14); color: #c4a0ff; }
   .badge.infrastructure { background: rgba(255,180,84,.14); color: var(--warn); }
   .badge.event { background: rgba(255,140,200,.14); color: #ff8cc8; }
+  .badge.sports { background: rgba(0,214,143,.14); color: var(--r-good); }
 
   /* Høyrekolonne */
   .list-item { display: flex; gap: 10px; padding: 6px 4px; border-bottom: 1px solid var(--border);
@@ -315,61 +316,61 @@
     <div id="clock">--:--</div>
     <div id="suninfo" style="display:none;align-self:center;color:var(--muted);font-size:14px"></div>
     <div id="uvinfo" style="display:none;align-self:center"></div>
-    <div id="updated">venter på data …</div>
-    <button id="refresh-btn" title="Hent siste data">⟳</button>
+    <div id="updated">waiting for data …</div>
+    <button id="refresh-btn" title="Fetch latest">⟳</button>
   </header>
   <main>
     <div class="col">
-      <section id="weather" class="clickable" title="Trykk for 48-timersvarsel">
-        <h2>Vær · Green Point</h2>
-        <div class="empty">Ingen data ennå</div>
+      <section id="weather" class="clickable" title="Tap for 48-hour forecast">
+        <h2>Weather · Green Point</h2>
+        <div class="empty">No data yet</div>
       </section>
       <section id="surf">
         <h2>Surf</h2>
-        <div class="empty">Ingen data ennå</div>
+        <div class="empty">No data yet</div>
       </section>
     </div>
     <div class="col">
-      <section id="calendar" class="clickable" title="Trykk for alle avtaler">
-        <h2>Kalender</h2>
-        <div class="empty">Ingen hendelser — kobles til Google Calendar</div>
+      <section id="calendar" class="clickable" title="Tap for all entries">
+        <h2>Calendar</h2>
+        <div class="empty">No events — connects to Google Calendar</div>
       </section>
-      <section id="todos" class="clickable" title="Trykk for alle gjøremål">
-        <h2>Gjøremål</h2>
-        <div class="empty">Kobles til Linear</div>
+      <section id="todos" class="clickable" title="Tap for all tasks">
+        <h2>Tasks</h2>
+        <div class="empty">Connects to Linear</div>
       </section>
       <section id="guides">
-        <h2>Guider</h2>
+        <h2>Guides</h2>
       </section>
-      <section id="concerts" class="clickable" title="Trykk for hele konsertoversikten">
-        <h2>Konserter</h2>
-        <div class="empty">Henter fra whatsonincapetown …</div>
+      <section id="concerts" class="clickable" title="Tap for the full concert list">
+        <h2>Concerts</h2>
+        <div class="empty">Fetching from whatsonincapetown …</div>
       </section>
     </div>
     <div class="col">
       <section id="loadshedding">
         <h2>Load shedding</h2>
-        <div class="empty">Ingen data</div>
+        <div class="empty">No data</div>
       </section>
       <section id="currency">
-        <h2>Kronekurs</h2>
-        <div class="empty">Ingen data</div>
+        <h2>Exchange rate</h2>
+        <div class="empty">No data</div>
       </section>
       <section id="events">
-        <h2>Det skjer</h2>
-        <div class="ev-list"><div class="empty">Ingen events ennå</div></div>
+        <h2>What's on</h2>
+        <div class="ev-list"><div class="empty">No events yet</div></div>
       </section>
     </div>
   </main>
   <section id="yearwheel">
-    <h2>Årshjul · 12 måneder</h2>
+    <h2>Year planner · 12 months</h2>
     <div class="yw-scroll"><div class="yw-inner" id="yw-inner">
-      <div class="empty">Kommer når kalenderen har avtaler</div>
+      <div class="empty">Appears when the calendar has entries</div>
     </div></div>
   </section>
   <section id="news">
-    <h2>Nyheter</h2>
-    <div class="news-list"><div class="empty">Ingen data ennå</div></div>
+    <h2>News</h2>
+    <div class="news-list"><div class="empty">No data yet</div></div>
   </section>
 
   <div id="overlay">
@@ -390,29 +391,29 @@ const DATA_URL = '/data/latest.json';
 
 // MET/Yr-symbolkoder (uten _day/_night) -> ikon + norsk tekst
 const MET_SYM = {
-  clearsky: ['☀️','Klarvær'], fair: ['🌤️','Lettskyet'], partlycloudy: ['⛅','Delvis skyet'],
-  cloudy: ['☁️','Overskyet'], fog: ['🌫️','Tåke'],
-  lightrain: ['🌦️','Lett regn'], rain: ['🌧️','Regn'], heavyrain: ['🌧️','Kraftig regn'],
-  lightrainshowers: ['🌦️','Lette byger'], rainshowers: ['🌦️','Regnbyger'],
-  heavyrainshowers: ['🌧️','Kraftige byger'],
-  drizzle: ['🌦️','Yr'], lightsleet: ['🌨️','Lett sludd'], sleet: ['🌨️','Sludd'],
-  heavysleet: ['🌨️','Kraftig sludd'], sleetshowers: ['🌨️','Sluddbyger'],
-  lightsnow: ['🌨️','Lett snø'], snow: ['❄️','Snø'], heavysnow: ['❄️','Kraftig snø'],
-  snowshowers: ['🌨️','Snøbyger'],
+  clearsky: ['☀️','Clear'], fair: ['🌤️','Fair'], partlycloudy: ['⛅','Partly cloudy'],
+  cloudy: ['☁️','Cloudy'], fog: ['🌫️','Fog'],
+  lightrain: ['🌦️','Light rain'], rain: ['🌧️','Rain'], heavyrain: ['🌧️','Heavy rain'],
+  lightrainshowers: ['🌦️','Light showers'], rainshowers: ['🌦️','Showers'],
+  heavyrainshowers: ['🌧️','Heavy showers'],
+  drizzle: ['🌦️','Drizzle'], lightsleet: ['🌨️','Light sleet'], sleet: ['🌨️','Sleet'],
+  heavysleet: ['🌨️','Heavy sleet'], sleetshowers: ['🌨️','Sleet showers'],
+  lightsnow: ['🌨️','Light snow'], snow: ['❄️','Snow'], heavysnow: ['❄️','Heavy snow'],
+  snowshowers: ['🌨️','Snow showers'],
 };
 const sym = code => {
   if (!code) return ['🌡️',''];
-  if (code.includes('thunder')) return ['⛈️','Torden'];
+  if (code.includes('thunder')) return ['⛈️','Thunder'];
   return MET_SYM[code] || MET_SYM[code.replace(/showers.*/,'showers')] || ['🌡️', code];
 };
 
-const DIRS = ['N','NNØ','NØ','ØNØ','Ø','ØSØ','SØ','SSØ','S','SSV','SV','VSV','V','VNV','NV','NNV'];
+const DIRS = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
 const compass = deg => DIRS[Math.round(deg / 22.5) % 16];
 const wind = (ms, deg) => `${Math.round(ms)} m/s ${compass(deg)}`;
 
 const CAT = {
-  crime: 'Krim', traffic: 'Trafikk', weather: 'Vær', politics: 'Politikk',
-  event: 'Event', infrastructure: 'Infrastruktur', other: 'Nyheter',
+  crime: 'Crime', traffic: 'Traffic', weather: 'Weather', politics: 'Politics',
+  event: 'Event', sports: 'Sports', infrastructure: 'Infrastructure', other: 'News',
 };
 
 const RATING = {
@@ -439,7 +440,7 @@ async function castVote(url, title, vote, btn) {
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ url, title, vote }),
     });
-  } catch (err) { console.warn('vote feilet:', err); }
+  } catch (err) { console.warn('vote failed:', err); }
 }
 
 function gcalUrl(e) {
@@ -459,29 +460,29 @@ function gcalUrl(e) {
     '&text=' + encodeURIComponent(e.title) +
     '&dates=' + dates +
     '&location=' + encodeURIComponent(e.venue || '') +
-    '&details=' + encodeURIComponent('Billetter/info: ' + e.url);
+    '&details=' + encodeURIComponent('Tickets/info: ' + e.url);
 }
 
 const esc = s => String(s ?? '').replace(/[&<>"]/g,
   c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 const hhmm = iso => iso.slice(11, 16);
-const dayName = iso => new Intl.DateTimeFormat('no', { weekday: 'long', day: 'numeric', month: 'short' })
+const dayName = iso => new Intl.DateTimeFormat('en-GB', { weekday: 'long', day: 'numeric', month: 'short' })
   .format(new Date(iso.slice(0, 10) + 'T12:00:00'));
-const shortDay = iso => new Intl.DateTimeFormat('no', { weekday: 'short' })
+const shortDay = iso => new Intl.DateTimeFormat('en-GB', { weekday: 'short' })
   .format(new Date(iso.slice(0, 10) + 'T12:00:00'));
 
 function tickClock() {
   document.getElementById('clock').textContent =
-    new Intl.DateTimeFormat('no', { hour: '2-digit', minute: '2-digit', timeZone: TZ }).format(new Date());
+    new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: TZ }).format(new Date());
 }
 
 function relTime(iso) {
   if (!iso) return '';
   const mins = Math.round((Date.now() - new Date(iso).getTime()) / 60000);
-  if (mins < 60) return mins + ' min siden';
-  if (mins < 60 * 24) return Math.round(mins / 60) + ' t siden';
-  return Math.round(mins / 1440) + ' d siden';
+  if (mins < 60) return mins + ' min ago';
+  if (mins < 60 * 24) return Math.round(mins / 60) + ' h ago';
+  return Math.round(mins / 1440) + ' d ago';
 }
 
 /* ---------- Modal ---------- */
@@ -517,7 +518,7 @@ function renderWeather(w) {
       <span class="wind">${Math.round(d.wind_max_ms)} m/s</span>
     </div>`).join('');
   document.getElementById('weather').innerHTML = `
-    <h2>Vær · Green Point</h2>
+    <h2>Weather · Green Point</h2>
     <div class="now">
       <div class="icon">${icon}</div>
       <div>
@@ -525,8 +526,8 @@ function renderWeather(w) {
         <div class="desc">${esc(desc)}</div>
       </div>
       <div style="margin-left:auto;text-align:right">
-        <div class="wind-row" style="margin:0"><div><span class="lbl">Vind</span>${wind(w.wind_ms, w.wind_direction_deg)}</div></div>
-        <div class="wind-row" style="margin:4px 0 0"><div><span class="lbl">Nedbør neste time</span>${w.precipitation_mm.toFixed(1)} mm</div></div>
+        <div class="wind-row" style="margin:0"><div><span class="lbl">Wind</span>${wind(w.wind_ms, w.wind_direction_deg)}</div></div>
+        <div class="wind-row" style="margin:4px 0 0"><div><span class="lbl">Precip next hour</span>${w.precipitation_mm.toFixed(1)} mm</div></div>
       </div>
     </div>
     <div class="hours">${nextHours}</div>
@@ -572,12 +573,12 @@ function weatherModal() {
       }
     }
   }
-  openModal('Vær · Green Point', `
+  openModal('Weather · Green Point', `
     <table class="fc">
-      <tr><th>Kl</th><th></th><th>Temp</th><th>Nedbør</th><th>Vind (kast)</th></tr>
+      <tr><th>Time</th><th></th><th>Temp</th><th>Precip</th><th>Wind (gusts)</th></tr>
       ${rows}
     </table>
-    <div class="src"><a href="https://www.yr.no/nb/v%C3%A6rvarsel/daglig-tabell/2-3369157" target="_blank" rel="noopener" style="color:var(--accent)">Åpne Cape Town på Yr ↗</a> · Data fra MET Norway, CC-BY 4.0</div>`);
+    <div class="src"><a href="https://www.yr.no/nb/v%C3%A6rvarsel/daglig-tabell/2-3369157" target="_blank" rel="noopener" style="color:var(--accent)">Open Cape Town on Yr ↗</a> · Data from MET Norway, CC-BY 4.0</div>`);
 }
 document.getElementById('weather').addEventListener('click', weatherModal);
 
@@ -591,13 +592,13 @@ function renderSurf(spots) {
       <span class="pill" style="background:${r.color}">${r.label}</span>
       <div class="h">${s.swell_height_m.toFixed(1)} m</div>
       <div class="meta">
-        ${s.swell_period_s.toFixed(0)} s · svell fra ${compass(s.swell_direction_deg)} ·
-        vind ${wind(s.wind_ms, s.wind_direction_deg)}${s.water_temp_c != null ? ` · ${Math.round(s.water_temp_c)}° i vannet` : ''}
+        ${s.swell_period_s.toFixed(0)} s · swell from ${compass(s.swell_direction_deg)} ·
+        wind ${wind(s.wind_ms, s.wind_direction_deg)}${s.water_temp_c != null ? ` · ${Math.round(s.water_temp_c)}° water` : ''}
       </div>
     </div>`;
   }).join('')
-  + (D?.surf_summary_no ? `<div style="color:var(--muted);font-size:12.5px;line-height:1.4;margin-top:8px;border-top:1px solid var(--border);padding-top:7px">🤖 ${esc(noMd(D.surf_summary_no))}</div>` : '')
-  + '<div class="src"><a href="https://www.surfline.com/surf-reports-forecasts-cams/south-africa/953987" target="_blank" rel="noopener" style="color:inherit">Sjekk Surfline ↗</a> · Open-Meteo (MFWAM) · rating + AI lokalt</div>';
+  + (D?.surf_summary ? `<div style="color:var(--muted);font-size:12.5px;line-height:1.4;margin-top:8px;border-top:1px solid var(--border);padding-top:7px">🤖 ${esc(noMd(D.surf_summary))}</div>` : '')
+  + '<div class="src"><a href="https://www.surfline.com/surf-reports-forecasts-cams/south-africa/953987" target="_blank" rel="noopener" style="color:inherit">Check Surfline ↗</a> · Open-Meteo (MFWAM) · rating + AI computed locally</div>';
   document.querySelectorAll('#surf .spot').forEach(el =>
     el.addEventListener('click', () => surfModal(+el.dataset.spot)));
 }
@@ -625,25 +626,25 @@ function surfModal(i) {
   }
   openModal(`${esc(s.name)} <span class="pill" style="background:${r.color};vertical-align:middle">${r.label}</span>`, `
     <div class="m-meta">
-      <span>Svell ${s.swell_height_m.toFixed(1)} m @ ${s.swell_period_s.toFixed(0)} s fra ${compass(s.swell_direction_deg)}</span>
-      <span>·</span><span>Bølge ${s.wave_height_m.toFixed(1)} m</span>
-      <span>·</span><span>Vind ${wind(s.wind_ms, s.wind_direction_deg)}</span>
-      ${s.water_temp_c != null ? `<span>·</span><span>Vann ${s.water_temp_c.toFixed(1)}°</span>` : ''}
+      <span>Swell ${s.swell_height_m.toFixed(1)} m @ ${s.swell_period_s.toFixed(0)} s from ${compass(s.swell_direction_deg)}</span>
+      <span>·</span><span>Waves ${s.wave_height_m.toFixed(1)} m</span>
+      <span>·</span><span>Wind ${wind(s.wind_ms, s.wind_direction_deg)}</span>
+      ${s.water_temp_c != null ? `<span>·</span><span>Water ${s.water_temp_c.toFixed(1)}°</span>` : ''}
     </div>
-    ${s.analysis_no ? `<p style="background:var(--panel2);border-radius:9px;padding:10px 13px;font-size:14px">🤖 ${esc(noMd(s.analysis_no))}</p>` : ''}
+    ${s.analysis ? `<p style="background:var(--panel2);border-radius:9px;padding:10px 13px;font-size:14px">🤖 ${esc(noMd(s.analysis))}</p>` : ''}
     <table class="fc">
-      <tr><th>Kl</th><th>Forhold</th><th>Svell</th><th>Retning</th><th>Vind</th><th>Tidevann</th></tr>
+      <tr><th>Time</th><th>Conditions</th><th>Swell</th><th>Direction</th><th>Wind</th><th>Tide</th></tr>
       ${rows}
     </table>
-    <div class="src"><a href="https://www.surfline.com/search/${encodeURIComponent(s.name)}" target="_blank" rel="noopener" style="color:var(--accent)">Åpne ${esc(s.name)} på Surfline ↗</a> · Open-Meteo (MFWAM) · rating: egen beregning fra svell, periode og vindretning mot spotens offshore-retning</div>`);
+    <div class="src"><a href="https://www.surfline.com/search/${encodeURIComponent(s.name)}" target="_blank" rel="noopener" style="color:var(--accent)">Open ${esc(s.name)} on Surfline ↗</a> · Open-Meteo (MFWAM) · rating: local model from swell, period and wind vs the spot's offshore direction</div>`);
 }
 
 /* ---------- Nyheter ---------- */
 function renderNews(news) {
   const items = news.slice(0, 12).map((n, i) => `
-    <div class="news-item clickable ${n.urgency >= 4 ? 'hot' : ''}" data-news="${i}" title="Trykk for hele saken">
-      <div class="head">${esc(n.headline_no)}</div>
-      <div class="sum">${esc(n.summary_no)}</div>
+    <div class="news-item clickable ${n.urgency >= 4 ? 'hot' : ''}" data-news="${i}" title="Tap for the full story">
+      <div class="head">${esc(n.headline)}</div>
+      <div class="sum">${esc(n.summary)}</div>
       <div class="meta">
         <span class="badge ${esc(n.category)}">${CAT[n.category] || esc(n.category)}</span>
         <span>${esc(n.source)}</span>
@@ -658,25 +659,25 @@ function renderNews(news) {
 function newsModal(i) {
   const n = D?.news?.[i];
   if (!n) return;
-  const detail = (n.detail_no || n.summary_no || '')
+  const detail = (n.detail || n.summary || '')
     .split(/\n+/).filter(Boolean)
     .map(p => `<p>${esc(p)}</p>`).join('');
-  openModal(esc(n.headline_no), `
+  openModal(esc(n.headline), `
     <div class="m-meta">
       <span class="badge ${esc(n.category)}">${CAT[n.category] || esc(n.category)}</span>
       <span>${esc(n.source)}</span>
       <span>${relTime(n.published_at)}</span>
-      <span>hastegrad ${n.urgency}/5</span>
+      <span>urgency ${n.urgency}/5</span>
     </div>
     ${detail}
     <a class="m-link" href="${esc(n.source_url)}" target="_blank" rel="noopener">
-      Les hele saken hos ${esc(n.source)} ↗
+      Read the full story at ${esc(n.source)} ↗
     </a>`);
 }
 
 /* ---------- Events / kalender / todos ---------- */
 function renderEvents(events) {
-  const fmtWhen = e => new Intl.DateTimeFormat('no', { day: 'numeric', month: 'short', timeZone: TZ })
+  const fmtWhen = e => new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', timeZone: TZ })
     .format(new Date(e.start));
   const relColor = r => r >= 5 ? 'var(--r-good)' : r >= 4 ? 'var(--r-fair)' : 'var(--border)';
   const row = (e, showWhy) => `
@@ -685,24 +686,24 @@ function renderEvents(events) {
       <span class="when">${esc(fmtWhen(e))}</span>
       <span style="flex:1;min-width:0">
         <div style="padding-right:92px"><span class="dot" style="background:${relColor(e.relevance || 0)};width:7px;height:7px"></span>${esc(e.title)}<span style="color:var(--muted)"> · ${esc(e.venue)}</span></div>${
-        showWhy && e.why_no ? `<div style="color:var(--muted);font-size:12px;margin-top:1px">🤖 ${esc(e.why_no)}</div>` : ''}</span>
+        showWhy && e.why ? `<div style="color:var(--muted);font-size:12px;margin-top:1px">🤖 ${esc(e.why)}</div>` : ''}</span>
       <span class="ev-actions">
-        <button class="vote ${myVotes[e.url] === 'up' ? 'chosen' : ''}" title="Mer som dette"
+        <button class="vote ${myVotes[e.url] === 'up' ? 'chosen' : ''}" title="More like this"
           onclick="event.preventDefault();event.stopPropagation();castVote('${esc(e.url)}', '${esc(e.title)}', 'up', this)">👍</button>
-        <button class="vote ${myVotes[e.url] === 'down' ? 'chosen' : ''}" title="Mindre som dette"
+        <button class="vote ${myVotes[e.url] === 'down' ? 'chosen' : ''}" title="Less like this"
           onclick="event.preventDefault();event.stopPropagation();castVote('${esc(e.url)}', '${esc(e.title)}', 'down', this)">👎</button>
-        <button class="addcal" title="Legg til i felleskalenderen"
+        <button class="addcal" title="Add to shared calendar"
           onclick="event.preventDefault();event.stopPropagation();window.open('${esc(gcalUrl(e))}','_blank')">📅+</button>
       </span>
     </a>`;
   const picks = events.filter(e => (e.relevance || 0) >= 4);
   const rest = events.filter(e => (e.relevance || 0) < 4 && (e.relevance || 0) !== 1 && (e.relevance || 0) !== 2);
   const html =
-    (picks.length ? `<div style="font-size:10.5px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin:2px 0 4px">Anbefalt for dere</div>` + picks.map(e => row(e, true)).join('') : '') +
-    (rest.length ? `<div style="font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:10px 0 4px">Ellers i byen</div>` + rest.map(e => row(e, false)).join('') : '');
+    (picks.length ? `<div style="font-size:10.5px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin:2px 0 4px">Recommended for you</div>` + picks.map(e => row(e, true)).join('') : '') +
+    (rest.length ? `<div style="font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:10px 0 4px">Also on</div>` + rest.map(e => row(e, false)).join('') : '');
   document.querySelector('#events .ev-list').innerHTML =
-    (html || '<div class="empty">Ingen events funnet</div>') +
-    '<div class="src">Quicket + Eventbrite + Ticketmaster · AI-kuratert · 👍👎 lærer den hva dere liker</div>';
+    (html || '<div class="empty">No events found</div>') +
+    '<div class="src">Quicket + Eventbrite + Ticketmaster · AI-curated · 👍👎 teaches it your taste</div>';
 }
 
 function calWhen(e) {
@@ -710,11 +711,11 @@ function calWhen(e) {
   const today = new Date(); today.setHours(0,0,0,0);
   const evDay = new Date(d); evDay.setHours(0,0,0,0);
   const diff = Math.round((evDay - today) / 86400000);
-  const time = e.all_day ? '' : ' ' + new Intl.DateTimeFormat('no', { hour: '2-digit', minute: '2-digit' }).format(d);
+  const time = e.all_day ? '' : ' ' + new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit' }).format(d);
   let day;
-  if (diff === 0) day = 'I dag';
-  else if (diff === 1) day = 'I morgen';
-  else day = new Intl.DateTimeFormat('no', { weekday: 'short', day: 'numeric', month: 'short' }).format(d);
+  if (diff === 0) day = 'Today';
+  else if (diff === 1) day = 'Tomorrow';
+  else day = new Intl.DateTimeFormat('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }).format(d);
   return { label: day + time, today: diff === 0 };
 }
 
@@ -735,12 +736,12 @@ function renderCalendar(cal) {
   const head = t => `<div style="font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;margin:9px 0 2px">${t}</div>`;
 
   let html = '';
-  if (started.length) html += head('Nå og i morgen') + started.map(e => row(e, 'big')).join('');
-  if (naer.length) html += head('Denne uka') + naer.map(e => row(e, '')).join('');
-  if (senere.length) html += head('Senere') + senere.map(e => row(e, 'dim')).join('');
-  document.getElementById('calendar').innerHTML = '<h2>Kalender · Felles</h2>' +
-    (html || '<div class="empty">Ingen hendelser de neste 30 dagene</div>') +
-    '<div class="src">Trykk for 60-dagersvisning · hele året i årshjulet nederst</div>';
+  if (started.length) html += head('Now & tomorrow') + started.map(e => row(e, 'big')).join('');
+  if (naer.length) html += head('This week') + naer.map(e => row(e, '')).join('');
+  if (senere.length) html += head('Later') + senere.map(e => row(e, 'dim')).join('');
+  document.getElementById('calendar').innerHTML = '<h2>Calendar · Shared</h2>' +
+    (html || '<div class="empty">Nothing in the next 30 days</div>') +
+    '<div class="src">Tap for 60-day view · full year in the planner below</div>';
 }
 
 function calendarModal() {
@@ -754,21 +755,21 @@ function calendarModal() {
     const d = e.all_day ? new Date(e.start + 'T12:00:00') : new Date(e.start);
     const dayKey = e.start.slice(0, 10);
     if (dayKey !== lastDay) {
-      html += `<div style="color:var(--accent);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:1px;margin:14px 0 4px">${esc(new Intl.DateTimeFormat('no', { weekday: 'long', day: 'numeric', month: 'long' }).format(d))}</div>`;
+      html += `<div style="color:var(--accent);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:1px;margin:14px 0 4px">${esc(new Intl.DateTimeFormat('en-GB', { weekday: 'long', day: 'numeric', month: 'long' }).format(d))}</div>`;
       lastDay = dayKey;
     }
-    const time = e.all_day ? 'Hele dagen' : new Intl.DateTimeFormat('no', { hour: '2-digit', minute: '2-digit' }).format(d);
+    const time = e.all_day ? 'All day' : new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit' }).format(d);
     html += `<div class="cal-row"><span class="when">${esc(time)}</span><span class="t">${esc(e.title)}</span></div>`;
   }
   openModal('Kalender · neste 30 dager', html +
-    '<div class="src">Google Calendar «Felles - Cape Town» · oppdateres hvert 30. min</div>');
+    '<div class="src">Google Calendar “Felles - Cape Town” · refreshes every 30 min</div>');
 }
 document.getElementById('calendar').addEventListener('click', calendarModal);
 
 function todoDue(t) {
   if (!t.due) return '';
   const overdue = new Date(t.due) < new Date();
-  const label = new Intl.DateTimeFormat('no', { day: 'numeric', month: 'short' }).format(new Date(t.due + 'T12:00:00'));
+  const label = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short' }).format(new Date(t.due + 'T12:00:00'));
   return ` <span style="color:${overdue ? 'var(--alert)' : 'var(--warn)'};font-size:12.5px;font-weight:600">${overdue ? '⚠ ' : ''}${label}</span>`;
 }
 
@@ -778,9 +779,9 @@ function renderTodos(todos) {
       <span class="st ${t.status === 'In Progress' ? 'active' : ''}">${esc(t.status)}</span>
       <span class="t">${esc(t.title)}${todoDue(t)}</span>
     </div>`).join('');
-  document.getElementById('todos').innerHTML = '<h2>Gjøremål · CapeTasks</h2>' +
-    (rows || '<div class="empty">Ingen åpne gjøremål 🎉</div>') +
-    (todos.length > 8 ? `<div class="src">+ ${todos.length - 8} til — trykk for alle</div>` : (rows ? '<div class="src">Linear</div>' : ''));
+  document.getElementById('todos').innerHTML = '<h2>Tasks · CapeTasks</h2>' +
+    (rows || '<div class="empty">No open tasks 🎉</div>') +
+    (todos.length > 8 ? `<div class="src">+ ${todos.length - 8} more — tap for all</div>` : (rows ? '<div class="src">Linear</div>' : ''));
 }
 
 function todosModal() {
@@ -792,8 +793,8 @@ function todosModal() {
       <span class="t">${esc(t.title)}${todoDue(t)}
         ${t.project ? `<div style="color:var(--muted);font-size:12.5px">${esc(t.project)}</div>` : ''}</span>
     </div>`).join('');
-  openModal('Gjøremål', rows +
-    '<div class="src">Linear · CapeTasks · legg til via Linear-appen eller be Claude</div>');
+  openModal('Tasks', rows +
+    '<div class="src">Linear · CapeTasks · add via the Linear app or ask Claude</div>');
 }
 document.getElementById('todos').addEventListener('click', todosModal);
 
@@ -844,7 +845,7 @@ function renderYearWheel(cal) {
   let html = '';
   months.forEach((m, i) => {
     html += `<div class="yw-month" style="left:${i * MONTH_PX}px;width:${MONTH_PX}px">${
-      new Intl.DateTimeFormat('no', { month: 'long', year: i === 0 || m.getMonth() === 0 ? 'numeric' : undefined }).format(m)}</div>`;
+      new Intl.DateTimeFormat('en-GB', { month: 'long', year: i === 0 || m.getMonth() === 0 ? 'numeric' : undefined }).format(m)}</div>`;
   });
   const now = new Date();
   html += `<div class="yw-now" style="left:${xPos(now)}px"></div>`;
@@ -870,24 +871,24 @@ function renderYearWheel(cal) {
 /* ---------- Guider (statisk innhold fra CapeTasks) ---------- */
 function renderGuides() {
   if (typeof GUIDES === 'undefined' || !GUIDES.length) return;
-  document.getElementById('guides').innerHTML = '<h2>Guider</h2>' + GUIDES.map((g, i) => `
-    <div class="guide-row clickable" data-guide="${i}" title="Trykk for hele guiden">
+  document.getElementById('guides').innerHTML = '<h2>Guides</h2>' + GUIDES.map((g, i) => `
+    <div class="guide-row clickable" data-guide="${i}" title="Tap for the full guide">
       <span class="ic">${g.icon}</span>
       <span><div class="t">${esc(g.title)}</div><div class="tag">${esc(g.tagline)}</div></span>
     </div>`).join('') +
-    '<div class="src">Egne notater · CapeTasks</div>';
+    '<div class="src">Own notes · CapeTasks</div>';
   document.querySelectorAll('#guides .guide-row').forEach(el =>
     el.addEventListener('click', () => {
       const g = GUIDES[+el.dataset.guide];
       openModal(`${g.icon} ${esc(g.title)}`, g.html +
-        '<div class="src">Fra CapeTasks (LAR-23) · si til Claude for å endre</div>');
+        '<div class="src">From CapeTasks (LAR-23) · ask Claude to edit</div>');
     }));
 }
 renderGuides();
 
 /* ---------- Konserter ---------- */
 function concertRow(c, showBadge) {
-  const when = new Intl.DateTimeFormat('no', { day: 'numeric', month: 'short' })
+  const when = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short' })
     .format(new Date(c.start + 'T12:00:00'));
   const badge = showBadge && c.pri === 'MUST' ? ' <span class="must">MUST</span>' : '';
   return `<div class="concert-row">
@@ -904,28 +905,28 @@ function renderConcerts() {
     .filter(c => c.start >= today)
     .sort((a, b) => a.start.localeCompare(b.start));
   const rows = merged.slice(0, 6).map(c => concertRow(c, true)).join('');
-  document.getElementById('concerts').innerHTML = '<h2>Konserter</h2>' +
-    (rows || '<div class="empty">Ingen kommende funnet</div>') +
-    `<div class="src">${merged.length} på lista — trykk for alt · whatsonincapetown + Live Radar</div>`;
+  document.getElementById('concerts').innerHTML = '<h2>Concerts</h2>' +
+    (rows || '<div class="empty">None upcoming</div>') +
+    `<div class="src">${merged.length} listed — tap for all · whatsonincapetown + Live Radar</div>`;
 }
 
 function concertsModal() {
   const today = new Date().toISOString().slice(0, 10);
   const auto = (D?.concerts || []).filter(c => c.start >= today);
   const radar = (typeof LIVE_RADAR !== 'undefined' ? LIVE_RADAR : []).filter(c => c.start >= today);
-  const fmtD = d => new Intl.DateTimeFormat('no', { day: 'numeric', month: 'short', year: 'numeric' })
+  const fmtD = d => new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
     .format(new Date(d + 'T12:00:00'));
-  let html = '<h4>🎤 De store (auto fra whatsonincapetown, ukentlig)</h4>';
+  let html = '<h4>🎤 The big ones (auto from whatsonincapetown, weekly)</h4>';
   html += auto.map(c => `
     <div class="concert-row">
       <span class="when" style="min-width:86px">${esc(fmtD(c.start))}</span>
       <span style="flex:1">${esc(c.title)}${c.city === 'Johannesburg' ? ' <span style="color:var(--warn);font-size:11px">JOBURG</span>' : ''}
-        <span style="color:var(--muted)"> · ${esc(c.venue)}${c.price_from ? ` · fra ${esc(c.price_from)}` : ''}</span>
-        ${c.ticket_url ? `<a href="${esc(c.ticket_url)}" target="_blank" rel="noopener" style="color:var(--accent);font-size:12px"> billetter ↗</a>` : ''}
+        <span style="color:var(--muted)"> · ${esc(c.venue)}${c.price_from ? ` · from ${esc(c.price_from)}` : ''}</span>
+        ${c.ticket_url ? `<a href="${esc(c.ticket_url)}" target="_blank" rel="noopener" style="color:var(--accent);font-size:12px"> tickets ↗</a>` : ''}
       </span>
       <button class="addcal" onclick="event.stopPropagation();window.open('${esc(gcalUrl({title: c.title, start: c.start, venue: c.venue, url: c.ticket_url || ''}))}','_blank')">📅+</button>
     </div>`).join('');
-  html += '<h4>🎺 Live Radar — ekte livemusikk (kuratert)</h4>';
+  html += '<h4>🎺 Live Radar — real live music (curated)</h4>';
   html += radar.map(c => `
     <div class="concert-row">
       <span class="when" style="min-width:86px">${esc(fmtD(c.start))}</span>
@@ -934,8 +935,8 @@ function concertsModal() {
       <button class="addcal" onclick="event.stopPropagation();window.open('${esc(gcalUrl({title: c.title, start: c.start, venue: c.venue, url: ''}))}','_blank')">📅+</button>
     </div>`).join('');
   html += (typeof CONCERT_NOTES !== 'undefined' ? CONCERT_NOTES : '');
-  openModal('Konserter og store events', html +
-    '<div class="src">Auto: whatsonincapetown.com (LLM-strukturert, hash-cachet) · Live Radar/watchlist: LAR-24 — si til Claude for å oppdatere</div>');
+  openModal('Concerts & big events', html +
+    '<div class="src">Auto: whatsonincapetown.com (LLM-structured, hash-cached) · Live Radar/watchlist: LAR-24 — ask Claude to update</div>');
 }
 document.getElementById('concerts').addEventListener('click', concertsModal);
 
@@ -954,11 +955,11 @@ function renderCurrency(c) {
       <path d="${path}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
     </svg>
     <div style="display:flex;justify-content:space-between;color:var(--muted);font-size:10.5px">
-      <span>${esc(pts[0].date.slice(5))}</span><span>min ${min.toFixed(1)} · maks ${max.toFixed(1)}</span><span>${esc(pts[pts.length-1].date.slice(5))}</span>
+      <span>${esc(pts[0].date.slice(5))}</span><span>min ${min.toFixed(1)} · max ${max.toFixed(1)}</span><span>${esc(pts[pts.length-1].date.slice(5))}</span>
     </div>`;
   }
   const up = c.change_pct_30d >= 0;
-  document.getElementById('currency').innerHTML = `<h2>Kronekurs</h2>
+  document.getElementById('currency').innerHTML = `<h2>Exchange rate</h2>
     <div style="display:flex;align-items:baseline;gap:10px">
       <span class="rate">100 ZAR = ${c.rate.toFixed(1)}</span><span style="color:var(--muted)">NOK</span>
       <span class="chg ${up ? 'up' : 'down'}" style="margin-left:auto">${up ? '+' : ''}${c.change_pct_30d.toFixed(1)}% <span style="color:var(--muted);font-weight:400">30 d</span></span>
@@ -976,11 +977,11 @@ function uvColor(uv) {
   return '#c47cff';
 }
 function uvLabel(uv) {
-  if (uv < 3) return 'lav';
-  if (uv < 6) return 'moderat';
-  if (uv < 8) return 'høy';
-  if (uv < 11) return 'svært høy';
-  return 'ekstrem';
+  if (uv < 3) return 'low';
+  if (uv < 6) return 'moderate';
+  if (uv < 8) return 'high';
+  if (uv < 11) return 'very high';
+  return 'extreme';
 }
 
 function renderSunUv(w) {
@@ -1008,9 +1009,9 @@ function renderSunUv(w) {
   const peakIdx = day.indexOf(peak);
 
   el.innerHTML = `
-    <span class="uv-badge" style="background:${uvColor(peak.uv)}" title="Dagens UV-topp">UV ${peak.uv.toFixed(0)}</span>
-    <span class="uv-lab">${uvLabel(peak.uv)} · topp kl ${esc(peak.time.slice(0, 2))}</span>
-    <svg viewBox="0 0 ${w2} ${h2}" style="width:${w2}px;height:${h2}px" title="UV gjennom dagen">
+    <span class="uv-badge" style="background:${uvColor(peak.uv)}" title="Today's UV peak">UV ${peak.uv.toFixed(0)}</span>
+    <span class="uv-lab">${uvLabel(peak.uv)} · peak ${esc(peak.time.slice(0, 2))}</span>
+    <svg viewBox="0 0 ${w2} ${h2}" style="width:${w2}px;height:${h2}px" title="UV through the day">
       <path d="${path}" fill="none" stroke="${uvColor(peak.uv)}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
       ${peakIdx >= 0 ? `<circle cx="${x(peakIdx).toFixed(1)}" cy="${y(peak.uv).toFixed(1)}" r="2.2" fill="${uvColor(peak.uv)}"/>` : ''}
     </svg>`;
@@ -1021,7 +1022,7 @@ function renderSunUv(w) {
 function render(data) {
   D = data;
   const upd = document.getElementById('updated');
-  upd.textContent = 'Oppdatert ' + relTime(data.generated_at);
+  upd.textContent = 'Updated ' + relTime(data.generated_at);
   upd.classList.toggle('stale',
     Date.now() - new Date(data.generated_at).getTime() > 90 * 60000);
 
@@ -1041,7 +1042,7 @@ function render(data) {
     ls.innerHTML = `<h2>Load shedding</h2>
       <div class="stage">
         <div class="num ${s.stage === 0 ? 'ok' : 'bad'}">${s.stage === 0 ? '✓' : 'Stage ' + s.stage}</div>
-        <div class="note">${s.stage === 0 ? 'Ingen load shedding' : ''} ${esc(s.note)}</div>
+        <div class="note">${s.stage === 0 ? 'No load shedding' : ''} ${esc(s.note)}</div>
       </div>
       <div class="src">EskomSePush</div>`;
   }
@@ -1055,7 +1056,7 @@ async function refresh() {
     lastGood = await resp.json();
     render(lastGood);
   } catch (err) {
-    console.warn('fetch feilet:', err);
+    console.warn('fetch failed:', err);
     if (lastGood) render(lastGood);
   }
 }

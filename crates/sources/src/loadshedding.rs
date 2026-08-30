@@ -52,7 +52,7 @@ pub async fn fetch(client: &reqwest::Client, active: bool) -> Result<Option<Load
 
     let stage: i32 = resp.status.capetown.stage.parse().unwrap_or(0);
     let note = match resp.status.capetown.stage_updated {
-        Some(ts) => format!("Siste endring {}", &ts[..10.min(ts.len())]),
+        Some(ts) => format!("last change {}", &ts[..10.min(ts.len())]),
         None => String::new(),
     };
     Ok(Some(LoadShedding { stage, note }))

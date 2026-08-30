@@ -227,7 +227,7 @@ pub async fn fetch_spot(client: &reqwest::Client, spot: &SpotDef) -> Result<Surf
         wind_ms: wind.current.wind_speed_10m,
         wind_direction_deg: wind.current.wind_direction_10m,
         water_temp_c: marine.current.sea_surface_temperature,
-        analysis_no: None,
+        analysis: None,
         rating: rate(
             spot,
             marine.current.swell_wave_height,
