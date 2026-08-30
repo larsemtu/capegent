@@ -2,23 +2,32 @@ use anyhow::{Context, Result};
 use schema::{SurfHour, SurfRating, SurfSpot};
 use serde::Deserialize;
 
-/// Spot-profil for kvalitetsvurdering. `offshore_deg` er vindretningen som
-/// gir offshore (vind FRA den retningen blåser mot havet). Cape Doctor (SØ)
-/// ødelegger vestkyst-spotene, derfor er retning viktigere enn styrke.
+/// Spot-profil for kvalitetsvurdering, kalibrert for TO NYBEGYNNERE/LETT
+/// ØVEDE (Lars-feedback aug 2026): Atlanterhavssiden bærer mer kraft enn
+/// tallene tilsier — små/rolige vestdager er best for dem, store dager er
+/// over nivået (hard_max => Poor uansett). Muizenberg har skuffet gjentatte
+/// ganger (feil vind). `offshore_deg` = vindretning FRA land mot hav.
 pub struct SpotDef {
     pub name: &'static str,
     pub lat: f64,
     pub lon: f64,
     pub offshore_deg: f64,
-    /// Svellhøyde-intervall der spoten fungerer best (meter, målt ved spoten)
+    /// Nedre grense for «ordentlige» bølger
     pub swell_min: f64,
-    pub swell_best_max: f64,
+    /// Øvre grense for sweet spot på DERES nivå
+    pub swell_sweet_max: f64,
+    /// Over dette: for kraftig for dem — Poor uansett annet
+    pub swell_hard_max: f64,
 }
 
 pub const SPOTS: &[SpotDef] = &[
-    SpotDef { name: "Muizenberg", lat: -34.108, lon: 18.470, offshore_deg: 315.0, swell_min: 0.5, swell_best_max: 2.0 },
-    SpotDef { name: "Big Bay", lat: -33.795, lon: 18.457, offshore_deg: 110.0, swell_min: 0.8, swell_best_max: 2.5 },
-    SpotDef { name: "Llandudno", lat: -34.006, lon: 18.341, offshore_deg: 90.0, swell_min: 1.0, swell_best_max: 3.0 },
+    SpotDef { name: "Muizenberg", lat: -34.108, lon: 18.470, offshore_deg: 315.0, swell_min: 0.5, swell_sweet_max: 1.6, swell_hard_max: 2.6 },
+    SpotDef { name: "Big Bay", lat: -33.795, lon: 18.457, offshore_deg: 110.0, swell_min: 0.6, swell_sweet_max: 1.7, swell_hard_max: 2.6 },
+    SpotDef { name: "Blouberg", lat: -33.808, lon: 18.464, offshore_deg: 110.0, swell_min: 0.6, swell_sweet_max: 1.7, swell_hard_max: 2.6 },
+    SpotDef { name: "Long Beach", lat: -34.135, lon: 18.327, offshore_deg: 135.0, swell_min: 0.4, swell_sweet_max: 1.3, swell_hard_max: 2.0 },
+    SpotDef { name: "Noordhoek", lat: -34.103, lon: 18.354, offshore_deg: 90.0, swell_min: 0.6, swell_sweet_max: 1.7, swell_hard_max: 2.5 },
+    SpotDef { name: "Llandudno", lat: -34.006, lon: 18.341, offshore_deg: 90.0, swell_min: 1.0, swell_sweet_max: 2.0, swell_hard_max: 2.6 },
+    SpotDef { name: "Strand", lat: -34.108, lon: 18.822, offshore_deg: 120.0, swell_min: 0.4, swell_sweet_max: 1.5, swell_hard_max: 2.5 },
 ];
 
 /// Surfline-inspirert rating: svellhøyde (0-4) + periode (0-3) + vind (0-3),
@@ -30,17 +39,21 @@ pub fn rate(
     wind_ms: f64,
     wind_deg: f64,
 ) -> SurfRating {
-    // Svellhøyde: ramp opp mot optimalt intervall, straff over
-    let swell_score = if swell_m < 0.3 {
-        0.0
+    // Over deres nivå: kraftregelen (Lars: «vest er litt over vårt nivå
+    // når det er stort — kalme dager er de beste»)
+    if swell_m > spot.swell_hard_max {
+        return SurfRating::Poor;
+    }
+    // Svellhøyde: små-men-rene dager er GODE for dem, sweet spot best,
+    // kraftig-men-under-hard er på grensen
+    let swell_score = if swell_m < 0.25 {
+        0.5
     } else if swell_m < spot.swell_min {
-        1.5 * (swell_m - 0.3) / (spot.swell_min - 0.3)
-    } else if swell_m <= spot.swell_best_max {
+        2.6
+    } else if swell_m <= spot.swell_sweet_max {
         4.0
-    } else if swell_m <= spot.swell_best_max + 1.5 {
-        2.5
     } else {
-        1.0
+        1.8
     };
 
     // Periode: groundswell (11s+) er gull, vindsjø (<8s) er rot
