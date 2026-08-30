@@ -18,33 +18,72 @@ fn sast() -> FixedOffset {
 }
 
 #[derive(Deserialize)]
-struct GustResp {
-    hourly: GustHourly,
+struct OmResp {
+    hourly: OmHourly,
+    daily: OmDaily,
 }
 
 #[derive(Deserialize)]
-struct GustHourly {
+struct OmHourly {
     time: Vec<String>,
     wind_gusts_10m: Vec<Option<f64>>,
+    #[serde(default)]
+    uv_index: Vec<Option<f64>>,
 }
 
-/// Kast finnes ikke i MET-data utenfor Norden — suppler fra Open-Meteo.
-/// Best effort: feiler dette, mangler bare kast-kolonnen.
-async fn fetch_gusts(client: &reqwest::Client) -> Result<HashMap<String, f64>> {
+#[derive(Deserialize)]
+struct OmDaily {
+    sunrise: Vec<String>,
+    sunset: Vec<String>,
+}
+
+struct OmSupplement {
+    gusts: HashMap<String, f64>,
+    uv_today: Vec<schema::UvPoint>,
+    sunrise: Option<String>,
+    sunset: Option<String>,
+}
+
+/// Kast, UV og sol finnes ikke i MET-data utenfor Norden — suppler fra
+/// Open-Meteo i ett kall. Best effort: feiler dette, mangler bare disse.
+async fn fetch_supplement(client: &reqwest::Client) -> Result<OmSupplement> {
     let (lat, lon) = GREEN_POINT;
     let url = format!(
         "https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}\
-         &hourly=wind_gusts_10m&wind_speed_unit=ms\
-         &timezone=Africa%2FJohannesburg&forecast_hours=72"
+         &hourly=wind_gusts_10m,uv_index&wind_speed_unit=ms\
+         &daily=sunrise,sunset\
+         &timezone=Africa%2FJohannesburg&forecast_days=3"
     );
-    let resp: GustResp = client.get(&url).send().await?.error_for_status()?.json().await?;
-    Ok(resp
+    let resp: OmResp = client.get(&url).send().await?.error_for_status()?.json().await?;
+    let today = resp
+        .daily
+        .sunrise
+        .first()
+        .map(|s| s[..10].to_string())
+        .unwrap_or_default();
+    let uv_today = resp
+        .hourly
+        .time
+        .iter()
+        .zip(&resp.hourly.uv_index)
+        .filter(|(t, _)| t.starts_with(&today))
+        .filter_map(|(t, uv)| {
+            Some(schema::UvPoint { time: t[11..16].to_string(), uv: (*uv)? })
+        })
+        .collect();
+    let gusts = resp
         .hourly
         .time
         .into_iter()
         .zip(resp.hourly.wind_gusts_10m)
         .filter_map(|(t, g)| Some((t, g?)))
-        .collect())
+        .collect();
+    Ok(OmSupplement {
+        gusts,
+        uv_today,
+        sunrise: resp.daily.sunrise.first().map(|s| s[11..16].to_string()),
+        sunset: resp.daily.sunset.first().map(|s| s[11..16].to_string()),
+    })
 }
 
 #[derive(Deserialize)]
@@ -122,13 +161,14 @@ pub async fn fetch(client: &reqwest::Client) -> Result<Weather> {
                 .await
                 .context("parse met.no locationforecast")
         },
-        fetch_gusts(client)
+        fetch_supplement(client)
     );
     let resp = met_res?;
-    let gusts = gusts_res.unwrap_or_else(|e| {
-        warn!("kast fra Open-Meteo feilet: {e:#}");
-        HashMap::new()
+    let supplement = gusts_res.unwrap_or_else(|e| {
+        warn!("Open-Meteo-supplement (kast/UV/sol) feilet: {e:#}");
+        OmSupplement { gusts: HashMap::new(), uv_today: vec![], sunrise: None, sunset: None }
     });
+    let gusts = supplement.gusts;
 
     let ts = &resp.properties.timeseries;
     let first = ts.first().context("tom timeserie fra met.no")?;
@@ -246,6 +286,9 @@ pub async fn fetch(client: &reqwest::Client) -> Result<Weather> {
             .unwrap_or(0.0),
         wind_ms: first.data.instant.details.wind_speed,
         wind_direction_deg: first.data.instant.details.wind_from_direction,
+        sunrise: supplement.sunrise,
+        sunset: supplement.sunset,
+        uv_today: supplement.uv_today,
         hourly,
         days,
     })

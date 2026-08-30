@@ -128,6 +128,14 @@ pub struct Weather {
     pub precipitation_mm: f64,
     pub wind_ms: f64,
     pub wind_direction_deg: f64,
+    /// Soloppgang/-nedgang i dag, lokal tid "HH:MM"
+    #[serde(default)]
+    pub sunrise: Option<String>,
+    #[serde(default)]
+    pub sunset: Option<String>,
+    /// UV-indeks time for time i dag (Open-Meteo)
+    #[serde(default)]
+    pub uv_today: Vec<UvPoint>,
     /// Time for time så langt MET leverer timesoppløsning (~60-70 t)
     #[serde(default)]
     pub hourly: Vec<HourlyForecast>,
@@ -148,6 +156,13 @@ pub struct HourlyForecast {
     /// Vindkast fra Open-Meteo (MET leverer ikke kast utenfor Norden)
     #[serde(default)]
     pub gust_ms: Option<f64>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct UvPoint {
+    /// Lokal time, f.eks. "13:00"
+    pub time: String,
+    pub uv: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

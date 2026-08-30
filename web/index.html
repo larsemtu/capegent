@@ -267,6 +267,16 @@
   .week-grid .day .i { font-size: 22px; margin: 2px 0; }
   .week-grid .day .w { color: var(--muted); font-size: 11px; }
 
+  #uvinfo { display: flex !important; align-items: center; gap: 7px; }
+  #uvinfo.hidden { display: none !important; }
+  .uv-badge { font-size: 12.5px; font-weight: 700; padding: 2px 9px; border-radius: 99px;
+              color: #08110c; }
+  .uv-lab { color: var(--muted); font-size: 11.5px; }
+  @media (max-width: 900px) {
+    #suninfo { font-size: 11.5px; }
+    .uv-lab { display: none; }
+  }
+
   #refresh-btn {
     background: var(--panel); border: 1px solid var(--border); color: var(--muted);
     border-radius: 9px; width: 34px; height: 34px; font-size: 17px; cursor: pointer;
@@ -303,6 +313,8 @@
     <img src="icon.svg" alt="" style="width:34px;height:34px;align-self:center;border-radius:8px">
     <h1>CAPEGENT</h1>
     <div id="clock">--:--</div>
+    <div id="suninfo" style="display:none;align-self:center;color:var(--muted);font-size:14px"></div>
+    <div id="uvinfo" style="display:none;align-self:center"></div>
     <div id="updated">venter på data …</div>
     <button id="refresh-btn" title="Hent siste data">⟳</button>
   </header>
@@ -955,6 +967,56 @@ function renderCurrency(c) {
     <div class="src">ECB via Frankfurter · ${esc(c.updated)}</div>`;
 }
 
+/* ---------- Sol + UV i tittellinjen ---------- */
+function uvColor(uv) {
+  if (uv < 3) return 'var(--r-good)';
+  if (uv < 6) return '#ffd54d';
+  if (uv < 8) return 'var(--warn)';
+  if (uv < 11) return 'var(--alert)';
+  return '#c47cff';
+}
+function uvLabel(uv) {
+  if (uv < 3) return 'lav';
+  if (uv < 6) return 'moderat';
+  if (uv < 8) return 'høy';
+  if (uv < 11) return 'svært høy';
+  return 'ekstrem';
+}
+
+function renderSunUv(w) {
+  const sun = document.getElementById('suninfo');
+  if (w.sunrise && w.sunset) {
+    sun.textContent = `☀ ${w.sunrise} → ${w.sunset}`;
+    sun.style.display = '';
+  }
+  const el = document.getElementById('uvinfo');
+  const pts = w.uv_today || [];
+  if (!pts.length) return;
+  let peak = pts[0];
+  for (const p of pts) if (p.uv > peak.uv) peak = p;
+
+  // Dagskurve: kun dagslys-timene (UV > 0 ± nabo)
+  const first = Math.max(0, pts.findIndex(p => p.uv > 0) - 1);
+  let last = pts.length - 1;
+  while (last > 0 && pts[last].uv === 0) last--;
+  const day = pts.slice(first, Math.min(last + 2, pts.length));
+  const w2 = 64, h2 = 20, pad = 1;
+  const maxUv = Math.max(peak.uv, 1);
+  const x = i => pad + i * (w2 - 2 * pad) / Math.max(day.length - 1, 1);
+  const y = v => h2 - pad - v * (h2 - 2 * pad) / maxUv;
+  const path = day.map((p, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(p.uv).toFixed(1)}`).join('');
+  const peakIdx = day.indexOf(peak);
+
+  el.innerHTML = `
+    <span class="uv-badge" style="background:${uvColor(peak.uv)}" title="Dagens UV-topp">UV ${peak.uv.toFixed(0)}</span>
+    <span class="uv-lab">${uvLabel(peak.uv)} · topp kl ${esc(peak.time.slice(0, 2))}</span>
+    <svg viewBox="0 0 ${w2} ${h2}" style="width:${w2}px;height:${h2}px" title="UV gjennom dagen">
+      <path d="${path}" fill="none" stroke="${uvColor(peak.uv)}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      ${peakIdx >= 0 ? `<circle cx="${x(peakIdx).toFixed(1)}" cy="${y(peak.uv).toFixed(1)}" r="2.2" fill="${uvColor(peak.uv)}"/>` : ''}
+    </svg>`;
+  el.style.display = '';
+}
+
 /* ---------- Hovedrender ---------- */
 function render(data) {
   D = data;
@@ -963,7 +1025,7 @@ function render(data) {
   upd.classList.toggle('stale',
     Date.now() - new Date(data.generated_at).getTime() > 90 * 60000);
 
-  if (data.weather) renderWeather(data.weather);
+  if (data.weather) { renderWeather(data.weather); renderSunUv(data.weather); }
   if (data.surf?.length) renderSurf(data.surf);
   if (data.news?.length) renderNews(data.news);
   renderEvents(data.events || []);
